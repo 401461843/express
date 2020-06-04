@@ -18,7 +18,7 @@ module.exports = {
       repo : 'git@github.com:401461843/express.git',
       path : '/home/express',
       'pre-deploy-local': '',
-      'post-deploy' : 'cnpm install && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'cnpm install && git fetch && pm2 reload ecosystem.config.js --env production',
       'pre-setup': ''
     }
   }
