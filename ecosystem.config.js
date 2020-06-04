@@ -14,11 +14,11 @@ module.exports = {
     production : {
       user : 'root',
       host : ['116.62.121.90'],
-      ref  : 'origin/master',
+      ref  : 'origin/master', 
       repo : 'git@github.com:401461843/express.git',
       path : '/home/express',
       'pre-deploy-local': '',
-      'post-deploy' : 'cnpm install && git fetch && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'cnpm install && git pull  && pm2 reload ecosystem.config.js --env production',
       'pre-setup': ''
     }
   }
