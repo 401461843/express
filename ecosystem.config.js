@@ -1,9 +1,9 @@
 module.exports = {
   apps : [{
-    script: 'app.js',
+    script: './bin/www',
     watch: '.',
     env: {
-      COMMON_VARIABLE: 'true'
+      NODE_ENV: 'development'
     },
     env_production : {
       NODE_ENV: 'production'
