@@ -3,11 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "pm2 start ./bin/www",
-    "prd":"pm2 start ecosystem.config.js --env production",
     "setup":"pm2 deploy ecosystem.config.js production setup",
     "fetch":"pm2 deploy ecosystem.config.js production",
-    "update":"pm2 deploy production update"
+    "update":"pm2 deploy production update",
+    "start": "pm2 start ./bin/www",
+    "prd":"pm2 start ecosystem.config.js --env production"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
