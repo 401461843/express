@@ -2,6 +2,7 @@ module.exports = {
   apps : [{
     script: './bin/www', //改成 ‘./bin/wwww’ 之后才暴露出3000端口，才难被访问
     watch: '.',
+    name:'express',
     instances: "max",
     exec_mode: "cluster",
     env: {
