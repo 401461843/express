@@ -5,12 +5,14 @@
   "scripts": {
     "setup":"pm2 deploy ecosystem.config.js production setup",
     "fetch":"pm2 deploy ecosystem.config.js production",
-    "update":"pm2 deploy production update",
-    "start": "pm2 start ./bin/www",
     "prd":"pm2 start ecosystem.config.js --env production",
     "restart": "pm2 deploy production exec 'pm2 startup'",
-    "restart": "pm2 deploy production exec 'pm2 save'",
-    "prdreload":"pm2 deploy production exec 'pm2 reload all'"
+    "save": "pm2 deploy production exec 'pm2 save'",
+    "update":"pm2 deploy production update",
+    "start": "pm2 start ./bin/www" ,
+    "stop":"pm2 deploy production exec 'pm2 stop all'",
+    "restart":"pm2 deploy production exec 'pm2 restart all'"
+    
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
