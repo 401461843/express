@@ -4,7 +4,6 @@ module.exports = {
     watch: '.',
     instances: "max",
     exec_mode: "cluster",
-    
     env: {
       NODE_ENV: 'development'
     },
