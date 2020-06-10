@@ -23,14 +23,14 @@ module.exports = {
   'deploy' : {
     'production' : {
       'user' : 'root',
-      'host' : ['116.62.121.90','106.12.69.208'],//这里可以多个远程服务器地址 '106.12.69.208'
+      'host' : ['106.12.69.208'],//这里可以多个远程服务器地址 '106.12.69.208'
       'ref'  : 'origin/master', 
       'repo' : 'git@github.com:401461843/express.git',
       'path' : '/home/express',
       "ssh_options": "StrictHostKeyChecking=no",//第一次连接服务器时候避免出现大量的提示
       'pre-deploy-local': '',
       "pre-deploy": "git pull",//解决更新无法拉取github最新的commit
-      'post-deploy' : 'cnpm install  && pm2 reload ecosystem.config.js --env production',
+      'post-deploy' : 'cnpm install ',
       'pre-setup': ''
     }
   }

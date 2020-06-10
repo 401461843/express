@@ -3,18 +3,18 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "setup":"pm2 deploy ecosystem.config.js production setup",
-    "fetch":"pm2 deploy ecosystem.config.js production",
+    "setup": "pm2 deploy ecosystem.config.js production setup",
+    "fetch": " pm2 deploy ecosystem.config.js production",
     "reboot": "pm2 deploy production exec 'pm2 startup'",
     "save": "pm2 deploy production exec 'pm2 save'",
-    "update":"pm2 deploy production update",
-    "start": "pm2 start ./bin/www" ,
-    "stop":"pm2 deploy production exec 'pm2 stop all'",
-    "restart":"pm2 deploy production exec 'pm2 restart all'"
-    
+    "update": "pm2 deploy production update",
+    "stop": "pm2 deploy production exec 'pm2 stop all'",
+    "restart": "pm2 deploy production exec 'pm2 restart all'",
+    "dev": "cross-env NODE_ENV=dev  nodemon ./bin/www"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
+    "cross-env": "^7.0.2",
     "debug": "~2.6.9",
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
