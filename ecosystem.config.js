@@ -5,7 +5,7 @@ module.exports = {
     'name':'express',
     'instances': "max",
     'exec_mode': "cluster",
-    'autorestart':true,
+    'autorestart':false,
     'env': {
       'NODE_ENV': 'development'
     },
@@ -30,8 +30,12 @@ module.exports = {
       "ssh_options": "StrictHostKeyChecking=no",//第一次连接服务器时候避免出现大量的提示
       'pre-deploy-local': '',
       "pre-deploy": "git pull",//解决更新无法拉取github最新的commit
-      'post-deploy' : 'cnpm install  && pm2 reload ecosystem.config.js --env production',
-      'pre-setup': ''
+      'post-deploy' : 'cnpm install  && pm2 startOrRestart ecosystem.config.js --env production',
+      'pre-setup': '',
+      'env': {
+        'NODE_ENV': 'production'
+      }
+      
     }
   }
 };

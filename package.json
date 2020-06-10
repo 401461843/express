@@ -9,7 +9,7 @@
     "save": "pm2 deploy production exec 'pm2 save'",
     "update": "pm2 deploy production update",
     "stop": "pm2 deploy production exec 'pm2 stop all'",
-    "restart": "pm2 deploy production exec 'pm2 restart all'",
+    "restart": "cross-env NODE_ENV=production pm2 deploy production exec 'pm2 restart all'",
     "dev": "cross-env NODE_ENV=dev  nodemon ./bin/www"
   },
   "dependencies": {
