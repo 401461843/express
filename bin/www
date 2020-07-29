@@ -7,7 +7,11 @@
 var app = require('../app');
 var debug = require('debug')('express:server');
 var http = require('http');
+var env =process.env.NODE_ENV
 
+// if(env ='dev'){
+//   console.log('http://127.0.0.1:3000')
+// }
 /**
  * Get port from environment and store in Express.
  */

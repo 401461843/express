@@ -7,20 +7,23 @@ var ejs = require('ejs');
 var indexRouter = require('./routes/index');
 var apiRouter = require('./api/api');
 var app = express();
+var bodyParser = require('body-parser');
+
 // view engine setup
 
 app.set('views', path.join(__dirname, '/views'));
 app.engine('.html', ejs.__express);  
 app.set('view engine', 'html');
 
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 app.use(logger('dev'));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '/'))); //路径得设置为根路径，页面中的css才能以app.js 出发的路查找
 
-
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
 	next(createError(404));

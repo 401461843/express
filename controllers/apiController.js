@@ -1,31 +1,39 @@
-const sqlQuery = require('../db/mysql');
-// const util =require('../utils/util');
-// const redis = require('../db/redis').redisClient;
-// const {redisStrSet, redisStrGet, redisStrDel}=require('../db/redis');
+// const sqlQuery = require('../db/mysql');
+const loadsh = require('lodash');
+const util =require('../utils/util');
+
+const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll}=require('../db/redis');
+
 
 // let queryWinInfo = async function (req, res) {
 // 	// let sql ='select * from wining_info where device_info =?                                                                                                                                                                                                                                                                                          ';
 // 	// let sqlArr =[username, username, username];
 
 // };
-let insertWinInfo = async function (req, res) {
-	let sql = 'insert into wining_info(device_info,prize_info,count,create_time) values(?,?,?,?)';
-	let sqlArr =['1111111', '华为mate30', 2, ''];
-	let result = await sqlQuery.SysqlConnect(sql, sqlArr);
+// let insertWinInfo = async function () {
+// 	let sql = 'insert into wining_info(device_info,prize_info,count,create_time) values(?,?,?,?)';
+// 	let sqlArr =['1111111', '华为mate30', 2, ''];
+// 	// let result = await sqlQuery.SysqlConnect(sql, sqlArr);
+// 	// // if(result.affectedRows ==1){
+// 	// 	res.send({
+// 	// 		'code':200,
 
-	if (result.affectedRows ==1) {
-		res.send({
-			'code': 200,
-			'msg': '记录成功',
-		});
-	} else {
-		res.send({
-			'code': 400,
-			'msg': '记录失败',
-		});
-	}
+// 	// 	})
+// 	// }
+
+// 	// if (result.affectedRows ==1) {
+// 	// 	res.send({
+// 	// 		'code': 200,
+// 	// 		'msg': '记录成功',
+// 	// 	});
+// 	// } else {
+// 	// 	res.send({
+// 	// 		'code': 400,
+// 	// 		'msg': '记录失败',
+// 	// 	});
+// 	// }
     
-};
+// };
 let test = async function (res) { 
     
 	// let {mobile} = req.body;
@@ -40,13 +48,82 @@ let test = async function (res) {
 	});
 };
 //抽奖
-let luckDraw =function () { 
+let luckDraw =async function ( res) { 
+	
+	let rate ='';
+	let sum = 0;
+	let section = [0];
+	let newArr =[];
+	let prizeNumber =loadsh.random(1, 100);
+	let allPrize='';
+	let count =0;
+	let prizeName ='';
+	
+	// 获取抽奖概率
+	rate =JSON.parse(await redisStrGet(1, 'gl'));
+	loadsh.forEach(rate, function (val) { 
+		let temArr=[];
 
-	console.log(11111);
+		sum+=val;
+		section.push(sum);
+		temArr[0]=section[count];
+		temArr[1]=section[count+1];
+		newArr.push(temArr);
+		count++;
+	});
+	util.customForeach(newArr, async function (val, index) { 
+		if (prizeNumber>val[0] && prizeNumber<=val[1]) {
+			prizeName=Object.keys(rate)[index];
+			await redisStrDecr(0, prizeName);
+			res.send({ 
+				'code': 200,
+				'msg': '抽奖成功',
+				'prize': prizeName,
+			});
+			allPrize=await redisStrAll(0);
+			util.customForeach(allPrize, async (val) => {
+				if ( await redisStrGet(0, val)==0) {
+					let oldGlObj =JSON.parse(await redisStrGet(1, 'gl'));
+					let oldGl =oldGlObj[val];
+					let avater =oldGl/( Object.keys(oldGlObj).length-1);
+
+					delete oldGlObj[val];
+					loadsh.forEach(oldGlObj, async function (val1, key) { 
+						oldGlObj[key] =Number(val1)+avater;
+					});	
+					await redisStrDel(0, val);
+					await redisStrSet(1, 'gl', JSON.stringify(oldGlObj));
+				}
+			});
+			
+		} 
+	});
+};
+let submit =async function (req, res) {
+	let {tell, prize} = req.body;
+	let date= new Date().toLocaleString();
+	let data ={
+		prize: prize,
+		date: date,
+	};
+	let result=await redisStrSet(2, tell, JSON.stringify(data));
+	
+	if (result == 'OK') {
+		res.send({ 
+			'code': 200,
+			'msg': '领奖成功',
+		});
+	} else {
+		res.send({ 
+			'code': 400,
+			'msg': '领取失败',
+		});
+	}
+
 };
 
 module.exports={
-	insertWinInfo,
 	test,
 	luckDraw,
+	submit,
 };

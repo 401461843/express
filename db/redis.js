@@ -4,8 +4,8 @@ const config =require('../config/dbConfig');
 // 创建客户端
 const redisClient = redis.createClient(config.redisConfig.port, config.redisConfig.host);
 
-redisClient.on('ready', res => {
-	console.log('redis启动成功', res);
+redisClient.on('ready', ()=> {
+	console.log('redis启动成功');
 });
 
 redisClient.on('error', err => {
@@ -71,4 +71,39 @@ module.exports = {
 			});
 		});
 	},
+	redisStrDecr: function (dbNum, key) {
+		return new Promise((resolve, reject)=>{
+			redisClient.select(dbNum, function (err) {
+				if (err) {
+					reject(err);
+				} else {
+					redisClient.decr(key, function (err, result) { 
+						if (err) {
+							reject(err);
+						} else {
+							resolve(result);
+						}
+					});
+				}
+			});
+		});
+	},
+	redisStrAll: function (dbNum) {
+		return new Promise((resolve, reject)=>{
+			redisClient.select(dbNum, function (err) {
+				if (err) {
+					reject(err);
+				} else {
+					redisClient.keys('*', function (err, result) { 
+						if (err) {
+							reject(err);
+						} else {
+							resolve(result);
+						}
+					});
+				}
+			});
+		});
+	},
+
 };

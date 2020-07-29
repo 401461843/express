@@ -6,5 +6,7 @@ var api =require('../controllers/apiController');
 router.post('/insertWinInfo', api.insertWinInfo);
 router.post('/test', api.test);
 //抽奖
-router.get('/luckDraw', api.luckDraw);
+router.post('/luckDraw', api.luckDraw);
+//提交手机号领奖
+router.post('/submit', api.submit);
 module.exports = router;
