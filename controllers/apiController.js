@@ -48,7 +48,8 @@ let test = async function (res) {
 	});
 };
 //抽奖
-let luckDraw =async function ( res) { 
+/* eslint-disable */
+let luckDraw =async function ( req,res) { 
 	
 	let rate ='';
 	let sum = 0;
