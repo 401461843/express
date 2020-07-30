@@ -2,8 +2,8 @@
 const loadsh = require('lodash');
 const util =require('../utils/util');
 
-const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll,redisStrIncr}=require('../db/redis');
-const redis = require('../db/redis');
+const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
+// const redis = require('../db/redis');
 
 
 // let queryWinInfo = async function (req, res) {
