@@ -186,6 +186,28 @@
                     console.log(e.responseText);
                 }
             });
+    }).on('click','.fq',function () { 
+        var param ={
+            prize:prize
+        }
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/giveUp",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                    alert(res.msg)
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
     })
 </script>
 </html>

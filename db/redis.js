@@ -88,6 +88,23 @@ module.exports = {
 			});
 		});
 	},
+	redisStrIncr: function (dbNum, key) {
+		return new Promise((resolve, reject)=>{
+			redisClient.select(dbNum, function (err) {
+				if (err) {
+					reject(err);
+				} else {
+					redisClient.incr(key, function (err, result) { 
+						if (err) {
+							reject(err);
+						} else {
+							resolve(result);
+						}
+					});
+				}
+			});
+		});
+	},
 	redisStrAll: function (dbNum) {
 		return new Promise((resolve, reject)=>{
 			redisClient.select(dbNum, function (err) {
