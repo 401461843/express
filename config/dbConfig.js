@@ -17,11 +17,11 @@ if ( env=='dev') {
 	};
 } else {
 	mysqlConfig ={
-		host:'106.12.75.244',
-        port:'3306',
-        user:'root',
-        password:'baidu@123',
-        database:'qx'
+		host: '106.12.75.244',
+		port: '3306',
+		user: 'root',
+		password: 'baidu@123',
+		database: 'qx',
 	};
 	redisConfig ={
 		host: 'redis.kfdctebchxge.scs.su.baidubce.com',

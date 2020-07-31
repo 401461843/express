@@ -9,33 +9,36 @@ var apiRouter = require('./api/api');
 var app = express();
 var bodyParser = require('body-parser');
 var schedule = require('node-schedule');
-var {redisStrGet,redisStrAll}=require('./db/redis');
+var {redisStrGet, redisStrAll}=require('./db/redis');
 var sqlQuery = require('./db/mysql');
-var util =require('./utils/util')
+var util =require('./utils/util');
 var getData =async function () { 
-	let redisData = await redisStrAll(2)
-	let tell =''
-	let prize=''
-	let time =''
-	let sqlArr =[]
-	let sql = `insert into win_prize_record (tell,prize,time) values(?,?,?)`;
-	util.customForeach(redisData,async function (val,idenx) { 
-		let record =JSON.parse(await redisStrGet(2,val))
-		tell = val
-		prize=record.prize
-		time =record.date
-		sqlArr =[tell,prize,time]
-		await sqlQuery.SysqlConnect(sql,sqlArr)
-	 })
- }
+	let redisData = await redisStrAll(2);
+	let tell ='';
+	let prize='';
+	let time ='';
+	let sqlArr =[];
+	let sql = 'insert into win_prize_record (tell,prize,time) values(?,?,?)';
 
-var  scheduleCronstyle = ()=>{
-  //每分钟的第30秒定时执行一次:
-    schedule.scheduleJob('0 30 1 * * *',()=>{
-        getData()
-    }); 
-}
- //设置定时任务
+	util.customForeach(redisData, async function (val) { 
+		let record =JSON.parse(await redisStrGet(2, val));
+
+		tell = val;
+		prize=record.prize;
+		time =record.date;
+		sqlArr =[tell, prize, time];
+		await sqlQuery.SysqlConnect(sql, sqlArr);
+	});
+};
+
+var scheduleCronstyle = ()=>{
+	//每分钟的第30秒定时执行一次:
+	schedule.scheduleJob('0 30 1 * * *', ()=>{
+		getData();
+	}); 
+};
+//设置定时任务
+
 scheduleCronstyle();
 
 // view engine setup
