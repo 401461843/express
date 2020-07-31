@@ -7,7 +7,7 @@ const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisSt
 //抽奖
 /* eslint-disable */
 let luckDraw =async function ( req,res) { 
-	   console.log(11111)
+	let a =''
 	let rate ='';
 	let sum = 0;
 	let section = [0];

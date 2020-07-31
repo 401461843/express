@@ -38,7 +38,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "echo 'husky' && eslint --fix ."
+      "pre-commit": "echo 'husky' && npm run lint"
     }
   }
 }
