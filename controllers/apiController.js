@@ -3,11 +3,10 @@ const loadsh = require('lodash');
 const util =require('../utils/util');
 
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
-
+let a =''
 //抽奖
 /* eslint-disable */
 let luckDraw =async function ( req,res) { 
-	let a =''
 	let rate ='';
 	let sum = 0;
 	let section = [0];
