@@ -1,9 +1,8 @@
 
 const loadsh = require('lodash');
 const util =require('../utils/util');
-
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
-let a =''
+
 //抽奖
 /* eslint-disable */
 let luckDraw =async function ( req,res) { 
@@ -94,7 +93,6 @@ let submit =async function (req, res) {
 let giveUp =async function (req,res) {
 	let {prize} =req.body
 	let checkFlag =await redisStrGet(0,prize)
-	
 	if(!checkFlag){
 		let fbgl =await redisStrGet(1,'gl1')
 		let result =await redisStrSet(0,prize,'1')
@@ -128,8 +126,16 @@ let giveUp =async function (req,res) {
 
 
 }
+let test =async function (req,res) {
+	// console.log(req)
+	res.send({ 
+		'code': 200,
+		'msg': '成功',
+	});
+}
 module.exports={
 	luckDraw,
 	submit,
-	giveUp
+	giveUp,
+	test
 };

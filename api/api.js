@@ -9,4 +9,6 @@ router.post('/luckDraw', api.luckDraw);
 router.post('/submit', api.submit);
 //放弃领奖
 router.post('/giveUp', api.giveUp);
+//提交表单信息
+router.post('/test', api.test);
 module.exports = router;
