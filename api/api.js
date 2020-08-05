@@ -12,5 +12,5 @@ router.post('/giveUp', api.giveUp);
 //提交表单信息
 router.post('/test', api.test);
 //获取用户信息接口
-router.post('/getUerCount',api.getUserInfo)
+router.post('/getUerCount', api.getUserInfo);
 module.exports = router;

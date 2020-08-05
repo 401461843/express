@@ -2,7 +2,7 @@
 const loadsh = require('lodash');
 const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
-const redis = require('../db/redis');
+
 
 //抽奖
 /* eslint-disable */
