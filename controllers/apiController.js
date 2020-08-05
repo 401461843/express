@@ -2,6 +2,7 @@
 const loadsh = require('lodash');
 const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
+const redis = require('../db/redis');
 
 //抽奖
 /* eslint-disable */
@@ -133,9 +134,47 @@ let test =async function (req,res) {
 		'msg': '成功',
 	});
 }
+//小程序接口
+//获取用户次数接口
+let getUserInfo= async function (req,res) {
+	let {uid} =req.body;
+	let result =await redisStrGet(5,uid)
+	if(!result){
+		let res1 = await redisStrSet(5,uid,'3')
+		let userInfo ={
+			'uid':uid,
+			'count':3
+		}
+		if(res1 =='OK'){
+			res.send({ 
+				'code': 200,
+				'msg': '成功',
+				'userInfo':userInfo
+			});
+		}
+
+
+	}else{
+		let userInfo ={
+			'uid':uid,
+			'count':result
+		}
+		res.send({ 
+			'code': 200,
+			'msg': '成功',
+			'userInfo':userInfo
+		});
+	}
+
+
+
+  
+}
+
 module.exports={
 	luckDraw,
 	submit,
 	giveUp,
-	test
+	test,
+	getUserInfo
 };
