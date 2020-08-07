@@ -228,8 +228,12 @@
                 dataType: 'json',
                 //请求成功
                 success : function(res) {
-                   alert(res.msg)
-                   window.location.href='https://mr.baidu.com/r/7xaTgyUWZO?f=cp&u=63548b5ba17206ca'
+                   if(res.code ==1){
+                        window.location.href='https://mr.baidu.com/r/7xaTgyUWZO?f=cp&u=63548b5ba17206ca'
+                   }else{
+                       alert(res.msg)
+                   }
+                   
                 },
                 //请求失败，包含具体的错误信息
                 error : function(e){
