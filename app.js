@@ -12,29 +12,48 @@ var schedule = require('node-schedule');
 var {redisStrGet, redisStrAll}=require('./db/redis');
 var sqlQuery = require('./db/mysql');
 var util =require('./utils/util');
-var getData =async function () { 
-	let redisData = await redisStrAll(2);
+// var getData =async function () { 
+// 	let redisData = await redisStrAll(2);
+// 	let tell ='';
+// 	let prize='';
+// 	let time ='';
+// 	let sqlArr =[];
+// 	let sql = 'insert into win_prize_record (tell,prize,time) values(?,?,?)';
+
+// 	util.customForeach(redisData, async function (val) { 
+// 		let record =JSON.parse(await redisStrGet(2, val));
+
+// 		tell = val;
+// 		prize=record.prize;
+// 		time =record.date;
+// 		sqlArr =[tell, prize, time];
+// 		await sqlQuery.SysqlConnect(sql, sqlArr);
+// 	});
+// };
+var szgetData =async function () { 
+	let redisData = await redisStrAll(6);
+	let company ='';
+	let name='';
 	let tell ='';
-	let prize='';
-	let time ='';
+	let createTime='';
 	let sqlArr =[];
-	let sql = 'insert into win_prize_record (tell,prize,time) values(?,?,?)';
+	let sql = 'insert into zbh_form (company,name,tell,create_time) values(?,?,?,?)';
 
 	util.customForeach(redisData, async function (val) { 
-		let record =JSON.parse(await redisStrGet(2, val));
+		let record =JSON.parse(await redisStrGet(6, val));
 
-		tell = val;
-		prize=record.prize;
-		time =record.date;
-		sqlArr =[tell, prize, time];
+		company = record.company;
+		name=record.name;
+		tell =record.tell;
+		createTime=record.create_time;
+		sqlArr =[company, name, tell, createTime];
 		await sqlQuery.SysqlConnect(sql, sqlArr);
 	});
 };
-
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 30 1 * * *', ()=>{
-		getData();
+	schedule.scheduleJob('0 0 1 * * *', ()=>{
+		szgetData(); 
 	}); 
 };
 //设置定时任务

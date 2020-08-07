@@ -13,4 +13,6 @@ router.post('/giveUp', api.giveUp);
 router.post('/test', api.test);
 //获取用户信息接口
 router.post('/getUerCount', api.getUserInfo);
-module.exports = router;
+//苏州数据提交接口
+router.post('/szSubmit', api.szSubmit);
+module.exports = router; 

@@ -134,6 +134,35 @@ let test =async function (req,res) {
 		'msg': '成功',
 	});
 }
+//苏州表单提交
+let szSubmit = async function (req,res) {
+	let {company,name,tell } =req.body
+
+	let create_time= new Date().toLocaleString();
+	
+	let data ={
+		company: company,
+		name:name,
+		tell:tell,
+		create_time: create_time
+	};
+	let result=await redisStrSet(6, tell+' '+create_time, JSON.stringify(data),86400);
+	
+	if (result == 'OK') {
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功',
+			'data':''
+		});
+	} else {
+		res.send({ 
+			'code': 0,
+			'msg': '提交失败',
+			'data':''
+		});
+	}
+  
+}
 //小程序接口
 //获取用户次数接口
 let getUserInfo= async function (req,res) {
@@ -161,14 +190,10 @@ let getUserInfo= async function (req,res) {
 		}
 		res.send({ 
 			'code': 200,
-			'msg': '成功',
+			'msg': '成功', 
 			'userInfo':userInfo
 		});
 	}
-
-
-
-  
 }
 
 module.exports={
@@ -176,5 +201,6 @@ module.exports={
 	submit,
 	giveUp,
 	test,
-	getUserInfo
+	getUserInfo,
+	szSubmit
 };

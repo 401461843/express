@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2020智博会</title>
+    <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">  
+    <style> 
+        img{
+            width: 100%;
+            margin-bottom: -.055rem;
+        }
+        .content{
+            position: relative;
+        }
+        .form{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 0;
+            overflow: hidden;
+        }
+        .item{
+            width: 6.6rem;
+            height: .9rem;
+            margin: 0 auto;
+            background: white;
+            margin-top: .25rem;
+
+        }
+        .title{
+            display: inline-block;
+            width: 1.5rem;
+            height: 100%;
+            margin-left: .3rem;
+            line-height: .9rem;
+            float: left;
+            text-align: left;
+            font-size: .32rem;
+            color: #666;
+        }
+        .item input{
+            display: inline-block;
+            float: right;
+            outline: none;
+            border: none;
+            width: calc(100% - 1.8rem);
+            height: 100%;
+            text-indent: .1rem;
+            font-size: .32rem;
+        }
+        .btn{
+            font-size: .35rem;
+            text-align: center;
+            line-height: .9rem;
+            color: black;
+            background: #f7b741;
+            font-weight: bold;
+        }
+        .footer{
+            position: relative;
+        }
+        .js{
+            text-align: center;
+            color: white;
+            font-size: .35rem;
+        }
+        .sw1,.sw2{
+                height: .4rem;
+                width: 5rem;
+                margin: 0 auto;
+                line-height: .4rem;
+                position: absolute;
+                color: white;
+                text-align: center;
+                left: 50%;
+                transform: translateX(-50%);
+                top: 4.8rem;
+                font-size: .28rem;
+        }
+        .sw2{
+            top: 5.3rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="banner">
+        <img src="../public/images/s-1.jpg" alt="">
+    </div>
+    <div class="content">
+        <img src="../public/images/s-2.jpg" alt="">
+        <div class="form">
+            <div class="item"><div class="title">公司名称 :</div><input type="text" class="company">   </div>
+            <div class="item"><div class="title">姓名 :</div><input type="text" class="name">   </div>
+            <div class="item"><div class="title">电话 :</div><input type="text" class="tell">   </div>
+            <div class="item btn">点击领取 进入直播间</div>
+        </div>
+        <div class="swiper-container sw1">
+            <div class="swiper-wrapper">
+                
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <img src="../public/images/s-3.jpg" alt="">
+        
+        <div class="form">
+            <div class="js">0元领取升职加薪大礼包</div>
+            <div class="item"><div class="title">公司名称 :</div><input type="text" class="company">   </div>
+            <div class="item"><div class="title">姓名 :</div><input type="text" class="name">   </div>
+            <div class="item"><div class="title">电话 :</div><input type="text" class="tell">   </div>
+            <div class="item btn">点击领取 进入直播间</div>
+        </div>
+        <div class="swiper-container sw2">
+            <div class="swiper-wrapper">
+                
+            </div>
+        </div>
+    </div>
+    
+</body>
+<script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+<script src="./public/javascripts/rem.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+<script>
+    var scrollList= [
+        {
+          name: '张**',
+          type: '138****7890',
+          school: '3分钟前领取成功'
+        },
+        {
+          name: '马**',
+          type: '137****5678',
+          school: '6分钟前领取成功'
+        },
+        {
+          name: '辛**',
+          type: '180****3566',
+          school: '10分钟前领取成功'
+        },
+        {
+          name: '张**',
+          type: '150****6756',
+          school: '13分钟前领取成功'
+        },
+        {
+          name: '柴**',
+          type: '134****1256',
+          school: '14分钟前领取成功'
+        },
+        {
+          name: '郑**',
+          type: '158****6767',
+          school: '16分钟前领取成功'
+        },
+        {
+          name: '王**',
+          type: '158****6007',
+          school: '20分钟前领取成功'
+        },
+        {
+          name: '吴**',
+          type: '178****1356',
+          school: '24分钟前领取成功'
+        },
+        {
+          name: '郝**',
+          type: '188****7080',
+          school: '28分钟前领取成功'
+        },
+        {
+          name: '吴**',
+          type: '181****6677',
+          school: '30分钟前领取成功'
+        }
+      ]
+    var str =''
+    $.each(scrollList,function (index,val) { 
+    str+='<div class="swiper-slide">'+val.name+'&nbsp;&nbsp;&nbsp;'+val.type+'&nbsp;&nbsp;&nbsp;'+val.school+'</div>'        
+    })
+    $('.swiper-wrapper').html(str)
+    var mySwiper = new Swiper ('.swiper-container', {
+    direction: 'vertical', // 垂直切换选项
+        loop: true, // 循环模式选项
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        autoplay:true
+    })  
+    function checkPhone(){ 
+        var phone = document.getElementById('phone').value;
+        if(!(/^1[3456789]\d{9}$/.test(phone))){ 
+            alert("手机号码有误，请重填");  
+            return false; 
+        } 
+    }
+    $('body').on('click','.btn',function () {
+        if($(this).parent().find('.company').val().trim() ==''){
+            alert('公司名称不能为空！')
+            return 
+        }else if($(this).parent().find('.name').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            company:$(this).parent().find('.company').val().trim(),
+            name:$(this).parent().find('.name').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim()
+        }
+        // console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/szSubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   alert(res.msg)
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+      })
+        
+       
+
+
+        
+
+    
+        
+</script>
+</html>

@@ -5,4 +5,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
 	res.render('index.html');
 });
+router.get('/zbh', function(req, res) {
+	res.render('zbh.html');
+});
 module.exports = router;
