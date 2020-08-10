@@ -31,7 +31,7 @@ var util =require('./utils/util');
 // 	});
 // };
 var szgetData =async function () { 
-	let redisData = await redisStrAll(6);
+	let redisData = await redisStrAll(7);
 	let company ='';
 	let name='';
 	let tell ='';
@@ -52,7 +52,7 @@ var szgetData =async function () {
 };
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 10 11 * * *', ()=>{
+	schedule.scheduleJob('0 35 11 * * *', ()=>{
 		szgetData(); 
 	}); 
 };

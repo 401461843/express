@@ -136,39 +136,31 @@ let test =async function (req,res) {
 }
 //苏州表单提交
 let szSubmit = async function (req,res) {
-	// let {company,name,tell } =req.body
+	let {company,name,tell } =req.body
 
-	// let create_time= new Date().toISOString().slice(0, 19).replace('T', ' ');
-	// let sjc=new Date().getTime()
-	// let data ={
-	// 	company: company,
-	// 	name:name,
-	// 	tell:tell,
-	// 	create_time: create_time
-	// };
-	// let result=await redisStrSet(6, tell+'-'+sjc, JSON.stringify(data),86400);
-	let redisData = await redisStrAll(6);
-	util.customForeach(redisData, async function (val) { 
-		await redisStrSet(6, val, '1111',10)
-	});
-	res.send({ 
-		'code': 1,
-		'msg': '提交成功',
-		'data':''
-	});
-	// if (result == 'OK') {
-	// 	res.send({ 
-	// 		'code': 1,
-	// 		'msg': '提交成功',
-	// 		'data':''
-	// 	});
-	// } else {
-	// 	res.send({ 
-	// 		'code': 0,
-	// 		'msg': '提交失败',
-	// 		'data':''
-	// 	});
-	// }
+	let create_time= new Date().toISOString().slice(0, 19).replace('T', ' ');
+	let sjc=new Date().getTime()
+	let data ={
+		company: company,
+		name:name,
+		tell:tell,
+		create_time: create_time
+	};
+	let result=await redisStrSet(7, tell+'-'+sjc, JSON.stringify(data),86400);
+	
+	if (result == 'OK') {
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功',
+			'data':''
+		});
+	} else {
+		res.send({ 
+			'code': 0,
+			'msg': '提交失败',
+			'data':''
+		});
+	}
   
 }
 //小程序接口
