@@ -138,8 +138,8 @@ let test =async function (req,res) {
 let szSubmit = async function (req,res) {
 	let {company,name,tell } =req.body
 
-	let create_time= new Date().toISOString().slice(0, 19).replace('T', ' ');
-	let sjc=new Date().getTime()
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	let sjc = new Date().getTime()
 	let data ={
 		company: company,
 		name:name,

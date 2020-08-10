@@ -40,7 +40,7 @@ var szgetData =async function () {
 	let sql = 'insert into zbh_form (company,name,tell,create_time) values(?,?,?,?)';
 
 	util.customForeach(redisData, async function (val) { 
-		let record =JSON.parse(await redisStrGet(6, val));
+		let record =JSON.parse(await redisStrGet(7, val));
 
 		company = record.company;
 		name=record.name;
@@ -52,7 +52,7 @@ var szgetData =async function () {
 };
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 35 11 * * *', ()=>{
+	schedule.scheduleJob('0 10 13 * * *', ()=>{
 		szgetData(); 
 	}); 
 };
