@@ -52,7 +52,7 @@ var szgetData =async function () {
 };
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 25 9 * * *', ()=>{
+	schedule.scheduleJob('0 36 9 * * *', ()=>{
 		szgetData(); 
 	}); 
 };
