@@ -52,13 +52,16 @@ var szgetData =async function () {
 };
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 16 13 * * *', ()=>{
+	schedule.scheduleJob('0 06 14 * * *', ()=>{
 		szgetData(); 
 	}); 
 };
 //设置定时任务
 
-scheduleCronstyle();
+if (process.env.NODE_APP_INSTANCE === '0') {
+	scheduleCronstyle();
+}
+
 
 // view engine setup
 
