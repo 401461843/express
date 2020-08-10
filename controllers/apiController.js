@@ -149,13 +149,13 @@ let szSubmit = async function (req,res) {
 	// let result=await redisStrSet(6, tell+'-'+sjc, JSON.stringify(data),86400);
 	let redisData = await redisStrAll(6);
 	util.customForeach(redisData, async function (val) { 
-		await redisStrDel(6,val)
+		await redisStrSet(6, val, '1111',10)
 	});
 	res.send({ 
-				'code': 1,
-				'msg': '提交成功',
-				'data':''
-			});
+		'code': 1,
+		'msg': '提交成功',
+		'data':''
+	});
 	// if (result == 'OK') {
 	// 	res.send({ 
 	// 		'code': 1,
