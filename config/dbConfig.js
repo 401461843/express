@@ -1,5 +1,5 @@
 
-const env =process.env.NODE_ENV; //环境变量
+let env =process.env.NODE_ENV; //环境变量
 let mysqlConfig;
 let redisConfig;
 

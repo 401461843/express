@@ -12,6 +12,7 @@ var schedule = require('node-schedule');
 var {redisStrGet, redisStrAll}=require('./db/redis');
 var sqlQuery = require('./db/mysql');
 var util =require('./utils/util');
+let env =process.env.NODE_ENV; 
 // var getData =async function () { 
 // 	let redisData = await redisStrAll(2);
 // 	let tell ='';
@@ -52,14 +53,18 @@ var szgetData =async function () {
 };
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 10 14 * * *', ()=>{
+	schedule.scheduleJob('0 17 14 * * *', ()=>{
 		szgetData(); 
 	}); 
 };
 //设置定时任务
 
-if (process.env.NODE_APP_INSTANCE === '0') {
+if (env=='dev') {
 	scheduleCronstyle();
+} else {
+	if (process.env.NODE_APP_INSTANCE === '0') {
+		scheduleCronstyle();
+	}
 }
 
 
