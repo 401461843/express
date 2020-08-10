@@ -53,7 +53,7 @@ var szgetData =async function () {
 };
 var scheduleCronstyle = ()=>{
 	//每分钟的第30秒定时执行一次:
-	schedule.scheduleJob('0 17 14 * * *', ()=>{
+	schedule.scheduleJob('0 1 1 * * *', ()=>{
 		szgetData(); 
 	}); 
 };
@@ -66,10 +66,7 @@ if (env=='dev') {
 		scheduleCronstyle();
 	}
 }
-
-
 // view engine setup
-
 app.set('views', path.join(__dirname, '/views'));
 app.engine('.html', ejs.__express);  
 app.set('view engine', 'html');
