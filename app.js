@@ -62,6 +62,7 @@ var scheduleCronstyle = ()=>{
 if (env=='dev') {
 	scheduleCronstyle();
 } else {
+	//多台服务器，可以结合ip来实现单实例执行定时任务
 	if (process.env.NODE_APP_INSTANCE === '0') {
 		scheduleCronstyle();
 	}

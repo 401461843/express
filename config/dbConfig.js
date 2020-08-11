@@ -33,5 +33,4 @@ if ( env=='dev') {
 module.exports ={
 	mysqlConfig,
 	redisConfig,
-   
 };
