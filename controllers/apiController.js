@@ -18,6 +18,7 @@ let luckDraw =async function ( req,res) {
 	
 	// 获取抽奖概率
 	rate =JSON.parse(await redisStrGet(1, 'gl'));
+	console.log(rate)
 	if(JSON.stringify(rate) =='{}'){
 		
 		res.send({ 
@@ -28,7 +29,6 @@ let luckDraw =async function ( req,res) {
 	}else{
 		loadsh.forEach(rate, function (val) { 
 			let temArr=[];
-	
 			sum+=val;
 			section.push(sum);
 			temArr[0]=section[count];
@@ -36,6 +36,8 @@ let luckDraw =async function ( req,res) {
 			newArr.push(temArr);
 			count++;
 		});
+		console.log(newArr)
+		console.log(prizeNumber)
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
