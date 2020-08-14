@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2020智博会</title>
+    <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/swiper.min.css">  
+    <style> 
+        body{
+            background: #2a42c4;
+            /* height: 9999rem; */
+        }
+        .baner img{
+            width: 100%;
+        }
+        .yq{
+            margin-top: -3.8rem;
+        }
+        .yq img{
+            width: 6.05rem;
+            margin: 0 auto;
+            display: block;
+        }
+        .kzj{
+            width: 6.85rem;
+            height: 6.1rem;
+            background: white;
+            border-radius: .2rem;
+            margin: 0 auto;
+            z-index: 999;
+            position: relative;
+            margin-top: .4rem;
+            
+        }
+        .yq-t{
+            width: 100%;
+            height: calc(100% - 2.1rem);
+            border-radius: .2rem .2rem 0 0;
+            box-sizing: border-box;
+            padding: .2rem;
+        }
+        .yq-t img{
+            width: 100%;
+            
+        }
+        .yq-b{
+            height: 2.1rem;
+            width: 100%;
+            border-radius:0 0 .2rem .2rem ;
+            background: #fff2f2;
+            overflow: hidden;
+        }
+        .yq-b img{
+            width: 90%;
+            margin-top: .2rem;
+        }
+        .btn{
+            display: block;
+            margin: 0 auto;
+            height: .7rem;
+            width: 3rem;
+            text-align: center;
+            line-height: .7rem;
+            color: white;
+            font-weight: bold;
+            font-size: .37rem;
+            background-image: linear-gradient(#ff5033 , #e5456b);
+            margin-top: .1rem;
+            border-radius: .4rem;
+        }
+
+        .tit{
+            width: 6.05rem;
+            margin: 0 auto;
+            display: block;
+            margin-top: .6rem;
+            margin-bottom: .4rem;
+        }
+        .cn{
+            margin-top: 0.6rem;
+            
+        }
+        .fx{
+            width: 6.85rem;
+            height: 2.55rem;
+            background: white;
+            border-radius: .3rem .2rem .2rem .2rem;
+            margin: 0 auto;
+            box-shadow:  0 .08rem 0  #ffa897;
+            overflow: hidden;
+        }
+        .fx-l{
+            float: left;
+            width: 3.1rem;
+            height: 100%;
+            border-radius: .2rem  0 0 .2rem;
+        }
+        .fx-l img{
+            width: 100%;
+           
+        }
+        .fx-r{
+            float: left;
+            width: calc(100% - 3.1rem);
+            height: 100%;
+            border-radius: 0 .2rem  .2rem 0 ;
+            box-sizing: border-box;
+            padding: .3rem;
+
+        }
+        .js{
+            color: black;
+            font-size: .24rem;
+            font-weight: bold;
+        }
+        .count{
+            color: red;
+            font-size: .24rem;
+            margin-top: .2rem;
+            font-weight: bold;
+        }
+        .fx-btn{
+            width: 1.8rem;
+            height: 0.55rem;
+            background-image: linear-gradient(#ff5033 , #e5456b);
+            border-radius: .3rem;
+            color: white;
+            font-weight: bold;
+            font-size: .28rem;
+            text-align: center;
+            line-height: .55rem;
+            margin-top: .2rem;
+        }
+        .cazb-b{
+            width: 6.8rem;
+            height: 4.7rem;
+            /* background: red; */
+            margin: 0 auto;
+            border-radius: .3rem .3rem 0 0;
+        }
+        .tab{
+            height: .6rem;
+            width: 100%;
+        }
+        .tab>div{
+            width: 50%;
+            height: .6rem;
+            border-radius: .3rem .3rem 0 0;
+            background: #ec4c72;
+            color: white;
+            float: left;
+            font-size: .33rem;
+            line-height: .6rem;
+            font-weight: bold;
+            position: relative;
+            text-align: center;
+
+        }
+        .tab>div:nth-child(2){
+            border-radius: 0 .3rem 0 0;
+        }
+
+        .tab>div:nth-child(1){
+            border-radius: .3rem 0 0 0;
+        }
+        .active{
+            height: .85rem !important;
+            background: #ff7394 !important;
+            margin-top: -.25rem;
+            border-radius: .3rem .3rem 0 0 !important;
+            line-height: .85rem !important;
+            font-size: .4rem !important;
+        }
+        .active1{
+            height: 0.7rem !important;
+            width: 0.7rem !important;
+            right: .15rem !important;
+            top: .05rem !important;
+        }
+        .ds{
+            position: absolute;
+            height: .65rem;
+            width: .65rem;
+            background: url('../public/images/ds.png') no-repeat;
+            background-size: 100%;
+            right: .4rem;
+            top: 0rem;
+        }
+        .dl{
+            position: absolute;
+            height: .37rem;
+            width: .37rem;
+            background: url('../public/images/dl.png') no-repeat;
+            background-size: 100%;
+            right: .5rem;
+            top: .14rem;
+        }
+        .zbdt{
+            height: calc(100% - .6rem);
+            width: 100%;
+            background-size: 100%;
+        }
+        .zbdt img{
+            width: 100%;
+        }
+        .yx{
+            position: relative;
+        }
+        .yx img{
+            width: 100%;
+            
+        }
+        .zpg{
+            position: absolute;
+            background: url(../public/images/zpg.png) no-repeat;
+            background-size: 100%;
+            height: 2.13rem;
+            width: 2.13rem;
+            top: 0;
+            border-radius: 50%;
+            left: 50.5%;
+            transform: translateX(-50%);
+            top: 2.29rem;
+        }
+        .jt{
+            width: 0.5rem;
+            height: 1.7rem;
+            background: url(../public/images/fx-jt.png) no-repeat;
+            background-size: 100%;
+            position: absolute;
+            left: 50.5%;
+            transform: translateX(-50%);
+            transform-origin:bottom center;
+            top: 1.6rem;
+        }
+        .footer img{
+            width: 100%;
+            margin-top: -.7rem ;
+        }
+        .dzp-mask{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0,0,0,.4);
+            top: 0;
+            z-index: 9999;
+            /* display: none; */
+        }
+        .jxm{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            top: 3.6rem;
+            font-size: .3rem;
+            width: 3.3rem;
+            text-align:center;
+        }
+        .dzp-mask-content{
+            position: absolute;
+            width: 90%;
+            height: 12rem;
+            left: 50%;
+            top: 50%;
+            background: url('../public/images/gxn.png') no-repeat;
+            background-size: 100%;
+            transform: translate(-50%,-50%);
+        }
+        .xxk{
+            width: 4.3rem;
+            height: 2.4rem;
+            left: 50%;
+            top: 6rem;
+            transform: translateX(-50%);
+            position: absolute;
+        }
+        .xxk input{
+            display: block;
+            width: 100%;
+            height: 0.7rem;
+            border-radius: .4rem;
+            border:none;
+            outline: none;
+            margin-bottom: .2rem;
+            text-align: center;
+        }
+        .xxk div{
+            width: 100%;
+            height: 0.7rem;
+            background: #fec44c;
+            border-radius: .4rem;
+            text-align: center;
+            line-height: .7rem;
+            color: white;
+            font-size: .35rem;
+        }
+        .close{
+            height: 0.6rem;
+            width: 0.6rem;
+            border-radius: 50%;
+            background: red;
+            color: white;
+            position: absolute;
+            left: 50%;
+            top: 12rem;
+            transform: translateX(-50%);
+            font-size: .5rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: .6rem;
+
+        }
+        
+        
+</style>
+</head>
+<body>
+    
+    <div class="baner">
+        <img src="../public/images/fx-baner.jpg" alt="">
+    </div>
+    
+    <div class="yq">
+        <img src="../public/images/fx-yq.png" alt="">
+        <div class="kzj">
+            <div class="yq-t">
+                
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                      <div class="swiper-slide"><img src="../public/images/fx-1.jpg" alt=""></div>
+                      <div class="swiper-slide"><img src="../public/images/fx-2.jpg" alt=""></div>
+                      <div class="swiper-slide"><img src="../public/images/fx-3.jpg" alt=""></div>
+                    </div>
+                  </div>
+            </div>
+            <div class="yq-b"> 
+                <img src="../public/images/kzj.png" alt="">
+                <a href="#" class="btn">0 元 抢</a>
+            </div>
+        </div>
+    </div>
+    <div class="cn">
+        <img src="../public/images/fx-cn.png" alt="" class="tit">
+        <div class="fx">
+            <div class="fx-l">
+                <img src="../public/images/fx-cj.jpg" alt="">
+            </div>
+            <div class="fx-r">
+                <div class="js">分享1位微信好友立即领取 老凤祥麻布袋便携餐具一份</div>
+                <div class="count">仅限100份先到先得</div>
+                <div class="fx-btn">立即分享</div>
+            </div>
+        </div>
+    </div>
+    <div class="zb">
+        <img src="../public/images/fx-zb.png" alt="" class="tit">
+        <div class="cazb-b">
+            <div class="tab">
+                <div class="active"> 正在直播 <span class="dl active1"></span></div>
+                <div>直播预告 <span class="ds"></span></div>
+            </div>
+            <div class="zbdt">
+                <img src="../public/images/fx-zbt.png" alt="">
+            </div>
+        </div>
+
+    </div>
+    <div class="fl">
+        <img src="../public/images/fx-zb.png" alt="" class="tit">
+        <div class="yx">
+            <img src="../public/images/fx-zp.png" alt="">
+            <div class="jt"></div>
+            <div class="zpg">
+                
+            </div>
+        </div>
+    </div>
+    <div class="footer">
+        <img src="../public/images/fx-yd.png" alt="">
+    </div>
+    <div class="dzp-mask">
+        <div class="dzp-mask-content">
+            <div class="jxm">
+                
+            </div>
+            <div class="xxk">
+                <input type="text" class="xm" placeholder="姓名">
+                <input type="text" class="tell" placeholder="电话">
+                <div> 提交</div>
+
+            </div>
+            <div class="close">×</div>
+
+        </div>
+    </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="./public/javascripts/rem.js"></script>
+<script src="../public/javascripts/swiper.min.js"> </script>
+<script>
+    
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true,
+        loop: true
+    })
+    $('body').on('click','.tab>div',function () {
+        $('.tab>div').removeClass('active')
+        $('.tab span').removeClass('active1')
+        $(this).addClass('active')
+        $(this).find('span').addClass('active1')
+        console.log($(this))
+    }).on('click','.close',function () { 
+        $('.dzp-mask').fadeOut()
+
+    }).on('click','.zpg',function () {
+        
+        var timer =null
+        var timer1=null
+        var deg =0
+        var zs =20
+        var js =0
+        var ydj =[700,600,520]
+        var edj =[780,650,780]
+        var sdj =[740,820,570]
+        var ajxaxCount =0
+        var flag =false
+        var jx =''
+        var ds =''
+        clearInterval(timer)
+        $.ajax({
+            //请求方式
+            type : "post",
+            //请求地址
+            url : "/api/luckDraw",
+            //数据，json字符串
+            data:{'mobile':'17621611037'},
+            dataType: 'json',
+            //请求成功
+            success : function(res) {
+                flag=true
+                if(res.prize =='kzj'){
+                    ds=sdj[Math.floor(Math.random()*3)]
+                    $('.jxm').text('获得由老凤祥提供的精美口罩夹一个')
+                }else if(res.prize =='ssh'){
+                    ds=ydj[Math.floor(Math.random()*3)]
+                    $('.jxm').text('获得由老凤祥提供的精美首饰盒一份')
+                }else if(res.prize =='cj'){
+                    ds=edj[Math.floor(Math.random()*3)]
+                    $('.jxm').text('获得由老凤祥提供的精美餐具一份')
+                }
+                    timer =setInterval(function () {  
+                            if(deg> ds){
+                                deg+=zs
+                                zs-=0.1
+                                if(zs<0){
+                                    clearInterval(timer)
+                                    setTimeout(function (param) { 
+                                        $('.dzp-mask').fadeIn()
+                                     },1000)
+                                }
+                            }else{
+                                deg+=zs
+                            }
+                            $('.jt').css({'transform': 'translateX(-50%) rotate('+deg+'deg)'})
+                        },20)
+                    
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+            
+        
+
+      })
+        
+       
+
+
+        
+
+    
+        
+</script>
+</html>
