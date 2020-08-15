@@ -223,6 +223,20 @@
             transform: translateX(-50%);
             top: 2.29rem;
         }
+        .zpg-mask{
+            position: absolute;
+            background: url(../public/images/zpg.png) no-repeat;
+            background-size: 100%;
+            height: 2.13rem;
+            width: 2.13rem;
+            top: 0;
+            border-radius: 50%;
+            left: 50.5%;
+            transform: translateX(-50%);
+            top: 2.29rem;
+            z-index: 22;
+            display: none;
+        }
         .jt{
             width: 0.5rem;
             height: 1.7rem;
@@ -245,7 +259,7 @@
             background: rgba(0,0,0,.4);
             top: 0;
             z-index: 9999;
-            /* display: none; */
+            display: none;
         }
         .jxm{
             position: absolute;
@@ -374,6 +388,7 @@
             <div class="zpg">
                 
             </div>
+            <div class="zpg-mask"></div>
         </div>
     </div>
     <div class="footer">
@@ -413,6 +428,8 @@
     }).on('click','.close',function () { 
         $('.dzp-mask').fadeOut()
 
+    }).on('click','.btn',function () { 
+        window.location.href='/game'
     }).on('click','.zpg',function () {
         
         var timer =null
@@ -428,6 +445,7 @@
         var jx =''
         var ds =''
         clearInterval(timer)
+        $('.zpg-mask').css('display','block')
         $.ajax({
             //请求方式
             type : "post",
@@ -457,6 +475,7 @@
                                     clearInterval(timer)
                                     setTimeout(function (param) { 
                                         $('.dzp-mask').fadeIn()
+                                        $('.zpg-mask').css('display','none')
                                      },1000)
                                 }
                             }else{

@@ -1,6 +1,7 @@
 body{
     overflow-x: hidden;
     
+    position: relative;
 }
 .hide{
     display: none;
@@ -10,18 +11,18 @@ body{
     display: block;
 }
 .wrap{
-    background: url('../images/bg.png') no-repeat;
-    background-size: 100%;
-    height: 74.68rem;
+    background: #2a42c4;
+    padding-bottom: 2.5rem;
 }
 .baner{
-    height: 10rem;
+    /* height: 10rem; */
     position: relative;
 }
 
 .baner img{
     width: 100%;    
 }
+
 
 .cd{
     position: absolute;
@@ -61,11 +62,334 @@ body{
     font-size: .25rem;
 }
 
-.xp-box img{
-    width: 100%;
-    display: block;
+
+
+.xp-box{
+    overflow: hidden;
+    width: 6.85rem;
     margin: 0 auto;
 }
+.dbt{
+    width: 6rem ;
+    margin: 0 auto;
+    display: block;
+    margin-bottom: .35rem;
+    margin-top: .6rem;
+}
+.kzj{
+    width: 6.85rem;
+    height: 6.1rem;
+    background: white;
+    border-radius: .2rem;
+    margin: 0 auto;
+    z-index: 999;
+    position: relative;
+    margin-top: .4rem;
+    
+}
+.yq-t{
+    width: 100%;
+    height: calc(100% - 2.1rem);
+    border-radius: .2rem .2rem 0 0;
+    box-sizing: border-box;
+    padding: .2rem;
+}
+.yq-t img{
+    width: 100%;
+    
+}
+.yq-b{
+    height: 2.1rem;
+    width: 100%;
+    border-radius:0 0 .2rem .2rem ;
+    background: #fff2f2;
+    overflow: hidden;
+}
+.yq-b img{
+    width: 90%;
+    margin-top: .2rem;
+}
+.btn{
+    display: block;
+    margin: 0 auto;
+    height: .7rem;
+    width: 3rem;
+    text-align: center;
+    line-height: .7rem;
+    color: white;
+    font-weight: bold;
+    font-size: .37rem;
+    background-image: linear-gradient(#ff5033 , #e5456b);
+    margin-top: .1rem;
+    border-radius: .4rem;
+}
+.tab-sb{
+    height: 1.15rem;
+    width: 100%;
+    margin-top: .75rem;
+    overflow: hidden;
+    /* background: red; */
+    position: relative;
+    margin-bottom: .2rem;
+}
+.tab-sb-item{
+    position: absolute;
+    width: 2.517rem;
+    height: .85rem;
+    bottom: 0;
+    /* background: red; */
+    border-radius: .3rem .3rem 0 0;
+    text-align: center;
+    line-height: .85rem;
+    color: white;
+    font-size: .32rem;
+    /* font-weight: bold; */
+    letter-spacing: 2px;
+    margin-top:0.3rem;
+}
+.tab-sb-item:nth-child(1){
+    
+    background: #e94762;
+    z-index: 3;
+    
+}
+.tab-sb-item:nth-child(2){
+    background: #df6996;
+    left: 2.2rem;
+    z-index: 2;
+}
+
+.tab-sb-item:nth-child(3){
+    
+    background: #735df9;
+    left: 4.34rem;
+    z-index: 1;
+}
+.tab-sb-active{
+    height: 1.15rem;
+    font-size: .38rem;
+    margin-top: 0;
+    line-height: 1.15rem;
+    box-shadow: 4px 1px 12px rgba(0,0,0,.2);
+}
+.tab-sb-con{
+    height: 7rem;
+    width: 100%;
+    border-radius:.3rem;
+    background: white;
+}
+.tab-sb-con-t{
+    border-radius:.3rem .3rem 0 0;
+    padding: .3rem .2rem;
+    box-sizing: border-box;
+    height: calc(100% - 3rem);
+}
+.tab-sb-con-t img{
+    width: 100%;
+    
+}
+
+.tab-sb-con-bottom{
+    position: relative;
+    height: 2.8rem;
+    background: #fff2f2;
+    overflow: hidden;
+    border-radius: 0 0 .3rem .3rem;
+    margin-top: .2rem;
+}
+
+.tab-sb-con-bottom img{
+    display: block;
+    width: 87%;
+    margin: 0 auto;
+    margin-top: .5rem;
+}
+.c-text{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    font-size: .4rem;
+    width: 3.7rem;
+    color: black;
+    font-weight: bold;
+    top: .4rem;
+}
+.djyh-box {
+    width: 100%;
+}
+.djyh-item{
+    width: 100%;
+    height: 2.85rem;
+    border-radius: .3rem;
+    margin-bottom: .3rem;
+    background: white;
+}
+.djyh-item:nth-last-child(1){
+    margin-bottom: 0rem;
+}
+
+.djyh-item-l{
+    border-radius: .3rem 0 0 .3rem;
+    float: left;
+    width: 2.85rem;
+    height: 100%;
+}
+.djyh-item-l img{
+    border-radius: .3rem 0 0 .3rem;
+    width: 100%;  
+    height: 100%;
+}
+.djyh-item-r{
+    border-radius:0 .3rem  .3rem 0 ;
+    float: left;
+    width: calc(100% - 2.85rem);
+    height: 100%;
+    box-sizing: border-box;
+    padding: .3rem;
+
+}
+.djyh-item-r div{
+    margin-bottom: .25rem;
+}
+.djyh-item-r-t{
+    font-size: .28rem;
+    color: black;
+    font-weight: bold;
+}
+.djyh-item-r-z{
+    color: red;
+    font-weight: bold;
+    font-size: .29rem;
+}
+.djyh-item-r-b{
+    text-align: center;
+    width: 2rem;
+    background-image: linear-gradient(#ff5033 , #e5456b);
+    height: .6rem;
+    line-height: .6rem;
+    color: white;
+    font-size: .28rem;
+    font-weight: bold;
+    border-radius: .3rem;
+    letter-spacing: 1px;
+}
+
+.thzq-box{
+    width: 100%;
+}
+.thzq-box-item{
+    height: 4.35rem;
+    width: 100%;
+    overflow: hidden;
+}
+.thzq-box-item-nav{
+    float: right;
+    height: .9rem;
+    width: 2.65rem;
+    background: url('../images/right-nav.png') no-repeat;
+    background-size: 100%;
+    
+    line-height: .9rem;
+    font-weight: bold;
+    color: white;
+    font-size: .34rem;
+    text-indent: .55rem;
+    margin-bottom: .3rem;
+}
+.nav-w{
+    height: .9rem;
+    width: 100%;
+}
+.scroll{
+    overflow-x:scroll ;
+    width: 100%;
+    padding-left: .3rem;
+    box-sizing: border-box;
+}
+.thzq-box-item-box{
+    height: 2.9rem;
+    margin: 0 auto;
+    overflow: hidden;
+}
+.tbib{
+    width: 2.1rem;
+    height: 100%;
+    border-radius: .25rem;
+    margin-right: .3rem;
+    background: white;
+    float: left;
+}
+.tbib-t{
+    height: 1.45rem;
+    width: 100%;
+    
+}
+.tbib-t img{
+    border-radius: .3rem .3rem 0 0;
+    width: 100%;
+    height: 100%;
+}
+.tbib-b{
+    height: calc(100% - 1.45rem);
+    position: relative;
+    overflow: hidden;
+}
+.spxq{
+    padding: 0 .1rem;
+    box-sizing: border-box;
+    text-align: center;
+    font-size: .2rem;
+    color: black;
+    margin-top: .2rem;
+    font-weight: bold;
+}
+.jg{
+    height: 0.6rem;
+    width: 100%;
+    position: absolute;
+    bottom: .115rem;
+}
+.jg div:nth-child(1){
+    float: left;
+    color: red;
+    font-size: .5rem;
+    margin-left: 0.4rem;
+    margin-top: .05rem;
+    font-weight: bold;
+}
+.jg div:nth-child(2){
+    float: left;
+    margin-top: .25rem;
+    margin-left: .1rem;
+    text-decoration: line-through;
+}
+
+.thzq-box-item:nth-last-child(1){
+    
+    margin-bottom:-.2rem;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .ts{
     width: 100%;
     display: block;
@@ -242,6 +566,7 @@ body{
     /* background: red; */
     margin: 0 auto;
     border-radius: .3rem .3rem 0 0;
+    margin-top: .6rem;
 }
 .tab{
     height: .6rem;
@@ -277,28 +602,28 @@ body{
     font-size: .4rem !important;
 }
 .active1{
-    height: 0.5rem !important;
-    width: 0.5rem !important;
-    right: .3rem !important;
+    height: 0.7rem !important;
+    width: 0.7rem !important;
+    right: .2rem !important;
     top: .1rem !important;
 }
 .ds{
     position: absolute;
-    height: .37rem;
-    width: .37rem;
+    height: .6rem;
+    width: .6rem;
     background: url(../images/ds.png) no-repeat;
     background-size: 100%;
     right: .5rem;
-    top: .07rem;
+    top: .0rem;
 }
 .dl{
     position: absolute;
-    height: .37rem;
-    width: .37rem;
+    height: .5rem;
+    width: .5rem;
     background: url(../images/dl.png) no-repeat;
     background-size: 100%;
     right: .5rem;
-    top: .14rem;
+    top: .05rem;
 }
 .zbdt{
     height: calc(100% - .6rem);
@@ -306,10 +631,12 @@ body{
     background: url('../images/zbdt.png') no-repeat;
     background-size: 100%;
 }
+
+
 .gz{
     height: 0.4rem;
-    width: 1rem;
-    background: #e695b5;
+    width: 1.5rem;
+    background: #8c92bf;
     color: white;
     border-radius: .2rem;
     text-align: center;
@@ -319,12 +646,12 @@ body{
     margin-top: -.5rem;
 }
 .yx{
-    width: 6.8rem;
-    height: 6.8rem;
-    background: url('../images/bg2.png') no-repeat;
+    width: 7rem;
+    height: 7.2rem;
+    background: url(../images/g-bg2.png) no-repeat;
     background-size: 101%;
     margin: 0 auto;
-    margin-top: .1rem;
+   
     overflow: hidden;
     position: relative;
 }
@@ -333,7 +660,7 @@ body{
     width: 5.8rem;
     /* background: red; */
     margin: 0 auto;
-    margin-top: 0.5rem;
+    margin-top: 0.72rem;
     position: relative;
 
 }
@@ -400,7 +727,7 @@ body{
     text-align: center;
     color: white;
     font-size: .5rem;
-    margin-top: -.5rem;
+    margin-top: -.2rem;
 }
 
 .clipped-box:nth-child(1){
@@ -511,4 +838,9 @@ body{
     border: 2px solid green;
     width: 1.4rem;
     height: 1.4rem;
+}
+.footer img{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
 }

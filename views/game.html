@@ -264,7 +264,7 @@
             width: 100%;
             background: rgba(0, 0, 0, .4);
             z-index: 9999;
-            /* display: none; */
+            display: none;
 
        }
        .g-c{
@@ -281,7 +281,7 @@
 
        }
        .sb{
-             height: 8rem;
+            height: 8rem;
            width: 83%;
            background: url('../public/images/s-sb.png') no-repeat;
            background-size: 100%;
@@ -290,7 +290,7 @@
             position: absolute;
             transform: translate(-50%,-50%);
             
-            /* display: none; */
+            display: none;
        }
        .sb div{
             height: 0.7rem;
@@ -324,7 +324,7 @@
             text-align: center;
         }
         .xxk div{
-            width: 100%;
+            width: 46%;
             height: 0.7rem;
             background: #fec44c;
             border-radius: .4rem;
@@ -332,6 +332,7 @@
             line-height: .7rem;
             color: white;
             font-size: .35rem;
+            float: left;
         }
         .close{
             height: 0.6rem;
@@ -354,7 +355,7 @@
 <body>
     <img src="../public/images/g-baner.jpg" alt="" class="baner">
     <div class="djs">
-        剩余 : <span class="sj">10</span> S
+        剩余 : <span class="sj">30</span> S
     </div>
     <div class="gz">规则攻略</div>
     <div class="yx">
@@ -371,14 +372,15 @@
             <div class="xxk">
                 <input type="text" class="xm" placeholder="姓名">
                 <input type="text" class="tell" placeholder="电话">
-                <div> 提交</div>
+                <div style="margin-right: .3rem;" class="tj">提交</div>
+                <div class="goIndex">回到主页</div>
             </div>
 
 
         </div>
         <div class="sb">
-            <div style="margin-left: .85rem;">再来一次</div>
-            <div class="">回到主页</div>
+            <div style="margin-left: .85rem;" class="restart">再来一次</div>
+            <div class="goIndex">回到主页</div>
         </div>
         <div class="close">
             ×
@@ -391,7 +393,7 @@
 <script src="./public/javascripts/rem.js"></script>
 <script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
 <script>
-      function randomilize(arr){
+    function randomilize(arr){
         var length=arr.length;
         var arr1=new Array(); 
         for(var i=0;i<length;i++)
@@ -441,7 +443,7 @@
     function genClips() {
         $.each($('.clipped-box'),function (index,val) {
                 $t= $(val)
-                var amount = 4;
+                var amount = 1;
                 var width = $t.width() / amount;
                 var height = $t.height() / amount;
                 var totalSquares = Math.pow(amount, 2);
@@ -467,16 +469,7 @@
     function rand(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    function restart() { 
-        var time =0
-        xcd=0
-        $('.time').text(time)
-        clearInterval(jsq)
-        jsq=setInterval(() => {
-            time++;
-            $('.time').text(time)
-        }, 1000);
-        }
+    
     function init() {
         var index =[0,1,2,3,4,5,6,7]
         var list =randomilize(index)
@@ -498,8 +491,7 @@
     var count =1
     var xcd =0
     var jsq =null
-    var startFlag =true
-    var djs =10
+    var djs =30
    $('body').on('click','.close',function () { 
         $('.result').fadeOut()
 
@@ -579,8 +571,17 @@
                         setTimeout(function (param) { 
                             $('.g-c').fadeIn()
                             $('.result').fadeIn()
+                            count =1
+                            xcd =0
+                            jsq =null
+                            djs =30
+                            $('.sj').text(djs)
+                            $('.start').removeClass('hide')
+                            $('.mask').removeClass('hide')
+                            init()
+
                          },1000)
-                        startFlag=false
+                        
                     }
                 }
                 
@@ -602,6 +603,18 @@
             }
         },1000)
         $(this).parent().addClass('hide')
+    }).on('click','.restart',function () { 
+        count =1
+        xcd =0
+        jsq =null
+        djs =30
+        $('.sj').text(djs)
+        $('.start').removeClass('hide')
+        $('.mask').removeClass('hide')
+        $('.result').hide()
+        init()
+    }).on('click','.goIndex',function () { 
+        window.location.href="/lfx"
     })
         
 </script>
