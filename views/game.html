@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2020智博会</title>
+    <title>老凤祥</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.css">  
     <style> 
@@ -567,6 +567,7 @@
                     $('.clipped-box').removeClass('sign')
                     console.log(xcd)
                     if(xcd==8){
+                        console.log(11111)
                         clearInterval(jsq)
                         setTimeout(function (param) { 
                             $('.g-c').fadeIn()
@@ -596,8 +597,6 @@
                 clearInterval(jsq)
                 $('.sb').fadeIn()
                 $('.result').fadeIn()
-
-
             }else{
                 $('.sj').text(djs)
             }
@@ -609,6 +608,7 @@
         jsq =null
         djs =30
         $('.sj').text(djs)
+        $('.sb').fadeOut()
         $('.start').removeClass('hide')
         $('.mask').removeClass('hide')
         $('.result').hide()
