@@ -2,7 +2,7 @@
 const loadsh = require('lodash');
 const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
-
+const sqlQuery = require('../db/mysql');
 
 //抽奖
 /* eslint-disable */
@@ -136,6 +136,140 @@ let test =async function (req,res) {
 		'msg': '成功',
 	});
 }
+//老凤祥提交
+let lfxSubmit = async function (req,res) {
+	let {name,tell,sign,jx } =req.body
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	let data ={
+		name:name,
+		tell:tell,
+		sign:sign,
+		jx:jx,
+		create_time: create_time 
+	};
+	let sqlArr =[data.tell,data.jx];
+	let sql = 'select * from  lfx_info where tell = ? and jx = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	let msg=''
+	let count=''
+	if(jx=='kzj'){
+		msg ='恭喜你,老凤祥定制口罩夹领取成功,请及时兑换!'
+	}else if(jx == 'ssh'){
+		msg ='恭喜你,老凤祥精美首饰盒领取成功,请及时兑换!'
+	}else{
+		msg ='恭喜你,老凤祥精美餐具领取成功,请及时兑换!'
+	}
+	if(sign=='fx'){
+		count = await redisStrGet(2, 'cj')
+		if(count >0){
+			await redisStrDecr(2,'cj')
+		}else{
+			count =0
+			msg="您的手速慢了!"
+		}
+	}
+	if(result.length ==0){
+		let sqlArr1 =[data.name,data.tell,data.jx,data.sign,data.create_time];
+		let sql1 = 'insert into lfx_info (name,tell,jx,sign,create_time) values(?,?,?,?,?)';
+		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
+		if(result1.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'msg': msg,
+				'data':'',
+				'count':count
+				 
+			});
+		}else{
+			res.send({ 
+				'code': 1,
+				'msg': '服务器出错!',
+				'data':''
+			});
+		}
+	}else{
+		res.send({ 
+			'code': 1,
+			'msg': '您已经领过此类奖品,请勿重复领取!',
+			'data':'',
+			'count':count
+		});
+	}
+}
+//老凤祥分享
+let lfxFx= async function (req,res) { 
+	let count = await redisStrGet(2, 'cj')
+	if(count){
+		res.send({ 
+			'code': 1,
+			'msg': '剩余餐具数!',
+			'count':count
+		});
+	}
+	
+
+
+}
+
+let lfxFxsubmit= async function (req,res) { 
+	let {name,tell,sign } =req.body
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	let data ={
+		name:name,
+		tell:tell,
+		sign:sign,
+		jx:'cj',
+		create_time: create_time 
+	};
+	let sqlArr =[data.tell,data.jx];
+	let sql = 'select * from  lfx_info where tell = ? and jx = ? ';
+	
+	let msg=''
+	let count=await redisStrGet(2, 'cj')
+	
+	if(count >0){
+		let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+		if(result.length ==0){
+			let sqlArr1 =[data.name,data.tell,data.jx,data.sign,data.create_time];
+			let sql1 = 'insert into lfx_info (name,tell,jx,sign,create_time) values(?,?,?,?,?)';
+			let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
+			if(result1.affectedRows==1){
+				await redisStrDecr(2,'cj')
+				res.send({ 
+					'code': 1,
+					'msg': '恭喜你,老凤祥精美餐具领取成功,请及时兑换!',
+					'data':'',
+					'count':count-1
+					 
+				});
+			}else{
+				res.send({ 
+					'code': 1,
+					'msg': '服务器出错!',
+					'data':''
+				});
+			}
+		}else{
+			res.send({ 
+				'code': 1,
+				'msg': '您已经领过此类奖品,请勿重复领取!',
+				'data':'',
+				'count':count
+			});
+		}
+
+	}else{
+		res.send({ 
+			'code': 1,
+			'msg': '您手速慢了,请参与其他活动吧!',
+			'data':''
+		});
+	}
+	
+	
+	
+	 
+}
 //苏州表单提交
 let szSubmit = async function (req,res) {
 	let {company,name,tell } =req.body
@@ -204,5 +338,8 @@ module.exports={
 	giveUp,
 	test,
 	getUserInfo,
-	szSubmit
+	szSubmit,
+	lfxSubmit,
+	lfxFx,
+	lfxFxsubmit
 };

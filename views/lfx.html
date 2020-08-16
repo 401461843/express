@@ -394,7 +394,7 @@
     <div class="footer">
         <img src="../public/images/fx-yd.png" alt="">
     </div>
-    <div class="dzp-mask">
+    <div class="dzp-mask zp-mask">
         <div class="dzp-mask-content">
             <div class="jxm">
                 
@@ -402,7 +402,22 @@
             <div class="xxk">
                 <input type="text" class="xm" placeholder="姓名">
                 <input type="text" class="tell" placeholder="电话">
-                <div> 提交</div>
+                <div class="zptj"> 提交</div>
+
+            </div>
+            <div class="close">×</div>
+
+        </div>
+    </div>
+    <div class="dzp-mask fx-mask">
+        <div class="dzp-mask-content">
+            <div class="jxm">
+                
+            </div>
+            <div class="xxk">
+                <input type="text" class="xm" placeholder="姓名">
+                <input type="text" class="tell" placeholder="电话">
+                <div class="fxtj"> 提交</div>
 
             </div>
             <div class="close">×</div>
@@ -414,17 +429,140 @@
 <script src="./public/javascripts/rem.js"></script>
 <script src="../public/javascripts/swiper.min.js"> </script>
 <script>
-    
+     $.ajax({
+        //请求方式
+        type : "post",
+        //请求地址
+        url : "/api/lfxFx",
+        //数据，json字符串
+        dataType: 'json',
+        //请求成功
+        success : function(res) {
+            if(res.code ==1){
+               $('.count').text('仅限'+res.count+'份先到先得')
+            }else{
+                alert(res.msg)
+            }
+            
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,
         loop: true
     })
+
+    var jpSign =''
+    function checkPhone(){ 
+        var phone = document.getElementById('phone').value;
+        if(!(/^1[3456789]\d{9}$/.test(phone))){ 
+            alert("手机号码有误，请重填");  
+            return false; 
+        } 
+    }
     $('body').on('click','.tab>div',function () {
         $('.tab>div').removeClass('active')
         $('.tab span').removeClass('active1')
         $(this).addClass('active')
         $(this).find('span').addClass('active1')
         console.log($(this))
+    }).on('click','.zptj',function () { 
+        if($(this).parent().find('.xm').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            name:$(this).parent().find('.xm').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim(),
+            jx:jpSign,
+            sign:'zp'
+        }
+        // console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/lfxSubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+
+
+    }).on('click','.fxtj',function () { 
+        if($(this).parent().find('.xm').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            name:$(this).parent().find('.xm').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim(),
+            jx:'cj',
+            sign:'fx'
+        }
+        // console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/lfxFxsubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                        $('.count').text('仅限'+res.count+'份先到先得')
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+
+
+    }).on('click','.fx-btn',function () { 
+        $('.fx-mask').fadeIn()
+        $('.jxm').text('获得由老凤祥提供的精美餐具一份')
+
     }).on('click','.close',function () { 
         $('.dzp-mask').fadeOut()
 
@@ -457,9 +595,12 @@
             //请求成功
             success : function(res) {
                 flag=true
+                jpSign=res.prize
+                console.log(jx)
                 if(res.prize =='kzj'){
                     ds=sdj[Math.floor(Math.random()*3)]
                     $('.jxm').text('获得由老凤祥提供的精美口罩夹一个')
+                    
                 }else if(res.prize =='ssh'){
                     ds=ydj[Math.floor(Math.random()*3)]
                     $('.jxm').text('获得由老凤祥提供的精美首饰盒一份')
@@ -474,7 +615,7 @@
                                 if(zs<0){
                                     clearInterval(timer)
                                     setTimeout(function (param) { 
-                                        $('.dzp-mask').fadeIn()
+                                        $('.zp-mask').fadeIn()
                                         $('.zpg-mask').css('display','none')
                                      },1000)
                                 }

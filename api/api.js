@@ -15,4 +15,10 @@ router.post('/test', api.test);
 router.post('/getUerCount', api.getUserInfo);
 //苏州数据提交接口
 router.post('/szSubmit', api.szSubmit);
+//老凤祥提交
+router.post('/lfxSubmit', api.lfxSubmit);
+//老凤祥提交
+router.post('/lfxFx', api.lfxFx);
+//老凤祥分享提交
+router.post('/lfxFxsubmit', api.lfxFxsubmit);
 module.exports = router; 

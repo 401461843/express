@@ -615,6 +615,50 @@
         init()
     }).on('click','.goIndex',function () { 
         window.location.href="/lfx"
+    }).on('click','.tj',function () { 
+        if($(this).parent().find('.xm').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            name:$(this).parent().find('.xm').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim(),
+            jx:'kzj',
+            sign:'game'
+        }
+        // console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/lfxSubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+
+
     })
         
 </script>
