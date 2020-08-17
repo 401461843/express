@@ -93,7 +93,7 @@ body{
     height: calc(100% - 2.1rem);
     border-radius: .2rem .2rem 0 0;
     box-sizing: border-box;
-    padding: .2rem;
+    /* padding: .2rem; */
 }
 .yq-t img{
     width: 100%;
@@ -644,17 +644,17 @@ body{
     line-height: .4rem;
     float: right;
     margin-right: .4rem;
-    margin-top: -.5rem;
+    margin-top: .5rem;
 }
 .yx{
     width: 7rem;
     height: 7.2rem;
-    background: url(../images/g-bg2.png) no-repeat;
+    background: url('../images/g-bg2.png') no-repeat;
     background-size: 101%;
     margin: 0 auto;
-   
     overflow: hidden;
     position: relative;
+    margin-top: 1.4rem;
 }
 .box{
     height: 5.8rem;
@@ -1093,6 +1093,7 @@ body{
     background: rgba(0, 0, 0, .7);
     z-index: 9989;
     display: none;
+    top: 0;
 }
 .mznr{
     position: absolute;
@@ -1113,4 +1114,32 @@ body{
     position: absolute;
     right: .3rem;
     top: 0;
+}
+.djs{
+    height: 1.2rem;
+    width: 1.2rem;
+    background: url('../images/djsbj.png') no-repeat;
+    background-size: 100%;
+    text-align: center;
+    color: white;
+    font-size: .45rem;
+    /* margin-top: -.5rem; */
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    top: 2.3rem;
+    line-height: 1.2rem;
+    color: #f55884;
+    text-align: center;
+    font-weight: bold;
+    text-indent: .05rem;
+}
+.yq-b-text{
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    font-size: .33rem;
+    font-weight: bold;
+    color: black;
+    top: .38rem;
 }
