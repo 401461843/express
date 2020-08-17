@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>2020智博会</title>
+    <link rel="stylesheet" href="./public/css/reset.css">
+    <style> 
+       
+    </style>
+</head>
+<body>
+    
+
+    
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="./public/javascripts/rem.js"></script>
+<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+<script>
+   
+    var str =''
+    $.each(scrollList,function (index,val) { 
+    str+='<div class="swiper-slide">'+val.name+'&nbsp;&nbsp;&nbsp;'+val.type+'&nbsp;&nbsp;&nbsp;'+val.school+'</div>'        
+    })
+    $('.swiper-wrapper').html(str)
+    var mySwiper = new Swiper ('.swiper-container', {
+    direction: 'vertical', // 垂直切换选项
+        loop: true, // 循环模式选项
+        // 如果需要滚动条
+        scrollbar: {
+            el: '.swiper-scrollbar',
+        },
+        autoplay:true
+    })  
+    function checkPhone(){ 
+        var phone = document.getElementById('phone').value;
+        if(!(/^1[3456789]\d{9}$/.test(phone))){ 
+            alert("手机号码有误，请重填");  
+            return false; 
+        } 
+    }
+    $('body').on('click','.btn',function () {
+        if($(this).parent().find('.company').val().trim() ==''){
+            alert('公司名称不能为空！')
+            return 
+        }else if($(this).parent().find('.name').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            company:$(this).parent().find('.company').val().trim(),
+            name:$(this).parent().find('.name').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim()
+        }
+        // console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/szSubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        window.location.href='https://mbd.baidu.com/newspage/data/mdpage?sid=1016847&tag=33&offset=10&method=LiveList&getTPL=1&livepre=1&roomid=3833448644'
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+      })
+        
+       
+
+
+        
+
+    
+        
+</script>
+</html>
