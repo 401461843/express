@@ -38,7 +38,7 @@ body{
     
 
 }
-.cd>div{
+.cd>a{
     height: 100%;
     width: 1.5rem;
     background: white;
@@ -46,15 +46,16 @@ body{
     border-radius: .13rem;
     padding: .15rem 0;
     box-sizing: border-box;
+    display: block;
 }
-.cd div img{
+.cd a img{
     display: block;
     height: 0.72rem;
     width: .72rem;
     margin: 0 auto;
 
 }
-.cd div div{
+.cd a div{
     width: 100%;
     text-align: center;
     color: #bc507a;
@@ -269,7 +270,7 @@ body{
     height: .6rem;
     line-height: .6rem;
     color: white;
-    font-size: .28rem;
+    /* font-size: .28rem; */
     font-weight: bold;
     border-radius: .3rem;
     letter-spacing: 1px;
@@ -843,4 +844,273 @@ body{
     width: 100%;
     position: absolute;
     bottom: 0;
+}
+.dzp-mask-content{
+    position: absolute;
+    width: 90%;
+    height: 12rem;
+    left: 50%;
+    top: 50%;
+    background: url('../images/gxn.png') no-repeat;
+    background-size: 100%;
+    transform: translate(-50%,-50%);
+}
+.xxk{
+    width: 4.3rem;
+    height: 2.4rem;
+    left: 50%;
+    top: 6rem;
+    transform: translateX(-50%);
+    position: absolute;
+}
+.xxk input{
+    display: block;
+    width: 100%;
+    height: 0.7rem;
+    border-radius: .4rem;
+    border:none;
+    outline: none;
+    margin-bottom: .2rem;
+    text-align: center;
+}
+.xxk div{
+    width: 100%;
+    height: 0.7rem;
+    background: #fec44c;
+    border-radius: .4rem;
+    text-align: center;
+    line-height: .7rem;
+    color: white;
+    font-size: .35rem;
+}
+.close{
+    height: .7rem;
+    width: .7rem;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    position: absolute;
+    left: 85%;
+    top: 0.4rem;
+    transform: translateX(-50%);
+    font-size: .5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: .65rem;
+}
+.yx-gz span{
+    display: block;
+    color: white;
+    width: 5.5rem;
+    margin-left: -0.5rem;
+}
+.yx-gz-title{
+    text-align: center;
+    font-size: .3rem;
+    font-weight: bold;
+    margin-top: .2rem;
+    margin-bottom: .1rem;
+}
+
+.dzp-mask{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0,0,0,.7);
+    top: 0;
+    z-index: 9999;
+    display: none;
+}
+.jxm{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    top: 3.6rem;
+    font-size: .3rem;
+    width: 3.3rem;
+    text-align:center;
+}
+.fxts{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 9989;
+    top: 0;
+    display: none;
+}
+.fxts img{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+
+}
+
+.result{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 9999;
+    display: none;
+    top: 0;
+
+}
+.g-c{
+   height: 8rem;
+   width: 100%;
+   background: url('../images/g-cg.png') no-repeat;
+   background-size: 100%;
+   left: 50%;
+   top: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    display: none;
+
+
+}
+.sb{
+    height: 8rem;
+   width: 83%;
+   background: url('../images/s-sb.png') no-repeat;
+   background-size: 100%;
+   left: 50%;
+   top: 50%;
+    position: absolute;
+    transform: translate(-50%,-50%);
+    
+    display: none;
+}
+.sb div{
+    height: 0.7rem;
+    background: #fec44c;
+    border-radius: .4rem;
+    text-align: center;
+    line-height: .7rem;
+    color: white;
+    font-size: .35rem;
+    float: left;
+    width: 2.2rem;
+    margin-left: 1.2rem;
+    margin-top: 6.3rem;
+}
+.result .xxk{
+    width: 4.3rem;
+    height: 2.4rem;
+    left: 50%;
+    top: 3.6rem;
+    transform: translateX(-50%);
+    position: absolute;
+}
+.result .xxk input{
+    display: block;
+    width: 100%;
+    height: 0.7rem;
+    border-radius: .4rem;
+    border:none;
+    outline: none;
+    margin-bottom: .2rem;
+    text-align: center;
+}
+.result .xxk div{
+    width: 46%;
+    height: 0.7rem;
+    background: #fec44c;
+    border-radius: .4rem;
+    text-align: center;
+    line-height: .7rem;
+    color: white;
+    font-size: .35rem;
+    float: left;
+}
+.result .close{
+    height: 0.6rem;
+    width: 0.6rem;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    position: absolute;
+    left: 85%;
+    top: 3.5rem;
+    transform: translateX(-50%);
+    font-size: .5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: .6rem;
+
+}
+.sm{
+    color: white;
+    left: 21%;
+    bottom: .6rem;
+    position: absolute;
+    width: 100%;
+}
+.yxgzts{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 9989;
+    /* display: none; */
+    
+
+}
+.yxgzts img{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
+.smclose{
+    width: .7rem;
+    height: .7rem;
+    left: 85%;
+    transform: translateX(-50%);
+    color: white;
+    background: red;
+    font-size: .5rem;
+    line-height: .65rem;
+    text-align: center;
+    position: absolute;
+    border-radius: 50%;
+    font-weight: bold;
+
+}
+.ss{
+    height: 10rem;
+    position: absolute;
+    width: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.mzsm{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 9989;
+    display: none;
+}
+.mznr{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    background: white;
+    overflow-y: auto;
+    width: 90%;
+    height: 11rem;
+    padding: .2rem;
+    box-sizing: border-box;
+    border-radius: .2rem;
+
+}
+.mzegb{
+    font-size: .5rem;
+    position: absolute;
+    right: .3rem;
+    top: 0;
 }

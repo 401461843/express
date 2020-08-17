@@ -21,4 +21,7 @@ router.post('/lfxSubmit', api.lfxSubmit);
 router.post('/lfxFx', api.lfxFx);
 //老凤祥分享提交
 router.post('/lfxFxsubmit', api.lfxFxsubmit);
+//主页抽奖
+router.post('/luckDrawZy', api.luckDrawZy);
+
 module.exports = router; 

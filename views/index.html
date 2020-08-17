@@ -31,27 +31,27 @@
         <div class="baner">
                 <img src="../public/images/banner.png" alt="">
                 <div class="cd">
-                    <div >
-                        <img src="../public/images/xp.png" alt="">
+                    <a  href="#ppzq">
+                        <img src="../public/images/xp.png" alt="" >
                         <div>品牌专区</div>
-                    </div>
-                    <div >
+                    </a>
+                    <a href="#djyh">
                         <img src="../public/images/dj.png" alt="">
                         <div>独家优惠</div>
-                    </div>
-                    <div >
+                    </a>
+                    <a href="#zczb">
                         <img src="../public/images/zb.png" alt="">
                         <div>直播会场</div>
-                    </div>
-                    <div >
+                    </a>
+                    <a href="#cafl">
                         <img src="../public/images/ca.png" alt="">
                         <div>宠爱礼包</div>
-                    </div>
+                    </a>
 
                 </div>
 
         </div>
-        <div class="xp-box">
+        <div class="xp-box" id="ppzq">
             <img src="../public/images/ppzq.png" alt="" class="dbt">
             <div class="kzj">
             <div class="yq-t">
@@ -90,15 +90,15 @@
             </div>
 
         </div>
-        <div class="xp-box">
+        <div class="xp-box" id="djyh">
             <img src="../public/images/djyh.png" alt="" class="dbt">
             <div class="djyh-box">
                 <div class="djyh-item">
                     <div class="djyh-item-l"><img src="../public/images/sy-cj.jpg" alt=""></div>
                     <div class="djyh-item-r">
                         <div class="djyh-item-r-t">分享1位微信好友立即领取 老凤祥麻布袋便携餐具一份</div>
-                        <div class="djyh-item-r-z">仅限100份先到先得</div>
-                        <div class="djyh-item-r-b">立即分享</div>
+                        <div class="djyh-item-r-z fxsy">仅限100份先到先得</div>
+                        <div class="djyh-item-r-b ljfx">立即分享</div>
                     </div>
                 </div>
                 <div class="djyh-item">
@@ -112,7 +112,7 @@
                 
             </div>
         </div>
-        <div  class="xp-box" style="width: 100%;">
+        <div  class="xp-box" style="width: 100%;" id="thzq">
             <img src="../public/images/thzq.png" alt="" class="dbt">
             <div class="thzq-box">
                 <div class="thzq-box-item">
@@ -274,7 +274,7 @@
             </div>
         </div>
     
-        <div class="xp-box">
+        <div class="xp-box" id="zczb">
             <img src="../public/images/zczb.png" class="dbt" alt="">
             <div class="cazb-b">
                 <div class="tab">
@@ -286,9 +286,9 @@
 
         </div>
   
-        <div class="xp-box">
+        <div class="xp-box" id="cafl">
             <img src="../public/images/cafl.png" class="dbt" alt="">
-            <div class="djs">30</div>
+            <div class="djs sj">20</div>
             <div class="gz">规则攻略</div>
             
             <div class="yx">
@@ -306,7 +306,61 @@
         <img src="../public/images/fx-yd.png" alt="">
     </div>
 
+    <div class="dzp-mask fx-mask">
+        <div class="dzp-mask-content">
+            <div class="jxm">
+                
+            </div>
+            <div class="xxk">
+                <input type="text" class="xm" placeholder="姓名">
+                <input type="text" class="tell" placeholder="电话">
+                <div class="fxtj"> 提交</div>
+                <p class="yx-gz">
+                    <span class="yx-gz-title">
+                        活动规则
+                    </span>
+                    <span>
+                        1.分享1次微信好友即可拼券到上海老凤祥豫园分号黄浦区丽水路58-88号领取老凤祥麻布袋便携餐具一份（100份）<br>
+                        2.仅限上海老凤祥豫园分号黄浦区丽水路58-88号<br>
+                        3.活动页类同类产品仅限可领取一次
+                    </span>
+                </p>
 
+            </div>
+            <div class="close">×</div>
+
+        </div>
+    </div>
+    <div class="fxts">
+        <img src="../public/images/fxtb.png" alt="">
+    </div>
+    <div class="result">
+        <div class="g-c">
+            <div class="xxk">
+                <input type="text" class="xm" placeholder="姓名">
+                <input type="text" class="tell" placeholder="电话">
+                <div style="margin-right: .3rem;" class="tj">提交</div>
+                <div class="goIndex">回到主页</div>
+                
+
+                
+            </div>
+
+            <p class="sm">
+                1.凭手机号进店即可免费老凤祥口罩夹一个<br>
+                2.上海老凤祥豫园分号黄浦区丽水路58-88号<br>
+                3.每人仅限领取同类产品一次
+            </p>
+        </div>
+        <div class="sb">
+            <div style="width: 65%;" class="restart">再来一次</div>
+            
+        </div>
+        <div class="close">
+            ×
+        </div>
+        
+    </div>
 </body>
 <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
 <script src="../public/javascripts/rem.js"></script>
@@ -416,6 +470,28 @@
         genClips()
     }
     init()
+    $.ajax({
+        //请求方式
+        type : "post",
+        //请求地址
+        url : "/api/lfxFx",
+        //数据，json字符串
+        dataType: 'json',
+        //请求成功
+        success : function(res) {
+            if(res.code ==1){
+               $('.fxsy').text('仅限'+res.count+'份先到先得')
+            }else{
+                alert(res.msg)
+            }
+            
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,
         loop: true
@@ -424,9 +500,7 @@
     var count =1
     var xcd =0
     var jsq =null
-    var startFlag =true
-    var djs =30
-    console.log($('.thzq-box-item-box>div').length)
+    var djs =20
     $.each( $('.thzq-box-item-box'),function (index,val) {
          $(val).css({
             'width':($(val).find('.tbib').length*2.4)+'rem'
@@ -438,11 +512,84 @@
         $(this).addClass('active')
         $(this).find('span').addClass('active1')
         console.log($(this))
+    }).on('click','.close',function () { 
+        $('.result').fadeOut()
+        $('.sj').text('20')
+    }).on('click','.restart',function () { 
+        count =1
+        xcd =0
+        jsq =null
+        djs =20
+        $('.sj').text(djs)
+        $('.sb').fadeOut()
+        $('.start').removeClass('hide')
+        $('.mask').removeClass('hide')
+        $('.result').hide()
+        init()
     }).on('click','.tab-sb-item',function () { 
         
         $(this).siblings().removeClass('tab-sb-active')
         $(this).addClass('tab-sb-active')
-     }).on('click','.cj',function () { 
+     }).on('click','.ljfx',function () { 
+        let timer =null;
+        clearTimeout(timer)
+        $('.fxts').fadeIn()
+        timer=setTimeout(function () { 
+            $('.fxts').fadeOut()
+            $('.fx-mask').fadeIn()
+            $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
+         },2000)
+       
+
+    }).on('click','.fxtj',function () { 
+        if($(this).parent().find('.xm').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            name:$(this).parent().find('.xm').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim(),
+            jx:'cj',
+            sign:'syfx'
+        }
+        // console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/lfxFxsubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                        $('.count').text('仅限'+res.count+'份先到先得')
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+
+
+    }).on('click','.close',function () { 
+        $('.dzp-mask').fadeOut()
+
+    }).on('click','.cj',function () { 
             $.ajax({
                 //请求方式
                 type : "post",
@@ -582,7 +729,20 @@
                     $('.clipped-box').removeClass('sign')
                     if(xcd==8){
                         clearInterval(jsq)
-                        startFlag=false
+                        setTimeout(function (param) { 
+                            $('.g-c').fadeIn()
+                            $('.result').fadeIn()
+                            count =1
+                            xcd =0
+                            jsq =null
+                            djs =20
+                            $('.sj').text(djs)
+                            $('.start').removeClass('hide')
+                            $('.mask').removeClass('hide')
+                            init()
+
+                         },1000)
+                        
                     }
                 }
                 
@@ -593,13 +753,14 @@
        
         
         clearInterval(jsq)
-        
         jsq =setInterval(function (param) { 
             djs--;
             if(djs == -1){
-                clearInterval(timer)
+                clearInterval(jsq)
+                $('.sb').fadeIn()
+                $('.result').fadeIn()
             }else{
-                $('.djs').text(djs)
+                $('.sj').text(djs)
             }
         },1000)
         $(this).parent().addClass('hide')
