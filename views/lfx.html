@@ -11,7 +11,7 @@
 </script>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>老凤祥</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="../public/css/swiper.min.css">  
@@ -341,7 +341,7 @@
             font-size: .5rem;
             font-weight: bold;
             text-align: center;
-            line-height: .6rem;
+            line-height: .55rem;
         }
         
         .yx-gz span{
@@ -356,6 +356,21 @@
             font-weight: bold;
             margin-top: .2rem;
             margin-bottom: .1rem;
+        }
+        .fxts{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, .7);
+            z-index: 9989;
+            top: 0;
+            display: none;
+        }
+        .fxts img{
+            width: 100%;
+            position: absolute;
+            bottom: 0;
+
         }
 </style>
 </head>
@@ -408,7 +423,7 @@
             <div class="zpg-mask"></div>
         </div>
     </div>
-    <div class="zb" >
+    <!-- <div class="zb" >
         <img src="../public/images/fx-zb.png" alt="" class="tit" style="margin-top: .3rem;">
         <div class="cazb-b">
             <div class="tab">
@@ -420,7 +435,7 @@
             </div>
         </div>
 
-    </div>
+    </div> -->
     <div class="footer">
         <div class="tit_bottom">版权所有@上海老凤祥有限公司</div>
     </div>
@@ -473,6 +488,9 @@
             <div class="close">×</div>
 
         </div>
+    </div>
+    <div class="fxts">
+        <img src="../public/images/fxtb.png" alt="">
     </div>
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
@@ -610,8 +628,15 @@
 
 
     }).on('click','.fx-btn',function () { 
-        $('.fx-mask').fadeIn()
-        $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
+        let timer =null;
+        clearTimeout(timer)
+        $('.fxts').fadeIn()
+        timer=setTimeout(function () { 
+            $('.fxts').fadeOut()
+            $('.fx-mask').fadeIn()
+            $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
+         },2000)
+       
 
     }).on('click','.close',function () { 
         $('.dzp-mask').fadeOut()
