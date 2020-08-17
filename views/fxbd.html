@@ -12,94 +12,97 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>2020智博会</title>
+    <title>老凤祥</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <style> 
-       
+       .dzp-mask-content{
+            position: absolute;
+            width: 90%;
+            height: 12rem;
+            left: 50%;
+            top: 50%;
+            background: url('../public/images/gxn.png') no-repeat;
+            background-size: 100%;
+            transform: translate(-50%,-50%);
+        }
+        .xxk{
+            width: 4.3rem;
+            height: 2.4rem;
+            left: 50%;
+            top: 6rem;
+            transform: translateX(-50%);
+            position: absolute;
+        }
+        .xxk input{
+            display: block;
+            width: 100%;
+            height: 0.7rem;
+            border-radius: .4rem;
+            border:none;
+            outline: none;
+            margin-bottom: .2rem;
+            text-align: center;
+        }
+        .xxk div{
+            width: 100%;
+            height: 0.7rem;
+            background: #fec44c;
+            border-radius: .4rem;
+            text-align: center;
+            line-height: .7rem;
+            color: white;
+            font-size: .35rem;
+        }
+        .close{
+            height: .7rem;
+            width: .7rem;
+            border-radius: 50%;
+            background: red;
+            color: white;
+            position: absolute;
+            left: 85%;
+            top: 0.4rem;
+            transform: translateX(-50%);
+            font-size: .5rem;
+            font-weight: bold;
+            text-align: center;
+            line-height: .65rem;
+        }
     </style>
 </head>
 <body>
-    
+    <div class="dzp-mask fx-mask">
+        <div class="dzp-mask-content">
+            <div class="jxm">
+                
+            </div>
+            <div class="xxk">
+                <input type="text" class="xm" placeholder="姓名">
+                <input type="text" class="tell" placeholder="电话">
+                <div class="fxtj"> 提交</div>
+                <p class="yx-gz">
+                    <span class="yx-gz-title">
+                        活动规则
+                    </span>
+                    <span>
+                        1.分享1次微信好友即可拼券到上海老凤祥豫园分号黄浦区丽水路58-88号领取老凤祥麻布袋便携餐具一份（100份）<br>
+                        2.仅限上海老凤祥豫园分号黄浦区丽水路58-88号<br>
+                        3.活动页类同类产品仅限可领取一次
+                    </span>
+                </p>
+
+            </div>
+            <div class="close">×</div>
+
+        </div>
+    </div>
 
     
 </body>
-<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
-<script src="./public/javascripts/rem.js"></script>
-<script src="https://unpkg.com/swiper/swiper-bundle.min.js"> </script>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
 <script>
    
-    var str =''
-    $.each(scrollList,function (index,val) { 
-    str+='<div class="swiper-slide">'+val.name+'&nbsp;&nbsp;&nbsp;'+val.type+'&nbsp;&nbsp;&nbsp;'+val.school+'</div>'        
-    })
-    $('.swiper-wrapper').html(str)
-    var mySwiper = new Swiper ('.swiper-container', {
-    direction: 'vertical', // 垂直切换选项
-        loop: true, // 循环模式选项
-        // 如果需要滚动条
-        scrollbar: {
-            el: '.swiper-scrollbar',
-        },
-        autoplay:true
-    })  
-    function checkPhone(){ 
-        var phone = document.getElementById('phone').value;
-        if(!(/^1[3456789]\d{9}$/.test(phone))){ 
-            alert("手机号码有误，请重填");  
-            return false; 
-        } 
-    }
-    $('body').on('click','.btn',function () {
-        if($(this).parent().find('.company').val().trim() ==''){
-            alert('公司名称不能为空！')
-            return 
-        }else if($(this).parent().find('.name').val().trim() ==''){
-            alert('姓名不能为空')
-            return 
-        }else if($(this).parent().find('.tell').val().trim() =='' ){
-            alert('手机号不能为空！')
-            return 
-        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
-            alert('手机号格式不正确！')
-            return 
-        }
-        var param ={
-            company:$(this).parent().find('.company').val().trim(),
-            name:$(this).parent().find('.name').val().trim(),
-            tell:$(this).parent().find('.tell').val().trim()
-        }
-        // console.log(param)
-        $.ajax({
-                //请求方式
-                type : "post",
-                //请求地址
-                url : "/api/szSubmit",
-                //数据，json字符串
-                data:param,
-                dataType: 'json',
-                //请求成功
-                success : function(res) {
-                   if(res.code ==1){
-                        window.location.href='https://mbd.baidu.com/newspage/data/mdpage?sid=1016847&tag=33&offset=10&method=LiveList&getTPL=1&livepre=1&roomid=3833448644'
-                   }else{
-                       alert(res.msg)
-                   }
-                   
-                },
-                //请求失败，包含具体的错误信息
-                error : function(e){
-                    console.log(e.status);
-                    console.log(e.responseText);
-                }
-            });
-      })
-        
-       
-
-
-        
-
     
-        
 </script>
 </html>
