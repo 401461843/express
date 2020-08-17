@@ -36,8 +36,7 @@ let luckDraw =async function ( req,res) {
 			newArr.push(temArr);
 			count++;
 		});
-		console.log(newArr)
-		console.log(prizeNumber)
+		
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
