@@ -15,6 +15,9 @@
     <title>老凤祥</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <style> 
+        body{
+            background: black;
+        }
        .dzp-mask-content{
             position: absolute;
             width: 90%;
@@ -68,13 +71,36 @@
             text-align: center;
             line-height: .65rem;
         }
+        .yx-gz span{
+            display: block;
+            color: white;
+            width: 5.5rem;
+            margin-left: -0.5rem;
+        }
+        .yx-gz-title{
+            text-align: center;
+            font-size: .3rem;
+            font-weight: bold;
+            margin-top: .2rem;
+            margin-bottom: .1rem;
+        }
+        .jxm{
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            color: white;
+            top: 3.6rem;
+            font-size: .3rem;
+            width: 3.3rem;
+            text-align:center;
+        }
     </style>
 </head>
 <body>
     <div class="dzp-mask fx-mask">
         <div class="dzp-mask-content">
             <div class="jxm">
-                
+                填写表单即可获得由老凤祥提供的麻布袋便携餐具
             </div>
             <div class="xxk">
                 <input type="text" class="xm" placeholder="姓名">
@@ -85,14 +111,13 @@
                         活动规则
                     </span>
                     <span>
-                        1.分享1次微信好友即可拼券到上海老凤祥豫园分号黄浦区丽水路58-88号领取老凤祥麻布袋便携餐具一份（100份）<br>
+                        1.到店领取有效时间：8月19日-10月31日 <br>
                         2.仅限上海老凤祥豫园分号黄浦区丽水路58-88号<br>
                         3.活动页类同类产品仅限可领取一次
                     </span>
                 </p>
 
             </div>
-            <div class="close">×</div>
 
         </div>
     </div>
@@ -102,7 +127,51 @@
 <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
 <script src="../public/javascripts/rem.js"></script>
 <script>
-   
-    
+   $('body').on('click','.fxtj',function () { 
+        if($(this).parent().find('.xm').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }
+        var param ={
+            name:$(this).parent().find('.xm').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim(),
+            jx:'cj',
+            sign:'jmy'
+        }
+        
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/lfxFxsubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                        $('.count').text('仅限'+res.count+'份先到先得')
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+
+
+    })    
 </script>
 </html>
