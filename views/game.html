@@ -350,8 +350,8 @@
             background: red;
             color: white;
             position: absolute;
-            left: 50%;
-            top: 12.5rem;
+            left: 85%;
+            top: 3.5rem;
             transform: translateX(-50%);
             font-size: .5rem;
             font-weight: bold;
@@ -364,7 +364,7 @@
 <body>
     <img src="../public/images/g-baner.png" alt="" class="baner">
     <div class="djs">
-        剩余 : <span class="sj">30</span> S
+        剩余 : <span class="sj">20</span> S
     </div>
     <div class="gz">规则攻略</div>
     <div class="yx">
@@ -452,7 +452,7 @@
     function genClips() {
         $.each($('.clipped-box'),function (index,val) {
                 $t= $(val)
-                var amount = 1;
+                var amount = 4;
                 var width = $t.width() / amount;
                 var height = $t.height() / amount;
                 var totalSquares = Math.pow(amount, 2);
@@ -500,7 +500,7 @@
     var count =1
     var xcd =0
     var jsq =null
-    var djs =30
+    var djs =20
    $('body').on('click','.close',function () { 
         $('.result').fadeOut()
 
@@ -584,7 +584,7 @@
                             count =1
                             xcd =0
                             jsq =null
-                            djs =30
+                            djs =20
                             $('.sj').text(djs)
                             $('.start').removeClass('hide')
                             $('.mask').removeClass('hide')
@@ -615,7 +615,7 @@
         count =1
         xcd =0
         jsq =null
-        djs =30
+        djs =20
         $('.sj').text(djs)
         $('.sb').fadeOut()
         $('.start').removeClass('hide')
