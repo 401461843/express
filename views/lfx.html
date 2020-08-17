@@ -1,5 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -13,6 +22,7 @@
         }
         .baner img{
             width: 100%;
+            height: 13rem;
         }
         .yq{
             margin-top: -3.8rem;
@@ -248,9 +258,18 @@
             transform-origin:bottom center;
             top: 1.6rem;
         }
-        .footer img{
+        .footer {
             width: 100%;
+            height: 2.82rem;
+            background: url(../public/images/fx-yd.png) no-repeat;
+            background-size: 100%;
             margin-top: -.7rem ;
+        }
+        .footer .tit_bottom {
+            font-size: 0.24rem;
+            color: #f6f6f6;
+            text-align: center;
+            padding-top: 2.2rem;
         }
         .dzp-mask{
             position: fixed;
@@ -316,14 +335,13 @@
             background: red;
             color: white;
             position: absolute;
-            left: 50%;
-            top: 12rem;
+            left: 85%;
+            top: 0.4rem;
             transform: translateX(-50%);
             font-size: .5rem;
             font-weight: bold;
             text-align: center;
             line-height: .6rem;
-
         }
         
         
@@ -361,10 +379,21 @@
                 <img src="../public/images/fx-cj.jpg" alt="">
             </div>
             <div class="fx-r">
-                <div class="js">分享1位微信好友立即领取 老凤祥麻布袋便携餐具一份</div>
+                <div class="js">分享1微信好友 到指定老凤祥店铺领取麻布袋便携餐具一份</div>
                 <div class="count">仅限100份先到先得</div>
                 <div class="fx-btn">立即分享</div>
             </div>
+        </div>
+    </div>
+    <div class="fl">
+        <img src="../public/images/fx-fl.png" alt="" class="tit">
+        <div class="yx">
+            <img src="../public/images/fx-zp.png" alt="">
+            <div class="jt"></div>
+            <div class="zpg">
+                
+            </div>
+            <div class="zpg-mask"></div>
         </div>
     </div>
     <div class="zb">
@@ -380,19 +409,8 @@
         </div>
 
     </div>
-    <div class="fl">
-        <img src="../public/images/fx-zb.png" alt="" class="tit">
-        <div class="yx">
-            <img src="../public/images/fx-zp.png" alt="">
-            <div class="jt"></div>
-            <div class="zpg">
-                
-            </div>
-            <div class="zpg-mask"></div>
-        </div>
-    </div>
     <div class="footer">
-        <img src="../public/images/fx-yd.png" alt="">
+        <div class="tit_bottom">版权所有@上海老凤祥有限公司</div>
     </div>
     <div class="dzp-mask zp-mask">
         <div class="dzp-mask-content">
@@ -561,7 +579,7 @@
 
     }).on('click','.fx-btn',function () { 
         $('.fx-mask').fadeIn()
-        $('.jxm').text('获得由老凤祥提供的精美餐具一份')
+        $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
 
     }).on('click','.close',function () { 
         $('.dzp-mask').fadeOut()
@@ -600,13 +618,12 @@
                 if(res.prize =='kzj'){
                     ds=sdj[Math.floor(Math.random()*3)]
                     $('.jxm').text('获得由老凤祥提供的精美口罩夹一个')
-                    
                 }else if(res.prize =='ssh'){
                     ds=ydj[Math.floor(Math.random()*3)]
                     $('.jxm').text('获得由老凤祥提供的精美首饰盒一份')
                 }else if(res.prize =='cj'){
                     ds=edj[Math.floor(Math.random()*3)]
-                    $('.jxm').text('获得由老凤祥提供的精美餐具一份')
+                    $('.jxm').text('获得由老凤祥提供的麻布袋便携餐具')
                 }
                     timer =setInterval(function () {  
                             if(deg> ds){
