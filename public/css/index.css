@@ -247,16 +247,19 @@ body{
     width: calc(100% - 2.85rem);
     height: 100%;
     box-sizing: border-box;
-    padding: .2rem;
+    padding: .3rem;
 
 }
 .djyh-item-r div{
-    margin-bottom: .1rem;
+    margin-bottom: .18rem;
 }
 .djyh-item-r-t{
-    font-size: .2rem;
+    font-size: .26rem;
     color: black;
     font-weight: bold;
+    height: 1.1rem;
+    width: 100%;
+    overflow: hidden;
 }
 .djyh-item-r-z{
     color: red;
@@ -328,7 +331,7 @@ body{
     
 }
 .tbib-t img{
-    border-radius: .3rem .3rem 0 0;
+    /* border-radius: .3rem .3rem 0 0; */
     width: 100%;
     height: 100%;
 }
@@ -634,11 +637,13 @@ body{
 .zbdt{
     height: calc(100% - .6rem);
     width: 100%;
-    background: url('../images/zbdt.png') no-repeat;
+    background: url('../images/fx-zbt.png') no-repeat;
     background-size: 100%;
 }
 
-
+.mc{
+    position: relative;
+}
 .gz{
     height: 0.4rem;
     width: 1.5rem;
