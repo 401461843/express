@@ -412,7 +412,7 @@
             </div>
         </div>
     </div>
-    <div class="fl">
+    <!-- <div class="fl">
         <img src="../public/images/fx-fl.png" alt="" class="tit" >
         <div class="yx">
             <img src="../public/images/fx-zp.png" alt="">
@@ -422,7 +422,7 @@
             </div>
             <div class="zpg-mask"></div>
         </div>
-    </div>
+    </div> -->
     <!-- <div class="zb" >
         <img src="../public/images/fx-zb.png" alt="" class="tit" style="margin-top: .3rem;">
         <div class="cazb-b">
@@ -497,7 +497,7 @@
     </div>
 </body>
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
-<script src="./public/javascripts/rem.js"></script>
+<script src="../public/javascripts/rem.js"></script>
 <script src="../public/javascripts/swiper.js"> </script>
 <script>
      $.ajax({
@@ -645,7 +645,16 @@
         $('.dzp-mask').fadeOut()
 
     }).on('click','.btn',function () { 
-        window.location.href='/game'
+        // window.location.href='/game'
+        let timer =null;
+        clearTimeout(timer)
+        $('.fxts').fadeIn()
+        timer=setTimeout(function () { 
+            $('.fxts').fadeOut()
+            $('.fx-mask').fadeIn()
+            $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
+         },2000)
+       
     }).on('click','.zpg',function () {
         
         var timer =null

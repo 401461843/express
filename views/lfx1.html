@@ -395,7 +395,7 @@
             </div>
             <div class="yq-b"> 
                 <img src="../public/images/kzj.png" alt="">
-                <a href="#" class="btn">0 元 抢</a>
+                <div  class="btn">0 元 抢</div>
             </div>
         </div>
     </div>
@@ -412,7 +412,7 @@
             </div>
         </div>
     </div>
-    <div class="fl">
+    <!-- <div class="fl">
         <img src="../public/images/fx-fl.png" alt="" class="tit" >
         <div class="yx">
             <img src="../public/images/fx-zp.png" alt="">
@@ -422,7 +422,7 @@
             </div>
             <div class="zpg-mask"></div>
         </div>
-    </div>
+    </div> -->
     <!-- <div class="zb" >
         <img src="../public/images/fx-zb.png" alt="" class="tit" style="margin-top: .3rem;">
         <div class="cazb-b">
@@ -500,28 +500,28 @@
 <script src="./public/javascripts/rem.js"></script>
 <script src="../public/javascripts/swiper.js"> </script>
 <script>
-     $.ajax({
-        //请求方式
-        type : "post",
-        //请求地址
-        url : "/api/lfxFx",
-        //数据，json字符串
-        dataType: 'json',
-        //请求成功
-        success : function(res) {
-            if(res.code ==1){
-               $('.count').text('仅限'+res.count+'份先到先得')
-            }else{
-                alert(res.msg)
-            }
+    //  $.ajax({
+    //     //请求方式
+    //     type : "post",
+    //     //请求地址
+    //     url : "/api/lfxFx",
+    //     //数据，json字符串
+    //     dataType: 'json',
+    //     //请求成功
+    //     success : function(res) {
+    //         if(res.code ==1){
+    //            $('.count').text('仅限'+res.count+'份先到先得')
+    //         }else{
+    //             alert(res.msg)
+    //         }
             
-        },
-        //请求失败，包含具体的错误信息
-        error : function(e){
-            console.log(e.status);
-            console.log(e.responseText);
-        }
-    });
+    //     },
+    //     //请求失败，包含具体的错误信息
+    //     error : function(e){
+    //         console.log(e.status);
+    //         console.log(e.responseText);
+    //     }
+    // });
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,
         loop: true
@@ -645,7 +645,16 @@
         $('.dzp-mask').fadeOut()
 
     }).on('click','.btn',function () { 
-        window.location.href='/game1'
+        let timer =null;
+        clearTimeout(timer)
+        $('.fxts').fadeIn()
+        timer=setTimeout(function () { 
+            $('.fxts').fadeOut()
+            $('.fx-mask').fadeIn()
+            $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
+         },2000)
+
+        // window.location.href='/game1'
     }).on('click','.zpg',function () {
         
         var timer =null
