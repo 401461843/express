@@ -23,7 +23,7 @@ module.exports = {
 	'deploy': {
 		'production': {
 			'user': 'root',
-			'host': ['106.12.30.140'], //这里可以多个远程服务器地址 '106.12.69.208'
+			'host': ['106.12.30.140', '106.12.69.208'], //这里可以多个远程服务器地址 '106.12.69.208'
 			'ref': 'origin/master', 
 			'repo': 'git@github.com:401461843/express.git',
 			'path': '/home/express',
