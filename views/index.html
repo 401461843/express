@@ -280,7 +280,7 @@
                 </div>
                 
                 <a href="https://mbd.baidu.com/newspage/data/mdpage?sid=1016847&tag=33&offset=10&method=LiveList&getTPL=1&livepre=1&roomid=3849712182" class="mc"><div class="zbdt" style="position: relative;">
-                    <div  style="height: 100%;width: 100%;background: rgba(255,255,255,.4);"><img style="display: block;height: 1rem;width: 1rem;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" src="../public/images/bf.png" alt=""></div>
+                    <div  style="height: 1rem;width: 1rem;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);background: grey;"><img style="display: block;height: 1rem;width: 1rem;position: absolute;left: 50%;top: 50%;transform: translate(-50%, -50%);" src="../public/images/bf.png" alt=""></div>
                 </div></a>
                 
             </div>
@@ -348,9 +348,7 @@
             </div>
 
             <p class="sm">
-                1.凭手机号进店即可免费老凤祥口罩夹一个<br>
-                2.上海老凤祥豫园分号黄浦区丽水路58-88号<br>
-                3.每人仅限领取同类产品一次
+                
             </p>
         </div>
         <div class="sb">
@@ -780,8 +778,21 @@
                                 // $('.jx').text("恭喜你中了"+res.prize)
                                 // prize=res.prize
                                 console.log();
+                                var str =''
                                 setTimeout(function (param) { 
+                                    if(res.prize=='kldzbx'){
+                                        str='1.顾客凭线上预约码 到店可领取价值399元便携珠宝箱一件（30天内有效）<br>2.线上预约链接：https://m.crd.cn/reservation/?source=kaipin|H5'
+                                        $('.sm').css({'left':'18%'})
+                                    }else if(res.prize=='kzj'){
+                                        str='1.凭手机号进店即可免费老凤祥口罩夹一个<br>2.上海老凤祥豫园分号黄浦区丽水路58-88号<br>3.每人仅限领取同类产品一次'
+                                        $('.sm').css({'bottom':'.5rem'})
+                                    }else{
+                                        str='1.请填写完整的获奖信息，活动结束后会有工作人员索要邮寄地址<br>2.活动结束后我们将于15个工作日内将奖品邮寄给您'
+                                        $('.sm').css({'left':'18%'})
+                                    }
                                     $('.jp-text').text('恭喜你获得'+map[res.prize])
+                                    $('.sm').html(str)
+                                    
                                     $('.g-c').fadeIn()
                                     $('.result').fadeIn()
                                     count =1
