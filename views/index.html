@@ -12,7 +12,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>七夕</title>
+    <title>七夕宠爱季</title>
     <link rel="stylesheet" href="./public/css/reset.css">
     <link rel="stylesheet" href="./public/css/index.css">
     <link rel="stylesheet" href="../public/css/swiper.min.css">  
@@ -340,6 +340,7 @@
     </div>
     <div class="result">
         <div class="g-c">
+            <div class="jp-text"></div>
             <div class="xxk">
                 <input type="text" class="xm" placeholder="姓名">
                 <input type="text" class="tell" placeholder="电话">
@@ -532,6 +533,15 @@
     var xcd =0
     var jsq =null
     var djs =20
+    var map ={
+        'ppxsz':'趴趴熊睡枕',
+        'kldzbx':'克莱蒂珠宝箱',
+        'kzj':'老凤祥口罩夹',
+        'xdzj':'小度在家X8',
+        'xzdxgz':'星座度熊公仔',
+        'bslx':'博洋冰丝凉席',
+        'xdznyx':'小度智能音响'
+    }
     $.each( $('.thzq-box-item-box'),function (index,val) {
          $(val).css({
             'width':($(val).find('.tbib').length*2.4)+'rem'
@@ -587,7 +597,7 @@
             name:$(this).parent().find('.xm').val().trim(),
             tell:$(this).parent().find('.tell').val().trim(),
             jx:'cj',
-            sign:'syfx'
+            sign:'主页分享'
         }
         // console.log(param)
         $.ajax({
@@ -621,26 +631,7 @@
         $('.dzp-mask').fadeOut()
 
     }).on('click','.cj',function () { 
-            $.ajax({
-                //请求方式
-                type : "post",
-                //请求地址
-                url : "/api/luckDraw",
-                //数据，json字符串
-                data:{'mobile':'17621611037'},
-                dataType: 'json',
-                //请求成功
-                success : function(res) {
-                    $('.jx').text("恭喜你中了"+res.prize)
-                    prize=res.prize
-                    // console.log(res.prize);
-                },
-                //请求失败，包含具体的错误信息
-                error : function(e){
-                    console.log(e.status);
-                    console.log(e.responseText);
-                }
-            });
+            
         
 
     }).on('click','.tj',function () { 
@@ -658,7 +649,7 @@
             name:$(this).parent().find('.xm').val().trim(),
             tell:$(this).parent().find('.tell').val().trim(),
             jx:'xx',
-            sign:'sygame'
+            sign:'主页消消乐'
         }
         $.ajax({
                 //请求方式
@@ -777,19 +768,40 @@
                     $('.clipped-box').removeClass('sign')
                     if(xcd==8){
                         clearInterval(jsq)
-                        setTimeout(function (param) { 
-                            $('.g-c').fadeIn()
-                            $('.result').fadeIn()
-                            count =1
-                            xcd =0
-                            jsq =null
-                            djs =20
-                            $('.sj').text(djs)
-                            $('.start').removeClass('hide')
-                            $('.mask').removeClass('hide')
-                            init()
+                        $.ajax({
+                            //请求方式
+                            type : "post",
+                            //请求地址
+                            url : "/api/luckDrawZy",
+                            //数据，json字符串
+                            dataType: 'json',
+                            //请求成功
+                            success : function(res) {
+                                // $('.jx').text("恭喜你中了"+res.prize)
+                                // prize=res.prize
+                                console.log();
+                                setTimeout(function (param) { 
+                                    $('.jp-text').text('恭喜你获得'+map[res.prize])
+                                    $('.g-c').fadeIn()
+                                    $('.result').fadeIn()
+                                    count =1
+                                    xcd =0
+                                    jsq =null
+                                    djs =20
+                                    $('.sj').text(djs)
+                                    $('.start').removeClass('hide')
+                                    $('.mask').removeClass('hide')
+                                    init()
 
-                         },1000)
+                                },1000)
+                            },
+                            //请求失败，包含具体的错误信息
+                            error : function(e){
+                                console.log(e.status);
+                                console.log(e.responseText);
+                            }
+                        });
+                        
                         
                     }
                 }

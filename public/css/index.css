@@ -970,7 +970,7 @@ body{
 .g-c{
    height: 8rem;
    width: 100%;
-   background: url('../images/g-cg.png') no-repeat;
+   background: url('../images/zy-cg.png') no-repeat;
    background-size: 100%;
    left: 50%;
    top: 50%;
@@ -1152,4 +1152,12 @@ body{
     font-weight: bold;
     color: black;
     top: .38rem;
+}
+.jp-text{
+    color: white;
+    position: absolute;
+    text-align: center;
+    width: 100%;
+    top: 2.9rem;
+    font-size: .35rem;
 }

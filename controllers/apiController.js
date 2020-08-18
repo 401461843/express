@@ -82,7 +82,7 @@ let luckDrawZy =async function ( req,res) {
 	let prizeName ='';
 	
 	// 获取抽奖概率
-	rate =JSON.parse(await redisStrGet(1, 'gl'));
+	rate =JSON.parse(await redisStrGet(5, 'gl'));
 	console.log(rate)
 	if(JSON.stringify(rate) =='{}'){
 		
@@ -105,7 +105,7 @@ let luckDrawZy =async function ( req,res) {
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
-				await redisStrDecr(0, prizeName);
+				await redisStrDecr(3, prizeName);
 				res.send({ 
 					'code': 200,
 					'msg': '抽奖成功',
@@ -113,8 +113,8 @@ let luckDrawZy =async function ( req,res) {
 				});
 				allPrize=await redisStrAll(0);
 				util.customForeach(allPrize, async (val) => {
-					if ( await redisStrGet(0, val)==0) {
-						let oldGlObj =JSON.parse(await redisStrGet(1, 'gl'));
+					if ( await redisStrGet(3, val)==0) {
+						let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
 						let fboldGlObj=JSON.stringify(oldGlObj)
 						let oldGl =oldGlObj[val];
 						let avater =oldGl/( Object.keys(oldGlObj).length-1);
@@ -123,9 +123,9 @@ let luckDrawZy =async function ( req,res) {
 						loadsh.forEach(oldGlObj, async function (val1, key) { 
 							oldGlObj[key] =Number(val1)+avater;
 						});	
-						await redisStrDel(0, val);
-						await redisStrSet(1, 'gl', JSON.stringify(oldGlObj));
-						await redisStrSet(1, 'gl1', fboldGlObj);
+						await redisStrDel(3, val);
+						await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
+						await redisStrSet(5, 'gl1', fboldGlObj);
 	
 					}
 				});
@@ -270,9 +270,6 @@ let lfxFx= async function (req,res) {
 			'count':count
 		});
 	}
-	
-
-
 }
 
 let lfxFxsubmit= async function (req,res) { 

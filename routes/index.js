@@ -12,8 +12,8 @@ router.get('/lfx', function(req, res) {
 router.get('/game', function(req, res) {
 	res.render('game.html');
 });
-router.get('/fxbd', function(req, res) {
-	res.render('fxbd.html');
+router.get('/lfx1', function(req, res) {
+	res.render('lfx1.html');
 });
 router.get('/game1', function(req, res) {
 	res.render('game1.html');
