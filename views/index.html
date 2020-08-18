@@ -539,6 +539,7 @@
         'bslx':'博洋冰丝凉席',
         'xdznyx':'小度智能音响'
     }
+    var xxljx =''
     $.each( $('.thzq-box-item-box'),function (index,val) {
          $(val).css({
             'width':($(val).find('.tbib').length*2.4)+'rem'
@@ -632,6 +633,7 @@
         
 
     }).on('click','.tj',function () { 
+        console.log(map[xxljx]+'领取成功！')
         if($(this).parent().find('.xm').val().trim() ==''){
             alert('姓名不能为空')
             return 
@@ -645,7 +647,7 @@
         var param ={
             name:$(this).parent().find('.xm').val().trim(),
             tell:$(this).parent().find('.tell').val().trim(),
-            jx:'xx',
+            jx:xxljx,
             sign:'主页消消乐'
         }
         $.ajax({
@@ -659,7 +661,7 @@
                 //请求成功
                 success : function(res) {
                    if(res.code ==1){
-                        alert(res.msg)
+                        alert('恭喜您'+map[xxljx]+'领取成功！')
                    }else{
                        alert(res.msg)
                    }
@@ -779,6 +781,7 @@
                                 console.log();
                                 var str =''
                                 setTimeout(function (param) { 
+                                    xxljx =res.prize
                                     if(res.prize=='kldzbx'){
                                         str='1.顾客凭线上预约码 到店可领取价值399元便携珠宝箱一件（30天内有效）<br>2.线上预约链接：https://m.crd.cn/reservation/?source=kaipin|H5'
                                         $('.sm').css({'left':'18%'})
