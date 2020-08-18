@@ -1161,3 +1161,15 @@ body{
     top: 2.9rem;
     font-size: .35rem;
 }
+.img1{
+    animation: fadeInRight 0.5s;
+    animation-fill-mode: forwards;
+  }
+  .img2{
+      animation: fadeInRight 0.5s 0.2s;
+      animation-fill-mode: forwards;
+  }
+  .img3{
+      animation: fadeInRight 0.5s 0.4s;
+      animation-fill-mode: forwards;
+  }
