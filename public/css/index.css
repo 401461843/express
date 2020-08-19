@@ -1218,3 +1218,11 @@ body{
 .scale{
     animation: scale 2s infinite;
 }
+.wl{
+    height: 2.9rem !important;
+}
+/* .swiper-slide-active{
+    background:#ff6600;
+    color:#fff;
+    width: 2.2rem;
+  } */
