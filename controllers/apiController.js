@@ -11,14 +11,12 @@ let luckDraw =async function ( req,res) {
 	let sum = 0;
 	let section = [0];
 	let newArr =[];
-	let prizeNumber =loadsh.random(1, 100);
+	let prizeNumber =Math.floor(Math.random() * 100);
 	let allPrize='';
 	let count =0;
 	let prizeName ='';
-	
 	// 获取抽奖概率
 	rate =JSON.parse(await redisStrGet(1, 'gl'));
-	console.log(rate)
 	if(JSON.stringify(rate) =='{}'){
 		
 		res.send({ 
@@ -76,7 +74,8 @@ let luckDrawZy =async function ( req,res) {
 	let sum = 0;
 	let section = [0];
 	let newArr =[];
-	let prizeNumber =loadsh.random(1, 100);
+	let prizeNumber =Math.floor(Math.random() * 100);
+	console.log(prizeNumber)
 	let allPrize='';
 	let count =0;
 	let prizeName ='';

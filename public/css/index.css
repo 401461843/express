@@ -1173,3 +1173,21 @@ body{
       animation: fadeInRight 0.5s 0.4s;
       animation-fill-mode: forwards;
   }
+  .yxgzts{
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    z-index: 9989;
+    top: 0;
+    display: none;
+    
+
+}
+.yxgzts img{
+    width: 100%;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    
+}
