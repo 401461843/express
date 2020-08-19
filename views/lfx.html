@@ -412,7 +412,7 @@
             </div>
         </div>
     </div>
-    <!-- <div class="fl">
+    <div class="fl">
         <img src="../public/images/fx-fl.png" alt="" class="tit" >
         <div class="yx">
             <img src="../public/images/fx-zp.png" alt="">
@@ -422,7 +422,7 @@
             </div>
             <div class="zpg-mask"></div>
         </div>
-    </div> -->
+    </div>
     <!-- <div class="zb" >
         <img src="../public/images/fx-zb.png" alt="" class="tit" style="margin-top: .3rem;">
         <div class="cazb-b">
@@ -645,16 +645,7 @@
         $('.dzp-mask').fadeOut()
 
     }).on('click','.btn',function () { 
-        // window.location.href='/game'
-        let timer =null;
-        clearTimeout(timer)
-        $('.fxts').fadeIn()
-        timer=setTimeout(function () { 
-            $('.fxts').fadeOut()
-            $('.fx-mask').fadeIn()
-            $('.jxm').text('由老凤祥提供的老凤祥麻布袋便携餐具一份')
-         },2000)
-       
+        window.location.href='/game'
     }).on('click','.zpg',function () {
         
         var timer =null
