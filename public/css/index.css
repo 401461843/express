@@ -299,7 +299,8 @@ body{
     color: white;
     font-size: .34rem;
     text-indent: .55rem;
-    margin-bottom: .3rem;
+    position: absolute;
+    right: -2.65rem;
 }
 .nav-w{
     height: .9rem;
@@ -1161,18 +1162,26 @@ body{
     top: 2.9rem;
     font-size: .35rem;
 }
-.img1{
-    animation: fadeInRight 0.5s;
+@keyframes slildeRight{
+    0%{
+        right: -2.65rem;
+    }
+    100%{
+        right: 0;
+    }
+}
+.t1{
+    animation: slildeRight 1s;
     animation-fill-mode: forwards;
   }
-  .img2{
-      animation: fadeInRight 0.5s 0.2s;
-      animation-fill-mode: forwards;
-  }
-  .img3{
-      animation: fadeInRight 0.5s 0.4s;
-      animation-fill-mode: forwards;
-  }
+.t2{
+    animation: slildeRight 1s 0.5s;
+    animation-fill-mode: forwards;
+}
+.t3{
+    animation: slildeRight 1s 1.5s;
+    animation-fill-mode: forwards;
+}
   .yxgzts{
     position: fixed;
     height: 100%;
@@ -1190,4 +1199,22 @@ body{
     top: 50%;
     transform: translateY(-50%);
     
+}
+
+@keyframes scale{
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+    }
+    40%{
+        transform: translate(-50%,-50%) scale(1.2);
+    }
+    75%{
+        transform: translate(-50%,-50%) scale(0.9);
+    }
+    100%{
+        transform: translate(-50%,-50%) scale(1);
+    }
+}
+.scale{
+    animation: scale 2s infinite;
 }

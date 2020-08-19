@@ -111,7 +111,7 @@
             <img src="../public/images/thzq.png" alt="" class="dbt">
             <div class="thzq-box">
                 <div class="thzq-box-item">
-                    <div style="width: 100%;height: .9rem;position: relative;"><div class="thzq-box-item-nav">宠爱我味蕾</div></div>
+                    <div style="width: 100%;height: .9rem;position: relative;margin-bottom: .3rem;"><div class="thzq-box-item-nav tit1">宠爱我味蕾</div></div>
                     <div class="scroll">
                         <div class="thzq-box-item-box">
                             <a class="tbib" href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.4e60687df3lKbz&id=606414286190
@@ -164,7 +164,7 @@
 
                 </div>
                 <div class="thzq-box-item">
-                    <div style="width: 100%;height: .9rem;position: relative;"><div class="thzq-box-item-nav">宠爱我肌肤</div></div>
+                    <div style="width: 100%;height: .9rem;position: relative;margin-bottom: .3rem;"><div class="thzq-box-item-nav tit2">宠爱我肌肤</div></div>
                     <div class="scroll">
                         <div class="thzq-box-item-box">
                             <a class="tbib" href="https://detail.tmall.com/item.htm?spm=a1z10.3-b-s.w4011-17406181326.41.44d1343aUP8S8r&id=616342010591&rn=e0cff1d901522815338c810c8fd5c0dd&abbucket=12&sku_properties=1627207:3232483
@@ -216,7 +216,7 @@
 
                 </div>
                 <div class="thzq-box-item">
-                    <div style="width: 100%;height: .9rem;position: relative;"><div class="thzq-box-item-nav">宠爱我生活</div></div>
+                    <div style="width: 100%;height: .9rem;position: relative;margin-bottom: .3rem;"><div class="thzq-box-item-nav tit3">宠爱我生活</div></div>
                     <div class="scroll">
                         <div class="thzq-box-item-box">
                             <a class="tbib" href="https://detail.tmall.com/item.htm?spm=a1z10.5-b-s.w4011-16101941271.43.54ea446bn1GfQJ&id=612964665132&rn=f3505f3c2ba958bc29665d077eb3936f&abbucket=9
@@ -299,7 +299,7 @@
 
                 </div>
                 <div class="mask">
-                    <div class="start"></div>
+                    <div class="start scale"></div>
                 </div>
             </div>
         </div> 
@@ -543,6 +543,24 @@
             console.log(e.responseText);
         }
     });
+    window.addEventListener('scroll', function () {
+        console.log(document.documentElement.scrollTop)
+        if(document.documentElement.scrollTop>718){
+            $('.tit1').addClass('t1')
+        }
+        if(document.documentElement.scrollTop>946){
+            $('.tit2').addClass('t1')
+        }
+        if(document.documentElement.scrollTop>1160){
+            $('.tit3').addClass('t1')
+        }
+        if(document.documentElement.scrollTop>2145 || document.documentElement.scrollTop<700){
+            $('.tit1').removeClass('t1')
+            $('.tit2').removeClass('t1')
+            $('.tit3').removeClass('t1')
+        }
+       
+    })
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,
         loop: true
@@ -813,7 +831,7 @@
                                 setTimeout(function (param) { 
                                     xxljx =res.prize
                                     if(res.prize=='kldzbx'){
-                                        str='1.顾客凭线上预约码 到店可领取价值399元便携珠宝箱一件（30天内有效）<br>2.线上预约链接:<a href="https://m.crd.cn/reservation/?source=kaipin|H5"></a>'
+                                        str='1.顾客凭线上预约码 到店可领取价值399元便携珠宝箱一件（30天内有效）<br>2.线上预约链接:<a href="https://m.crd.cn/reservation/?source=kaipin|H5">https://m.crd.cn/reservation/?source=kaipin|H5</a>'
                                         $('.sm').css({'left':'18%'})
                                     }else if(res.prize=='kzj'){
                                         str='1.凭手机号进店即可免费老凤祥口罩夹一个<br>2.上海老凤祥豫园分号黄浦区丽水路58-88号<br>3.每人仅限领取同类产品一次'
@@ -880,6 +898,8 @@
         $('.mzsm').fadeIn()
     }).on('click','.smclose',function () { 
         $('.yxgzts').fadeOut()
+    }).on('scroll','body',function(e){
+       console.log(e)
     })
 </script>
 </html>
