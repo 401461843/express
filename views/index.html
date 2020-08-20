@@ -470,7 +470,7 @@
                     <span>
                         1.分享1次微信好友,可凭手机号到老凤祥指定门店领取老凤祥麻布袋便携餐具一份(限量100份,先到先得）<br>
                         2.仅限上海老凤祥豫园分号黄浦区丽水路58-88号<br>
-                        3.活动页类同类产品仅限可领取一次<br>
+                        3.活动页类内同类产品仅限领取一次<br>
                     </span>
                 </p>
 
@@ -500,7 +500,7 @@
             
             
         </div>
-        <div class="close">
+        <div class="close" style="top: 3rem;left: 88%;">
             ×
         </div>
         
@@ -731,6 +731,7 @@
         'bslx':'博洋冰丝凉席',
         'xdznyx':'小度智能音响'
     }
+    var timer2=null
     var xxljx =''
     $.each( $('.thzq-box-item-box'),function (index,val) {
          $(val).css({
@@ -1025,7 +1026,7 @@
         }   
     }).on('click','.start',function () { 
        
-        var timer2=null
+        
         clearTimeout(timer2)
         $('.yxgzts').fadeIn()
         timer2=setTimeout(() => {
@@ -1047,10 +1048,24 @@
     }).on('click','.mzegb',function (param) {  
         $('.mzsm').fadeOut()
     }).on('click','.gz',function (param) {  
-        console.log(1111)
+        
         $('.mzsm').fadeIn()
+       
     }).on('click','.smclose',function () { 
         $('.yxgzts').fadeOut()
+        $('.mask').addClass('hide')
+        clearTimeout(timer2)
+        clearInterval(jsq)
+        jsq =setInterval(function (param) { 
+            djs--;
+            if(djs == -1){
+                clearInterval(jsq)
+                $('.sb').fadeIn()
+                $('.result').fadeIn()
+            }else{
+                $('.sj').text(djs)
+            }
+        },1000)
     }).on('scroll','body',function(e){
        console.log(e)
     })

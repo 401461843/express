@@ -901,7 +901,7 @@ body{
     background: red;
     color: white;
     position: absolute;
-    left: 85%;
+    left: 93%;
     top: 0.4rem;
     transform: translateX(-50%);
     font-size: .5rem;
@@ -1036,19 +1036,19 @@ body{
     float: left;
 }
 .result .close{
-    height: 0.6rem;
-    width: 0.6rem;
+    height: 0.7rem;
+    width: 0.7rem;
     border-radius: 50%;
     background: red;
     color: white;
     position: absolute;
     left: 85%;
-    top: 3.5rem;
+    top: 2rem;
     transform: translateX(-50%);
     font-size: .5rem;
     font-weight: bold;
     text-align: center;
-    line-height: .6rem;
+    line-height: .7rem;
 
 }
 .sm{
@@ -1078,16 +1078,17 @@ body{
 .smclose{
     width: .7rem;
     height: .7rem;
-    left: 85%;
+    left: 86%;
     transform: translateX(-50%);
     color: white;
     background: red;
     font-size: .5rem;
-    line-height: .65rem;
+    line-height: .67rem;
     text-align: center;
     position: absolute;
     border-radius: 50%;
     font-weight: bold;
+    top: 0.5rem;    
 
 }
 .ss{

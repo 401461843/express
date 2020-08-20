@@ -352,8 +352,8 @@
             float: left;
         }
         .close{
-            height: 0.6rem;
-            width: 0.6rem;
+            height: 0.7rem;
+            width: 0.7rem;
             border-radius: 50%;
             background: red;
             color: white;
@@ -361,7 +361,7 @@
             left: 85%;
             top: 3.5rem;
             transform: translateX(-50%);
-            font-size: .5rem;
+            font-size: .7rem;
             font-weight: bold;
             text-align: center;
             line-height: .6rem;
@@ -399,7 +399,7 @@
             color: white;
             background: red;
             font-size: .5rem;
-            line-height: .65rem;
+            line-height: .7rem;
             text-align: center;
             position: absolute;
             border-radius: 50%;
@@ -441,6 +441,37 @@
             right: .3rem;
             top: 0;
         }
+        @keyframes scale{
+            0%{
+                transform:translate(-50%,-50%) scale(0);
+            }
+            40%{
+                transform: translate(-50%,-50%) scale(1.2);
+            }
+            75%{
+                transform: translate(-50%,-50%) scale(0.9);
+            }
+            100%{
+                transform: translate(-50%,-50%) scale(1);
+            }
+        }
+        @-webkit-keyframes scale{
+            0%{
+                transform:translate(-50%,-50%) scale(0);
+            }
+            40%{
+                transform: translate(-50%,-50%) scale(1.2);
+            }
+            75%{
+                transform: translate(-50%,-50%) scale(0.9);
+            }
+            100%{
+                transform: translate(-50%,-50%) scale(1);
+            }
+        }
+        .scale{
+            animation: scale 2s infinite;
+        }
     </style>
 </head>
 <body>
@@ -455,7 +486,7 @@
 
         </div>
         <div class="mask">
-            <div class="start"></div>
+            <div class="start scale"></div>
         </div>
     </div>
     <div class="result">
