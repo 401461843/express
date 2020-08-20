@@ -1215,6 +1215,20 @@ body{
         transform: translate(-50%,-50%) scale(1);
     }
 }
+@-webkit-keyframes scale{
+    0%{
+        transform:translate(-50%,-50%) scale(0);
+    }
+    40%{
+        transform: translate(-50%,-50%) scale(1.2);
+    }
+    75%{
+        transform: translate(-50%,-50%) scale(0.9);
+    }
+    100%{
+        transform: translate(-50%,-50%) scale(1);
+    }
+}
 .scale{
     animation: scale 2s infinite;
 }
