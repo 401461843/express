@@ -1,5 +1,6 @@
 const moment = require('moment');
 const fs = require('fs');
+const os = require('os');
 
 module.exports ={
 	//生成随机数
@@ -49,6 +50,21 @@ module.exports ={
 		
 		}
 	},
+	getIPAdress() {
+		var interfaces = os.networkInterfaces();
+
+		for (var devName in interfaces) {
+			var iface = interfaces[devName];
+
+			for (var i = 0; i < iface.length; i++) {
+				var alias = iface[i];
+
+				if (alias.family === 'IPv4' && alias.address !== '127.0.0.1' && !alias.internal) {
+					return alias.address;
+				}
+			}
+		}
     
+	},
 };
  
