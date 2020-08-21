@@ -38,6 +38,7 @@ let luckDraw =async function ( req,res) {
 			count++;
 		});
 		
+		
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
@@ -84,7 +85,6 @@ let luckDrawZy =async function ( req,res) {
 	
 	// 获取抽奖概率
 	rate =JSON.parse(await redisStrGet(5, 'gl'));
-	console.log(rate)
 	if(JSON.stringify(rate) =='{}'){
 		
 		res.send({ 
@@ -102,17 +102,17 @@ let luckDrawZy =async function ( req,res) {
 			newArr.push(temArr);
 			count++;
 		});
-		
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
+				console.log(prizeName)
 				await redisStrDecr(3, prizeName);
 				res.send({ 
 					'code': 200,
 					'msg': '抽奖成功',
 					'prize': prizeName,
 				});
-				allPrize=await redisStrAll(0);
+				allPrize=await redisStrAll(3);
 				util.customForeach(allPrize, async (val) => {
 					if ( await redisStrGet(3, val)==0) {
 						let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
