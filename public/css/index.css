@@ -312,6 +312,9 @@ body{
     padding-left: .3rem;
     box-sizing: border-box;
 }
+.scroll::-webkit-scrollbar {
+    display: none;
+}
 .thzq-box-item-box{
     height: 2.9rem;
     margin: 0 auto;
