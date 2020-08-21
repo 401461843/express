@@ -466,7 +466,8 @@ let download = function (req,res) {
 			'code': 1,
 			'msg': 'excel生成成功'
 		});
-	} catch{
+	} catch(err){
+		
 		res.send(
 			{ 
 				'code': 1,
