@@ -1,0 +1,169 @@
+ 
+<html> 
+    <head> 
+    <title></title> 
+    <style type="text/css"> 
+            body,table{ 
+                font-size:18px; 
+                /* background: skyblue;  */
+                background-size: 100%;
+                font-family: cursive;
+                
+            } 
+            table{ 
+                table-layout:fixed; 
+                empty-cells:show; 
+                border-collapse: collapse; 
+                margin:0 auto; 
+                text-align: center;
+            } 
+            td{ 
+                height:40px; 
+            } 
+            h1,h2,h3{ 
+                font-size:12px; 
+                margin:0; 
+                padding:0; 
+            } 
+            .table{ 
+                border:1px solid black; 
+                color: black;
+            } 
+            .table th { 
+                background-repeat:repeat-x; 
+                height:30px; 
+            } 
+            .table td,.table th{ 
+                border:1px solid black; 
+                padding:0 1em 0; 
+            } 
+            .title{
+                text-align: center;
+                color: black;
+                font-weight: bold;
+                font-size: 25px;
+                margin-top: 50px;
+                margin-bottom: 10px;
+            }
+           
+            .xx{
+                height: 25px;
+                width: 210px;
+                margin: 0 auto;
+                margin-bottom: 20px;
+                overflow: hidden;
+
+            }
+            button{
+                display: block;
+                margin:  0 auto;
+                float: left;
+              
+            }
+            a{
+                display: block;
+                margin:  0 auto;
+                width: 110px;
+                text-align: center;
+                display: none;
+                float: right;
+
+            }
+    </style> 
+    </head> 
+    <body> 
+        <div class="title">
+            数据查询下载
+        </div>
+        <div class="xx">
+            <button>生成excel</button>
+            <a href="https://smartsh.gzbaidu.co/excel/表单信息.xlsx" download="表单信息">七夕表单信息</a>
+        </div>
+        <table width="80%" class="table"> 
+            <thead> 
+                <th>序号</th> 
+                <th>姓名</th> 
+                <th>电话</th> 
+                <th>奖品</th> 
+                <th>数据来源</th> 
+                <th>时间</th> 
+        
+            </thead> 
+            <tbody> 
+                
+               
+            </tbody>
+            
+        </table> 
+    </body> 
+    <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+    <script>
+        var map ={
+            'ppxsz':'趴趴熊睡枕',
+            'kldzbx':'克莱蒂珠宝箱',
+            'kzj':'老凤祥口罩夹',
+            'xdzj':'小度在家X8',
+            'xzdxgz':'星座度熊公仔',
+            'bslx':'博洋冰丝凉席',
+            'xdznyx':'小度智能音响',
+            'cj':'老凤祥餐具',
+            'ssh':'老凤祥首饰盒'
+        }
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/query",
+                //数据，json字符串
+                data:'param',
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        var str =''
+                        $.each(res.tab_list,function (index,val) {
+                            str+=`<tr> 
+                                    <td>${index}</td> 
+                                    <td>${val.name}</td> 
+                                    <td>${val.tell}</td> 
+                                    <td>${map[val.jx]}</td> 
+                                    <td>${val.sign}</td> 
+                                    <td>${val.create_time}</td> 
+                                </tr> `
+                        })
+                        $('tbody').html(str)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+        });
+        $('body').on('click','button',function () {
+            $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/download",
+                //数据，json字符串
+                data:'param',
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        $('a').css({'display':'block'})
+                   }
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+          })
+    </script>
+    </html> 
+    

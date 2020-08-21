@@ -23,5 +23,8 @@ router.post('/lfxFx', api.lfxFx);
 router.post('/lfxFxsubmit', api.lfxFxsubmit);
 //主页抽奖
 router.post('/luckDrawZy', api.luckDrawZy);
-
+//查询数据
+router.post('/query', api.query);
+//下载
+router.post('/download', api.download);
 module.exports = router; 

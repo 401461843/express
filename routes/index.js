@@ -24,4 +24,8 @@ router.get('/game1', function(req, res) {
 router.get('/zbh', function(req, res) {
 	res.render('zbh.html');
 });
+//查询
+router.get('/query', function(req, res) {
+	res.render('query.html');
+});
 module.exports = router;

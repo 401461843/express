@@ -12,6 +12,7 @@ var schedule = require('node-schedule');
 var {redisStrGet, redisStrAll}=require('./db/redis');
 var sqlQuery = require('./db/mysql');
 var util =require('./utils/util');
+
 let env =process.env.NODE_ENV; 
 // var getData =async function () { 
 // 	let redisData = await redisStrAll(2);
@@ -33,11 +34,17 @@ let env =process.env.NODE_ENV;
 // };
 var szgetData =async function () { 
 	let redisData = await redisStrAll(7);
+
 	let company ='';
+
 	let name='';
+
 	let tell ='';
+
 	let createTime='';
+
 	let sqlArr =[];
+
 	let sql = 'insert into zbh_form (company,name,tell,create_time) values(?,?,?,?)';
 
 	util.customForeach(redisData, async function (val) { 

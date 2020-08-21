@@ -3,6 +3,9 @@ const loadsh = require('lodash');
 const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
 const sqlQuery = require('../db/mysql');
+const xlsx = require('xlsx');
+
+global.dataList =[];
 
 //抽奖
 /* eslint-disable */
@@ -392,6 +395,89 @@ let getUserInfo= async function (req,res) {
 	}
 }
 
+//数据查询工具
+let query = async function (req,res) {
+	let sqlArr =[];
+	let sql = 'select * from  lfx_info ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	let obj ={}
+	let tableList =[]
+	if(result.length>0){
+		result.forEach(function (val) {
+			obj ={}
+			obj['name']=val.name
+			obj['tell']=val.tell
+			obj['jx']=val.jx
+			obj['sign']=val.sign
+			obj['create_time']=util.mysqlDatetime(val.create_time) 
+			tableList.push(obj)
+		})
+		dataList=tableList
+		res.send({ 
+			'code': 1,
+			'msg': '成功',
+			'tab_list':tableList
+		});
+	}
+  }
+
+let download = function (req,res) {
+	let map ={
+		'ppxsz':'趴趴熊睡枕',
+		'kldzbx':'克莱蒂珠宝箱',
+		'kzj':'老凤祥口罩夹',
+		'xdzj':'小度在家X8',
+		'xzdxgz':'星座度熊公仔',
+		'bslx':'博洋冰丝凉席',
+		'xdznyx':'小度智能音响',
+		'cj':'老凤祥餐具',
+		'ssh':'老凤祥首饰盒'
+	}
+	let arrayWorkSheet = '';
+	let workBook='';
+	let arrayData = [
+		['序号', '姓名','电话','奖品','数据来源','时间']
+	  ];
+	  
+	
+	dataList.forEach((item,index)=>{
+		var temp = [];
+		temp.push(index);
+		temp.push(item.name);
+		temp.push(item.tell);
+		temp.push(map[item.jx]);
+		temp.push(item.sign);
+		temp.push(item.create_time);
+		arrayData.push(temp)
+	})
+	arrayWorkSheet = xlsx.utils.aoa_to_sheet(arrayData);
+	workBook = {
+		SheetNames: ['arrayWorkSheet'],
+		Sheets: {
+		  'arrayWorkSheet': arrayWorkSheet
+		}
+	  };
+	//删除文件
+	util.deleteall('./excel') 
+	// 将workBook写入文件
+	try{
+		xlsx.writeFile(workBook, "./excel/表单信息.xlsx");
+		res.send({ 
+			'code': 1,
+			'msg': 'excel生成成功'
+		});
+	} catch{
+		res.send(
+			{ 
+				'code': 1,
+				'msg': 'excel生成失败'
+			}
+		);
+	}
+	
+	
+}
+
 module.exports={
 	luckDraw,
 	submit,
@@ -402,5 +488,7 @@ module.exports={
 	lfxSubmit,
 	lfxFx,
 	lfxFxsubmit,
-	luckDrawZy
+	luckDrawZy,
+	query,
+	download
 };

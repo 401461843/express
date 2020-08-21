@@ -8,7 +8,7 @@ module.exports = {
 	'parserOptions': {
 		'sourceType': 'script',
 	},
-	'parser': 'esprima',
+	'parser': 'babel-eslint',
 	'rules': {
 		'no-console': 'off',
 		'no-unused-vars': 'error',
