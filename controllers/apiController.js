@@ -78,7 +78,6 @@ let luckDrawZy =async function ( req,res) {
 	let section = [0];
 	let newArr =[];
 	let prizeNumber =Math.floor(Math.random() * 100);
-	console.log(prizeNumber)
 	let allPrize='';
 	let count =0;
 	let prizeName ='';
