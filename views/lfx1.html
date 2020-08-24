@@ -385,6 +385,47 @@
             bottom: 0;
             z-index: 999;
         }
+        .mzsm{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            background: rgba(0, 0, 0, .7);
+            z-index: 9989;
+            display: none;
+            top:0;
+        }
+        .mznr{
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%,-50%);
+            background: white;
+            overflow-y: auto;
+            width: 90%;
+            height: 11rem;
+            padding: .2rem;
+            box-sizing: border-box;
+            border-radius: .2rem;
+
+        }
+        .mzegb{
+            font-size: .5rem;
+            position: absolute;
+            right: .3rem;
+            top: 0;
+        }
+        .gz{
+            height: 0.4rem;
+            width: 1.5rem;
+            background: #8c92bf;
+            color: white;
+            border-radius: .2rem;
+            text-align: center;
+            line-height: .4rem;
+            position: absolute;
+            right: 0.4rem;
+            z-index: 999;
+        }
 </style>
 </head>
 <body>
@@ -427,6 +468,7 @@
     </div>
     <div class="fl">
         <img src="../public/images/fx-fl.png" alt="" class="tit" >
+        <div class="gz">免责声明</div>
         <div class="yx">
             <img src="../public/images/fx-zp.png" alt="">
             <div class="jt"></div>
@@ -506,6 +548,37 @@
     </div>
     <div class="fxts">
         <img src="../public/images/fxtb.png" alt="">
+    </div>
+    <div class="mzsm">
+        <div class="mznr">
+            <div style="text-align: center;font-size: .3rem;margin-bottom: .2rem;"> 活动参与方式及规则</div>
+            <div class="mzegb">×</div>
+            参与方式: <br>
+            1.用户进入活动页面后，按照页面提示完成互动，即可参与抽奖。 <br>
+            2.同一用户最多只可获奖一次（详见活动须知）。 <br>
+            3.中奖用户需提交准确无误的获奖品信息（姓名、联系电话等），以确保奖品正确核销。 <br>
+
+            活动时间: <br>
+            2020年8月19日-2020年8月30日 <br>
+
+            奖品领取: <br>
+            1.获奖后，请按照页面提示填写完整的获奖信息，并于10个工作日内去相关的领取 <br>
+            2.若由于用户未提供准确信息致使无法将奖品成功寄送给用户的，将视为中奖用户自动放弃奖品及兑奖资格。 <br>
+
+            活动须知： <br>
+            1.    请在参与本活动之前，仔细阅读本活动参与方式及规则，您参与本活动即表示您愿意遵守与本活动有关的以下规则。 <br>
+            2.    同一用户（同一设备，同一手机号，同一网络IP，满足前述任一条件均视为同一用户）最多只可获奖一次。 <br>
+            3.    此活动相关推广活动页面可被转发。 <br>                                                
+            4.    限时抢奖品一经领取，不可退换，不可兑换现金，不可对外出售。 <br>
+            5.    用户的中奖纪录以主办方保存的系统后台数据库中的记录为准。 <br>
+            6.    主办方工作人员与相关代理商不得参与本次活动。 <br>
+            7.    获奖者在领取、使用奖品过程中发生损失或损害，除非该等损失或损害系因主办方过失导致的，否则主办方不承担任何责任。 <br>
+            8.    若发现用户在活动参加过程中有任何舞弊、欺诈或违法行为，主办方有权在不经事先通知的前提下取消其获奖资格。 <br>
+            9.    因网络、通讯线路故障等非主办方原因而导致系统误送中奖通知或用户无法获取奖品，或遭受其他权利损失，主办方不承担任何责任。 <br>
+            10.    本活动仅为用户提供网络活动式平台体验服务，用户不得利用相关网站发布侮辱与攻击性语言，不得侵犯他人隐私，不得发布任何违法内容，任何由用户发布、参与、传播互动内容而导致的法律责任，由用户自行承担。 <br>
+            11.    中奖者提供虚假兑奖信息或转发兑奖信息、逾期兑奖等情形，皆视为中奖者放弃中奖资格及由此引申的权利。 <br>
+            12.    最终解释权归@上海老凤祥有限公司所有 <br>
+        </div>
     </div>
     <a href="/" class="hzy"></a>
 </body>
@@ -727,7 +800,13 @@
             
         
 
-      })
+    }).on('click','.mzegb',function (param) {  
+        $('.mzsm').fadeOut()
+    }).on('click','.gz',function (param) {  
+        $('.mzsm').fadeIn()
+    }).on('click','.smclose',function () { 
+        $('.yxgzts').fadeOut()
+    })
         
        
 
