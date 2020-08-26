@@ -27,4 +27,9 @@ router.post('/luckDrawZy', api.luckDrawZy);
 router.post('/query', api.query);
 //下载
 router.post('/download', api.download);
+
+//小程序接口
+router.post('/getAccessToken', api.getAccessToken);
+router.post('/test2', api.test2);
+
 module.exports = router; 

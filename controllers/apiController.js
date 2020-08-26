@@ -4,6 +4,7 @@ const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
+const request =require('request');
 
 global.dataList =[];
 
@@ -78,7 +79,7 @@ let luckDrawZy =async function ( req,res) {
 	let sum = 0;
 	let section = [0];
 	let newArr =[];
-	let prizeNumber =Math.floor(Math.random() * 100);
+	let prizeNumber =Math.floor(Math.random() * 1000);
 	let allPrize='';
 	let count =0;
 	let prizeName ='';
@@ -393,6 +394,37 @@ let getUserInfo= async function (req,res) {
 		});
 	}
 }
+let getAccessToken = async function (req,res) { 
+
+	request('https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=W229ytlqVG9EQTNcafLteSymT9xWNF6C&client_secret=obskiUt1LeqXv2N5UEkyeImxgLryY57O&scope=smartapp_snsapi_base',function (error, response, data) {
+		if (!error && response.statusCode == 200) {
+			// console.log(data)
+			console.log(JSON.parse(data).access_token)
+			
+			request('https://openapi.baidu.com/rest/2.0/smartapp/template/templatelist?access_token='+JSON.parse(data).access_token+'&count=10&offset=0',function (error,response,data1) {
+				console.log(data1)
+			})
+			res.send({ 
+				'code': 1,
+				'msg': '成功',
+				'data':''
+			});
+		}
+	});
+ }
+let test2 =async function(){
+	res.send({ 
+		'code': 1,
+		'msg': '成功',
+		'data':''
+	});
+}
+
+
+
+
+
+//小程序接口
 
 //数据查询工具
 let query = async function (req,res) {
@@ -490,5 +522,7 @@ module.exports={
 	lfxFxsubmit,
 	luckDrawZy,
 	query,
-	download
+	download,
+	getAccessToken,
+	test2
 };
