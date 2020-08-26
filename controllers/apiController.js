@@ -412,7 +412,7 @@ let getAccessToken = async function (req,res) {
 		}
 	});
  }
-let test2 =async function(){
+let test2 =async function(req,res){
 	res.send({ 
 		'code': 1,
 		'msg': '成功',
