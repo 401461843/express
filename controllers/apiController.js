@@ -396,28 +396,60 @@ let getUserInfo= async function (req,res) {
 }
 let getAccessToken = async function (req,res) { 
 
-	request('https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=W229ytlqVG9EQTNcafLteSymT9xWNF6C&client_secret=obskiUt1LeqXv2N5UEkyeImxgLryY57O&scope=smartapp_snsapi_base',function (error, response, data) {
-		if (!error && response.statusCode == 200) {
-			// console.log(data)
-			console.log(JSON.parse(data).access_token)
+	// request('https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=W229ytlqVG9EQTNcafLteSymT9xWNF6C&client_secret=obskiUt1LeqXv2N5UEkyeImxgLryY57O&scope=smartapp_snsapi_base',function (error, response, data) {
+	// 	if (!error && response.statusCode == 200) {
+	// 		// console.log(data)
+	// 		console.log(JSON.parse(data).access_token)
 			
-			request('https://openapi.baidu.com/rest/2.0/smartapp/template/templatelist?access_token='+JSON.parse(data).access_token+'&count=10&offset=0',function (error,response,data1) {
-				console.log(data1)
-			})
-			res.send({ 
-				'code': 1,
-				'msg': '成功',
-				'data':''
-			});
-		}
-	});
+	// 		request('https://openapi.baidu.com/rest/2.0/smartapp/template/templatelist?access_token='+JSON.parse(data).access_token+'&count=10&offset=0',function (error,response,data1) {
+	// 			console.log(data1)
+	// 		})
+	// 		res.send({ 
+	// 			'code': 1,
+	// 			'msg': '成功',
+	// 			'data':''
+	// 		});
+	// 	}
+	// });
  }
 let test2 =async function(req,res){
-	res.send({ 
-		'code': 1,
-		'msg': '成功',
-		'data':''
-	});
+	
+	let {formId,swanid} =req.body
+	let param ={
+		accessToken:'24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672',
+		template_id:'9933055a93484023ad6b76adaae4183f',
+		touser:swanid,
+		data:{
+			keyword1: {
+				value: "百度直播夜"
+			},
+			keyword2: {
+				value: '今天20:00 开播时间'
+			},
+			keyword3: {
+				value: "2020-09-10 13:00"
+			},
+		},
+		page:'test/test',
+		scene_id:formId,
+		scene_type:1
+
+	}
+	let url ='https://openapi.baidu.com/rest/2.0/smartapp/template/send?access_token=24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672'
+	request({
+		url:url,
+		method: 'POST',
+		data: param
+	},(reslut)=>{
+		console.log(reslut)
+		res.send({ 
+			'code': 1,
+			'msg': '成功',
+			'data':reslut
+		});
+		
+	})
+		
 }
 
 
