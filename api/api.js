@@ -30,6 +30,7 @@ router.post('/download', api.download);
 
 //小程序接口
 router.post('/getAccessToken', api.getAccessToken);
-router.post('/test2', api.test2);
+// router.post('/test2', api.test2);
+router.post('/hqjsLuckDraw', api.hqjsLuckDraw);
 
 module.exports = router; 

@@ -4,7 +4,7 @@ const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
-const request =require('request');
+// const request =require('request');
 
 global.dataList =[];
 
@@ -412,46 +412,114 @@ let getAccessToken = async function (req,res) {
 	// 	}
 	// });
  }
-let test2 =async function(req,res){
+// let test2 =async function(req,res){
 	
-	let {formId,swanid} =req.body
-	let param ={
-		accessToken:'24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672',
-		template_id:'9933055a93484023ad6b76adaae4183f',
-		touser:swanid,
-		data:{
-			keyword1: {
-				value: "百度直播夜"
-			},
-			keyword2: {
-				value: '今天20:00 开播时间'
-			},
-			keyword3: {
-				value: "2020-09-10 13:00"
-			},
-		},
-		page:'test/test',
-		scene_id:formId,
-		scene_type:1
+// 	let {formId,swanid} =req.body
+// 	let formId =''
+// 	let swanid=''
+// 	let param ={
+// 		accessToken:'24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672',
+// 		template_id:'9933055a93484023ad6b76adaae4183f',
+// 		touser:swanid,
+// 		data:{
+// 			keyword1: {
+// 				value: "百度直播夜"
+// 			},
+// 			keyword2: {
+// 				value: '今天20:00 开播时间'
+// 			},
+// 			keyword3: {
+// 				value: "2020-09-10 13:00"
+// 			},
+// 		},
+// 		page:'test/test',
+// 		scene_id:formId,
+// 		scene_type:1
 
-	}
-	let url ='https://openapi.baidu.com/rest/2.0/smartapp/template/send?access_token=24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672'
-	request({
-		url:url,
-		method: 'POST',
-		data: param
-	},(reslut)=>{
-		console.log(reslut)
+// 	}
+// 	let url ='https://openapi.baidu.com/rest/2.0/smartapp/template/send?access_token=24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672'
+// 	request({
+// 		url:url,
+// 		method: 'POST',
+// 		data: param
+// 	},(reslut)=>{
+// 		console.log(reslut)
+// 		res.send({ 
+// 			'code': 1,
+// 			'msg': '成功',
+// 			'data':reslut
+// 		});
+		
+// 	})
+		
+// }
+//好奇集市接口
+let hqjsLuckDraw =async function ( req,res) { 
+	let rate ='';
+	let sum = 0;
+	let section = [0];
+	let newArr =[];
+	let prizeNumber =Math.floor(Math.random() * 1000);
+	let allPrize='';
+	let count =0;
+	let prizeName ='';
+	
+	// 获取抽奖概率
+	rate =JSON.parse(await redisStrGet(10, 'gl'));
+	console.log(prizeNumber)
+	
+	if(JSON.stringify(rate) =='{}'){
+		
 		res.send({ 
-			'code': 1,
-			'msg': '成功',
-			'data':reslut
+			'code': 200,
+			'msg': '抽奖成功',
+			'prize': '没中奖',
 		});
+	}else{
+		loadsh.forEach(rate, function (val) { 
+			let temArr=[];
+			sum+=val;
+			section.push(sum);
+			temArr[0]=section[count];
+			temArr[1]=section[count+1];
+			newArr.push(temArr);
+			count++;
+		});
+		console.log(newArr)
 		
-	})
-		
-}
-
+		util.customForeach(newArr, async function (val, index) { 
+			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
+				prizeName=Object.keys(rate)[index];
+				await redisStrDecr(9, prizeName);
+				res.send({ 
+					'code': 200,
+					'msg': '抽奖成功',
+					'prize': prizeName,
+				});
+				allPrize=await redisStrAll(9);
+				util.customForeach(allPrize, async (val) => {
+					if ( await redisStrGet(9, val)==0) {
+						let oldGlObj =JSON.parse(await redisStrGet(10, 'gl'));
+						let fboldGlObj=JSON.stringify(oldGlObj)
+						let oldGl =oldGlObj[val];
+						let avater =oldGl/( Object.keys(oldGlObj).length-1);
+	
+						delete oldGlObj[val];
+						loadsh.forEach(oldGlObj, async function (val1, key) { 
+							oldGlObj[key] =Number(val1)+avater;
+						});	
+						await redisStrDel(9, val);
+						await redisStrSet(10, 'gl', JSON.stringify(oldGlObj));
+						await redisStrSet(10, 'gl1', fboldGlObj);
+	
+					}
+				});
+				
+			} 
+		});
+	}
+	
+};
 
 
 
@@ -556,5 +624,5 @@ module.exports={
 	query,
 	download,
 	getAccessToken,
-	test2
+	hqjsLuckDraw
 };
