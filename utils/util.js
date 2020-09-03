@@ -66,5 +66,18 @@ module.exports ={
 		}
     
 	},
+	makeJm() {
+		let str ='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+
+		let randNumber='';
+
+		let qm ='';
+
+		for (var i =0 ; i<6; i++) {
+			randNumber=Math.floor(Math.random() * str.length);
+			qm+=str.split('')[randNumber];
+		}
+		return qm;
+	},
 };
  

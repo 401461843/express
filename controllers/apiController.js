@@ -463,10 +463,10 @@ let hqjsLuckDraw =async function ( req,res) {
 	let allPrize='';
 	let count =0;
 	let prizeName ='';
-	
+	let qm =''
 	// 获取抽奖概率
 	rate =JSON.parse(await redisStrGet(10, 'gl'));
-	console.log(prizeNumber)
+	// console.log(prizeNumber)
 	
 	if(JSON.stringify(rate) =='{}'){
 		
@@ -484,42 +484,51 @@ let hqjsLuckDraw =async function ( req,res) {
 			temArr[1]=section[count+1];
 			newArr.push(temArr);
 			count++;
-		});
-		console.log(newArr)
+		// });
+		// console.log(newArr)
 		
-		util.customForeach(newArr, async function (val, index) { 
-			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
-				prizeName=Object.keys(rate)[index];
-				await redisStrDecr(9, prizeName);
-				res.send({ 
-					'code': 200,
-					'msg': '抽奖成功',
-					'prize': prizeName,
-				});
-				allPrize=await redisStrAll(9);
-				util.customForeach(allPrize, async (val) => {
-					if ( await redisStrGet(9, val)==0) {
-						let oldGlObj =JSON.parse(await redisStrGet(10, 'gl'));
-						let fboldGlObj=JSON.stringify(oldGlObj)
-						let oldGl =oldGlObj[val];
-						let avater =oldGl/( Object.keys(oldGlObj).length-1);
-	
-						delete oldGlObj[val];
-						loadsh.forEach(oldGlObj, async function (val1, key) { 
-							oldGlObj[key] =Number(val1)+avater;
-						});	
-						await redisStrDel(9, val);
-						await redisStrSet(10, 'gl', JSON.stringify(oldGlObj));
-						await redisStrSet(10, 'gl1', fboldGlObj);
-	
+			util.customForeach(newArr, async function (val, index) { 
+				if (prizeNumber>val[0] && prizeNumber<=val[1]) {
+					prizeName=Object.keys(rate)[index];
+					await redisStrDecr(9, prizeName);
+					if(prizeName !='xxhg'){
+						qm =util.makeJm()
+						let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+						let sqlArr1 =[qm,prizeName,create_time];
+						let sql1 = 'insert into hqjs (qm,jp,create_time) values(?,?,?)';
+						let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
 					}
-				});
-				
-			} 
-		});
+					res.send({ 
+						'code': 200,
+						'msg': '抽奖成功',
+						'prize': prizeName,
+						'qm':qm
+					});
+					
+					allPrize=await redisStrAll(9);
+					util.customForeach(allPrize, async (val) => {
+						if ( await redisStrGet(9, val)==0) {
+							let oldGlObj =JSON.parse(await redisStrGet(10, 'gl'));
+							let fboldGlObj=JSON.stringify(oldGlObj)
+							let oldGl =oldGlObj[val];
+							let avater =oldGl/( Object.keys(oldGlObj).length-1);
+		
+							delete oldGlObj[val];
+							loadsh.forEach(oldGlObj, async function (val1, key) { 
+								oldGlObj[key] =Number(val1)+avater;
+							});	
+							await redisStrDel(9, val);
+							await redisStrSet(10, 'gl', JSON.stringify(oldGlObj));
+							await redisStrSet(10, 'gl1', fboldGlObj);
+		
+						}
+					});
+					
+				} 
+			});
+		})
 	}
-	
-};
+}
 
 
 
