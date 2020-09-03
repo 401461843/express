@@ -504,7 +504,7 @@ let hqjsLuckDraw =async function ( req,res) {
 						'prize': prizeName,
 						'qm':qm
 					});
-					
+					 
 					allPrize=await redisStrAll(9);
 					util.customForeach(allPrize, async (val) => {
 						if ( await redisStrGet(9, val)==0) {
