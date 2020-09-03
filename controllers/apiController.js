@@ -469,7 +469,6 @@ let hqjsLuckDraw =async function ( req,res) {
 	// console.log(prizeNumber)
 	
 	if(JSON.stringify(rate) =='{}'){
-		
 		res.send({ 
 			'code': 200,
 			'msg': '抽奖成功',
@@ -484,7 +483,7 @@ let hqjsLuckDraw =async function ( req,res) {
 			temArr[1]=section[count+1];
 			newArr.push(temArr);
 			count++;
-		// });
+		});
 		// console.log(newArr)
 		
 			util.customForeach(newArr, async function (val, index) { 
@@ -526,7 +525,7 @@ let hqjsLuckDraw =async function ( req,res) {
 					
 				} 
 			});
-		})
+		
 	}
 }
 

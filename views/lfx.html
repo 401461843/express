@@ -591,16 +591,16 @@
         //请求方式
         type : "post",
         //请求地址
-        url : "/api/lfxFx",
+        url : "/api/hqjsLuckDraw",
         //数据，json字符串
         dataType: 'json',
         //请求成功
         success : function(res) {
-            if(res.code ==1){
-               $('.count').text('仅限'+res.count+'份先到先得')
-            }else{
-                alert(res.msg)
-            }
+            // if(res.code ==1){
+            //    $('.count').text('仅限'+res.count+'份先到先得')
+            // }else{
+            //     alert(res.msg)
+            // }
             
         },
         //请求失败，包含具体的错误信息
