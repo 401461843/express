@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>百度智能制造研讨会</title>
+    <link rel="stylesheet" href="./public/css/reset.css">
+    <style> 
+        body{
+            
+            width: 100%;
+            height: 100%;
+            overflow-y: auto;
+            
+        }
+        .warp{
+            width: 100%;
+            height: 100%;
+            /* background:red; */
+            position: relative;
+        }
+        .bg{
+            width: 7.5rem;
+        }
+        .box{
+            position: absolute;
+            top: 0;
+            width: 100%;
+        }
+        .box div{
+            position: relative;
+        }
+        .box img{
+            width: 100%;
+        }
+        .znzz{
+            margin-top: -3.6rem;
+        }
+        .bt{
+            width: 6.1rem;
+            height: 3.57rem;
+            background: url('../public/images/znyth/znzz-0.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+        }
+        .znzz-box{
+            width: 6.61rem;
+            margin: 0 auto;
+        }
+        .znzz-1{
+            width: 6.61rem;
+            height: 3.43rem;
+            background: url('../public/images/znyth/znzz-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: -.5rem;
+        }
+        .znzz-2{
+            width: 3.22rem;
+            height: 2.83rem;
+            background: url('../public/images/znyth/znzz-2.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            margin-top: .2rem;
+            margin-right: .08rem;
+        }
+        .znzz-3{
+            width: 3.22rem;
+            height: 2.83rem;
+            background: url('../public/images/znyth/znzz-3.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            
+        }
+        .znzz-4{
+            width: 3.22rem;
+            height: 1.93rem;
+            background: url('../public/images/znyth/znzz-5.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            margin-top: .2rem;
+            margin-right: .08rem;
+            z-index: 3;
+        }
+        .znzz-5{
+            width: 3.22rem;
+            height: 1.93rem;
+            background: url('../public/images/znyth/znzz-4.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            z-index: 3;
+        }
+        .dkql{
+            margin-top: -0.7rem;
+        }
+        .ppzg{
+            margin-top: -0.7rem;
+        }
+        .dkql-bt{
+            width: 6.1rem;
+            height: 3.57rem;
+            background: url('../public/images/znyth/dkql.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+        }
+        .ppzg-bt{
+            width: 6.1rem;
+            height: 3.57rem;
+            background: url('../public/images/znyth/ppzg-0.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+        }
+        .zbbj{
+            width: 6.71rem;
+            height: 4.17rem;
+            margin: 0 auto;
+            background: url('../public/images/znyth/zbbj.png') no-repeat;
+            background-size: 100%;
+            margin-top: -.8rem;
+            z-index: 1;
+        }
+        .ppzg-box{
+            width: 6.72rem;
+            margin: 0 auto;
+            margin-top: -1rem;
+            
+        }
+        .ppzg-1{
+            width: 3.23rem;
+            height: 3.22rem;
+            background: url('../public/images/znyth/ppzg-1.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+           
+        }
+        .ppzg-2{
+            width: 3.23rem;
+            height: 3.22rem;
+            background: url('../public/images/znyth/ppzg-2.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            
+        }
+        .ppzg-3{
+            width: 3.23rem;
+            height: 3.62rem;
+            background: url('../public/images/znyth/ppzg-3.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+           
+        }
+        .ppzg-4{
+            width: 3.23rem;
+            height: 3.62rem;
+            background: url('../public/images/znyth/ppzg-4.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            
+        }
+        .ck{
+            width: 4.84rem;
+            height: .5rem;
+            background: url('../public/images/znyth/ppzg-5.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .3rem;
+            z-index: 1;
+        }
+        .zjxc{
+            margin: 0 auto;
+            margin-top: -.7rem;
+            width: 6.72rem;
+            
+        }
+        .zjxc-bt{
+            width: 6.1rem;
+            height: 3.57rem;
+            background: url('../public/images/znyth/zjxc-0.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+        }
+        .zjxc-1{
+            width: 6.72rem;
+            height: 2.62rem;
+            background: url('../public/images/znyth/zjxc-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: -1rem;
+        }
+        .zjxc-2{
+            width:3.31rem;
+            height: 2.62rem;
+            background: url('../public/images/znyth/zjxc-2.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            margin-top: .1rem;
+            z-index: 1;
+
+        }
+        .zjxc-3{
+            width:3.31rem;
+            height: 2.62rem;
+            background: url('../public/images/znyth/zjxc-3.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+            margin-top: .1rem;
+            z-index: 1;
+
+        }
+        .hdhl-bt{
+            width: 6.1rem;
+            height: 3.57rem;
+            background: url('../public/images/znyth/hdhl-0.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: -.9rem;
+        }
+        .zpbox{
+            width: 6.54rem;
+            height: 6.54rem;
+            position: relative;
+            margin: 0 auto;
+           
+        }
+        .zpd{
+            width: 6.54rem;
+            height: 6.54rem;
+            position: absolute !important;
+            margin: 0 auto;
+            background: url('../public/images/znyth/zp.png') no-repeat;
+            background-size: 100%;
+            top: 0;
+
+        }
+        .ks{
+            position: absolute !important;
+            height: 2.87rem;
+            width: 2.87rem;
+            background: url('../public/images/znyth/start.png') no-repeat;
+            background-size: 100%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+
+        }
+        .ks-mask{
+            position: absolute !important;
+            height: 2.87rem;
+            width: 2.87rem;
+            background: url('../public/images/znyth/start.png') no-repeat;
+            background-size: 100%;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            display: none;
+        }
+        .jt{
+            width: .64rem;
+            height: 0.95rem;
+            background: url('../public/images/znyth/jt.png') no-repeat;
+            background-size: 100%;
+            left: 50%;
+            top: -.2rem;
+            transform: translateX(-50%);
+            position: absolute !important;
+            z-index: 11;
+        }
+        .xdxd{
+            width: 3.43rem;
+            height: .5rem;
+            background: url('../public/images/znyth/xdxd.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .6rem;
+        }
+        .r{
+            width: 1.16rem;
+            height: 3.16rem;
+            background: url('../public/images/znyth/r.png') no-repeat;
+            background-size: 100%;
+            position: absolute !important;
+            right: .6rem;
+            top: 9.1rem;
+
+        }
+    </style>
+</head>
+<body>
+   <div class="warp">
+        <img src="../public/images/znyth/bg.png" alt="" class="bg">
+        <div class="box">
+            <div class="baner" style="z-index: 2;"><img src="../public/images/znyth/banner.png" alt=""></div>
+            <div class="znzz">
+                <div class="bt"></div>
+                <div class="znzz-box">
+                    <div class="znzz-1"></div>
+                    <div class="znzz-2"></div>
+                    <div class="znzz-3"></div>
+                    <div class="znzz-4"></div>
+                    <div class="znzz-5"></div>
+
+                </div>
+            </div>
+            <div class="dkql">
+                <div class="dkql-bt"></div>
+                <div class="zbbj"></div>
+            </div>
+            <div class="ppzg" >
+                <div class="ppzg-bt"></div>
+                <div class="ppzg-box">
+                    <div class="ppzg-1"></div>
+                    <div class="ppzg-2"></div>
+                    <div class="ppzg-3"></div>
+                    <div class="ppzg-4"></div>
+                </div>
+                <div class="ck"></div>
+            </div>
+            <div class="zjxc" >
+                <div class="zjxc-bt"></div>
+                <div class="zjxc-box">
+                    <div class="zjxc-1"></div>
+                    <div class="zjxc-2"></div>
+                    <div class="zjxc-3"></div>
+                   
+                </div>
+            </div>
+            <div class="hdhl">
+                <div class="hdhl-bt"></div>
+                <div class="zpbox">
+                    <div class="zpd"></div>
+                    <div class="jt"></div>
+                    <div class="zpd"></div>
+                    <div class="ks start"></div>
+                    <div class="ks-mask"></div>
+                </div>
+                <div class="r">
+
+                </div>
+                <div class="xdxd">
+
+                </div>
+            </div>
+        </div>
+
+
+   </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+<script src="../public/javascripts/swiper.js"> </script>
+<script>
+   $('body').on('click','.start',function () {
+        
+        var timer =null
+        var timer1=null
+        var deg =0
+        var zs =20
+        var js =0
+        var ydj =[700,600,520]
+        var edj =[780,650,780]
+        var zzyc =520
+        var bjb=580
+        var hbd=640
+        var bqm=700
+        var yx=760
+        var gz=820
+        var ajxaxCount =0
+        var flag =false
+        var jx =''
+        var ds =''
+        clearInterval(timer)
+        $('.ks-mask').css('display','block')
+        $.ajax({
+            //请求方式
+            type : "post",
+            //请求地址
+            url : "/api/luckDraw",
+            //数据，json字符串
+            dataType: 'json',
+            //请求成功
+            success : function(res) {
+                flag=true
+                jpSign=res.prize
+                console.log(jpSign)
+                if(res.prize =='zlyc'){
+                    ds=520
+                    // $('.jxm').text('hen')
+                }else if(res.prize =='bqm'){
+                    ds=700
+                    // $('.jxm').text('获得由老凤祥提供的精美首饰盒一份')
+                }else if(res.prize =='gz'){
+                    ds=820
+                    // $('.jxm').text('获得由老凤祥提供的麻布袋便携餐具')
+                }else if(res.prize =='yx'){
+                    ds=760
+                }else if(res.prize =='bjb'){
+                    ds=580
+                }else if(res.prize =='hbd'){
+                    ds=640
+                }
+                    timer =setInterval(function () {  
+                            if(deg> ds){
+                                deg+=zs
+                                zs-=0.1
+                                if(zs<0){
+                                    clearInterval(timer)
+                                    $('.ks-mask').css('display','none')
+                                    setTimeout(function (param) { 
+                                        // $('.zp-mask').fadeIn()
+                                        alert('恭喜你获得'+res.prize)
+                                       
+                                        
+                                     },1000)
+                                }
+                            }else{
+                                deg+=zs
+                            }
+                            $('.zpd').css({'transform': 'rotate('+deg+'deg)'})
+                        },20)
+                    
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+            
+        
+
+    })
+</script>
+</html>

@@ -28,4 +28,7 @@ router.get('/zbh', function(req, res) {
 router.get('/query', function(req, res) {
 	res.render('query.html');
 });
+router.get('/znyth', function(req, res) {
+	res.render('znyth.html');
+});
 module.exports = router;
