@@ -549,8 +549,13 @@
         var timer =null 
         var tpjs =0
         var mySwiper = new Swiper('.swiper-container', {
-            autoplay: true,
-            loop: true
+            autoplay: {
+                delay: 2000,
+                stopOnLastSlide: false,
+                disableOnInteraction: true,
+            },
+            loop: true,
+            speed:300
         })
         timer=setInterval(function (param) {  
             if(tpjs ==15){
