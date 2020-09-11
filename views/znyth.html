@@ -13,7 +13,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>百度智能制造研讨会</title>
-    <link rel="stylesheet" href="./public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/swiper.min.css">  
     <style> 
         body{
             
@@ -154,6 +155,29 @@
             height: 3.62rem;
             background: url('../public/images/znyth/ppzg-3.png') no-repeat;
             background-size: 100%;
+            display: inline-block;
+           
+        }
+        .ppzg-7{
+            width: 3.23rem;
+            height: 3.62rem;
+            background: url('../public/images/znyth/ppzg-7.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+           
+        }
+        .ppzg-8{
+            width: 3.23rem;
+            height: 3.62rem;
+            background: url('../public/images/znyth/ppzg-8.png') no-repeat;
+            background-size: 100%;
+            display: inline-block;
+           
+        }
+        .ppzg-5{
+            width: 3.23rem;
+            height: 3.62rem;
+            /* background:red; */
             display: inline-block;
            
         }
@@ -433,12 +457,10 @@
                 <div class="bt"></div>
                 <div class="znzz-box">
                     <a href="https://m.misumi.com.cn/misumipr/BDBrandlink_caigou_02/?utm_source=baidu&utm_medium=display&utm_campaign=baidu_znzztb&utm_term=cp&utm_content=znzztb"><div class="znzz-1"></div></a>
-                    <a href="https://aisite.wejianzhan.com/site/mt.com/129f9423-e0e9-414c-8689-3f33af49f5e4"><div class="znzz-2"></div></a>
                     <a href="https://www.te.com.cn/chn-zh/industries/industrial-machinery/applications/robot-arm.html?tab=pgp-story&te_bu=Cor&te_type=disp&te_campaign=bai_chn_cor-bai-chn-disp-selectmktg-fy20-kp-3-lp-produc_sma-1601_20&elqCampaignId=94962"><div class="znzz-3"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mt.com/129f9423-e0e9-414c-8689-3f33af49f5e4"><div class="znzz-2"></div></a>
                     <a href="https://www.keyence.com.cn/?ad=gaad20200907ciif"> <div class="znzz-4"></div></a>
                     <a href="https://www.rockwellautomation.com/zh-cn.html"><div class="znzz-5"></div></a>
-                    
-
                 </div>
             </div>
             <div class="dkql">
@@ -448,10 +470,17 @@
             <div class="ppzg" >
                 <div class="ppzg-bt"></div>
                 <div class="ppzg-box">
-                    <div class="ppzg-1"></div>
-                    <div class="ppzg-2"></div>
-                    <a href="https://www.mt.com/cn/zh/home/products/Industrial_Weighing_Solutions/AutomPrecision/load-cell-and-weigh-module/compression-wm/powermount.html?cmp=sea_21151207"><div class="ppzg-3"></div></a>
+                    <a href="https://m.misumi.com.cn/vona2/detail/110310251369/?utm_source=baidu&utm_medium=display&utm_campaign=baidu_znzz&utm_term=cp&utm_content=ct"><div class="ppzg-1"></div></a>
+                    <a href="https://m.misumi.com.cn/vona2/detail/110310313829/?utm_source=baidu&utm_medium=display&utm_campaign=baidu_tbd&utm_term=cp&utm_content=tbd"> <div class="ppzg-2"></div></a>
+                    <div class="swiper-container ppzg-5">
+                        <div class="swiper-wrapper">
+                          <div class="swiper-slide"><a href="https://www.mt.com/cn/zh/home/products/Industrial_Weighing_Solutions/AutomPrecision/load-cell-and-weigh-module/compression-wm/powermount.html?cmp=sea_21151207"><div class="ppzg-3"></div></a></div>
+                          <div class="swiper-slide"><a href="https://www.mt.com/cn/zh/home/products/Process-Analytics/pH-probe/pH-ISM-accessories/calibration-and-maintenance.html?cmp=sea_16151207"><div class="ppzg-7"></div></a></div>
+                        </div>
+                    </div>
                     <a href="https://www.te.com.cn/chn-zh/trends/industry-4-digital-factory-production/digital-transformation.html?te_bu=Cor&te_type=disp&te_campaign=bai_chn_cor-bai-chn-disp-selectmktg-fy20-kp-3-lp-banner_sma-1601_19&elqCampaignId=94961"><div class="ppzg-4"></div></a>
+                    
+                    
                 </div>
                 <div class="ck"></div>
             </div>
@@ -519,7 +548,10 @@
         window.jp =''
         var timer =null 
         var tpjs =0
-
+        var mySwiper = new Swiper('.swiper-container', {
+            autoplay: true,
+            loop: true
+        })
         timer=setInterval(function (param) {  
             if(tpjs ==15){
                 tpjs=0
