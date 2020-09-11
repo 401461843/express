@@ -32,5 +32,7 @@ router.post('/download', api.download);
 router.post('/getAccessToken', api.getAccessToken);
 // router.post('/test2', api.test2);
 router.post('/hqjsLuckDraw', api.hqjsLuckDraw);
+// 研讨会提交
+router.post('/submityYth', api.submityYth);
 
 module.exports = router; 

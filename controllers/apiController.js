@@ -273,7 +273,55 @@ let lfxFx= async function (req,res) {
 		});
 	}
 }
+//智能研讨会
+let submityYth =async function (req,res) {
+	let {name,tell,dz,jx } =req.body
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	let map={
+		'kz':'米思米海绵口罩',
+		'gz':'度熊星座公仔',
+		'yx':'小度智能音响大金刚',
+		'bjb':'MT定制笔记本',
+		'hbd':'MT环保袋'
+	}
+	let data ={
+		name:name,
+		tell:tell,
+		dz:dz,
+		jx:jx,
+		create_time: create_time 
+	};
+	let sqlArr =[data.tell];
+	let sql = 'select * from  znyth_info where tell = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	
+	if(result.length ==0){
+		let sqlArr1 =[data.name,data.tell,data.dz,data.jx,data.create_time];
+		let sql1 = 'insert into znyth_info (name,tell,dz,jx,create_time) values(?,?,?,?,?)';
+		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
+		if(result1.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'msg': '领取成功',
+				'data':''
+			});
+		}else{
+			res.send({ 
+				'code': 1,
+				'msg': '服务器出错!',
+				'data':''
+			});
+		}
+	}else{
+		// console.log(result[0]['jx'])
+		res.send({ 
+			'code': 1,
+			'msg': '您已经领过'+map[result[0]['jx']]+'奖品了!',
+			'data':''
 
+		});
+	}
+}
 let lfxFxsubmit= async function (req,res) { 
 	let {name,tell,sign } =req.body
 	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
@@ -632,5 +680,6 @@ module.exports={
 	query,
 	download,
 	getAccessToken,
-	hqjsLuckDraw
+	hqjsLuckDraw,
+	submityYth
 };
