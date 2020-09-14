@@ -452,7 +452,9 @@
         <img src="../public/images/znyth/bg.png" alt="" class="bg">
         <div class="box">
             
-            <div class="baner" style="z-index: 2;"><img src="../public/images/znyth/banner.png" alt=""><div class="sd"></div></div>
+            <div class="baner" style="z-index: 2;"><img src="../public/images/znyth/banner.png" alt="">
+                <!-- <div class="sd"></div> -->
+            </div>
             <div class="znzz">
                 <div class="bt"></div>
                 <div class="znzz-box">
@@ -557,14 +559,14 @@
             loop: true,
             speed:300
         })
-        timer=setInterval(function (param) {  
-            if(tpjs ==15){
-                tpjs=0
+        // timer=setInterval(function (param) {  
+        //     if(tpjs ==15){
+        //         tpjs=0
                 
-            }
-            $('.sd').css({'background':'url("../public/images/znyth/D_'+tpjs+'.png") no-repeat','background-size':'100%'})
-            tpjs++
-        },150)
+        //     }
+        //     $('.sd').css({'background':'url("../public/images/znyth/D_'+tpjs+'.png") no-repeat','background-size':'100%'})
+        //     tpjs++
+        // },150)
         if(!localStorage.getItem('cjcs')){
             localStorage.setItem('cjcs','3')
             cjcs=3
