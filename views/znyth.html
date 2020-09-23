@@ -452,7 +452,7 @@
         <img src="../public/images/znyth/bg.png" alt="" class="bg">
         <div class="box">
             
-            <div class="baner" style="z-index: 2;"><img src="../public/images/znyth/banner.png" alt="">
+            <div class="baner" style="z-index: 2;"><img src="../public/images/znyth/banner.png" alt=""  class="baner-img">
                 <!-- <div class="sd"></div> -->
             </div>
             <div class="znzz">
@@ -743,7 +743,10 @@
 
     }); 
     
-})
+}).on('click','.baner-img',function () { 
+    console.log(111)
+    _hmt.push(['_trackEvent', 'baner', 'click', 'baidu', 1]);
+ })
   
 </script>
 </html>
