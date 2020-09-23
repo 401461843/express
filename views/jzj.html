@@ -1132,7 +1132,7 @@
         </div>
     </div>
     <div class="sp-mask">
-        <video src="" controls class="vdo" id="sp"></video>
+        <video src="" controls class="vdo" id="sp" poster="../public/images/jz/spfm.png"></video>
         <div class="gb">
             ×
         </div>
@@ -1406,6 +1406,7 @@
     }
     $('.sycs').text('剩余'+cjcs+'次')
     $('body').on('click','.tab-btn',function () {
+        _hmt.push(['_trackEvent', "测试", "tab"]);
         $('.tab-btn').removeClass('active')
         $(this).addClass('active')
         $('.tab-content >div').hide()
