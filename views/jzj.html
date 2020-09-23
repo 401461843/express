@@ -1,17 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<script>
-    var _hmt = _hmt || [];
-    (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
-        var s = document.getElementsByTagName("script")[0]; 
-        s.parentNode.insertBefore(hm, s);
-    })();
-</script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <script>
+        var _hmt = _hmt || [];
+        (function() {
+            var hm = document.createElement("script");
+            hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+            var s = document.getElementsByTagName("script")[0]; 
+            s.parentNode.insertBefore(hm, s);
+            
+        })();
+    </script>
     <title>家装节</title>
     <link rel="stylesheet" href="../public/css/reset.css">
     <link rel="stylesheet" href="../public/css/swiper.min.css">  
@@ -1410,6 +1412,7 @@
     window.idMap={"yyzj": '0',"gz": '6',"dcf": '1',"ppxsz": '2',"xdzj": '4',"yx": '5',"qjth": '7',"hyd": '10',"dkx": '11','zcyc':'3'}
     window.zlycList=['3','8','9']
     window.jp=''
+    
     var mySwiper = new Swiper('.swiper-container', {
         autoplay: true,
         loop: true,
@@ -1567,14 +1570,14 @@
     
         $('.sp-mask').fadeOut()
     });
-    $(document).scroll(function(){
-        var $top = parseInt($(window).scrollTop());
-		if($top>=431){
-			$(".tab").css({"position":"fixed","top":'.31rem',"z-index":5,'left':'50%','transform':'translateX(-50%)'});
-		}else{
-			$(".tab").css({"position":"relative",'top':0,'left':0,'transform':'translateX(0)'});
-		}
-	});
+    // $(document).scroll(function(){
+    //     var $top = parseInt($(window).scrollTop());
+	// 	if($top>=431){
+	// 		$(".tab").css({"position":"fixed","top":'.31rem',"z-index":5,'left':'50%','transform':'translateX(-50%)'});
+	// 	}else{
+	// 		$(".tab").css({"position":"relative",'top':0,'left':0,'transform':'translateX(0)'});
+	// 	}
+	// });
     
   
 </script>
