@@ -220,13 +220,27 @@
             background-size:100% ;
             overflow: hidden;
         }
-        .ybj img{
+        .ybj {
             display: block;
             margin: 0 auto;
             margin-top: 2.30rem;
             width: 6.83rem;
             height: 4.77rem;
+            background: url('../public/images/jz/ppzg-ybj.png') no-repeat;
+            background-size:100% ;
             
+        }
+        .swiper-container{
+            width: 6.14rem;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        .swiper-container img{
+            width: 6.14rem;
+            height: 3.7rem;
+            margin: 0 auto;
+            display: block;
+            margin-top: .24rem;
         }
         .cp{
             margin: 0 auto;
@@ -1130,7 +1144,7 @@
         <div class="tab-list">
             <div class="tab-btn active" id="12">品牌展馆</div>
             <div class="tab-btn" id="13"> <span class="line"></span> 特惠专区</div>
-            <div class="tab-btn" id="14"> <span class="line"></span> 家具干货</div>
+            <div class="tab-btn" id="14"> <span class="line"></span> 家居干货</div>
             <div class="tab-btn" id="15"> <span class="line"></span> 抽奖专区</div>
         </div>
         <div class="tab-content">
@@ -1138,8 +1152,8 @@
                 <a href="#zzg" class="tab-smalll">整装馆 ></a>
                 <a href="#cwg" class="tab-smalll">厨卫馆 ></a>
                 <a href="#jdg" class="tab-smalll">家电馆 ></a>
-                <a href="#jjg" class="tab-smalll">智能家具馆 ></a>
-                <a href="#jjypg" class="tab-smalll">家具用品馆 ></a>
+                <a href="#jjg" class="tab-smalll">智能家居馆 ></a>
+                <a href="#jjypg" class="tab-smalll">家居用品馆 ></a>
                 <a href="#jcga" class="tab-smalll">家具建材馆 ></a>
            </div>
            <div class="thzq-c-box">
@@ -1162,7 +1176,21 @@
                     <img src="../public/images/jz/ybj-tit.png" alt="">
                </div>
                 <div class="ybj" style="position: relative;">
-                    <img src="../public/images/jz/ppzg-ybj.png" alt="">
+                   
+                    <div class="swiper-container">
+                        <div class="swiper-wrapper">
+                            <div class="swiper-slide" style="width: 100%;">
+                                <img src="../public/images/jz/lb-1.png" alt="">
+                            </div> 
+                            <div class="swiper-slide" style="width: 100%;">
+                                <img src="../public/images/jz/lb-1.png" alt="">
+                            </div>
+                            <div class="swiper-slide" style="width: 100%;">
+                                <img src="../public/images/jz/lb-1.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+
                     <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ckgd"></div></a>
                     
                 </div>
@@ -1300,9 +1328,10 @@
                     
                 </div>
                 <div>
-                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w16147682-22559681189.1.3ae955dcNIIwr0&id=533900639197&scene=taobao_shop"></a>
-                    
-                    <a href="https://www.zwilling.com.cn/item/ZWC018"> <div class="jjth-sp"></div></a>
+                   
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w16147682-22559681189.1.3ae955dcNIIwr0&id=533900639197&scene=taobao_shop"> <div class="jjth-sp"></div></a>
+                    <a href="https://www.zwilling.com.cn/item/ZWC018"><div class="jjth-sp"></div></a>
+        
                    
                     
                 </div>
@@ -1365,6 +1394,10 @@
     window.idMap={"yyzj": '0',"gz": '6',"dcf": '1',"ppxsz": '2',"xdzj": '4',"yx": '5',"qjth": '7',"hyd": '10',"dkx": '11','zcyc':'3'}
     window.zlycList=['3','8','9']
     window.jp=''
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true,
+        loop: true,
+    })
     if(!localStorage.getItem('cjcs')){
         localStorage.setItem('cjcs','3')
         cjcs=3
@@ -1517,8 +1550,17 @@
         video.pause();
     
         $('.sp-mask').fadeOut()
-    }); 
-
+    });
+    $(document).scroll(function(){
+        var $top = parseInt($(window).scrollTop());
+        console.log($top)
+		if($top>=431){
+			$(".tab").css({"position":"fixed","top":'.31rem',"z-index":5,'left':'50%','transform':'translateX(-50%)'});
+		}else{
+			$(".tab").css({"position":"relative",'top':0,'left':0,'transform':'translateX(0)'});
+		}
+	});
+    
   
 </script>
 </html>
