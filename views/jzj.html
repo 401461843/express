@@ -1,0 +1,1524 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>家装节</title>
+    <link rel="stylesheet" href="../public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/swiper.min.css">  
+    <style> 
+        body{
+            background: #e24b3b;
+            /* height: 9999rem; */
+        }
+        .baner img{
+            width: 100%;
+            /* height: 13rem; */
+        }
+        .tab{
+            width: 7rem;
+            height: 2.45rem;
+            margin: 0 auto;
+            /* background: #f7756a; */
+            border-radius: .3rem;
+            margin-top: -.3rem;
+            position: relative;
+            z-index: 2;
+            
+        }
+        .tab-list{
+            position: relative;
+
+        }
+        .tab-btn{
+            position: absolute;
+            width: 25%;
+            height: .65rem;
+            text-align: center;
+            line-height: .65rem;
+            font-size: .3rem;
+            color: #fffac9;
+            background: #d65648;
+            top: .14rem;
+        }
+        .tab-btn:nth-child(1){
+           
+            left: 0;
+
+        }
+        .tab-btn:nth-child(2){
+            left: 25%;
+            
+        }
+        .tab-btn:nth-child(3){
+            left: 50%;
+            
+        }
+        .tab-btn:nth-child(4){
+            left: 75%;
+            
+        }
+        .line{
+            position: absolute;
+            height: .4rem;
+            width: 1px;
+            background: #f37066;
+            left: 0;
+            top: .12rem;
+        }
+        .active{
+            top: 0;
+            height: .79rem;
+            border-radius: .2rem .2rem 0 0;
+            width: 26%;
+            z-index: 2;
+            line-height: .8rem;
+            font-size: .34rem;
+            font-weight: bold;
+            background: #f7756a;
+
+        }
+        .ppzg-c-box{
+            padding: .18rem .11rem;
+            position: absolute;
+            top: .79rem;
+            display: flex;
+            justify-content: space-between;
+            /* align-content: space-between; */
+            flex-wrap: wrap;
+            background: #f7756a;
+            border-radius:  0 0 .2rem .2rem;
+        }
+        .thzq-c-box{
+            padding: .18rem .11rem;
+            position: absolute;
+            top: .79rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #f7756a;
+            border-radius:  0 0 .2rem .2rem;
+            width: 7rem;
+            box-sizing: border-box;
+            display: none;
+            
+        }
+        .jjgh-c-box{
+            padding: .18rem .11rem;
+            position: absolute;
+            top: .79rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #f7756a;
+            border-radius:  0 0 .2rem .2rem;
+            width: 7rem;
+            box-sizing: border-box;
+            display: none;
+            
+        }
+        .cjzq-c-box{
+            padding: .18rem .11rem;
+            position: absolute;
+            top: .79rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            background: #f7756a;
+            border-radius:  0 0 .2rem .2rem;
+            width: 7.06rem;
+            box-sizing: border-box;
+            display: none;
+            
+        }
+        .tab-small-cj{
+            width: 3.31rem;
+            height: 0.56rem;
+            background: url('../public/images/jz/thzq-c-t.png') no-repeat;
+            background-size: 100%;
+            
+            /* margin-top: .13rem; */
+            text-align: center;
+            line-height: .56rem;
+            color: #e94d38;
+            font-size:.25rem;
+            font-weight: bold;
+            display: block;
+            margin: 0 auto;
+        }
+        .tab-small-gh{
+            width: 3.31rem;
+            height: 0.56rem;
+            background: url('../public/images/jz/thzq-c-t.png') no-repeat;
+            background-size: 100%;
+            float: left;
+            /* margin-top: .13rem; */
+            text-align: center;
+            line-height: .56rem;
+            color: #e94d38;
+            font-size:.25rem;
+            font-weight: bold;
+            display: block;
+        }
+        .tab-small-gh:nth-child(2){
+            float: right;
+        }
+        .tab-small-th{
+            width: 3.31rem;
+            height: 0.56rem;
+            background: url('../public/images/jz/thzq-c-t.png') no-repeat;
+            background-size: 100%;
+            float: left;
+            /* margin-top: .13rem; */
+            text-align: center;
+            line-height: .56rem;
+            color: #e94d38;
+            font-size:.25rem;
+            font-weight: bold;
+            display: block;
+           
+        }
+        .tab-small-th:nth-child(2){
+            float: right;
+        }
+        .tab-smalll{
+            width: 2.2rem;
+            height: 0.55rem;
+            background: url('../public/images/jz/ppzg-tab-s.png') no-repeat;
+            background-size: 100%;
+            float: left;
+            margin-top: .13rem;
+            text-align: center;
+            line-height: .5rem;
+            color: #e94d38;
+            font-size:.25rem;
+            font-weight: bold;
+            display: block;
+            
+        }
+        .tab-smalll:nth-child(1),.tab-smalll:nth-child(2),.tab-smalll:nth-child(3){
+            margin-top: 0;
+        }
+        .cont-box{
+            padding-top: .2rem;
+            padding-bottom: .2rem;
+        }
+        .zzg{
+            height: 26.26rem;
+            width: 7.24rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/ppzg-1-bg.png') no-repeat;
+            background-size:100% ;
+            overflow: hidden;
+        }
+        .ybj img{
+            display: block;
+            margin: 0 auto;
+            margin-top: 2.30rem;
+            width: 6.83rem;
+            height: 4.77rem;
+            
+        }
+        .cp{
+            margin: 0 auto;
+            margin-top: .85rem;
+            width: 6.74rem;
+            height: 16.44rem;
+            background: url('../public/images/jz/ppzg-hd.png') no-repeat;
+            background-size: 100%;
+            /* display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap; */
+            box-sizing: border-box;
+            padding: .25rem;
+        }
+        .ppzg-sp{
+            height: 3.2rem;
+            overflow: hidden;
+            width: 3.1rem;
+            float: left;
+        }
+        .ppzg-sp img{
+            display: block;
+            width: 3.11rem;
+            height: 3.24rem;
+            margin-bottom: .1rem;
+            float: left;
+            
+        }
+        .ppzg-ge{
+            width: 6.34rem;
+            height: 1.32rem;
+            margin: 0 auto ;
+            background: url('../public/images/jz/ppzg-ge.png') no-repeat;
+            background-size: 100%;
+            margin-top: .2rem;
+        }
+        .cwg{
+            width: 7.24rem;
+            height: 28.26rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-bg.png') no-repeat;
+            background-size: 100%;
+            margin-top: .3rem;
+            overflow: hidden;
+         
+
+        }
+        .cwg-1{
+            width: 6.96rem;
+            height: 8.15rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-1-bg.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1.5rem;
+            overflow: hidden;
+
+        }
+        .cwg-1-zh1{
+            width: 6.21rem;
+            height: 2.96rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-1-zh1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1rem;
+        }
+        .cwg-1-zh2{
+            width: 5.95rem;
+            height: 3.65rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-1-zh2.png') no-repeat;
+            background-size: 100%;
+            margin-top: .2rem;
+        }
+        .cwg-2{
+            width: 6.96rem;
+            height: 3.75rem;
+            margin: 0 auto;
+            background: url(../public/images/jz/cwg-2.png) no-repeat;
+            background-size: 100%;
+            margin-top: -.08rem;
+        }
+        .cwg-3{
+            width: 6.96rem;
+            height: 3.68rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-3.png') no-repeat;
+            background-size: 100%;
+            /* margin-top: .1rem; */
+        }
+        .cwg-4{
+            width: 6.96rem;
+            height: 3.68rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-4.png') no-repeat;
+            background-size: 100%;
+            /* margin-top: .1rem; */
+        }
+        .cwg-5{
+            width: 6.96rem;
+            height: 3.68rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-5.png') no-repeat;
+            background-size: 100%;
+            /* margin-top: .1rem; */
+        }
+        .cwg-6{
+            width: 6.96rem;
+            height: 3.68rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/cwg-6.png') no-repeat;
+            background-size: 100%;
+            /* margin-top: .2rem; */
+        }
+        .all{
+            width: 100%;
+            height: 100%;
+        }
+        .left,.right{
+            float: left;
+            width: 50%;
+            height: 100%;
+        }
+        .jdg{
+            width: 7.24rem;
+            height: 9.22rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/jdg.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .jdg-1{
+            width: 6.96rem;
+            height: 3.81rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jdg-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1.55rem;
+            /* margin-top: .2rem; */
+        }
+        .jdg-2{
+            width: 6.96rem;
+            height: 3.81rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jdg-2.png') no-repeat;
+            background-size: 100%;
+           
+        }
+        .jdg-2-l{
+            height: 100%;
+            width: 56.5%;
+            float: left;
+        }
+        .jdg-2-r{
+            height: 100%;
+            width: 43.5%;
+            float: left;
+        }
+        .jjg{
+            width: 7.24rem;
+            height: 9.22rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/jjg.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .jjg-1{
+            width: 6.96rem;
+            height: 3.81rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jjg-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1.55rem;
+            /* margin-top: .2rem; */
+        }
+        .jjg-2{
+            width: 6.96rem;
+            height: 3.81rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jjg-2.png') no-repeat;
+            background-size: 100%;
+           
+        }
+        .jjg-2-l{
+            height: 100%;
+            width: 53.5%;
+            float: left;
+        }
+        .jjg-2-r{
+            height: 100%;
+            width: 46.5%;
+            float: left;
+        }
+        .jjypg{
+            width: 7.24rem;
+            height: 12.91rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/jjypg.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .jjypg-1{
+            width: 6.96rem;
+            height: 3.81rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jjypg-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1.5rem;
+        }
+        .jjypg-2{
+            width: 6.96rem;
+            height: 3.74rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jjypg-2.png') no-repeat;
+            background-size: 100%;
+          
+        }
+        .jjypg-3{
+            width: 6.96rem;
+            height: 3.81rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jjypg-3.png') no-repeat;
+            background-size: 100%;
+        }
+        .jjypg-1-l,.jjypg-1-c,.jjypg-1-r{
+            width: 33.3%;
+            height: 100%;
+            float: left;
+        }
+        .jjypg-2-l{
+            width: 56.5%;
+            height: 100%;
+            float: left;
+        }
+        .jjypg-2-r{
+            width: 43.5%;
+            height: 100%;
+            float: left;
+        }
+        .jjypg-3-l{
+            width: 52.5%;
+            height: 100%;
+            float: left;
+        }
+        .jjypg-3-r{
+            width: 47.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg{
+            width: 7.24rem;
+            height: 15.92rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/jcg.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .jcg-1{
+            width: 6.96rem;
+            height: 3.34rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jcg-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1.6rem;
+        }
+        .jcg-2{
+            width: 6.96rem;
+            height: 3.34rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jcg-2.png') no-repeat;
+            background-size: 100%;
+            
+        }
+        .jcg-3{
+            width: 6.96rem;
+            height: 3.34rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jcg-3.png') no-repeat;
+            background-size: 100%;
+            
+        }
+        .jcg-4{
+            width: 6.96rem;
+            height: 3.34rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/jcg-4.png') no-repeat;
+            background-size: 100%;
+            
+        }
+        .jcg-1-l{
+            width: 52.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-1-r{
+            width: 47.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-2-l{
+            width: 50.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-2-r{
+            width: 49.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-3-l{
+            width: 53.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-3-r{
+            width: 46.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-4-l{
+            width: 47.5%;
+            height: 100%;
+            float: left;
+        }
+        .jcg-4-r{
+            width: 52.5%;
+            height: 100%;
+            float: left;
+        }
+        .zzth{
+            width: 7.24rem;
+            height: 17.36rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/zzth.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .jjth{
+            width: 7.24rem;
+            height: 21.43rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/jjth.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .zzth>div{
+            width: 6.34rem;
+            height: 2.7rem;
+            margin: 0 auto;
+        }
+        .zzth>div:nth-child(1){
+            background: url('../public/images/jz/zzyh-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 2.7rem;
+        }
+        .zzth>div:nth-child(2){
+            background: url('../public/images/jz/zzyh-2.png') no-repeat;
+            background-size: 100%;
+        }
+
+        .zzth>div:nth-child(3){
+            background: url('../public/images/jz/zzyh-3.png') no-repeat;
+            background-size: 100%;
+        }
+        .zzth>div:nth-child(4){
+            background: url('../public/images/jz/zzyh-4.png') no-repeat;
+            background-size: 100%;
+        }
+        .zzth>div:nth-child(5){
+            background: url('../public/images/jz/zzyh-5.png') no-repeat;
+            background-size: 100%;
+        }
+        .zzth>div>a{
+            display: block;
+            height: 100%;
+            width: 100%;
+
+        }
+        .thzq-wrap,.jjgh-wrap,.cjzq-wrap{
+            display: none;
+        }
+        .jjth>div{
+            width: 6.31rem;
+            height: 3.26rem;
+            margin: 0 auto;
+        }
+        .jjth>div:nth-child(1){
+            background: url('../public/images/jz/jjth-1.png') no-repeat;
+            background-size: 100%;
+            margin-top: 1.87rem;
+            width: 6.3rem;
+            height: 2.74rem;
+        }
+        .jjth>div:nth-child(2){
+            background: url('../public/images/jz/jjth-2.png') no-repeat;
+            background-size: 100%;
+        }
+
+        .jjth>div:nth-child(3){
+            background: url('../public/images/jz/jjth-3.png') no-repeat;
+            background-size: 100%;
+        }
+        .jjth>div:nth-child(4){
+            background: url('../public/images/jz/jjth-4.png') no-repeat;
+            background-size: 100%;
+        }
+        .jjth>div:nth-child(5){
+            background: url('../public/images/jz/jjth-5.png') no-repeat;
+            background-size: 100%;
+        }
+        .jjth>div:nth-child(6){
+            background: url('../public/images/jz/jjth-6.png') no-repeat;
+            background-size: 100%;
+        }
+        
+        .jjth-sp{
+            height: 100%;
+            width: 50%;
+            float: left;
+        }
+        @-webkit-keyframes slideInLeft {
+            from {
+                -webkit-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes slideInLeft {
+            from {
+                -webkit-transform: translate3d(-100%, 0, 0);
+                transform: translate3d(-100%, 0, 0);
+                visibility: visible;
+            }
+
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .slideLeft{
+            animation: slideInLeft 1s ;
+            display: block !important;
+        }
+
+        .zbtd{
+            width: 7.24rem;
+            height: 5.31rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/zbtd.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .zbtd-1{
+            width: 6.83rem;
+            height: 3.51rem;
+            background: url('../public/images/jz/zbtd-1.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: 1.6rem;
+        }
+        .zxgh{
+            width: 7.24rem;
+            height: 15.03rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/zxgh.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+        }
+        .zxgh-box{
+            height: 13.1rem;
+            width: 6.65rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            /* background: red; */
+            margin: 0 auto;
+            margin-top: 1.64rem;
+            box-sizing: border-box;
+            padding: .25rem;
+        }
+        .zxgh-zs{
+            width: 2.97rem;
+            height: 2.43rem;
+            margin-bottom: .12rem;
+        }
+        .zxgh-zs:nth-child(1){
+            background: url('../public/images/jz/zxgh-1.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(2){
+            background: url('../public/images/jz/zxgh-2.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(3){
+            background: url('../public/images/jz/zxgh-3.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(4){
+            background: url('../public/images/jz/zxgh-4.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(5){
+            background: url('../public/images/jz/zxgh-5.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(6){
+            background: url('../public/images/jz/zxgh-6.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(7){
+            background: url('../public/images/jz/zxgh-7.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(8){
+            background: url('../public/images/jz/zxgh-8.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(9){
+            background: url('../public/images/jz/zxgh-9.png') no-repeat;
+            background-size: 100%;
+        }
+        .zxgh-zs:nth-child(10){
+            background: url('../public/images/jz/zxgh-10.png') no-repeat;
+            background-size: 100%;
+        }
+        .ppzg-wrap{
+            position: relative;
+        }
+        .go-top{
+            position: fixed;
+            height: 1.06rem;
+            width: 1.06rem;
+            background: url('../public/images/jz/go-top.png') no-repeat;
+            background-size: 100%;
+            right:0 ;
+            bottom: 1rem;
+            z-index: 99;
+        }
+        .cjzq{
+            width: 7.24rem;
+            height: 13.07rem;
+            margin: 0 auto;
+            margin-top: .3rem;
+            background: url('../public/images/jz/cjzq.png') no-repeat;
+            background-size: 100%;
+            overflow: hidden;
+            position: relative;
+            
+        }
+        .cjzq-box{
+            width: 5.6rem;
+            height: 6rem;
+            margin: 0 auto;
+            margin-top: 2.88rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            box-sizing: border-box;
+            padding: .25rem .1rem;
+        }
+        .jp{
+            width: 1.6rem;
+            height: 1.3rem;
+            margin-bottom: .12rem;
+        }
+        .jp:nth-child(1){
+            background: url('../public/images/jz/jp-1.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(2){
+            background: url('../public/images/jz/jp-2.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(3){
+            background: url('../public/images/jz/jp-3.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(4){
+            background: url('../public/images/jz/jp-4.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(5){
+            background: url('../public/images/jz/jp-5.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(6){
+            background: url('../public/images/jz/jp-6.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(7){
+            background: url('../public/images/jz/jp-7.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(8){
+            background: url('../public/images/jz/jp-8.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(9){
+            background: url('../public/images/jz/jp-4.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(10){
+            background: url('../public/images/jz/jp-4.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(11){
+            background: url('../public/images/jz/jp-9.png') no-repeat;
+            background-size: 100%;
+        }
+        .jp:nth-child(12){
+            background: url('../public/images/jz/jp-10.png') no-repeat;
+            background-size: 100%;
+        }
+        .mask{
+            width: 1.6rem;
+            height: 1.3rem;
+            /* border: 2px dashed green; */
+            border-radius: .2rem;
+            display: none;
+            background: rgba(255,233,0,.6);
+        }
+        .ljcj{
+            width: 4.72rem;
+            height: 1.04rem;
+            background: url(../public/images/jz/cjan.png) no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .85rem;
+        }
+        .ljcj-mask{
+            width: 4.72rem;
+            height: 1.04rem;
+            position: absolute;
+            
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 2.3rem;
+            display: none;
+
+        }
+        .hdgz{
+            width: .98rem;
+            height: 0.31rem;
+            background: url('../public/images/jz/hdgz.png') no-repeat;
+            background-size: 100%;
+            float: right;
+            margin-top: 1.8rem;
+            margin-right: .3rem;
+        }
+        .gz-mask,.zj-mask,.wzj-mask{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background: rgba(0,0,0,.6);
+            z-index: 100;
+            display: none;
+        }
+        .gz-con{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            height: 65%;
+            width: 90%;
+            transform: translate(-50%,-50%);
+            background: white;
+            border-radius: .1rem;
+        }
+        .close{
+            position: absolute;
+            top: .0rem;
+            right: .2rem;
+            font-size: .5rem;
+        }
+        .gz-nr{
+            width: 100%;
+            height: 100%;
+            width: 100%;
+            height: 100%;
+            box-sizing: border-box;
+            padding-top: .65rem;
+            padding-left: .2rem;
+            padding-right: .2rem;
+            padding-bottom: .2rem;
+            overflow-y: auto;
+        }
+        .zj-con{
+            width: 6.1rem;
+            height: 7.99rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            background: url('../public/images/jz/zj.png') no-repeat;
+            background-size: 100%;
+        }
+        .wzj-con{
+            width: 7.32rem;
+            height: 7.29rem;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            background: url('../public/images/jz/wzj.png') no-repeat;
+            background-size: 100%;
+        }
+        .title{
+            font-size: .64rem;
+            text-align: center;
+            color: #ff2a2a;
+            margin-top: 2.13rem;
+        }
+        .jx{
+            font-size: .4rem;
+            text-align: center;
+            color: #ff2a2a;
+        }
+        .srk{
+            width: 5rem;
+            height: 0.65rem;
+            border: 1px solid #ff2a2a;
+            border-radius: .4rem;
+            margin: 0 auto;
+            margin-bottom: .15rem;
+            line-height: .65rem;
+            color: #a9a9a9;
+            text-indent: .4rem;
+            font-size: .26rem;
+            margin-top: .1rem;
+        }
+        .srk input{
+            height: .65rem;
+            width: 3.4rem;
+            float: right;
+            border: none;
+            outline: none;
+            margin-right: .3rem;
+        }
+        .btn{
+            width: 5.67rem;
+            height: 1.6rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/ljlq.png') no-repeat;
+            background-size: 100%;
+            margin-top: -.2rem;
+        }
+       
+        .zj-close{
+            float: right;
+            margin-top: 1.1rem;
+            margin-right: 0.5rem;
+            font-size: .4rem;
+        }
+        .zcyc{
+            height: 0.61rem;
+            width: 2.5rem;
+            margin: 0 auto;
+            margin-top: 5.2rem;
+        }
+        .ybjtit img{
+            width: 4.01rem;
+            height: 0.59rem;
+           
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 1.62rem;
+
+        }
+        .zzthtit img{
+            width: 4.01rem;
+            height: 0.59rem;
+            display: block;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: 7.15rem;
+        }
+        .ckgd{
+            width: 3.32rem;
+            height: .4rem;
+            position: absolute;
+            right: .5rem;
+            bottom: .26rem;
+            background: url(../public/images/jz/hsmj.png) no-repeat;
+            background-size: 100%;
+        }
+        .sp-mask{
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            background: rgba(0,0,0,.6);
+            z-index: 100;
+            display: none;
+        }
+        .sp-mask video{
+            width: 100%;
+            height: 5rem;
+            left: 50%;
+            top: 45%;
+            transform: translate(-50%,-50%);
+            display: block;
+            position: absolute;
+            
+        }
+        .gb{
+            left: 50%;
+            top: 64%;
+            transform: translate(-50%,-50%);
+            display: block;
+            position: absolute;
+            color: white;
+            font-size: .5rem;
+            height: .6rem;
+            width: .6rem;
+            /* background: white; */
+            border: 1px solid white;
+            border-radius: 50%;
+            text-align: center;
+            line-height: .6rem;
+            
+        }
+    </style>
+</head>
+<body>  
+    <div class="gz-mask">
+        <div class="gz-con">
+            <div class="close">×</div>
+            <div class="gz-nr">
+                参与方式:<br>
+                1.用户进入活动页面后，按照页面提示完成互动，即可参与抽奖。<br>
+                2.中奖用户需提交准确无误的获奖品信息(姓名、联系电话等)，以确保奖品正确核销。<br>
+                活动时间:<br>
+                即日起截止2020年10月31日 <br>
+                奖品领取:<br>
+                1.奖品款式，颜色随机，邮寄地址以客服联系中奖用户后留下的信息为准，一经提交无法更改，不接受退换。
+                2.若由于用户未提供准确信息致使无法将奖品成功寄送给用户的，将视为中奖用户自动放弃奖品及兑奖资格。<br>
+                3.按照活动页面提示填写个人信息后可获得一次申领机会，涉及实物奖品申领后，我们将于活动结束后，2020年11月1日按用户提交的信息邮寄奖品。<br>
+                隐私权声明:<br>
+                在正常使用本网站期间收集和储存的信息是用于监管本网站的使用情况及改进网站内容。上述使用并不会导致任何个人信息被收集或储存。您可以通过网站上的有些页面向百度在线网络技术(北京)有限公司上海软件技术分公司提供一些个人信息，您所作的任何的申请，请求或询问可能被百度在线网络技术(北京)有限公司上海软件技术分公司使用。百度在线网络技术(北京)有限公司上海软件技术分公司会遵守内部的隐私条例，对您的个人信息进行保密。如果您通过网站提交您的个人信息，表示您百度在线网络技术(北京)有限公司上海软件技术分公司按照上述的方式处理您的个人资料。<br>
+                活动须知:<br>
+                1.请在参与本活动之前，仔细阅读本活动参与方式及规则，您参与本活动即表示您愿意遵守与本活动有关的以下规则。<br>
+                2.此活动相关推广活动页面可被转发。<br>
+                3.抽奖礼品一经领取，不可退换，不可兑换现金，不可对外出售。<br>
+                4.用户的中奖纪录以主办方保存的系统后台数据库中的记录为准。<br>
+                5.获奖者在领取、使用奖品过程中发生损失或损害，除非该损失或损害系因主办方过失导致的，否则主办方不承担任何责任。<br>
+                6.若发现用户在活动参加过程中有任何舞弊、欺诈或违法行为，主办方有权在不经事先通知的前提下取消其获奖资格。<br>
+                7.因网络、通讯线路故障等非主办方原因而导致系统误送中奖通知或用户无法获取奖品，或遭受其他权利损失，主办方不承担任何责任<br>
+                8.本活动仅为用户提供网络活动式平台体验服务，用户不得利用相关网站发布侮辱与攻击性语言，不得侵犯他人隐私，不得发布任何违法内容，任何由用户发布、参与、传播互动内容而导致的法律责任，由用户自行承担。<br>
+                9.中奖者提供虚假兑奖信息或转发兑奖信息、逾期兑奖等情形，皆视为中奖者放弃中奖资格及由此引申的权利。<br>
+                10.活动最终解释权归主办方所有。<br>
+            </div>
+        </div>
+    </div>
+    <div class="zj-mask">
+        <div class="zj-con">
+            <div class="zj-close">×</div>
+            <div class="title">
+                恭喜您获得
+            </div>
+            <div class="jx">
+               
+            </div>
+            <div class="srk">姓名<input type="text" class="xm"></div>
+            <div class="srk">电话<input type="text" class="dh"></div>
+            <div class="srk">地址<input type="text" class="dz"></div>
+            <div class="btn"></div>
+           
+            
+        </div>
+    </div>
+    <div class="wzj-mask" >
+        <div class="wzj-con">
+            <div class="zcyc"></div>
+        </div>
+    </div>
+    <div class="sp-mask">
+        <video src="" controls class="vdo" id="sp"></video>
+        <div class="gb">
+            ×
+        </div>
+    </div>
+    <div class="baner">
+        <img src="../public/images/jz/baner.png" alt="">
+    </div> 
+    <div class="tab">
+        <div class="tab-list">
+            <div class="tab-btn active" id="12">品牌展馆</div>
+            <div class="tab-btn" id="13"> <span class="line"></span> 特惠专区</div>
+            <div class="tab-btn" id="14"> <span class="line"></span> 家具干货</div>
+            <div class="tab-btn" id="15"> <span class="line"></span> 抽奖专区</div>
+        </div>
+        <div class="tab-content">
+           <div class="ppzg-c-box">
+                <a href="#zzg" class="tab-smalll">整装馆 ></a>
+                <a href="#cwg" class="tab-smalll">厨卫馆 ></a>
+                <a href="#jdg" class="tab-smalll">家电馆 ></a>
+                <a href="#jjg" class="tab-smalll">智能家具馆 ></a>
+                <a href="#jjypg" class="tab-smalll">家具用品馆 ></a>
+                <a href="#jcga" class="tab-smalll">家具建材馆 ></a>
+           </div>
+           <div class="thzq-c-box">
+                <a href="#zzyh" class="tab-small-th">整装专享优惠 ></a>
+                <a href="#jjth" class="tab-small-th">家居特惠购 ></a>
+            </div>
+            <div class="jjgh-c-box">
+                <a href="#zbtd" class="tab-small-gh">直播探店 ></a>
+                <a href="#zxgh" class="tab-small-gh">装修干货知识 ></a>
+            </div>
+            <div class="cjzq-c-box">
+                <a href="#cjzq" class="tab-small-cj">抽奖专区 ></a>
+            </div>
+        </div>
+    </div>
+    <div class="cont-box">
+        <div class="ppzg-wrap">
+           <div class="zzg" id="zzg" style="position: relative;">
+               <div class="ybjtit">
+                    <img src="../public/images/jz/ybj-tit.png" alt="">
+               </div>
+                <div class="ybj" style="position: relative;">
+                    <img src="../public/images/jz/ppzg-ybj.png" alt="">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ckgd"></div></a>
+                    
+                </div>
+                <div class="zzthtit">
+                    <img src="../public/images/jz/zzthtit.png" alt="">
+                </div>
+                <div class="cp">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-1.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-2.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-3.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-4.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-5.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-6.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-7.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-8.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-9.png" alt=""></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="ppzg-sp"><img src="../public/images/jz/ppzg-10.png" alt=""></div></a>
+                </div>
+                <div class="ppzg-ge">
+                    
+                </div>
+           </div>
+           <div class="cwg" id="cwg" >
+                <div class="cwg-1">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="cwg-1-zh1"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="cwg-1-zh2"></div></a>
+                    
+                </div>
+                <div class="cwg-2">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"> <div class="all"></div></a>
+                </div>
+                <div class="cwg-3">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="left"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="right"></div></a>
+                    
+                </div>
+                <div class="cwg-4">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="left"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="right"></div></a>
+                    
+                </div>
+                <div class="cwg-5">
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-22068830716.6.6adf4db7Hid9tJ&id=611849773882&rn=0f7188720ac7169ffefcf8bdd22f476c&abbucket=9&scene=taobao_shop&sku_properties=3064618:29432734"><div class="left"></div></a>
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w16147682-22559681189.1.3ae955dcNIIwr0&id=533900639197&scene=taobao_shop"><div class="right"></div></a>
+                    
+                </div>
+                <div class="cwg-6">
+                    <a href="https://www.zwilling.com.cn/item/ZWC018"><div class="left"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="right"></div></a>
+                </div>
+           </div>
+           <div class="jdg" id="jdg">
+                
+                <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jdg-1"></div></a>
+                <div class="jdg-2">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"> <div class="jdg-2-l"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jdg-2-r"></div></a>
+                    
+                </div>
+           </div>
+           <div class="jjg" id="jjg">
+               <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jjg-1"></div></a>
+                <div class="jjg-2">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"> <div class="jjg-2-l"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jjg-2-r"></div></a>
+                </div>
+            </div>
+            <div class="jjypg" id="jjypg">
+                <div class="jjypg-1">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"> <div class="jjypg-1-l"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jjypg-1-c"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"> <div class="jjypg-1-r"></div></a>   
+                </div>
+                <div class="jjypg-2">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jjypg-2-l"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"><div class="jjypg-2-r"></div></a>     
+                </div>
+                <div class="jjypg-3">
+                    <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"> <div class="jjypg-3-l"></div></a>
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.3-b-s.w4011-15139193946.39.24363727INrdga&id=613321221804&rn=635db6e9ca90089d8a741b72d79f612b&abbucket=1&sku_properties=1627207:28320"><div class="jjypg-3-r"></div></a>
+                </div>
+            </div>
+            <div class="jcg" id="jcg">
+                <div class="jcg-1">
+                    <a href="https://www.shanghaihomeexpo.com/event/detail/335.html"><div class="jcg-1-l"></div></a>
+                    <a href="http://www.kano-of.com"><div class="jcg-1-r"></div></a>
+                </div>
+                <div class="jcg-2">
+                    <a href="https://www.sh-lami.com/?BDPC_X1_lmjj_112&bd_vid=10961448950000298416"><div class="jcg-2-l"></div></a>
+                    <a href="https://www.natuzzi.cn/"><div class="jcg-2-r"></div></a>
+                </div>
+                <div class="jcg-3">
+                    <a href="https://tiangedb.tmall.com/index.htm?spm=a1z10.3-b-s.w5001-17806683029.4.21d71fbcwt25iF"><div class="jcg-3-l"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/scholar-home.com/9e9c0cf3-be12-49bd-b77e-685fe8df575a?fid=nHDLnHm3rjR1PHDYPWfYnWn4nWIxnWcdg1D&ch=4"> <div class="jcg-3-r"></div></a>
+                </div>
+                <div class="jcg-4">
+
+                    <a href="https://detail.tmall.com/item.htm?spm=a220o.1000855.1998025129.2.3f8426ceccuhp1&pvid=58033941-c22d-41ce-85f8-ab3735cd39f4&pos=2&acm=03054.1003.1.2768562&id=616377250141&scm=1007.16862.95220.23864_0_0&utparam=%7B%22x_hestia_source%22:%2223864%22,%22x_object_type%22:%22item%22,%22x_hestia_subsource%22:%22default%22,%22x_mt%22:0,%22x_src%22:%2223864%22,%22x_pos%22:2,%22wh_pid%22:-1,%22x_pvid%22:%2258033941-c22d-41ce-85f8-ab3735cd39f4%22,%22scm%22:%221007.12144.95220.23864_0_0%22,%22x_object_id%22:616377250141%7D"><div class="jcg-4-l"></div></a>
+                    <a href="https://detail.tmall.com/item.htm?spm=a220o.1000855.1998025129.2.3f8426ceccuhp1&pvid=58033941-c22d-41ce-85f8-ab3735cd39f4&pos=2&acm=03054.1003.1.2768562&id=616377250141&scm=1007.16862.95220.23864_0_0&utparam=%7B%22x_hestia_source%22:%2223864%22,%22x_object_type%22:%22item%22,%22x_hestia_subsource%22:%22default%22,%22x_mt%22:0,%22x_src%22:%2223864%22,%22x_pos%22:2,%22wh_pid%22:-1,%22x_pvid%22:%2258033941-c22d-41ce-85f8-ab3735cd39f4%22,%22scm%22:%221007.12144.95220.23864_0_0%22,%22x_object_id%22:616377250141%7D"><div class="jcg-4-r"></div></a>
+                    
+                </div>
+            </div>
+            <div class="go-top"></div>
+        </div>
+        <div class="thzq-wrap" style="margin-top: -1rem;">
+            <div class="zzth" id="zzyh">
+               
+                <div> <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"></a></div>
+                <div> <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"></a></div>
+                <div> <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"></a></div>
+                <div> <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"></a></div>
+                <div> <a href="https://aisite.wejianzhan.com/site/mingjugroup.com/216a0f32-4755-4f7e-bc45-c431649028fa"></a></div>
+            </div>
+            <div class="jjth" id="jjth">
+                <div>
+                    <a style="display: block;width: 100%;height: 100%;" href="https://detail.tmall.com/item.htm?spm=a220o.1000855.1998025129.2.3f8426ceccuhp1&pvid=58033941-c22d-41ce-85f8-ab3735cd39f4&pos=2&acm=03054.1003.1.2768562&id=616377250141&scm=1007.16862.95220.23864_0_0&utparam=%7B%22x_hestia_source%22:%2223864%22,%22x_object_type%22:%22item%22,%22x_hestia_subsource%22:%22default%22,%22x_mt%22:0,%22x_src%22:%2223864%22,%22x_pos%22:2,%22wh_pid%22:-1,%22x_pvid%22:%2258033941-c22d-41ce-85f8-ab3735cd39f4%22,%22scm%22:%221007.12144.95220.23864_0_0%22,%22x_object_id%22:616377250141%7D"></a>
+                </div>
+                <div>
+                    <a href="https://www.shanghaihomeexpo.com/event/detail/335.html"><div class="jjth-sp"></div></a>
+                    <a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.11.1a2e5216igKwyw&id=619348418883&skuId=4370651452726&user_id=2206384590783&cat_id=2&is_b=1&rn=a1b0705df3eef762b6e818ba06d4511f"><div class="jjth-sp"></div></a>
+                    
+                </div>
+                <div>
+                    <a href="https://www.sh-lami.com/?BDPC_X1_lmjj_112&bd_vid=10961448950000298416"><div class="jjth-sp"></div></a>
+                    <a href="https://detail.tmall.com/item.htm?spm=a220m.1000858.1000725.1.22eb4fe5kudxuG&id=619879642956&skuId=4555423459547&user_id=2206384590783&cat_id=2&is_b=1&rn=17ee5f45f8dda04d3780cc3f486f0dba"><div class="jjth-sp"></div></a>
+                </div>
+                <div>
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-22817152384.8.31494379EsCrNS&id=611157713423&sku_properties=152056919:135420914&scene=taobao_shop"><div class="jjth-sp"></div></a>
+                    <a href="https://aisite.wejianzhan.com/site/scholar-home.com/9e9c0cf3-be12-49bd-b77e-685fe8df575a?fid=nHDLnHm3rjR1PHDYPWfYnWn4nWIxnWcdg1D&ch=4"><div class="jjth-sp"></div></a>
+                </div>
+                <div>
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.3-b-s.w4011-15139193946.39.24363727INrdga&id=613321221804&rn=635db6e9ca90089d8a741b72d79f612b&abbucket=1&sku_properties=1627207:28320"><div class="jjth-sp"></div></a>
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-22068830716.6.6adf4db7Hid9tJ&id=611849773882&rn=0f7188720ac7169ffefcf8bdd22f476c&abbucket=9&scene=taobao_shop&sku_properties=3064618:29432734"><div class="jjth-sp"></div></a>
+                    
+                    
+                </div>
+                <div>
+                    <a href="https://detail.tmall.com/item.htm?spm=a1z10.1-b-s.w16147682-22559681189.1.3ae955dcNIIwr0&id=533900639197&scene=taobao_shop"></a>
+                    
+                    <a href="https://www.zwilling.com.cn/item/ZWC018"> <div class="jjth-sp"></div></a>
+                   
+                    
+                </div>
+            </div>
+        </div>
+        <div class="jjgh-wrap" style="margin-top: -1rem;">
+            <div class="zbtd" id="zbtd">
+                <div class="zbtd-1"></div>
+            </div>
+            <div class="zxgh" id="zxgh">
+                <div class="zxgh-box">
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/6863a74486519cf1d3a6fdc9b8562af0_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/b336b2bc51527baeeab8fa644971ea72_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/93b5f7b7a83393759df1cf6bc971c649_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/566eceb6459d7d7c2898daa3cb00a904_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/47b07ef363a1f1c89116def117f5cdb4_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/ddf7a30941046c943ef3a78d5f6f2b32_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/9ec45d779b7a055473ced8e05c681448_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/0f7bd8bd375d6862b343e892dadac8fe_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/e7e6ca18b7bcce900f391e47ba3c334a_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/8dab70f89ad537dcd1b6ac09b715d355_1920_1080.mp4"></div>
+                    
+                    
+                </div>
+            </div>
+            
+        </div>
+        <div class="cjzq-wrap" style="margin-top: -1rem;">
+            <div class="cjzq">
+                <div class="hdgz"></div>
+                <div class="cjzq-box">
+                    <div class="jp"><div class="mask" id="0"></div></div>
+                    <div class="jp"><div class="mask" id="1"></div></div>
+                    <div class="jp"><div class="mask" id="2"></div></div>
+                    <div class="jp"><div class="mask" id="3"></div></div>
+                    <div class="jp"><div class="mask" id="4"></div></div>
+                    <div class="jp"><div class="mask" id="5"></div></div>
+                    <div class="jp"><div class="mask" id="6"></div></div>
+                    <div class="jp"><div class="mask" id="7"></div></div>
+                    <div class="jp"><div class="mask" id="8"></div></div>
+                    <div class="jp"><div class="mask" id="9"></div></div>
+                    <div class="jp"><div class="mask" id="10"></div></div>
+                    <div class="jp"><div class="mask" id="11"></div></div>
+                    <div class="sycs" style="text-align: center;margin: 0 auto;color: white;">剩余1次抽奖</div>
+                </div>
+                
+                <div class="ljcj"></div>
+                <div class="ljcj-mask"></div>
+            </div>
+        </div>
+
+    </div>
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+<script src="../public/javascripts/swiper.js"> </script>
+<script>
+    window.cjcs=''
+    window.jpMap={"yyzj": '小度语音车载支架',"gz": '星座度熊公仔',"dcf": '飞利浦电吹风',"ppxsz": '趴趴熊睡枕',"xdzj": '小度在家1c',"yx": '小度智能音箱play',"qjth": '厨房器具套盒',"hyd": '百度推广LED护眼台灯',"dkx": '小熊电烤箱'}
+    window.idMap={"yyzj": '0',"gz": '6',"dcf": '1',"ppxsz": '2',"xdzj": '4',"yx": '5',"qjth": '7',"hyd": '10',"dkx": '11','zcyc':'3'}
+    window.zlycList=['3','8','9']
+    window.jp=''
+    if(!localStorage.getItem('cjcs')){
+        localStorage.setItem('cjcs','3')
+        cjcs=3
+    }else{
+        cjcs=Number(localStorage.getItem('cjcs'))
+    }
+    $('.sycs').text('剩余'+cjcs+'次')
+    $('body').on('click','.tab-btn',function () {
+        $('.tab-btn').removeClass('active')
+        $(this).addClass('active')
+        $('.tab-content >div').hide()
+        $('.cont-box >div').hide()
+        $('.cont-box >div').removeClass('slideLeft')
+        if($(this).attr('id') =='12'){
+            $('.ppzg-c-box').show()
+            $('.ppzg-wrap').addClass('slideLeft')
+        }else if($(this).attr('id') =='13'){
+            $('.thzq-c-box').show()
+            $('.thzq-wrap').addClass('slideLeft')
+        }else if($(this).attr('id') =='14'){
+            $('.jjgh-c-box').show()
+            $('.jjgh-wrap').addClass('slideLeft')
+        }else if($(this).attr('id') =='15'){
+            $('.cjzq-c-box').show()
+            $('.cjzq-wrap').addClass('slideLeft')
+        }   
+
+
+    }).on('click','.go-top',function () {
+        $(window).scrollTop(0);
+    }).on('click','.hdgz',function () {
+        $('.gz-mask').fadeIn()
+    }).on('click','.zcyc',function () {
+        $('.wzj-mask').fadeOut()
+    }).on('click','.zj-close',function () {
+        $('.zj-mask').fadeOut()
+    }).on('click','.close',function () {
+        $('.gz-mask').fadeOut()
+    }).on('click','.ljcj',function () {
+        if(cjcs>0){
+            $('.ljcj-mask').show()
+            $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/jzjluckDraw",
+                //数据，json字符串
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                 
+                    console.log(res.prize)
+                    
+                    let timer =null;
+                    let timer1 =null;
+                    let count =0
+                    cjcs--;
+                    $('.sycs').text('剩余'+cjcs+'次')
+                    localStorage.setItem('cjcs',cjcs)
+                    timer = setInterval(function(){
+                        count++
+                        
+                        $('.mask').hide()
+                        $('#'+Math.floor(Math.random() *12)).show()
+                        if(count>40){
+                            $('.ljcj-mask').hide()
+                            clearInterval(timer);
+                            $('.mask').hide()
+                            if(res.prize=='zcyc'){
+                                $('#'+zlycList[Math.floor(Math.random() *3)]).show()
+                            }else{
+                                $('#'+idMap[res.prize]).show()
+                            }
+                            clearTimeout(timer1)
+                            timer1 =setTimeout(function (param) {  
+                                if(res.prize=='zcyc'){
+                                $('.wzj-mask').fadeIn()
+                                }else{
+                                    $('.zj-mask').fadeIn()
+                                    $('.jx').text(jpMap[res.prize])
+                                    jp=jpMap[res.prize]
+                                }
+                            },1000)
+                        }
+                    }, 50);
+
+
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+
+        }else{
+            alert('您的抽奖次数已经用完！')
+        }   
+    }).on('click','.btn',function () { 
+        if($('.xm').val().trim() ==''){
+            alert('姓名不能为空')
+            return 
+        }else if($('.dh').val().trim() =='' ){
+            alert('手机号不能为空！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($('.dh').val().trim())) ){
+            alert('手机号格式不正确！')
+            return 
+        }else if($('.dz').val().trim() =='' ){
+            alert('地址不能为空！')
+            return 
+        }
+        var param ={
+            name:$('.xm').val().trim(),
+            tell:$('.dh').val().trim(),
+            dz:$('.dz').val().trim(),
+            jx:jp
+            
+        }
+        console.log(param)
+        $.ajax({
+            //请求方式
+            type : "post",
+            //请求地址
+            url : "/api/submityJzj",
+            //数据，json字符串
+            data:param,
+            dataType: 'json',
+            //请求成功
+            success : function(res) {
+            if(res.code ==1){
+                alert(res.msg)
+            }else{
+                alert(res.msg)
+            }
+            
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    }).on('click','.zxgh-zs',function () {
+        $('.vdo').attr('src',$(this).attr('id'))
+        $('.sp-mask').fadeIn()
+    }).on('click','.gb',function () {
+        var video = document.getElementById('sp');
+        video.currentTime = 0;
+        video.pause();
+    
+        $('.sp-mask').fadeOut()
+    }); 
+
+  
+</script>
+</html>

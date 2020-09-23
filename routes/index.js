@@ -31,4 +31,7 @@ var router = express.Router();
 router.get('/', function(req, res) {
 	res.render('znyth.html');
 });
+router.get('/home/jzj', function(req, res) {
+	res.render('jzj.html');
+});
 module.exports = router;

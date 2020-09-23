@@ -22,7 +22,10 @@ router.post('/lfxFx', api.lfxFx);
 //老凤祥分享提交
 router.post('/lfxFxsubmit', api.lfxFxsubmit);
 //主页抽奖
-router.post('/luckDrawZy', api.luckDrawZy);
+router.post('/jzjluckDraw', api.jzjluckDraw);
+//家装节提交
+router.post('/submityJzj', api.submityJzj);
+
 //查询数据
 router.post('/query', api.query);
 //下载
@@ -34,5 +37,5 @@ router.post('/getAccessToken', api.getAccessToken);
 router.post('/hqjsLuckDraw', api.hqjsLuckDraw);
 // 研讨会提交
 router.post('/submityYth', api.submityYth);
-
+//
 module.exports = router; 

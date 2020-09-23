@@ -74,7 +74,7 @@ let luckDraw =async function ( req,res) {
 	
 };
 //
-let luckDrawZy =async function ( req,res) { 
+let jzjluckDraw =async function ( req,res) { 
 	let rate ='';
 	let sum = 0;
 	let section = [0];
@@ -317,6 +317,48 @@ let submityYth =async function (req,res) {
 		res.send({ 
 			'code': 1,
 			'msg': '您已经领过'+map[result[0]['jx']]+'奖品了!',
+			'data':''
+
+		});
+	}
+}
+//家装
+let submityJzj =async function (req,res) {
+	let {name,tell,dz,jx } =req.body
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	let data ={
+		name:name,
+		tell:tell,
+		dz:dz,
+		jx:jx,
+		create_time: create_time 
+	};
+	let sqlArr =[data.tell];
+	let sql = 'select * from  jzj_info where tell = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	
+	if(result.length ==0){
+		let sqlArr1 =[data.name,data.tell,data.dz,data.jx,data.create_time];
+		let sql1 = 'insert into jzj_info (name,tell,dz,jx,create_time) values(?,?,?,?,?)';
+		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
+		if(result1.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'msg': '领取成功',
+				'data':''
+			});
+		}else{
+			res.send({ 
+				'code': 1,
+				'msg': '服务器出错!',
+				'data':''
+			});
+		}
+	}else{
+		// console.log(result[0]['jx'])
+		res.send({ 
+			'code': 1,
+			'msg': '您已经领过'+result[0]['jx']+'奖品了!',
 			'data':''
 
 		});
@@ -676,10 +718,11 @@ module.exports={
 	lfxSubmit,
 	lfxFx,
 	lfxFxsubmit,
-	luckDrawZy,
+	jzjluckDraw,
 	query,
 	download,
 	getAccessToken,
 	hqjsLuckDraw,
-	submityYth
+	submityYth,
+	submityJzj
 };
