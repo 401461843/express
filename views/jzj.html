@@ -807,6 +807,7 @@
             background-size: 100%;
             overflow: hidden;
             position: relative;
+            margin-top: -1.5rem;
             
         }
         .cjzq-box{
@@ -1084,6 +1085,14 @@
             line-height: .6rem;
             
         }
+        .bq{
+            width: 3.59rem;
+            height: .60rem;
+            margin: 0 auto;
+            background: url('../public/images/jz/bq.png') no-repeat;
+            background-size: 100%;
+            margin-top: .2rem;
+        }
     </style>
 </head>
 <body>  
@@ -1171,9 +1180,9 @@
                 <a href="#zbtd" class="tab-small-gh">直播探店 ></a>
                 <a href="#zxgh" class="tab-small-gh">装修干货知识 ></a>
             </div>
-            <div class="cjzq-c-box">
+            <!-- <div class="cjzq-c-box">
                 <a href="#cjzq" class="tab-small-cj">抽奖专区 ></a>
-            </div>
+            </div> -->
         </div>
     </div>
     <div class="cont-box">
@@ -1317,6 +1326,9 @@
                 </div>
             </div>
             <div class="go-top"></div>
+            <div class="bq">
+
+            </div>
         </div>
         <div class="thzq-wrap" style="margin-top: -1rem;">
             <div class="zzth" id="zzyh">
@@ -1359,6 +1371,10 @@
                     
                 </div>
             </div>
+            <div class="bq">
+
+            </div>
+        
         </div>
         <div class="jjgh-wrap" style="margin-top: -1rem;">
             <div class="zbtd" id="zbtd">
@@ -1379,6 +1395,9 @@
                     
                     
                 </div>
+            </div>
+            <div class="bq">
+
             </div>
             
         </div>
@@ -1404,6 +1423,9 @@
                 <div class="ljcj"></div>
                 <div class="ljcj-mask"></div>
             </div>
+            <div class="bq">
+
+            </div>
         </div>
 
     </div>
@@ -1419,8 +1441,13 @@
     window.jp=''
     
     var mySwiper = new Swiper('.swiper-container', {
-        autoplay: true,
+        autoplay: {
+                delay: 2000,
+                stopOnLastSlide: false,
+                disableOnInteraction: true,
+            },
         loop: true,
+        speed:500
     })
     if(!localStorage.getItem('cjcs')){
         localStorage.setItem('cjcs','3')
