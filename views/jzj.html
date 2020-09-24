@@ -1382,8 +1382,7 @@
             </div>
             <div class="zxgh" id="zxgh">
                 <div class="zxgh-box">
-                    <div class="zxgh-zs" id="../public/video/1.mp4"></div>
-                    <!-- <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/6863a74486519cf1d3a6fdc9b8562af0_1920_1080.mp4"></div> -->
+                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/6863a74486519cf1d3a6fdc9b8562af0_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/b336b2bc51527baeeab8fa644971ea72_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/93b5f7b7a83393759df1cf6bc971c649_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/566eceb6459d7d7c2898daa3cb00a904_1920_1080.mp4"></div>
@@ -1393,8 +1392,6 @@
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/0f7bd8bd375d6862b343e892dadac8fe_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/e7e6ca18b7bcce900f391e47ba3c334a_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/8dab70f89ad537dcd1b6ac09b715d355_1920_1080.mp4"></div>
-                    
-                    
                 </div>
             </div>
             <div class="bq">
@@ -1594,8 +1591,9 @@
             }
         });
     }).on('click','.zxgh-zs',function () {
-        $('.vdo').attr('src',$(this).attr('id'))
-        $('.sp-mask').fadeIn()
+        window.location.href="http://127.0.0.1:3000/home/sp?src="+$(this).attr('id')
+        // $('.vdo').attr('src',$(this).attr('id'))
+        // $('.sp-mask').fadeIn()
     }).on('click','.gb',function () {
         var video = document.getElementById('sp');
         video.currentTime = 0;

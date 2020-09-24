@@ -34,4 +34,7 @@ router.get('/', function(req, res) {
 router.get('/home/jzj', function(req, res) {
 	res.render('jzj.html');
 });
+router.get('/home/sp', function(req, res) {
+	res.render('sp.html');
+});
 module.exports = router;
