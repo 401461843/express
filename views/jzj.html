@@ -1148,9 +1148,7 @@
         </div>
     </div>
     <div class="sp-mask">
-        <video  controls class="vdo"  poster="../public/images/jz/spfm.png" id="sp">
-            <source src="" type="video/mp4" >
-        </video>
+        <video src="" controls class="vdo" id="sp" poster="../public/images/jz/spfm.png"></video>
         <div class="gb">
             ×
         </div>
@@ -1384,7 +1382,8 @@
             </div>
             <div class="zxgh" id="zxgh">
                 <div class="zxgh-box">
-                    <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/6863a74486519cf1d3a6fdc9b8562af0_1920_1080.mp4"></div>
+                    <div class="zxgh-zs" id="../public/video/1.mp4"></div>
+                    <!-- <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/6863a74486519cf1d3a6fdc9b8562af0_1920_1080.mp4"></div> -->
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/b336b2bc51527baeeab8fa644971ea72_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/93b5f7b7a83393759df1cf6bc971c649_1920_1080.mp4"></div>
                     <div class="zxgh-zs" id="https://jmy-video.wejianzhan.com/566eceb6459d7d7c2898daa3cb00a904_1920_1080.mp4"></div>
@@ -1595,15 +1594,13 @@
             }
         });
     }).on('click','.zxgh-zs',function () {
-        var video = document.getElementsByTagName('video')[0];
-        var sources = video.getElementsByTagName('source')[0];
-        sources.src =$(this).attr('id');
-        video.load();
+        $('.vdo').attr('src',$(this).attr('id'))
         $('.sp-mask').fadeIn()
     }).on('click','.gb',function () {
         var video = document.getElementById('sp');
         video.currentTime = 0;
         video.pause();
+    
         $('.sp-mask').fadeOut()
     });
     // $(document).scroll(function(){
