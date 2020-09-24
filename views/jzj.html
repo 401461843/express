@@ -1148,7 +1148,9 @@
         </div>
     </div>
     <div class="sp-mask">
-        <video src="" controls class="vdo" id="sp" poster="../public/images/jz/spfm.png"></video>
+        <video  controls class="vdo"  poster="../public/images/jz/spfm.png" id="sp">
+            <source src="" type="video/mp4" >
+        </video>
         <div class="gb">
             ×
         </div>
@@ -1593,13 +1595,15 @@
             }
         });
     }).on('click','.zxgh-zs',function () {
-        $('.vdo').attr('src',$(this).attr('id'))
+        var video = document.getElementsByTagName('video')[0];
+        var sources = video.getElementsByTagName('source')[0];
+        sources.src =$(this).attr('id');
+        video.load();
         $('.sp-mask').fadeIn()
     }).on('click','.gb',function () {
         var video = document.getElementById('sp');
         video.currentTime = 0;
         video.pause();
-    
         $('.sp-mask').fadeOut()
     });
     // $(document).scroll(function(){
