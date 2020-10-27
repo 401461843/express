@@ -3,9 +3,9 @@ var router = express.Router();
 
 /* GET home page. */
 //七夕
-// router.get('/', function(req, res) {
-// 	res.render('index.html');
-// });
+router.get('/home/qx', function(req, res) {
+	res.render('index.html');
+});
 // router.get('/lfx', function(req, res) {
 // 	res.render('lfx.html');
 // });
