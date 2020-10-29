@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>白羽素丝</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+    <style> 
+        img{
+            width: 100%;
+        }
+        .btn{
+            position: absolute;
+            width: 6.26rem;
+            height: .9rem;
+            /* background: red; */
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 1.05rem;
+        }
+    </style>
+</head>
+<body>
+    <div><img src="../public/images/sf/1.jpg" alt=""></div>
+    <div style="position: relative;">
+        <img src="../public/images/sf/2.jpg" alt=""  style="margin-top: -.1rem;">
+        <div class="btn"></div>
+    </div>
+    <div><img src="../public/images/sf/3.jpg" alt=""></div>
+    <div><img src="../public/images/sf/4.jpg" alt=""></div>
+    <div style="position: relative;">
+        <img src="../public/images/sf/2.jpg" alt="" style="margin-top: -.1rem;">
+        <div class="btn"></div>
+    </div>
+    <div><img src="../public/images/sf/5.jpg" alt="" style="margin-top: -.1rem;"></div>
+    <div><img src="../public/images/sf/6.jpg" alt=""></div>
+    <div style="position: relative;">
+        <img src="../public/images/sf/2.jpg" alt="" style="margin-top: -.1rem;">
+        <div class="btn"></div>
+    </div>
+    <div><img src="../public/images/sf/7.jpg" alt=""></div>
+
+
+    
+    
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+<script src="../public/javascripts/clipboard.min.js"></script>
+
+<script>
+    $('.btn').on('click',function () { 
+        var clipboard = new ClipboardJS('.btn', {
+            text: function() {
+                return '17621611037';
+            }
+        });
+
+        clipboard.on('success', function(e) {
+            alert('复制成功！')
+            
+        });
+
+        clipboard.on('error', function(e) {
+            alert('复制失败！')
+            
+        });
+
+    })
+    
+   
+        
+</script>
+</html>

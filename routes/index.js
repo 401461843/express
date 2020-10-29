@@ -6,6 +6,9 @@ var router = express.Router();
 router.get('/home/qx', function(req, res) {
 	res.render('index.html');
 });
+router.get('/home/byss', function(req, res) {
+	res.render('byss.html');
+});
 // router.get('/lfx', function(req, res) {
 // 	res.render('lfx.html');
 // });
