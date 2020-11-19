@@ -9,6 +9,9 @@ router.get('/home/qx', function(req, res) {
 router.get('/home/byss', function(req, res) {
 	res.render('byss.html');
 });
+router.get('/home/audi', function(req, res) {
+	res.render('audi.html');
+});
 // router.get('/lfx', function(req, res) {
 // 	res.render('lfx.html');
 // });
@@ -32,12 +35,12 @@ router.get('/home/byss', function(req, res) {
 // 	res.render('query.html');
 // });
 router.get('/', function(req, res) {
-	res.render('znyth.html');
+	res.render('index.html');
 });
 router.get('/home/jzj', function(req, res) {
 	res.render('jzj.html');
 });
 router.get('/home/sp', function(req, res) {
 	res.render('sp.html');
-});
+}); 
 module.exports = router;

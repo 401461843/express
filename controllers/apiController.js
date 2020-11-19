@@ -159,6 +159,30 @@ let submit =async function (req, res) {
 	}
 
 };
+
+let audiSubmit = async function (req,res) {
+	let {model, name,tell} = req.body;
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	
+	let sqlArr =[model,name,tell,create_time];
+	let sql = 'insert into audi_form (model,name,tell,create_time) values(?,?,?,?)';;
+	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
+	if(result1.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功！',
+			'data':''
+			
+			 
+		});
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '提交失败!',
+			'data':''
+		});
+	}
+}
 let giveUp =async function (req,res) {
 	let {prize} =req.body
 	let checkFlag =await redisStrGet(0,prize)
@@ -724,5 +748,6 @@ module.exports={
 	getAccessToken,
 	hqjsLuckDraw,
 	submityYth,
-	submityJzj
+	submityJzj,
+	audiSubmit
 };

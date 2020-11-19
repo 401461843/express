@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Audi</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+    <link rel="stylesheet" href="../public/css/swiper.min.css">  
+    
+    <style> 
+       
+        .swiper-slide{
+            width: 7.5rem;
+            height: 5.59rem;
+           
+        }
+        .swiper-slide img{
+            width: 7.5rem;
+            height: 5.59rem;
+        }
+        .bdq{
+            height: 23.85rem;
+            width: 7.5rem;
+            background: url('../public/images/audi/2.jpg') no-repeat;
+            background-size: 100%;
+            position: relative;
+        }
+        .js{
+            height: 15.15rem;
+            width: 7.5rem;
+            background: url('../public/images/audi/3.jpg') no-repeat;
+            background-size: 100%;
+        }
+        .db{
+            height: 22.85rem;
+            width: 7.5rem;
+            background: url('../public/images/audi/4.jpg') no-repeat;
+            background-size: 100%;
+        }
+        .form{
+            width: 6.1rem;
+            height: 4.4rem;
+            position: absolute;
+            /* background: white; */
+            left: 50%;
+            transform: translateX(-50%);
+            top: 4.84rem;
+        }
+        .item{
+            height:.9rem;
+            width: 100%;
+            margin-bottom: .267rem;
+            background: white;
+        }
+        .item:last-child{
+            margin-bottom: 0;
+            background: url('../public/images/audi/yysj.png') no-repeat;
+            background-size: 100%;
+        }
+        .item input{
+            height: .9rem;
+            display: inline-block;
+            width: calc(100% - 1.2rem);
+            border: none;
+            outline: none;
+            float: right;
+            
+        }
+        .ts{
+            display: inline-block;
+            height: .9rem;
+            width: 1rem;
+            text-align: center;
+            line-height: .95rem;
+        }
+        .cx{
+            display: inline-block;
+            height: .9rem;
+            width: 1.5rem;
+            text-align: center;
+            line-height: .95rem;
+        }
+        .xh{
+            display: inline-block;
+            height: .9rem;
+            width: 2.9rem;
+            text-align: center;
+            line-height: .95rem;
+  
+        }
+        .xz{
+            height: .18rem;
+            width: 0.18rem;
+            background: url(../public/images/audi/xz.png) no-repeat;
+            background-size: 100%;
+            float: right;
+            margin-right: .3rem;
+            margin-top: .38rem;
+        }
+        .sel{
+            position: relative;
+        }
+        .sel-w{
+            position: absolute;
+            width: 100%;
+            height: 3.4rem;
+            background: rgba(0,0,0,.7);
+            overflow-y: scroll;
+            padding-top: .15rem;
+            display: none;
+        }
+        .sel-w div{
+            height: .7rem;
+            color: white;
+            width: 100%;
+            line-height: .7rem;
+            text-align: center;
+        }
+        /* .sel-w div:hover{
+            background: #eee;
+            color: black;
+        } */
+    </style>
+</head>
+<body>
+    <div class="swiper-container">
+        <div class="swiper-wrapper">
+            <div class="swiper-slide">
+                <img src="../public/images/audi/baner1.png" alt="">
+            </div>
+            <div class="swiper-slide">
+                <img src="../public/images/audi/baner2.png" alt="">
+            </div>
+            
+        </div>
+        
+    </div>
+    <div class="bdq">
+        <div class="form">
+            <div class="item sel">
+                <div class="cx">选择车型</div>
+                <div class="xh">A3</div>
+                <div class="xz"></div>
+                <div class="sel-w">
+                    
+                        <div>A3</div> 
+                        <div>A4</div> 
+                        <div>A5</div> 
+                        <div>A6</div> 
+                        <div>A7</div> 
+                        <div>A8</div> 
+                        <div>Q2</div> 
+                        <div>Q3</div> 
+                        <div>Q5</div> 
+                        <div>Q7</div> 
+                        <div>Q8</div> 
+                        <div>R8</div> 
+                        <div>RS</div> 
+                        <div>e-tron</div> 
+                    
+                </div>
+            </div>
+            <div class="item">
+                <div class="ts">姓名</div>
+                <input type="text" class="name">
+            </div>
+            <div class="item">
+                <div class="ts">手机</div>
+                <input type="text" class="tel">
+            </div>
+            <div class="item submit"></div>
+        </div>
+    </div>
+    <div class="js">
+
+    </div>
+    <div class="db">
+
+    </div>
+
+    
+    
+</body>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+<script src="../public/javascripts/swiper.min.js"></script>
+
+<script>
+    var mySwiper = new Swiper('.swiper-container', {
+        autoplay: true,
+        loop: true
+    })
+    $('body').on('click','.sel',function () {
+        $('.sel-w').toggle()
+        
+    }).on('click','.sel-w div',function () { 
+
+        $('.xh').text($(this).text())
+    }).on('click','.submit',function () {
+        if($('.name').val().trim() ==''){
+            alert('请输入姓名！')
+            return 
+        }else if($('.tel').val().trim() =='' ){
+            alert('请划入手机号！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($('.tel').val().trim())) ){
+            alert('请输入正确格式手机号！')
+            return 
+        }
+        var param ={
+            model:$('.xh').text().trim(),
+            name:$('.name').val().trim(),
+            tell:$('.tel').val().trim()
+        }
+        console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/audiSubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                       
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+    })
+   
+        
+</script>
+</html>

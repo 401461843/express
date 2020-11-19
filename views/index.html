@@ -476,7 +476,7 @@
     </div>
     <div class="result">
         <div class="g-c">
-            <div class="jp-text"></div>
+            <div class="jp-text">恭喜你获得小都音响</div>
             <div class="xxk">
                 <input type="text" class="xm" placeholder="姓名">
                 <input type="text" class="tell" placeholder="电话">
@@ -960,55 +960,58 @@
                     count=1
                     $('.clipped-box').removeClass('yx-active1')
                     $('.clipped-box').removeClass('sign')
+
                     if(xcd==8){
                         clearInterval(jsq)
-                        $.ajax({
-                            //请求方式
-                            type : "post",
-                            //请求地址
-                            url : "/api/luckDrawZy",
-                            //数据，json字符串
-                            dataType: 'json',
-                            //请求成功
-                            success : function(res) {
-                                // $('.jx').text("恭喜你中了"+res.prize)
-                                // prize=res.prize
-                                console.log();
-                                var str =''
-                                setTimeout(function (param) { 
-                                    xxljx =res.prize
-                                    if(res.prize=='kldzbx'){
-                                        str='1.顾客凭线上预约码 到店可领取价值399元便携珠宝箱一件（30天内有效）<br>2.线上预约链接:<a href="https://m.crd.cn/reservation/?source=kaipin|H5">https://m.crd.cn/reservation/?source=kaipin|H5</a>'
-                                        $('.sm').css({'left':'18%'})
-                                    }else if(res.prize=='kzj'){
-                                        str='1.凭手机号进店即可免费老凤祥口罩夹一个<br>2.上海老凤祥豫园分号黄浦区丽水路58-88号<br>3.每人仅限领取同类产品一次'
-                                        $('.sm').css({'bottom':'.5rem'})
-                                    }else{
-                                        str='1.请填写完整的获奖信息，活动结束后会有工作人员索要邮寄地址<br>2.活动结束后我们将于15个工作日内将奖品邮寄给您'
-                                        $('.sm').css({'left':'18%'})
-                                    }
-                                    $('.jp-text').text('恭喜你获得'+map[res.prize])
-                                    $('.sm').html(str)
+                        $('.result').fadeIn()
+                        $('.g-c').fadeIn()
+                        // $.ajax({
+                        //     //请求方式
+                        //     type : "post",
+                        //     //请求地址
+                        //     url : "/api/luckDrawZy",
+                        //     //数据，json字符串
+                        //     dataType: 'json',
+                        //     //请求成功
+                        //     success : function(res) {
+                        //         // $('.jx').text("恭喜你中了"+res.prize)
+                        //         // prize=res.prize
+                        //         console.log();
+                        //         var str =''
+                        //         setTimeout(function (param) { 
+                        //             xxljx =res.prize
+                        //             if(res.prize=='kldzbx'){
+                        //                 str='1.顾客凭线上预约码 到店可领取价值399元便携珠宝箱一件（30天内有效）<br>2.线上预约链接:<a href="https://m.crd.cn/reservation/?source=kaipin|H5">https://m.crd.cn/reservation/?source=kaipin|H5</a>'
+                        //                 $('.sm').css({'left':'18%'})
+                        //             }else if(res.prize=='kzj'){
+                        //                 str='1.凭手机号进店即可免费老凤祥口罩夹一个<br>2.上海老凤祥豫园分号黄浦区丽水路58-88号<br>3.每人仅限领取同类产品一次'
+                        //                 $('.sm').css({'bottom':'.5rem'})
+                        //             }else{
+                        //                 str='1.请填写完整的获奖信息，活动结束后会有工作人员索要邮寄地址<br>2.活动结束后我们将于15个工作日内将奖品邮寄给您'
+                        //                 $('.sm').css({'left':'18%'})
+                        //             }
+                        //             $('.jp-text').text('恭喜你获得'+map[res.prize])
+                        //             $('.sm').html(str)
                                     
-                                    $('.g-c').fadeIn()
-                                    $('.result').fadeIn()
-                                    count =1
-                                    xcd =0
-                                    jsq =null
-                                    djs =12
-                                    $('.sj').text(djs)
-                                    $('.start').removeClass('hide')
-                                    $('.mask').removeClass('hide')
-                                    init()
+                        //             $('.g-c').fadeIn()
+                        //             $('.result').fadeIn()
+                        //             count =1
+                        //             xcd =0
+                        //             jsq =null
+                        //             djs =12
+                        //             $('.sj').text(djs)
+                        //             $('.start').removeClass('hide')
+                        //             $('.mask').removeClass('hide')
+                        //             init()
 
-                                },1000)
-                            },
-                            //请求失败，包含具体的错误信息
-                            error : function(e){
-                                console.log(e.status);
-                                console.log(e.responseText);
-                            }
-                        });
+                        //         },1000)
+                        //     },
+                        //     //请求失败，包含具体的错误信息
+                        //     error : function(e){
+                        //         console.log(e.status);
+                        //         console.log(e.responseText);
+                        //     }
+                        // });
                         
                         
                     }
@@ -1019,7 +1022,7 @@
         }   
     }).on('click','.start',function () { 
        
-        
+        $('.mask').fadeIn()
         clearTimeout(timer2)
         $('.yxgzts').fadeIn()
         timer2=setTimeout(() => {

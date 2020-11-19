@@ -37,5 +37,8 @@ router.post('/getAccessToken', api.getAccessToken);
 router.post('/hqjsLuckDraw', api.hqjsLuckDraw);
 // 研讨会提交
 router.post('/submityYth', api.submityYth);
+//audi提交
+router.post('/audiSubmit', api.audiSubmit);
+
 //
 module.exports = router; 
