@@ -14,7 +14,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>Audi</title>
     <link rel="stylesheet" href="../public/css/reset.css"> 
-    <link rel="stylesheet" href="../public/css/swiper.min.css">  
+    <link rel="stylesheet" href="../public/css/swiper.css">  
     
     <style> 
        
@@ -193,12 +193,14 @@
 </body>
 <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
 <script src="../public/javascripts/rem.js"></script>
-<script src="../public/javascripts/swiper.min.js"></script>
+<script src="../public/javascripts/swiper.js"></script>
 
 <script>
     var mySwiper = new Swiper('.swiper-container', {
-        autoplay: true,
-        loop: true
+        autoplay : 2000,
+        loop: true,
+        speed:1000
+       
     })
     $('body').on('click','.sel',function () {
         $('.sel-w').toggle()
