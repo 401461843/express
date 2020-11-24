@@ -7,6 +7,7 @@ const xlsx = require('xlsx');
 // const request =require('request');
 
 global.dataList =[];
+global.dataList1 =[];
 
 //抽奖
 /* eslint-disable */
@@ -719,10 +720,75 @@ let download = function (req,res) {
 		}
 	  };
 	//删除文件
-	util.deleteall('./excel') 
+	util.deleteFile('./excel/表单信息.xlsx') 
 	// 将workBook写入文件
 	try{
 		xlsx.writeFile(workBook, "./excel/表单信息.xlsx");
+		res.send({ 
+			'code': 1,
+			'msg': 'excel生成成功'
+		});
+	} catch(err){
+		res.send(
+			{ 
+				'code': 1,
+				'msg': 'excel生成失败'
+			}
+		);
+	}
+	
+	
+}
+//数据查询工具
+let query1= async function (req,res) {
+	let sqlArr =[];
+	let sql = 'select * from  jmgj_form ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	let obj ={}
+	let tableList =[]
+	if(result.length>0){
+		result.forEach(function (val) {
+			obj ={}
+			obj['name']=val.name
+			obj['tell']=val.tell
+			obj['create_time']=util.mysqlDatetime(val.create_time) 
+			tableList.push(obj)
+		})
+		dataList1=tableList
+		res.send({ 
+			'code': 1,
+			'msg': '成功',
+			'tab_list':tableList
+		});
+	}
+  }
+
+let download1 = function (req,res) {
+	let arrayWorkSheet = '';
+	let workBook='';
+	let arrayData = [
+		['序号','姓名','电话','预约时间']
+	  ];
+	dataList1.forEach((item,index)=>{
+		var temp = [];
+		temp.push((index+1));
+		temp.push(item.name);
+		temp.push(item.tell);
+		temp.push(item.create_time);
+		arrayData.push(temp)
+	})
+	arrayWorkSheet = xlsx.utils.aoa_to_sheet(arrayData);
+	workBook = {
+		SheetNames: ['arrayWorkSheet'],
+		Sheets: {
+		  'arrayWorkSheet': arrayWorkSheet
+		}
+	  };
+	//删除文件
+	util.deleteFile('./excel/表单信息1.xlsx') 
+	// 将workBook写入文件
+	try{
+		xlsx.writeFile(workBook, "./excel/表单信息1.xlsx");
 		res.send({ 
 			'code': 1,
 			'msg': 'excel生成成功'
@@ -757,5 +823,8 @@ module.exports={
 	submityYth,
 	submityJzj,
 	audiSubmit,
-	jmgjSubmit
+	jmgjSubmit,
+	query1,
+	download1
+
 };

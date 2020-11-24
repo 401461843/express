@@ -30,7 +30,9 @@ router.post('/submityJzj', api.submityJzj);
 router.post('/query', api.query);
 //下载
 router.post('/download', api.download);
-
+router.post('/query1', api.query1);
+//下载
+router.post('/download1', api.download1);
 //小程序接口
 router.post('/getAccessToken', api.getAccessToken);
 // router.post('/test2', api.test2);

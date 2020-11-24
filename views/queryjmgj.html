@@ -83,12 +83,11 @@
             <button class="query">查询</button>
             <button class="make">生成excel</button>
 
-            <a href="../excel/表单信息.xlsx" download="奥迪">预约表单</a>
+            <a href="../excel/表单信息1.xlsx" download="金门国际">预约表单</a>
         </div>
         <table width="80%" class="table"> 
             <thead> 
                 <th>序号</th> 
-                <th>车型</th> 
                 <th>姓名</th> 
                 <th>电话</th> 
                 <th>预约时间</th> 
@@ -110,7 +109,7 @@
                 //请求方式
                 type : "post",
                 //请求地址
-                url : "/api/query",
+                url : "/api/query1",
                 //数据，json字符串
                 data:'param',
                 dataType: 'json',
@@ -121,7 +120,6 @@
                         $.each(res.tab_list,function (index,val) {
                             str+=`<tr> 
                                     <td>${index+1}</td> 
-                                    <td>${val.model}</td> 
                                     <td>${val.name}</td> 
                                     <td>${val.tell}</td> 
                                     <td>${val.create_time}</td> 
@@ -143,7 +141,7 @@
                 //请求方式
                 type : "post",
                 //请求地址
-                url : "/api/download",
+                url : "/api/download1",
                 //数据，json字符串
                 data:'param',
                 dataType: 'json',

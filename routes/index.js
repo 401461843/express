@@ -35,6 +35,9 @@ router.get('/home/jmgj', function(req, res) {
 // 	res.render('zbh.html');
 // });
 //查询
+router.get('/queryjmgj', function(req, res) {
+	res.render('queryjmgj.html');
+});
 router.get('/query', function(req, res) {
 	res.render('query.html');
 });

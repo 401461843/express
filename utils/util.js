@@ -50,6 +50,11 @@ module.exports ={
 		
 		}
 	},
+	deleteFile(path) {
+		if (fs.existsSync(path)) {
+			fs.unlinkSync(path);
+		}
+	},
 	getIPAdress() {
 		var interfaces = os.networkInterfaces();
 
