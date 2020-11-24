@@ -674,17 +674,16 @@ let hqjsLuckDraw =async function ( req,res) {
 //数据查询工具
 let query = async function (req,res) {
 	let sqlArr =[];
-	let sql = 'select * from  lfx_info ';
+	let sql = 'select * from  audi_form ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
 	let obj ={}
 	let tableList =[]
 	if(result.length>0){
 		result.forEach(function (val) {
 			obj ={}
+			obj['model']=val.model
 			obj['name']=val.name
 			obj['tell']=val.tell
-			obj['jx']=val.jx
-			obj['sign']=val.sign
 			obj['create_time']=util.mysqlDatetime(val.create_time) 
 			tableList.push(obj)
 		})
@@ -698,31 +697,17 @@ let query = async function (req,res) {
   }
 
 let download = function (req,res) {
-	let map ={
-		'ppxsz':'趴趴熊睡枕',
-		'kldzbx':'克莱蒂珠宝箱',
-		'kzj':'老凤祥口罩夹',
-		'xdzj':'小度在家X8',
-		'xzdxgz':'星座度熊公仔',
-		'bslx':'博洋冰丝凉席',
-		'xdznyx':'小度智能音响',
-		'cj':'老凤祥餐具',
-		'ssh':'老凤祥首饰盒'
-	}
 	let arrayWorkSheet = '';
 	let workBook='';
 	let arrayData = [
-		['序号', '姓名','电话','奖品','数据来源','时间']
+		['序号', '车型','姓名','电话','预约时间']
 	  ];
-	  
-	
 	dataList.forEach((item,index)=>{
 		var temp = [];
-		temp.push(index);
+		temp.push((index+1));
+		temp.push(item.model);
 		temp.push(item.name);
 		temp.push(item.tell);
-		temp.push(map[item.jx]);
-		temp.push(item.sign);
 		temp.push(item.create_time);
 		arrayData.push(temp)
 	})
@@ -743,7 +728,6 @@ let download = function (req,res) {
 			'msg': 'excel生成成功'
 		});
 	} catch(err){
-		
 		res.send(
 			{ 
 				'code': 1,

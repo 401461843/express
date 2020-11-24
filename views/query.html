@@ -58,7 +58,11 @@
                 display: block;
                 margin:  0 auto;
                 float: left;
+                margin-right: 20px;
               
+            }
+            .make{
+                display: none;
             }
             a{
                 display: block;
@@ -76,17 +80,18 @@
             数据查询下载
         </div>
         <div class="xx">
-            <button>生成excel</button>
-            <a href="http://106.12.69.208:3000/excel/表单信息.xlsx" download="表单信息">七夕表单信息</a>
+            <button class="query">查询</button>
+            <button class="make">生成excel</button>
+
+            <a href="../excel/表单信息.xlsx" download="表单信息">预约表单</a>
         </div>
         <table width="80%" class="table"> 
             <thead> 
                 <th>序号</th> 
+                <th>车型</th> 
                 <th>姓名</th> 
                 <th>电话</th> 
-                <th>奖品</th> 
-                <th>数据来源</th> 
-                <th>时间</th> 
+                <th>预约时间</th> 
         
             </thead> 
             <tbody> 
@@ -98,18 +103,10 @@
     </body> 
     <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
     <script>
-        var map ={
-            'ppxsz':'趴趴熊睡枕',
-            'kldzbx':'克莱蒂珠宝箱',
-            'kzj':'老凤祥口罩夹',
-            'xdzj':'小度在家X8',
-            'xzdxgz':'星座度熊公仔',
-            'bslx':'博洋冰丝凉席',
-            'xdznyx':'小度智能音响',
-            'cj':'老凤祥餐具',
-            'ssh':'老凤祥首饰盒'
-        }
-        $.ajax({
+       
+       
+        $('body').on('click','.query',function () { 
+            $.ajax({
                 //请求方式
                 type : "post",
                 //请求地址
@@ -123,25 +120,25 @@
                         var str =''
                         $.each(res.tab_list,function (index,val) {
                             str+=`<tr> 
-                                    <td>${index}</td> 
+                                    <td>${index+1}</td> 
+                                    <td>${val.model}</td> 
                                     <td>${val.name}</td> 
                                     <td>${val.tell}</td> 
-                                    <td>${map[val.jx]}</td> 
-                                    <td>${val.sign}</td> 
                                     <td>${val.create_time}</td> 
                                 </tr> `
                         })
                         $('tbody').html(str)
-                   }
-                   
-                },
-                //请求失败，包含具体的错误信息
-                error : function(e){
-                    console.log(e.status);
-                    console.log(e.responseText);
-                }
-        });
-        $('body').on('click','button',function () {
+                        $('.make').show()
+                    }
+                    
+                    },
+                    //请求失败，包含具体的错误信息
+                    error : function(e){
+                        console.log(e.status);
+                        console.log(e.responseText);
+                    }
+            });
+        }).on('click','.make',function () {
             $.ajax({
                 //请求方式
                 type : "post",
@@ -153,6 +150,7 @@
                 //请求成功
                 success : function(res) {
                    if(res.code ==1){
+                        $('.make').hide()
                         $('a').css({'display':'block'})
                    }
                 },
