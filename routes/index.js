@@ -12,6 +12,10 @@ router.get('/home/byss', function(req, res) {
 router.get('/home/audi', function(req, res) {
 	res.render('audi.html');
 });
+router.get('/home/jmgj', function(req, res) {
+	res.render('jmgj.html');
+});
+
 // router.get('/lfx', function(req, res) {
 // 	res.render('lfx.html');
 // });
