@@ -44,5 +44,7 @@ router.post('/audiSubmit', api.audiSubmit);
 //金门国际提交
 router.post('/jmgjSubmit', api.jmgjSubmit);
 
-//
+//小程序接口
+router.post('/getOpenid', api.getOpenid);
+
 module.exports = router; 

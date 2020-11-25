@@ -667,10 +667,11 @@ let hqjsLuckDraw =async function ( req,res) {
 	}
 }
 
+//
 
 
 
-//小程序接口
+
 
 //数据查询工具
 let query = async function (req,res) {
@@ -805,6 +806,35 @@ let download1 = function (req,res) {
 	
 }
 
+
+
+
+//小程序接口
+let getOpenid=async function (req,res) {
+	let {code} =req.body
+	let param ={
+		code:code,
+		client_id:'W229ytlqVG9EQTNcafLteSymT9xWNF6C',
+		sk:'1XRL2XOF5jPg6SoMnRfmhPQy2E10RWbf'
+	}
+	request({
+		url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
+		method: 'POST',
+		data: param,
+		headers: {
+			"content-type": "Application/x-www-form-urlencoded",
+		},
+	},(reslut)=>{
+		console.log(reslut)
+		res.send({ 
+			'code': 1,
+			'msg': '成功',
+			'data':reslut
+		});
+	});
+}
+
+
 module.exports={
 	luckDraw,
 	submit,
@@ -825,6 +855,7 @@ module.exports={
 	audiSubmit,
 	jmgjSubmit,
 	query1,
-	download1
+	download1,
+	getOpenid
 
 };
