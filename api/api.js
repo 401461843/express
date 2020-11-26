@@ -45,6 +45,9 @@ router.post('/audiSubmit', api.audiSubmit);
 router.post('/jmgjSubmit', api.jmgjSubmit);
 
 //小程序接口
+//获取用户唯一id
 router.post('/getOpenid', api.getOpenid);
+//更新用户信息
+router.post('/updateUserinfo', api.updateUserinfo);
 
 module.exports = router; 

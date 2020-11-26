@@ -859,7 +859,25 @@ let getOpenid=async function (req,res) {
 		
 	});
 }
-//
+//updateUserinfo
+let updateUserinfo = async function (req,res) {
+	let {name,avatarUrl,user_id} =req.body
+	let sqlArr =[name,avatarUrl,user_id];
+	let sql = 'update nhj_user_info  set user_name = ? ,user_avatar_url= ? where user_id= ?';
+	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '更新用户信息成功！'
+		});
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '更新用户信息失败！'
+		});
+	}
+
+}
 
 
 module.exports={
@@ -883,6 +901,7 @@ module.exports={
 	jmgjSubmit,
 	query1,
 	download1,
-	getOpenid
+	getOpenid,
+	updateUserinfo
 
 };
