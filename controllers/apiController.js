@@ -815,12 +815,12 @@ let getOpenid=async function (req,res) {
 	let param ={
 		code:code,
 		client_id:'W229ytlqVG9EQTNcafLteSymT9xWNF6C',
-		sk:'1XRL2XOF5jPg6SoMnRfmhPQy2E10RWbf'
+		sk:'DA3xBCohPOzCECCCKGKpgAesd4dOZGuR'
 	}
 	request({
 		url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
 		method: 'POST',
-		body: param,
+		body: JSON.stringify(param),
 		headers: {
 			"content-type": "Application/x-www-form-urlencoded",
 		},
@@ -829,7 +829,8 @@ let getOpenid=async function (req,res) {
 			res.send({ 
 				'code': 1,
 				'msg': '成功',
-				'data':body
+				'data':body,
+				'cs':param
 			});
 		}
 		
