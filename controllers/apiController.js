@@ -851,7 +851,7 @@ let getOpenid=async function (req,res) {
 				res.send({ 
 					'code': 2,
 					'msg': '用户已经存在！',
-					'data':result
+					'data':result[0]
 
 				});
 			}
