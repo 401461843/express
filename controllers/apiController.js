@@ -4,7 +4,7 @@ const util =require('../utils/util');
 const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
-// const request =require('request');
+const request =require('request');
 
 global.dataList =[];
 global.dataList1 =[];
@@ -833,6 +833,7 @@ let getOpenid=async function (req,res) {
 		});
 	});
 }
+//
 
 
 module.exports={
