@@ -820,7 +820,7 @@ let getOpenid=async function (req,res) {
 	request({
 		url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
 		method: 'POST',
-		body: JSON.stringify(param),
+		body: param,
 		headers: {
 			"content-type": "Application/x-www-form-urlencoded",
 		},
