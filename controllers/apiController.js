@@ -906,7 +906,7 @@ let createGoodsList = async function (req,res) {
 	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
 	if(result.affectedRows==1){
 		let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-		let sqlArr1 =[user_id,user_name+'的战队',goods_list,create_time];
+		let sqlArr1 =[user_id,user_name,goods_list,create_time];
 		let sql1 = 'insert into nhj_team_info (team_id,team_name,goods_list,create_time) values(?,?,?,?)';
 		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
 		if(result1.affectedRows==1){
