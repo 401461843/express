@@ -824,14 +824,37 @@ let getOpenid=async function (req,res) {
 		headers: {
 			"content-type": "Application/x-www-form-urlencoded",
 		},
-	},(error, response, body)=>{
+	},async (error, response, body)=>{
 		if (!error && response.statusCode == 200) {
-			res.send({ 
-				'code': 1,
-				'msg': '成功',
-				'data':body,
-				'cs':param
-			});
+			let openid =JSON.parse(body)['openid']
+			let sqlArr =[openid];
+			let sql = 'select * from  nhj_user_info where user_id = ? ';
+			let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+			if(result.length ==0){
+				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+				let sqlArr1 =[openid,create_time];
+				let sql1 = 'insert into nhj_user_info (user_id,create_time) values(?,?)';
+				let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				if(result1.affectedRows==1){
+					res.send({ 
+						'code': 1,
+						'msg': '用户记录成功！',
+						'user_id':openid
+					});
+				}else{
+					res.send({ 
+						'code': 0,
+						'msg': '用户记录失败！'
+					});
+				}
+			}else{
+				res.send({ 
+					'code': 2,
+					'msg': '用户已经存在！',
+					'data':result
+
+				});
+			}
 		}
 		
 	});
