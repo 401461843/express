@@ -49,5 +49,7 @@ router.post('/jmgjSubmit', api.jmgjSubmit);
 router.post('/getOpenid', api.getOpenid);
 //更新用户信息
 router.post('/updateUserinfo', api.updateUserinfo);
+//查询用户信息
+router.post('/getUserinfo', api.getUserinfo);
 
 module.exports = router; 

@@ -863,7 +863,7 @@ let getOpenid=async function (req,res) {
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
 	let sqlArr =[name,avatarUrl,user_id];
-	let sql = 'update nhj_user_info  set user_name = ? ,user_avatar_url= ? where user_id= ?';
+	let sql = 'update nhj_user_info  set user_name = ? , user_avatar_url= ? where user_id= ?';
 	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
 	if(result.affectedRows==1){
 		res.send({ 
@@ -874,6 +874,26 @@ let updateUserinfo = async function (req,res) {
 		res.send({ 
 			'code': 0,
 			'msg': '更新用户信息失败！'
+		});
+	}
+
+}
+//getUserinfo
+let getUserinfo = async function (req,res) {
+	let {user_id} =req.body
+	let sqlArr =[user_id];
+	let sql = 'select * from  nhj_user_info where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.length>0){
+		res.send({ 
+			'code': 1,
+			'msg': '获取用户信息成功！',
+			'data':result[0]
+		});
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '获取用户信息失败！'
 		});
 	}
 
@@ -902,6 +922,7 @@ module.exports={
 	query1,
 	download1,
 	getOpenid,
-	updateUserinfo
+	updateUserinfo,
+	getUserinfo
 
 };
