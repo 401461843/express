@@ -51,5 +51,7 @@ router.post('/getOpenid', api.getOpenid);
 router.post('/updateUserinfo', api.updateUserinfo);
 //查询用户信息
 router.post('/getUserinfo', api.getUserinfo);
+//生成年货列表
+router.post('/createGoodsList', api.createGoodsList);
 
 module.exports = router; 

@@ -898,7 +898,38 @@ let getUserinfo = async function (req,res) {
 	}
 
 }
+//createGoodsList
+let createGoodsList = async function (req,res) {
+	let {user_id,user_name,goods_list} =req.body
+	let sqlArr =[1,1,user_id,user_id];
+	let sql = 'update nhj_user_info  set join_team_flag = ? , captain_flag= ? , team_id = ? where user_id= ?';
+	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.affectedRows==1){
+		let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+		let sqlArr1 =[user_id,user_name+'的战队',goods_list,create_time];
+		let sql1 = 'insert into nhj_team_info (team_id,team_name,goods_list,create_time) values(?,?,?,?)';
+		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+		if(result1.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'msg': '年货清单生成成功！'
+				
+			});
+		}else{
+			res.send({ 
+				'code': 0,
+				'msg': '年货清单生成失败！'
+			});
+		}
+		
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '年货清单生成失败！'
+		});
+	}
 
+}
 
 module.exports={
 	luckDraw,
@@ -923,6 +954,7 @@ module.exports={
 	download1,
 	getOpenid,
 	updateUserinfo,
-	getUserinfo
+	getUserinfo,
+	createGoodsList
 
 };
