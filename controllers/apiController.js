@@ -901,9 +901,8 @@ let getUserinfo = async function (req,res) {
 //createGoodsList
 let createGoodsList = async function (req,res) {
 	let {user_id,user_name,goods_list} =req.body
-	let team_id =user_id
-	let sqlArr =[1,1,team_id,user_id];
-	let sql = 'update nhj_user_info  set join_team_flag = ? , captain_flag= ? , team_id = ? where user_id= ?';
+	let sqlArr =[1,1,user_id,user_id];
+	let sql = 'update nhj_user_info  set join_team_flag = ? , captain_flag= ? , team_id = ?  where user_id= ?';
 	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
 	// console.log(1111)
 	if(result.affectedRows==1){
