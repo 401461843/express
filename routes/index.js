@@ -50,4 +50,7 @@ router.get('/home/jzj', function(req, res) {
 router.get('/home/sp', function(req, res) {
 	res.render('sp.html');
 }); 
+router.get('/home/cfhy', function(req, res) {
+	res.render('cf.html');
+}); 
 module.exports = router;

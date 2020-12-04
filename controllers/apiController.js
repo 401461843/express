@@ -5,6 +5,11 @@ const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisSt
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
+// const { json } = require('body-parser');
+const fs = require('fs');
+// const path = require('path');
+const JSZip= require('jszip');
+
 
 global.dataList =[];
 global.dataList1 =[];
@@ -198,6 +203,27 @@ let jmgjSubmit = async function (req,res) {
 			'data':''
 			
 			 
+		});
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '提交失败!',
+			'data':''
+		});
+	}
+}
+let cfhySubmit = async function (req,res) {
+	let {name,tell} = req.body;
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	
+	let sqlArr =[name,tell,create_time];
+	let sql = 'insert into cfhy_form (name,tell,create_time) values(?,?,?)';;
+	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
+	if(result1.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功！',
+			'data':''
 		});
 	}else{
 		res.send({ 
@@ -805,6 +831,56 @@ let download1 = function (req,res) {
 	
 	
 }
+//压缩打包接口	
+let packFile =function (req,res) {
+	let {url} =req.body
+	let files =JSON.parse(url)
+	let rootPath ='/Users/baidu/Desktop/imc/static_html/layoutTool/'
+	let zip = new JSZip();
+
+	files.forEach(function (val,index) {
+		let fileName =rootPath+'psd/'+val
+		let content = fs.readFileSync(fileName, { encoding: "utf-8" });
+		zip.file(fileName, content);
+	})
+	// 压缩
+    zip.generateAsync({
+        // 压缩类型选择nodebuffer，在回调函数中会返回zip压缩包的Buffer的值，再利用fs保存至本地
+        type: "nodebuffer",
+        // 压缩算法
+        compression: "DEFLATE",
+        compressionOptions: {
+            level: 9
+        }
+    }).then(function (content) {
+		let timestamp = Date.parse(new Date());
+        let zipName = './zip/'+timestamp+'-psd.zip';
+        // 写入磁盘
+        fs.writeFile(zipName, content, function (err) {
+            if (err) {
+                // 是否删除源文件
+				res.send(
+					{ 
+						'code': 0,
+						'msg': '压缩失败！'
+					}
+				);
+            } else {
+                res.send(
+					{ 
+						'code': 1,
+						'msg': '压缩成功！',
+						'data':zipName
+					}
+				);
+            }
+        });
+	});
+	
+  
+}
+
+
 
 
 
@@ -931,7 +1007,123 @@ let createGoodsList = async function (req,res) {
 	}
 
 }
+//getTeamInfo 战队信息
+let getTeamInfo= async function (req,res) {
+	// let {user_id} =req.body
+	let user_id ='hfhff'
+	let share_user_id ='MCt1srWopMairAZKTogETHUWqn'
+	let team_id ='MCt1srWopMairAZKTogETHUWqn'
+	
+	let teamInfo ={}
+	let captain={}
+	let members=[]
+	let msg =''
+	//自行进入的默认都是已经有战队的
+	if(share_user_id !=''){
+		let sqlArr =[user_id];
+		let sql = 'select * from  nhj_user_info where user_id = ? ';
+		let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+		// console.log(result[0])
+		let help_team_id =JSON.parse(result[0]['help_team_id'])
+		if(help_team_id.indexOf(team_id) <0){
+			help_team_id.push(team_id)
+			let sqlArr1 =[JSON.stringify(help_team_id),user_id];
+			let sql1= 'update nhj_user_info  set help_team_id = ?  where user_id= ?';
+			let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			if(result1.affectedRows == 1){
+				let sqlArr2 =[share_user_id];
+				let sql2 = 'select * from  nhj_user_info where user_id = ? ';
+				let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
+				let share_count_info =JSON.parse(result2[0]['share_count_info'])
+				let tem_obj ={}
+				let tem_arr =[]
+				if(share_count_info.length>0){
+					let have_team_flag =true
+					share_count_info.forEach(function (val,index) {
+						if(val['team_id'] == team_id){
+							val['b_share_user_id'].push(user_id)
+							have_team_flag =false
+						}
+					})
+					if(have_team_flag){
+						tem_arr.push(user_id)
+						tem_obj['b_share_user_id']=tem_arr
+						tem_obj['team_id']=team_id
+						share_count_info.push(tem_obj)
+					}
+				}else{
+					tem_arr.push(user_id)
+					tem_obj['b_share_user_id']=tem_arr
+					tem_obj['team_id']=team_id
+					share_count_info.push(tem_obj)
+				}
+				let sqlArr3 =[JSON.stringify(share_count_info),share_user_id];
+				let sql3= 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
+				let result3= await sqlQuery.SysqlConnect(sql3,sqlArr3);
+				if(result3.affectedRows == 1){
+					let sqlArr4 =[team_id];
+					let sql4 = 'select * from  nhj_team_info where team_id = ? ';
+					let result4 = await sqlQuery.SysqlConnect(sql4,sqlArr4)
+					if(result4[0]){
+						let total = result4[0]['team_total_bill']+1
+						let sqlArr5 =[total,team_id];
+						let sql5= 'update nhj_team_info  set team_total_bill = ?  where team_id= ?';
+						let result5= await sqlQuery.SysqlConnect(sql5,sqlArr5);
+						if(result5.affectedRows ==1){
+							msg='助力成功！'
+						}
+					}
+					
+				}
+			}
 
+		}else{
+			msg='您已经为当前战队助过力了！'
+		}
+
+		 
+	}
+	let sqlArr1 =[team_id];
+	let sql1 = 'select * from  nhj_team_info where team_id = ? ';
+	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
+	if(result1.length >0){
+		teamInfo['goods_list']=JSON.parse(result1[0]['goods_list'] )
+		teamInfo['team_name']=result1[0]['team_name']
+		teamInfo['team_total_bill']=result1[0]['team_total_bill'] 
+		let sqlArr2 =[team_id];
+		let sql2 = 'select * from nhj_user_info where team_id = ?';
+		let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
+		if(result2.length>0){
+			result2.forEach(function (val,index) { 
+				if(val['captain_flag'] =='1'){
+					captain['user_name']=val['user_name']
+					captain['user_avatar_url']=val['user_avatar_url']
+					captain['share_count_info']=JSON.parse(val['share_count_info'])
+					teamInfo['captain']=captain
+				}else{
+					let member={}
+					member['user_name']=val['user_name']
+					member['user_avatar_url']=val['user_avatar_url']
+					member['share_count_info']=JSON.parse(val['share_count_info'])
+					members.push(member)
+				}
+
+			})
+			teamInfo['members']=members
+		}
+		
+	}
+
+	res.send({ 
+		'code': 1,
+		'msg': msg,
+		'data':teamInfo
+	});
+	
+
+
+}
+//
 module.exports={
 	luckDraw,
 	submit,
@@ -951,11 +1143,16 @@ module.exports={
 	submityJzj,
 	audiSubmit,
 	jmgjSubmit,
+	cfhySubmit,
 	query1,
 	download1,
+	packFile,
+	// 小程序接口
 	getOpenid,
 	updateUserinfo,
 	getUserinfo,
-	createGoodsList
+	createGoodsList,
+	getTeamInfo
+	
 
 };

@@ -43,6 +43,12 @@ router.post('/submityYth', api.submityYth);
 router.post('/audiSubmit', api.audiSubmit);
 //金门国际提交
 router.post('/jmgjSubmit', api.jmgjSubmit);
+//超凡宏宇提交
+router.post('/cfhySubmit', api.cfhySubmit);
+
+//psd 打包压缩
+router.post('/packFile', api.packFile);
+
 
 //小程序接口
 //获取用户唯一id
@@ -53,5 +59,8 @@ router.post('/updateUserinfo', api.updateUserinfo);
 router.post('/getUserinfo', api.getUserinfo);
 //生成年货列表
 router.post('/createGoodsList', api.createGoodsList);
+//获取战队信息
+router.post('/getTeamInfo', api.getTeamInfo);
+
 
 module.exports = router; 

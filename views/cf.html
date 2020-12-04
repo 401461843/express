@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>超凡宏宇</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+ 
+    
+    <style> 
+     .section1{
+        width: 7.5rem;
+        height: 9.59rem;
+        background: url('../public/images/cf/cf_01.jpg') no-repeat;
+        background-size: 100%;
+     }
+     .section2{
+         width: 7.5rem;
+         height: 15.67rem;
+        background: url('../public/images/cf/cf_02.jpg') no-repeat;
+        background-size: 100%;
+        position: relative;
+        margin-top: -.1rem;
+     }
+     .form{
+         position: absolute;
+         left: 50%;
+         width: 7.42rem;
+         height: 6.72rem;
+         transform: translateX(-50%);
+         background: url('../public/images/cf/bz.png') no-repeat;
+        background-size: 100%;
+        top: -2rem;
+     }
+     .section3{
+        width: 7.5rem;
+        height: 10.88rem;
+        background: url('../public/images/cf/cf_03.jpg') no-repeat;
+        background-size: 100%;
+       
+     }
+     .section4{
+        width: 7.5rem;
+        height: 14.67rem;
+        background: url('../public/images/cf/cf_04.jpg') no-repeat;
+        background-size: 100%;
+       
+     }
+     .section5{
+        width: 7.5rem;
+        height: 6.49rem;
+        background: url('../public/images/cf/cf_05.jpg') no-repeat;
+        background-size: 100%;
+        margin-top: -.1rem;
+        position: relative;
+       
+     }
+     .name{
+        position: absolute;
+        width: 6.5rem;
+        top: 2.25rem;
+        height: .7rem;
+        left: .47rem; 
+        border: none;
+        outline: none;
+        text-indent: .2rem;
+
+
+     }
+
+     .tell{
+        position: absolute;
+        width: 6.5rem;
+        top: 3.74rem;
+        height: .7rem;
+        left: .47rem; 
+        border: none;
+        outline: none;    
+        text-indent: .2rem;
+
+     }
+     .submit{
+        position: absolute;
+        width: 6.5rem;
+        height: .8rem;
+        background: url('../public/images/cf/tj.png') no-repeat;
+        background-size: 100%;
+        left: 50%;
+        transform: translateX(-50%);
+        bottom: 1.15rem;
+     }
+     .dh,.dh1{
+         display: block;
+         height: 0.7rem;
+         position: absolute;
+         width: 3.65rem;
+         text-align: center;
+         font-size: .3rem;
+         line-height: .7rem;
+         bottom: 0;
+       
+         color: white;
+         background: #7d7d7d;
+     }
+     .dh{
+         left: 0;
+     }
+     .dh1{
+
+         right: 0;
+     }
+    </style>
+</head>
+<body>
+    <div class="section1"></div>
+    <div class="section2">
+        <div class="form">
+            <input type="text" class="name" placeholder="请输入您的姓名">
+            <input type="text" class="tell" placeholder="请输入您的电话">
+            <div class="submit">
+                
+            </div>
+        </div>
+    </div>
+    <div class="section3"></div>
+    <div class="section4"></div>
+    <div class="section5">
+        <input type="text" class="name" placeholder="请输入您的姓名" style="top: 2.1rem;left: .5rem;">
+        <input type="text" class="tell" placeholder="请输入您的电话" style="left: .5rem;top: 3.6rem;">
+        <div class="submit" style="bottom: 1.08rem;">
+        </div>
+        <a href="tel:13656219726"  class="dh">电话</a>
+        <a href="tel:13656219726" class="dh1">预约</a>
+    </div>
+    
+</body>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+
+
+<script>
+    $('body').on('click','.submit',function () {
+        if($(this).parent().find('.name').val().trim() ==''){
+            alert('请输入姓名！')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('请划入手机号！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('请输入正确格式手机号！')
+            return 
+        }
+        var param ={
+            name:$(this).parent().find('.name').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim()
+        }
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/cfhySubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                       
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+    })
+        
+</script>
+</html>

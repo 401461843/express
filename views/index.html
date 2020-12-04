@@ -15,7 +15,7 @@
     <title>七夕宠爱季</title>
     <link rel="stylesheet" href="../public/css/reset.css">
     <link rel="stylesheet" href="../public/css/index.css">
-    <link rel="stylesheet" href="../public/css/swiper.min.css">  
+    <link rel="stylesheet" href="../public/css/swiper.css">  
 </head>
 <body>
    
@@ -658,20 +658,20 @@
         genClips()
     }
     init()
+    var param ={
+        url:JSON.stringify(['报考流程_1.psd','报考指南_1.psd'])
+    }
     $.ajax({
         //请求方式
         type : "post",
         //请求地址
-        url : "/api/lfxFx",
+        url : "/api/packFile",
         //数据，json字符串
         dataType: 'json',
+        data:param,
         //请求成功
         success : function(res) {
-            if(res.code ==1){
-               $('.fxsy').text('仅限'+res.count+'份先到先得')
-            }else{
-                alert(res.msg)
-            }
+           
             
         },
         //请求失败，包含具体的错误信息
