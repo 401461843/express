@@ -6,9 +6,9 @@ const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
 // const { json } = require('body-parser');
-const fs = require('fs');
+// const fs = require('fs');
 // const path = require('path');
-const JSZip= require('jszip');
+// const JSZip= require('jszip');
 
 
 global.dataList =[];
@@ -832,53 +832,53 @@ let download1 = function (req,res) {
 	
 }
 //压缩打包接口	
-let packFile =function (req,res) {
-	let {url} =req.body
-	let files =JSON.parse(url)
-	let rootPath ='/Users/baidu/Desktop/imc/static_html/layoutTool/'
-	let zip = new JSZip();
+// let packFile =function (req,res) {
+// 	let {url} =req.body
+// 	let files =JSON.parse(url)
+// 	let rootPath ='/Users/baidu/Desktop/imc/static_html/layoutTool/'
+// 	let zip = new JSZip();
 
-	files.forEach(function (val,index) {
-		let fileName =rootPath+'psd/'+val
-		let content = fs.readFileSync(fileName, { encoding: "utf-8" });
-		zip.file(fileName, content);
-	})
-	// 压缩
-    zip.generateAsync({
-        // 压缩类型选择nodebuffer，在回调函数中会返回zip压缩包的Buffer的值，再利用fs保存至本地
-        type: "nodebuffer",
-        // 压缩算法
-        compression: "DEFLATE",
-        compressionOptions: {
-            level: 9
-        }
-    }).then(function (content) {
-		let timestamp = Date.parse(new Date());
-        let zipName = './zip/'+timestamp+'-psd.zip';
-        // 写入磁盘
-        fs.writeFile(zipName, content, function (err) {
-            if (err) {
-                // 是否删除源文件
-				res.send(
-					{ 
-						'code': 0,
-						'msg': '压缩失败！'
-					}
-				);
-            } else {
-                res.send(
-					{ 
-						'code': 1,
-						'msg': '压缩成功！',
-						'data':zipName
-					}
-				);
-            }
-        });
-	});
+// 	files.forEach(function (val,index) {
+// 		let fileName =rootPath+'psd/'+val
+// 		let content = fs.readFileSync(fileName, { encoding: "utf-8" });
+// 		zip.file(fileName, content);
+// 	})
+// 	// 压缩
+//     zip.generateAsync({
+//         // 压缩类型选择nodebuffer，在回调函数中会返回zip压缩包的Buffer的值，再利用fs保存至本地
+//         type: "nodebuffer",
+//         // 压缩算法
+//         compression: "DEFLATE",
+//         compressionOptions: {
+//             level: 9
+//         }
+//     }).then(function (content) {
+// 		let timestamp = Date.parse(new Date());
+//         let zipName = './zip/'+timestamp+'-psd.zip';
+//         // 写入磁盘
+//         fs.writeFile(zipName, content, function (err) {
+//             if (err) {
+//                 // 是否删除源文件
+// 				res.send(
+// 					{ 
+// 						'code': 0,
+// 						'msg': '压缩失败！'
+// 					}
+// 				);
+//             } else {
+//                 res.send(
+// 					{ 
+// 						'code': 1,
+// 						'msg': '压缩成功！',
+// 						'data':zipName
+// 					}
+// 				);
+//             }
+//         });
+// 	});
 	
   
-}
+// }
 
 
 
@@ -1146,7 +1146,7 @@ module.exports={
 	cfhySubmit,
 	query1,
 	download1,
-	packFile,
+	// packFile,
 	// 小程序接口
 	getOpenid,
 	updateUserinfo,

@@ -47,7 +47,7 @@ router.post('/jmgjSubmit', api.jmgjSubmit);
 router.post('/cfhySubmit', api.cfhySubmit);
 
 //psd 打包压缩
-router.post('/packFile', api.packFile);
+// router.post('/packFile', api.packFile);
 
 
 //小程序接口
