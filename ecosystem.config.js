@@ -20,22 +20,5 @@ module.exports = {
 		'log_date_format': 'YYYY-MM-DD HH:mm:ss Z',
 	}],
 
-	'deploy': {
-		'production': {
-			'user': 'root',
-			'host': ['106.12.30.140'], //这里可以多个远程服务器地址 '106.12.69.208'
-			'ref': 'origin/master', 
-			'repo': 'git@github.com:401461843/express.git',
-			'path': '/home/express',
-			'ssh_options': 'StrictHostKeyChecking=no', //第一次连接服务器时候避免出现大量的提示
-			'pre-deploy-local': '',
-			'pre-deploy': 'git pull', //解决更新无法拉取github最新的commit
-			'post-deploy': 'npm install  && pm2 startOrRestart ecosystem.config.js --env production',
-			'pre-setup': '',
-			'env': {
-				'NODE_ENV': 'production',
-			},
-      
-		},
-	},
+
 };

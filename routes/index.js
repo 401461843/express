@@ -53,10 +53,10 @@ router.get('/home/sp', function(req, res) {
 router.get('/home/cfhy', function(req, res) {
 	res.render('cf.html');
 }); 
-router.get('/home/ysf1', function(req, res) {
-	res.render('ysf1.html');
+router.get('/home/szysf', function(req, res) {
+	res.render('szysf.html');
 }); 
-router.get('/home/ysf2', function(req, res) {
-	res.render('ysf2.html');
+router.get('/home/czysf', function(req, res) {
+	res.render('czysf.html');
 }); 
 module.exports = router;
