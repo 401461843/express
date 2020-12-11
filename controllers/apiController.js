@@ -5,9 +5,9 @@ const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisSt
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
-const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
-const b64 = new BaiduB64();
-4
+// const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
+// const b64 = new BaiduB64();
+
 
 global.dataList =[];
 global.dataList1 =[];
