@@ -46,10 +46,6 @@ router.post('/jmgjSubmit', api.jmgjSubmit);
 //超凡宏宇提交
 router.post('/cfhySubmit', api.cfhySubmit);
 
-//psd 打包压缩
-// router.post('/packFile', api.packFile);
-
-
 //小程序接口
 //获取用户唯一id
 router.post('/getOpenid', api.getOpenid);

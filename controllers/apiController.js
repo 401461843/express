@@ -5,11 +5,9 @@ const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisSt
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
-// const { json } = require('body-parser');
-// const fs = require('fs');
-// const path = require('path');
-// const JSZip= require('jszip');
-
+const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
+const b64 = new BaiduB64();
+4
 
 global.dataList =[];
 global.dataList1 =[];
@@ -831,59 +829,6 @@ let download1 = function (req,res) {
 	
 	
 }
-//压缩打包接口	
-// let packFile =function (req,res) {
-// 	let {url} =req.body
-// 	let files =JSON.parse(url)
-// 	let rootPath ='/Users/baidu/Desktop/imc/static_html/layoutTool/'
-// 	let zip = new JSZip();
-
-// 	files.forEach(function (val,index) {
-// 		let fileName =rootPath+'psd/'+val
-// 		let content = fs.readFileSync(fileName, { encoding: "utf-8" });
-// 		zip.file(fileName, content);
-// 	})
-// 	// 压缩
-//     zip.generateAsync({
-//         // 压缩类型选择nodebuffer，在回调函数中会返回zip压缩包的Buffer的值，再利用fs保存至本地
-//         type: "nodebuffer",
-//         // 压缩算法
-//         compression: "DEFLATE",
-//         compressionOptions: {
-//             level: 9
-//         }
-//     }).then(function (content) {
-// 		let timestamp = Date.parse(new Date());
-//         let zipName = './zip/'+timestamp+'-psd.zip';
-//         // 写入磁盘
-//         fs.writeFile(zipName, content, function (err) {
-//             if (err) {
-//                 // 是否删除源文件
-// 				res.send(
-// 					{ 
-// 						'code': 0,
-// 						'msg': '压缩失败！'
-// 					}
-// 				);
-//             } else {
-//                 res.send(
-// 					{ 
-// 						'code': 1,
-// 						'msg': '压缩成功！',
-// 						'data':zipName
-// 					}
-// 				);
-//             }
-//         });
-// 	});
-	
-  
-// }
-
-
-
-
-
 
 //小程序接口
 let getOpenid=async function (req,res) {
@@ -1083,6 +1028,7 @@ let getTeamInfo= async function (req,res) {
 
 		 
 	}
+
 	let sqlArr1 =[team_id];
 	let sql1 = 'select * from  nhj_team_info where team_id = ? ';
 	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
@@ -1123,7 +1069,12 @@ let getTeamInfo= async function (req,res) {
 
 
 }
-//
+//小程序点击分享，生成分享口令
+let getCommand = async function (req,res) { 
+	
+
+
+}
 module.exports={
 	luckDraw,
 	submit,
@@ -1146,7 +1097,6 @@ module.exports={
 	cfhySubmit,
 	query1,
 	download1,
-	// packFile,
 	// 小程序接口
 	getOpenid,
 	updateUserinfo,
