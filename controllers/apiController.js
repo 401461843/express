@@ -723,7 +723,7 @@ let hqjsLuckDraw =async function ( req,res) {
 //数据查询工具
 let query = async function (req,res) {
 	let sqlArr =[];
-	let sql = 'select * from  audi_form ';
+	let sql = 'select * from  audi_form1 ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
 	let obj ={}
 	let tableList =[]
@@ -733,7 +733,7 @@ let query = async function (req,res) {
 			obj['model']=val.model
 			obj['name']=val.name
 			obj['tell']=val.tell
-			obj['create_time']=util.mysqlDatetime(val.create_time) 
+			obj['date']=val.date
 			tableList.push(obj)
 		})
 		dataList=tableList
@@ -757,7 +757,7 @@ let download = function (req,res) {
 		temp.push(item.model);
 		temp.push(item.name);
 		temp.push(item.tell);
-		temp.push(item.create_time);
+		temp.push(item.date);
 		arrayData.push(temp)
 	})
 	arrayWorkSheet = xlsx.utils.aoa_to_sheet(arrayData);
