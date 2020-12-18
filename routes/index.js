@@ -59,4 +59,7 @@ router.get('/home/szysf', function(req, res) {
 router.get('/home/czysf', function(req, res) {
 	res.render('czysf.html');
 }); 
+router.get('/home/audi1', function(req, res) {
+	res.render('audi1.html');
+});
 module.exports = router;

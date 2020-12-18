@@ -41,6 +41,7 @@ router.post('/hqjsLuckDraw', api.hqjsLuckDraw);
 router.post('/submityYth', api.submityYth);
 //audi提交
 router.post('/audiSubmit', api.audiSubmit);
+router.post('/audi1Submit', api.audi1Submit);
 //金门国际提交
 router.post('/jmgjSubmit', api.jmgjSubmit);
 //超凡宏宇提交

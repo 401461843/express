@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Audi</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+    <link rel="stylesheet" href="../public/css/mdate.css">
+   
+    
+    <style> 
+       .sec1{
+           height: 9.62rem;
+           width: 7.5rem;
+           background: url('../public/images/audi1/ad1.jpg') no-repeat;
+           background-size: 100%;
+       }
+
+       .sec2{
+           height: 8rem;
+           width: 7.5rem;
+           background: url('../public/images/audi1/ad2.jpg') no-repeat;
+           background-size: 100%;
+           position: relative;
+       }
+       .sec3{
+           height: 35.2rem;
+           width: 7.5rem;
+           background: url('../public/images/audi1/ad3.jpg') no-repeat;
+           background-size: 100%;
+       }
+       .sec4{
+           height: 9.58rem;
+           width: 7.5rem;
+           background: url('../public/images/audi1/ad4.jpg') no-repeat;
+           background-size: 100%;
+           position: relative;
+       }
+       .fix{
+           position: fixed;
+           bottom: 0;
+           height: 1.1rem;
+           width: 7.5rem;
+           background: url('../public/images/audi1/dbyy.png') no-repeat;
+           background-size: 100%;
+       }
+       .cx,.gcsj,.name,.tell,.time{
+           height: .94rem;
+           width: 6.3rem;
+           background: rgba(255, 255,255, .2);
+           position: absolute;
+           border: none;
+           border-radius:.2rem ;
+           left: 50%;
+           transform: translateX(-50%);
+           color: white;
+           text-indent: .5rem;
+           font-size: .28rem;
+           outline: none;
+       }
+       input::-webkit-input-placeholder {
+        color: rgba(255, 255, 255, .3);
+       }
+
+         
+       .cx{
+           top: 1.2rem;
+       }
+       .gcsj,.time{
+           top: 2.5rem;
+           line-height: .94rem;
+
+           color: rgba(255, 255, 255, .3);
+       }
+       .name{
+           top: 3.8rem;
+       }
+       .tell{
+           top: 5.1rem;
+       }
+       .tj{
+           height: 0.8rem;
+           width: 5.96rem;
+           position: absolute;
+           bottom: .8rem;
+           left: 50%;
+           transform: translateX(-50%);
+           background: url('../public/images/audi1/tjyy.png') no-repeat;
+           background-size: 100%;
+       }
+       .getDateBox {
+            width: 100%;
+            position: fixed;
+            left: 0;
+            background-color: #fff;
+            box-shadow: -5px 0 5px rgba(0,0,0,0.3);
+            z-index: 101;
+            transition: bottom 0.4s;
+            bottom: -270px;
+            height: 4.5rem;
+        }
+        #yearwrapper ul li, #monthwrapper ul li, #daywrapper ul li {
+            height: 40px;
+            line-height: 40px;
+            font-size: 0.3rem !important;
+            text-align: center;
+            list-style: none;
+        }
+        .getDateBox .choiceDateTitle button {
+            height: 100%;
+           
+            font-size: 1.0rem;
+            background: none;
+            border: 0;
+            -webkit-tap-highlight-color: rgba(0,0,0,0.2);
+            height: .8rem;
+            font-size: .32rem;
+            color: #666;
+            padding: .1rem 0.5rem;
+        }
+        .getDateBox .choiceDateTitle {
+            height: 0.85rem;
+            background-color: #f2f2f2;
+        }
+        .getDateBox .dateContent {
+            width: 100%;
+            margin: 0rem 0;
+            height: 120px;
+            overflow: hidden;
+            position: relative;
+        }
+        .time{
+            background: transparent;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+   <div class="sec1">
+
+   </div>
+   <div class="sec2">
+        <input type="text" class="cx" placeholder="请输入意向车型">
+        <input type="text" placeholder="请选择意向购买时间" class="time" id="time">
+        <div class="gcsj" id="gcsj"> </div>
+        
+        <input type="text" class="name" placeholder="请输入您的姓名" id="name">
+        <input type="text" class="tell" placeholder="请输入您的手机号">
+        <div class="tj"></div>
+   </div>
+   <div class="sec3">
+
+   </div>
+   <div class="sec4">   
+        <input type="text" class="cx" placeholder="请输入意向车型">
+        <input type="text" placeholder="请选择意向购买时间" class="time" id="time1">
+        <div class="gcsj" id="gcsj1"></div>
+        <input type="text" class="name"  placeholder="请输入您的姓名">
+        <input type="text" class="tell" placeholder="请输入您的手机号">
+        <div class="tj" style="bottom: 2.4rem;"></div>
+    </div>
+   <div class="fix">
+
+   </div>
+    <!-- <div class="bdq">
+        <div class="form">
+            <div class="item sel">
+                <div class="cx">选择车型</div>
+                <div class="xh">A3</div>
+                <div class="xz"></div>
+                <div class="sel-w">
+                    
+                        <div>A3</div> 
+                        <div>A4</div> 
+                        <div>A5</div> 
+                        <div>A6</div> 
+                        <div>A7</div> 
+                        <div>A8</div> 
+                        <div>Q2</div> 
+                        <div>Q3</div> 
+                        <div>Q5</div> 
+                        <div>Q7</div> 
+                        <div>Q8</div> 
+                        <div>R8</div> 
+                        <div>RS</div> 
+                        <div>e-tron</div> 
+                    
+                </div>
+            </div>
+            <div class="item">
+                <div class="ts">姓名</div>
+                <input type="text" class="name">
+            </div>
+            <div class="item">
+                <div class="ts">手机</div>
+                <input type="text" class="tel">
+            </div>
+            <div class="item submit"></div>
+        </div>
+    </div> -->
+ 
+   
+
+    
+    
+</body>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+<script src="../public/javascripts/Mdate/iScroll.js"></script>
+<script src="../public/javascripts/Mdate/Mdate.js"></script>
+
+<script>
+    new Mdate("gcsj", {
+        acceptId: "time",
+        beginYear: "2020",
+        beginMonth: "12",
+        beginDay: "17",
+        endYear: "2025",
+        endMonth: "12",
+        endDay: "17",
+        format: "-"
+    })
+    new Mdate("gcsj1", {
+        acceptId: "time1",
+        beginYear: "2020",
+        beginMonth: "12",
+        beginDay: "17",
+        endYear: "2025",
+        endMonth: "12",
+        endDay: "17",
+        format: "-"
+    })
+    $('body').on('click','.tj',function () {
+        if($(this).parent().find('.cx').val().trim() ==''){
+            alert('请输入车型！')
+            return 
+        }else if($(this).parent().find('.time').val().trim() ==''){
+            alert('请选择意向购买时间')
+            return 
+        }else if($(this).parent().find('.name').val().trim() ==''){
+            alert('请输入姓名！')
+            return 
+        }else if($(this).parent().find('.tell').val().trim() =='' ){
+            alert('请划入手机号！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($(this).parent().find('.tell').val().trim())) ){
+            alert('请输入正确格式手机号！')
+            return 
+        }
+        var param ={
+            model:$(this).parent().find('.cx').val().trim(),
+            date:$(this).parent().find('.time').val().trim(),
+            name:$(this).parent().find('.name').val().trim(),
+            tell:$(this).parent().find('.tell').val().trim()
+        }
+        console.log(param)
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/audi1Submit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                       
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+    })
+   
+        
+</script>
+</html>

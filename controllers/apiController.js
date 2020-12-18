@@ -187,6 +187,29 @@ let audiSubmit = async function (req,res) {
 		});
 	}
 }
+let audi1Submit = async function (req,res) {
+	let {model,date, name,tell} = req.body;
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	
+	let sqlArr =[model,date,name,tell,create_time];
+	let sql = 'insert into audi_form1 (model,date,name,tell,create_time) values(?,?,?,?,?)';;
+	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
+	if(result1.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功！',
+			'data':''
+			
+			 
+		});
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '提交失败!',
+			'data':''
+		});
+	}
+}
 let jmgjSubmit = async function (req,res) {
 	let {name,tell} = req.body;
 	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
@@ -1093,6 +1116,7 @@ module.exports={
 	submityYth,
 	submityJzj,
 	audiSubmit,
+	audi1Submit,
 	jmgjSubmit,
 	cfhySubmit,
 	query1,
