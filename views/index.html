@@ -551,7 +551,7 @@
 </body>
 <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
 <script src="../public/javascripts/rem.js"></script>
-<script src="../public/javascripts/swiper.js"> </script>
+<!-- <script src="../public/javascripts/swiper.js"> </script> -->
 
 <script> 
      
@@ -665,7 +665,7 @@
         //请求方式
         type : "post",
         //请求地址
-        url : "/api/packFile",
+        url : "/api/getCommand",
         //数据，json字符串
         dataType: 'json',
         data:param,
@@ -697,19 +697,19 @@
         }
        
     })
-    var mySwiper = new Swiper('.swiper-container', {
-        autoplay: true,
-        loop: true,
-    })
+    // var mySwiper = new Swiper('.swiper-container', {
+    //     // autoplay: true,
+    //     loop: true,
+    // })
     
-    var mySwiper = new Swiper('.swiper-container2', {
-        autoplay: true,
-        loop: true,
-        slidesPerView : 3,  
-        speed:500,
-        centeredSlidesBounds: true,
-        centeredSlides : true,
-    })
+    // var mySwiper = new Swiper('.swiper-container2', {
+    //     autoplay: true,
+    //     loop: true,
+    //     slidesPerView : 3,  
+    //     speed:5000,
+    //     centeredSlidesBounds: true,
+    //     centeredSlides : true,
+    // })
     window.prize= ''
     var count =1
     var xcd =0

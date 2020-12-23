@@ -5,8 +5,8 @@ const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisSt
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
-// const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
-// const b64 = new BaiduB64();
+const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
+const b64 = new BaiduB64();
 
 
 global.dataList =[];
@@ -858,8 +858,8 @@ let getOpenid=async function (req,res) {
 	let {code} =req.body
 	let param ={
 		code:code,
-		client_id:'W229ytlqVG9EQTNcafLteSymT9xWNF6C',
-		sk:'DA3xBCohPOzCECCCKGKpgAesd4dOZGuR'
+		client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
+		sk:'2GSqlxC7P4KEdHggYoGmp6tkZDIHCn9A'
 	}
 	request({
 		url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
@@ -1094,9 +1094,23 @@ let getTeamInfo= async function (req,res) {
 }
 //小程序点击分享，生成分享口令
 let getCommand = async function (req,res) { 
-	
-
-
+	let data ={
+		"activity_id":"749",//活动id，由cms申请,必选
+		"url":"跳转链接",//跳转地址，或feed的nid，
+		"slog":{//非必需，目前口令支持4个维度的统计
+			"p1":"chrome|safari|...",//浏览器,
+			"p2":"android|ios|...",//系统，
+			"p3":"1099a|...",//渠道来源
+			"p4":"component|midPage"//组件（component） ，中间页（midPage）
+		}
+	}
+	let result = b64.encode(Buffer.from('test'));
+	console.log(result)
+	res.send({ 
+		'code': 1,
+		'msg': '',
+		'data':''
+	});
 }
 module.exports={
 	luckDraw,
@@ -1126,7 +1140,8 @@ module.exports={
 	updateUserinfo,
 	getUserinfo,
 	createGoodsList,
-	getTeamInfo
+	getTeamInfo,
+	getCommand
 	
 
 };

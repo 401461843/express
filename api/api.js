@@ -58,6 +58,8 @@ router.post('/getUserinfo', api.getUserinfo);
 router.post('/createGoodsList', api.createGoodsList);
 //获取战队信息
 router.post('/getTeamInfo', api.getTeamInfo);
+//生成口令的接口
+router.post('/getCommand', api.getCommand);
 
 
 module.exports = router; 
