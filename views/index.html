@@ -659,13 +659,15 @@
     }
     init()
     var param ={
-        url:JSON.stringify(['报考流程_1.psd','报考指南_1.psd'])
+        user_id:'MCt1srWopMairAZKTogETHUWqn',
+        user_name:'王大毛',
+        goods_list:JSON.stringify([{"goodSName":"小米手机","goodsPrice":999,"goodsImgSrc":""},{"goodSName":"华为手机","goodsPrice":999,"goodsImgSrc":""},{"goodSName":"苹果手机","goodsPrice":9229,"goodsImgSrc":""}])
     }
     $.ajax({
         //请求方式
         type : "post",
         //请求地址
-        url : "/api/getCommand",
+        url : "/api/getTeamInfo",
         //数据，json字符串
         dataType: 'json',
         data:param,
