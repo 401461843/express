@@ -1122,7 +1122,7 @@ let getTeamInfo= async function (req,res) {
 let getCommand = async function (req,res) { 
 	let {team_id,user_id} =req.body
 	// console.log(team_id,user_id)
-	let url ='baiduboxapp://swan/dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index/?team_id='+team_id+'&user_id='+user_id+'&_baiduboxapp=%7B%22ext%22%3A%7B%7D%7D&callback=_bdbox_js_275&upgrade=0'
+	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index/?team_id='+team_id+'&user_id='+user_id+'&_baiduboxapp=%7B%22ext%22%3A%7B%7D%7D&callback=_bdbox_js_275&upgrade=0'
 	let data ={
 		"activity_id":"749",//活动id，由cms申请,必选
 		"url":url,//跳转地址，或feed的nid，
