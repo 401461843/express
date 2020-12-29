@@ -858,8 +858,8 @@ let download1 = function (req,res) {
 let getOpenid=async function (req,res) {
 	
 	let {code,team_id,share_id} =req.body
-	team_id='aaaaa',
-	share_id='aaaaa'
+	// team_id='aaaaa',
+	// share_id='aaaaa'
 	let param ={
 		code:code,
 		client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
@@ -879,18 +879,17 @@ let getOpenid=async function (req,res) {
 			let sqlArr =[openid];
 			let sql = 'select * from  nhj_user_info where user_id = ? ';
 			let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+			//判断用户是否存在
 			if(result.length ==0){
 				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
 				let sqlArr1 =[openid,create_time];
 				let sql1 = 'insert into nhj_user_info (user_id,create_time) values(?,?)';
 				await sqlQuery.SysqlConnect(sql1,sqlArr1);
-			
 			}
 			let sqlArr7 =[openid];
 			let sql7 = 'select * from  nhj_user_info where user_id = ? ';
 			let result7 = await sqlQuery.SysqlConnect(sql7,sqlArr7);
 			userinfo =result7[0]
-			console.log(userinfo)
 			//判断有没有team_id
 			if(team_id ==''){
 				if(userinfo['join_team_flag'] =='0'){
@@ -927,27 +926,27 @@ let getOpenid=async function (req,res) {
 
 				}
 
-
-
-
 			}else{
 				// 当前用户没有加入战队
 				if(userinfo['join_team_flag'] =='0'){
-					
 					if(JSON.parse(userinfo['help_team_id']).indexOf(team_id)==-1){
 						//更新被分享者信息
 						let help_team_id_temp =JSON.parse(userinfo['help_team_id'])
 						help_team_id_temp.push(team_id)
-						userinfo['help_team_id']=JSON.stringify(help_team_id_temp)
+						
 						let sqlArr3 =[JSON.stringify(help_team_id_temp),userinfo['user_id']];
 						let sql3 = 'update nhj_user_info  set help_team_id = ? where user_id= ? ';
-						await sqlQuery.SysqlConnect(sql3,sqlArr3);
+						let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
+						if(result3.affectedRows ==1){
+							userinfo['help_team_id']=JSON.stringify(help_team_id_temp)
+						}
 						//更新分享者的分享信息
 						let shareinfo=JSON.parse(userinfo['share_count_info'])
 						shareinfo.push(share_id)
 						let sqlArr4 =[JSON.stringify(shareinfo),share_id];
 						let sql4 = 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
 						await sqlQuery.SysqlConnect(sql4,sqlArr4);
+
 						//查询当前前往哪个页面
 						let sqlArr5 =[team_id];
 						let sql5 = 'select * from  nhj_team_info where team_id = ? ';
@@ -983,6 +982,9 @@ let getOpenid=async function (req,res) {
 					}
 				}else{
 					//查询当前前往哪个页面
+					if(userinfo['team_id'] != team_id){
+						userinfo['tips']='你已经加入战队了，不能为其他战队助力'
+					}
 					let sqlArr6 =[userinfo['team_id']];
 					let sql6 = 'select * from  nhj_team_info where team_id = ? ';
 					let result6 = await sqlQuery.SysqlConnect(sql6,sqlArr6);
@@ -1006,12 +1008,7 @@ let getOpenid=async function (req,res) {
 					}
 					
 				}
-
-
 			}
-			
-			
-			
 		}
 		
 	});
@@ -1089,152 +1086,46 @@ let createGoodsList = async function (req,res) {
 }
 //getTeamInfo 战队信息
 let getTeamInfo= async function (req,res) {
-	// let {user_id} =req.body
-	let user_id ='aaaa'
-	let share_user_id ='MCt1srWopMairAZKTogETHUWqn'
-	let team_id ='MCt1srWopMairAZKTogETHUWqn'
-	
-	let teamInfo ={}
-	let captain={}
-	let members=[]
-	let msg =''
-	//自行进入的默认都是已经有战队的
-	if(share_user_id !=''){
-		let sqlArr =[user_id];
-		let sql = 'select * from  nhj_user_info where user_id = ? ';
-		let result = await sqlQuery.SysqlConnect(sql,sqlArr);
-		if(result[0]['join_team_flag'] =='0'){
-			let sqlArr1 =[team_id];
-			let sql1 = 'select * from  nhj_team_info where team_id = ? ';
+	let {team_id} =req.body
+	let sqlArr =[team_id];
+	let sql = 'select * from  nhj_team_info where team_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let team_info =[]
+	let data ={}
+	// console.log(result[0]['members'])
+	if(result.length >0){
+		data['goods_list']= JSON.parse(result[0]['goods_list'])
+		JSON.parse(result[0]['members']).forEach(async function (val,index) {
+			let obj ={}
+			let sqlArr1 =[val];
+			let sql1 = 'select * from  nhj_user_info where user_id = ? ';
 			let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
-			if(JSON.parse(result1[0]['members']).length<3){
-				let meb =JSON.parse(result1[0]['members'])
-				meb.push(user_id)
-				let sqlArr2 =[JSON.stringify(meb)];
-				let sql2 = 'update nhj_team_info  set members = ?';
-				let result2= await sqlQuery.SysqlConnect(sql2,sqlArr2);
-				if(result2.affectedRows ==1){
-					let sqlArr3 =[JSON.stringify(meb)];
-					let sql3 = 'update nhj_user_info  set join_team_flag = ? , team_id= ? where user_id= ?';
-					let result3= await sqlQuery.SysqlConnect(sql2,sqlArr2);
-				}
-				
+			if(result1.length>0){
+				obj['user_name'] =result1[0]['user_name']
+				obj['user_avatar_url'] =result1[0]['user_avatar_url']
+				team_info.push(obj)
 			}
-
-		}
-		console.log(result[0])
+			if((JSON.parse(result[0]['members']).length -1) == index){
+				data['team_info']=team_info
+				res.send({ 
+					'code': 1,
+					'msg': '',
+					'data':data
+				});
+			}
+			
+		})
 	}
-		// console.log(result[0])
-	// 	let help_team_id =JSON.parse(result[0]['help_team_id'])
-	// 	if(help_team_id.indexOf(team_id) <0){
-	// 		help_team_id.push(team_id)
-	// 		let sqlArr1 =[JSON.stringify(help_team_id),user_id];
-	// 		let sql1= 'update nhj_user_info  set help_team_id = ?  where user_id= ?';
-	// 		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
-	// 		if(result1.affectedRows == 1){
-	// 			let sqlArr2 =[share_user_id];
-	// 			let sql2 = 'select * from  nhj_user_info where user_id = ? ';
-	// 			let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
-	// 			let share_count_info =JSON.parse(result2[0]['share_count_info'])
-	// 			let tem_obj ={}
-	// 			let tem_arr =[]
-	// 			if(share_count_info.length>0){
-	// 				let have_team_flag =true
-	// 				share_count_info.forEach(function (val,index) {
-	// 					if(val['team_id'] == team_id){
-	// 						val['b_share_user_id'].push(user_id)
-	// 						have_team_flag =false
-	// 					}
-	// 				})
-	// 				if(have_team_flag){
-	// 					tem_arr.push(user_id)
-	// 					tem_obj['b_share_user_id']=tem_arr
-	// 					tem_obj['team_id']=team_id
-	// 					share_count_info.push(tem_obj)
-	// 				}
-	// 			}else{
-	// 				tem_arr.push(user_id)
-	// 				tem_obj['b_share_user_id']=tem_arr
-	// 				tem_obj['team_id']=team_id
-	// 				share_count_info.push(tem_obj)
-	// 			}
-	// 			let sqlArr3 =[JSON.stringify(share_count_info),share_user_id];
-	// 			let sql3= 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
-	// 			let result3= await sqlQuery.SysqlConnect(sql3,sqlArr3);
-	// 			if(result3.affectedRows == 1){
-	// 				let sqlArr4 =[team_id];
-	// 				let sql4 = 'select * from  nhj_team_info where team_id = ? ';
-	// 				let result4 = await sqlQuery.SysqlConnect(sql4,sqlArr4)
-	// 				if(result4[0]){
-	// 					let total = result4[0]['team_total_bill']+1
-	// 					let sqlArr5 =[total,team_id];
-	// 					let sql5= 'update nhj_team_info  set team_total_bill = ?  where team_id= ?';
-	// 					let result5= await sqlQuery.SysqlConnect(sql5,sqlArr5);
-	// 					if(result5.affectedRows ==1){
-	// 						msg='助力成功！'
-	// 					}
-	// 				}
-					
-	// 			}
-	// 		}
-
-	// 	}else{
-	// 		msg='您已经为当前战队助过力了！'
-	// 	}
-
-		 
-	// }
-
-	// let sqlArr1 =[team_id];
-	// let sql1 = 'select * from  nhj_team_info where team_id = ? ';
-	// let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
-	// if(result1.length >0){
-	// 	teamInfo['goods_list']=JSON.parse(result1[0]['goods_list'] )
-	// 	teamInfo['team_name']=result1[0]['team_name']
-	// 	teamInfo['team_total_bill']=result1[0]['team_total_bill'] 
-	// 	let sqlArr2 =[team_id];
-	// 	let sql2 = 'select * from nhj_user_info where team_id = ?';
-	// 	let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
-	// 	if(result2.length>0){
-	// 		result2.forEach(function (val,index) { 
-	// 			if(val['captain_flag'] =='1'){
-	// 				captain['user_name']=val['user_name']
-	// 				captain['user_avatar_url']=val['user_avatar_url']
-	// 				captain['share_count_info']=JSON.parse(val['share_count_info'])
-	// 				teamInfo['captain']=captain
-	// 			}else{
-	// 				let member={}
-	// 				member['user_name']=val['user_name']
-	// 				member['user_avatar_url']=val['user_avatar_url']
-	// 				member['share_count_info']=JSON.parse(val['share_count_info'])
-	// 				members.push(member)
-	// 			}
-
-	// 		})
-	// 		teamInfo['members']=members
-	// 	}
-		
-	// }
-
-	// res.send({ 
-	// 	'code': 1,
-	// 	'msg': msg,
-	// 	'data':teamInfo
-	// });
-	res.send({ 
-		'code': 1,
-		'msg': 'msg',
-		'data':'teamInfo'
-	});
-	
-
 
 }
 //小程序点击分享，生成分享口令
 let getCommand = async function (req,res) { 
+	let {team_id,user_id} =req.body
+	// console.log(team_id,user_id)
+	let url ='baiduboxapp://swan/dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index/?team_id='+team_id+'&user_id='+user_id+'&_baiduboxapp=%7B%22ext%22%3A%7B%7D%7D&callback=_bdbox_js_275&upgrade=0'
 	let data ={
 		"activity_id":"749",//活动id，由cms申请,必选
-		"url":"跳转链接",//跳转地址，或feed的nid，
+		"url":url,//跳转地址，或feed的nid，
 		"slog":{//非必需，目前口令支持4个维度的统计
 			"p1":"chrome|safari|...",//浏览器,
 			"p2":"android|ios|...",//系统，
@@ -1242,12 +1133,11 @@ let getCommand = async function (req,res) {
 			"p4":"component|midPage"//组件（component） ，中间页（midPage）
 		}
 	}
-	let result = b64.encode(Buffer.from('test'));
-	console.log(result)
+	let result = b64.encode(Buffer.from(JSON.stringify(data)));
 	res.send({ 
 		'code': 1,
 		'msg': '',
-		'data':''
+		'data':result
 	});
 }
 module.exports={
