@@ -6,6 +6,8 @@ const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
+// const { isArguments } = require('lodash');
+// const { 1 } = require('mysql/lib/protocol/constants/types');
 
 const b64 = new BaiduB64();
 
@@ -111,7 +113,7 @@ let jzjluckDraw =async function ( req,res) {
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
-				console.log(prizeName)
+				// console.log(prizeName)
 				await redisStrDecr(3, prizeName);
 				res.send({ 
 					'code': 200,
@@ -598,48 +600,6 @@ let getAccessToken = async function (req,res) {
 	// 	}
 	// });
  }
-// let test2 =async function(req,res){
-	
-// 	let {formId,swanid} =req.body
-// 	let formId =''
-// 	let swanid=''
-// 	let param ={
-// 		accessToken:'24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672',
-// 		template_id:'9933055a93484023ad6b76adaae4183f',
-// 		touser:swanid,
-// 		data:{
-// 			keyword1: {
-// 				value: "百度直播夜"
-// 			},
-// 			keyword2: {
-// 				value: '今天20:00 开播时间'
-// 			},
-// 			keyword3: {
-// 				value: "2020-09-10 13:00"
-// 			},
-// 		},
-// 		page:'test/test',
-// 		scene_id:formId,
-// 		scene_type:1
-
-// 	}
-// 	let url ='https://openapi.baidu.com/rest/2.0/smartapp/template/send?access_token=24.7c296337d474b78e44828ce6d5530f0b.2592000.1601026870.282335-18005672'
-// 	request({
-// 		url:url,
-// 		method: 'POST',
-// 		data: param
-// 	},(reslut)=>{
-// 		console.log(reslut)
-// 		res.send({ 
-// 			'code': 1,
-// 			'msg': '成功',
-// 			'data':reslut
-// 		});
-		
-// 	})
-		
-// }
-//好奇集市接口
 let hqjsLuckDraw =async function ( req,res) { 
 	let rate ='';
 	let sum = 0;
@@ -714,12 +674,6 @@ let hqjsLuckDraw =async function ( req,res) {
 		
 	}
 }
-
-//
-
-
-
-
 
 //数据查询工具
 let query = async function (req,res) {
@@ -856,7 +810,6 @@ let download1 = function (req,res) {
 
 //小程序接口
 let getOpenid=async function (req,res) {
-	
 	let {code,team_id,share_id} =req.body
 	// team_id='aaaaa',
 	// share_id='aaaaa'
@@ -894,13 +847,14 @@ let getOpenid=async function (req,res) {
 			if(team_id ==''){
 				if(userinfo['join_team_flag'] =='0'){
 					userinfo['to']='sy'
+					userinfo['to_team_id']=''
+					// console.log(userinfo)
 					res.send({ 
 						'code': 1,
 						'msg': '用户未加入战队',
 						'data':userinfo
 					});
-				}else{	
-					
+				}else{
 					let sqlArr1 =[userinfo['team_id']];
 					let sql1 = 'select * from  nhj_team_info where team_id = ? ';
 					let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
@@ -909,7 +863,7 @@ let getOpenid=async function (req,res) {
 						userinfo['to_team_id']=userinfo['team_id']
 						res.send({ 
 							'code': 1,
-							'msg': '用户已加入战队，单战队人数不够',
+							'msg': '用户已加入战队，但战队人数不够',
 							'data':userinfo
 						});
 						
@@ -927,7 +881,9 @@ let getOpenid=async function (req,res) {
 				}
 
 			}else{
+				
 				// 当前用户没有加入战队
+				
 				if(userinfo['join_team_flag'] =='0'){
 					if(JSON.parse(userinfo['help_team_id']).indexOf(team_id)==-1){
 						//更新被分享者信息
@@ -946,6 +902,15 @@ let getOpenid=async function (req,res) {
 						let sqlArr4 =[JSON.stringify(shareinfo),share_id];
 						let sql4 = 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
 						await sqlQuery.SysqlConnect(sql4,sqlArr4);
+						//更新 redis战队票数
+					
+						let objRes =JSON.parse(await redisStrGet(1,team_id))
+						objRes['total_bill']= objRes['total_bill']+1
+						await redisStrSet(1, team_id, JSON.stringify(objRes))
+						//更新数据库战队票数
+						let sqlArr7 =[objRes['total_bill'],team_id];
+						let sql7 = 'update nhj_team_info  set total_bill = ?  where team_id= ?';
+						await sqlQuery.SysqlConnect(sql7,sqlArr7);
 
 						//查询当前前往哪个页面
 						let sqlArr5 =[team_id];
@@ -982,9 +947,7 @@ let getOpenid=async function (req,res) {
 					}
 				}else{
 					//查询当前前往哪个页面
-					if(userinfo['team_id'] != team_id){
-						userinfo['tips']='你已经加入战队了，不能为其他战队助力'
-					}
+				
 					let sqlArr6 =[userinfo['team_id']];
 					let sql6 = 'select * from  nhj_team_info where team_id = ? ';
 					let result6 = await sqlQuery.SysqlConnect(sql6,sqlArr6);
@@ -993,7 +956,7 @@ let getOpenid=async function (req,res) {
 						userinfo['to_team_id']=userinfo['team_id']
 						res.send({ 
 							'code': 1,
-							'msg': '被分享战队还差人，判断是否加入当前战队',
+							'msg': '你的战队已经还差人，快去邀请成员吧！',
 							'data':userinfo
 						});
 						
@@ -1002,7 +965,7 @@ let getOpenid=async function (req,res) {
 						userinfo['to_team_id']=userinfo['team_id']
 						res.send({ 
 							'code': 1,
-							'msg': '被分享战队不差人，判断是否仍要加入当前战队',
+							'msg': '你的战队已经还不差人，快去分享助力吧！',
 							'data':userinfo
 						});
 					}
@@ -1054,34 +1017,54 @@ let getUserinfo = async function (req,res) {
 }
 //createGoodsList
 let createGoodsList = async function (req,res) {
-	let {user_id,user_name,goods_list} =req.body
-	let sqlArr =[1,1,user_id,user_id];
-	let sql = 'update nhj_user_info  set join_team_flag = ? , captain_flag= ? , team_id = ?  where user_id= ?';
-	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
-	if(result.affectedRows==1){
-		let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-		let sqlArr1 =[user_id,user_name,JSON.stringify([user_id]),goods_list,create_time];
-		let sql1 = 'insert into nhj_team_info (team_id,team_name,members,goods_list,create_time) values(?,?,?,?,?)';
-		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
-		if(result1.affectedRows==1){
-			res.send({ 
-				'code': 1,
-				'msg': '年货清单生成成功！'
-				
-			});
+	let {user_id,goods_list} =req.body
+	let sqlArr0 =[user_id];
+	let sql0 = 'select * from  nhj_user_info where user_id = ? ';
+	let result0 = await sqlQuery.SysqlConnect(sql0,sqlArr0);
+	// console.log(result0[0])
+	if(result0[0]['captain_flag'] =='1'){
+		res.send({ 
+			'code': 1,
+			'msg': '您已经选过年货了，请勿重新提交！'
+		});
+	}else{
+		//设置战队排行榜
+		let obj ={}
+		obj['team_name'] =result0[0]['user_name']+'的战队'
+		obj['user_avatar_url']=result0[0]['user_avatar_url']
+		obj['total_bill']=1
+		await redisStrSet(1, user_id, JSON.stringify(obj));
+		
+		let sqlArr =[1,1,user_id,user_id];
+		let sql = 'update nhj_user_info  set join_team_flag = ? , captain_flag= ? , team_id = ?  where user_id= ?';
+		let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+		if(result.affectedRows==1){
+			
+			let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+			let sqlArr1 =[user_id,obj['team_name'],JSON.stringify([user_id]),goods_list,create_time];
+			let sql1 = 'insert into nhj_team_info (team_id,team_name,members,goods_list,create_time) values(?,?,?,?,?)';
+			let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			if(result1.affectedRows==1){
+				res.send({ 
+					'code': 1,
+					'msg': '年货清单生成成功！'
+					
+				});
+			}else{
+				res.send({ 
+					'code': 0,
+					'msg': '年货清单生成失败！'
+				});
+			}
+			
 		}else{
 			res.send({ 
 				'code': 0,
 				'msg': '年货清单生成失败！'
 			});
 		}
-		
-	}else{
-		res.send({ 
-			'code': 0,
-			'msg': '年货清单生成失败！'
-		});
 	}
+	
 
 }
 //getTeamInfo 战队信息
@@ -1092,10 +1075,70 @@ let getTeamInfo= async function (req,res) {
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
 	let team_info =[]
 	let data ={}
-	// console.log(result[0]['members'])
+	
 	if(result.length >0){
 		data['goods_list']= JSON.parse(result[0]['goods_list'])
-		JSON.parse(result[0]['members']).forEach(async function (val,index) {
+		util.customForeach(JSON.parse(result[0]['members']), async (val,index) => {
+			let obj ={}
+			let sqlArr1 =[val];
+			let sql1 = 'select * from  nhj_user_info where user_id = ? ';
+			let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			
+			if(result1.length>0){
+				obj['user_name'] =result1[0]['user_name']
+				obj['user_avatar_url'] =result1[0]['user_avatar_url']
+				obj['share_count_info'] =result1[0]['share_count_info']
+				team_info.push(obj)
+			}
+			if((JSON.parse(result[0]['members']).length -1) == index){
+				data['team_info']=team_info
+				// console.log(data)
+				res.send({ 
+					'code': 1,
+					'msg': '',
+					'data':data
+				});
+			}
+		});
+		
+	}
+
+}
+//战队助力页内容
+let getTeamzy =async function (req,res) {
+	let {team_id,user_id} =req.body
+	let sqlArr =[team_id];
+	let sql = 'select * from  nhj_team_info where team_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let team_info =[]
+	let data ={}
+	let sqlArr2 =[];
+	let sql2 = 'select * from  nhj_team_info order by total_bill desc';
+	let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
+	let sqlArr3 =[user_id];
+	let sql3 = 'select * from  nhj_user_info where user_id = ? ';
+	let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
+	let pm =''
+	let price =0
+	JSON.parse(result[0]['goods_list']).forEach(function (val,index) { 
+		price+=Number(val['goodsPrice'])
+	})
+	data['total_price']=price
+	data['task']= JSON.parse(result3[0]['task'])
+	data['id']=result[0]['id']
+	
+	data['create_time'] =result[0]['create_time'].toLocaleString().split(' ')[0].replace(/-/g,'/')
+	data['task_total']= JSON.parse(result3[0]['task_total'])
+	result2.forEach(function (val,index) {
+		if(val.team_id == team_id ){
+			pm = index+1
+		}
+	})
+	data['pm'] =pm
+	if(result.length >0){
+		data['total_bill']=result[0]['total_bill']
+		data['team_name']=result[0]['team_name']
+		util.customForeach(JSON.parse(result[0]['members']), async (val,index) => {
 			let obj ={}
 			let sqlArr1 =[val];
 			let sql1 = 'select * from  nhj_user_info where user_id = ? ';
@@ -1103,18 +1146,74 @@ let getTeamInfo= async function (req,res) {
 			if(result1.length>0){
 				obj['user_name'] =result1[0]['user_name']
 				obj['user_avatar_url'] =result1[0]['user_avatar_url']
+				obj['share_count']=JSON.parse(result1[0]['share_count_info']).length +result1[0]['task_total']
+				obj['captain_flag']=result1[0]['captain_flag']
 				team_info.push(obj)
 			}
 			if((JSON.parse(result[0]['members']).length -1) == index){
-				data['team_info']=team_info
+				
+				data['team_info']=util.objSort('share_count',team_info)
+				data['goods_list']=JSON.parse(result[0]['goods_list'])
+				
+				// 
 				res.send({ 
 					'code': 1,
 					'msg': '',
 					'data':data
 				});
 			}
-			
-		})
+		});
+		
+	}
+
+}
+//加入战队
+let joinTeam = async function (req,res) {
+	let {user_id,team_id}=req.body
+	//更新当前用户信息
+	let sqlArr =[1,team_id,user_id];
+	let sql = 'update nhj_user_info  set join_team_flag = ? ,team_id = ? where user_id= ?';
+	await sqlQuery.SysqlConnect(sql,sqlArr);
+
+	let sqlArr1 =[team_id];
+	let sql1 = 'select * from  nhj_team_info where team_id = ? ';
+	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
+	if(result1.length>0){
+		let obj=JSON.parse(result1[0]['members'])
+		obj.push(user_id)
+		let sqlArr2 =[JSON.stringify(obj),team_id];
+		let sql2 = 'update nhj_team_info  set members = ? where team_id= ?';
+		await sqlQuery.SysqlConnect(sql2,sqlArr2);
+		res.send({ 
+			'code': 1,
+			'msg': '更新加入战队成功！'
+		});
+	}
+	
+}
+//更新战队名
+let updateTeamName =async function (req,res) {
+	// let {team_name,team_id}=req.body
+	let team_name ='小王八的战队'
+	let team_id ='k04HERpS7gftwqxK2-D3zZRRfn'
+	let sqlArr =[team_name,team_id];
+	let sql = 'update nhj_team_info  set team_name = ? where team_id= ?';
+	//更新redis内的战队名
+	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+	let obj =JSON.parse(await redisStrGet(1,team_id))
+	obj['team_name']= team_name
+	await redisStrSet(1, team_id, JSON.stringify(obj))
+	
+	if(result.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '更改名字成功！'
+		});
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '更改名字失败！'
+		});
 	}
 
 }
@@ -1140,6 +1239,110 @@ let getCommand = async function (req,res) {
 		'data':result
 	});
 }
+//获取排行榜信息
+
+let getRankingList   = async function (req,res) { 
+	let result = await redisStrAll(1)
+	let list =[]
+	util.customForeach(result, async (val,index) => {
+		let obj =JSON.parse(await redisStrGet(1, val))
+		obj['team_id'] =val
+		list.push(obj)
+		if(index == (result.length-1)){
+			res.send({ 
+				'code': 1,
+				'msg': '',
+				'data':util.objSort('total_bill',list)
+			});
+		}
+	});
+	
+} 
+//签到任务签到
+let task =async function (req,res) {
+	let {date,user_id,task_id,total_bill,res_code,task_total} =req.body
+	let map={
+		'2021.1.18':1,
+		'2021.1.19':2,
+		'2021.1.20':3,
+		'2021.1.21':4,
+		'2021.1.22':5
+
+	}
+	let dayNum=map[date]
+	//  
+	let sqlArr =[user_id];
+	let sql = 'select * from  nhj_user_info where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let task =JSON.parse(result[0]['task'])
+	
+	
+	if(task_id==3){
+		if(res_code=='nn2021'){
+			
+			if(task['task'+task_id].indexOf('1')>-1){
+				
+				res.send({ 
+					'code': 1,
+					'msg': '您已经关注过公众号了！',
+					'data':task
+				});
+			}else{
+				//更新个人任务信息
+				task['task'+task_id][dayNum-1]='1'
+				let sqlArr1 =[JSON.stringify(task),user_id];
+				let sql1 = 'update nhj_user_info  set task = ? where user_id= ?';
+				await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				//更新团队牌票数
+				let sqlArr2 =[total_bill,result[0]['team_id']];
+				let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
+				await sqlQuery.SysqlConnect(sql2,sqlArr2);
+				//更新个人任务票数
+				let sqlArr4 =[task_total,user_id];
+				let sql4 = 'update nhj_user_info  set task_total = ? where user_id= ?';
+				await sqlQuery.SysqlConnect(sql4,sqlArr4);
+				//更新redis
+				let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
+				objRes['total_bill']= total_bill
+				await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
+				res.send({ 
+					'code': 1,
+					'msg': '任务完成成功',
+					'data':task
+				});
+			}
+		
+		}
+
+	}else{
+		//更新个人任务信息
+		task['task'+task_id][dayNum-1]='1'
+		let sqlArr1 =[JSON.stringify(task),user_id];
+		let sql1 = 'update nhj_user_info  set task = ? where user_id= ?';
+		await sqlQuery.SysqlConnect(sql1,sqlArr1);
+		
+		//更新团队牌票数
+		let sqlArr2 =[total_bill,result[0]['team_id']];
+		let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
+		await sqlQuery.SysqlConnect(sql2,sqlArr2);
+		//更新个人任务票数
+		let sqlArr4 =[task_total,user_id];
+		let sql4 = 'update nhj_user_info  set task_total = ? where user_id= ?';
+		await sqlQuery.SysqlConnect(sql4,sqlArr4);
+		//更新redis
+		let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
+		objRes['total_bill']= total_bill
+		await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
+		res.send({ 
+			'code': 1,
+			'msg': '任务完成成功',
+			'data':task
+		});
+	}
+
+}
+//签到任务 获取天数
+
 module.exports={
 	luckDraw,
 	submit,
@@ -1169,7 +1372,12 @@ module.exports={
 	getUserinfo,
 	createGoodsList,
 	getTeamInfo,
-	getCommand
+	getCommand,
+	joinTeam,
+	updateTeamName,
+	getRankingList,
+	getTeamzy,
+	task
 	
 
 };

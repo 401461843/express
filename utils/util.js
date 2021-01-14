@@ -84,5 +84,15 @@ module.exports ={
 		}
 		return qm;
 	},
+	objSort(property, arr) {
+		var sort1=function (a, b) {
+			var value1 = a[property];
+			var value2 = b[property];
+
+			return value2-value1;
+		};
+
+		return arr.sort(sort1);	  
+	},
 };
  

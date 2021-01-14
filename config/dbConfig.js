@@ -12,6 +12,7 @@ if ( env=='dev') {
 		user: 'root',
 		password: '123456',
 		database: 'qx',
+		connectionLimit: 100,
 	};
 	redisConfig ={
 		host: '127.0.0.1',
@@ -24,6 +25,7 @@ if ( env=='dev') {
 		user: 'root',
 		password: 'baidu@123',
 		database: 'qx',
+		connectionLimit: 100,
 	};
 	redisConfig ={
 		host: 'redis.kfdctebchxge.scs.su.baidubce.com',
