@@ -1233,7 +1233,7 @@ let updateTeamName =async function (req,res) {
 //小程序点击分享，生成分享口令
 let getCommand = async function (req,res) { 
 	let {team_id,user_id} =req.body
-	// console.log(team_id,user_id)
+	// console.log(team_id,user_id) 
 	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index?team_id='+team_id+'&share_id='+user_id
 	
 	let data ={
