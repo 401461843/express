@@ -1262,11 +1262,11 @@ let getRankingList   = async function (req,res) {
 let task =async function (req,res) {
 	let {date,user_id,task_id,total_bill,res_code,task_total} =req.body
 	let map={
-		'2021.1.18':1,
-		'2021.1.19':2,
-		'2021.1.20':3,
-		'2021.1.21':4,
-		'2021.1.22':5
+		'2021.1.15':1,
+		'2021.1.16':2,
+		'2021.1.17':3,
+		'2021.1.18':4,
+		'2021.1.19':5
 
 	}
 	let dayNum=map[date]
