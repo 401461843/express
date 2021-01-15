@@ -929,12 +929,19 @@ let getOpenid=async function (req,res) {
 								'data':userinfo
 							});
 							
+						}else{
+							userinfo['to']='db'
+							userinfo['to_team_id']=team_id
+							res.send({ 
+								'code': 1,
+								'msg': '被分享已上榜，判断是否加入当前战队',
+								'data':userinfo
+							});
 						}
 					
 
 
 					}else{
-						
 						let sqlArr9 =[team_id];
 						let sql9 = 'select * from  nhj_team_info where team_id = ? ';
 						let result9 = await sqlQuery.SysqlConnect(sql9,sqlArr9);
@@ -952,7 +959,7 @@ let getOpenid=async function (req,res) {
 							userinfo['to_team_id']=team_id
 							res.send({ 
 								'code': 1,
-								'msg': '被分享战队还差人，判断是否加入当前战队',
+								'msg': '被分享战队已上榜，判断是否加入当前战队',
 								'data':userinfo
 							});
 						}
