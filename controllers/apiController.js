@@ -1312,6 +1312,12 @@ let task =async function (req,res) {
 				});
 			}
 		
+		}else{
+			res.send({ 
+				'code': 1,
+				'msg': '关注码错误了！',
+				'data':task
+			});
 		}
 
 	}else{
