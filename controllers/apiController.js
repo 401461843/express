@@ -883,9 +883,9 @@ let getOpenid=async function (req,res) {
 			}else{
 				
 				// 当前用户没有加入战队
-				
 				if(userinfo['join_team_flag'] =='0'){
 					if(JSON.parse(userinfo['help_team_id']).indexOf(team_id)==-1){
+						
 						//更新被分享者信息
 						let help_team_id_temp =JSON.parse(userinfo['help_team_id'])
 						help_team_id_temp.push(team_id)
@@ -897,8 +897,12 @@ let getOpenid=async function (req,res) {
 							userinfo['help_team_id']=JSON.stringify(help_team_id_temp)
 						}
 						//更新分享者的分享信息
-						let shareinfo=JSON.parse(userinfo['share_count_info'])
-						shareinfo.push(share_id)
+						let sqlArr10 =[share_id];
+						let sql10 = 'select * from  nhj_user_info where user_id = ? ';
+						let result10 = await sqlQuery.SysqlConnect(sql10,sqlArr10);
+						let shareinfo=JSON.parse(result10[0]['share_count_info'])
+
+						shareinfo.push(userinfo['user_id'])
 						let sqlArr4 =[JSON.stringify(shareinfo),share_id];
 						let sql4 = 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
 						await sqlQuery.SysqlConnect(sql4,sqlArr4);
@@ -925,25 +929,34 @@ let getOpenid=async function (req,res) {
 								'data':userinfo
 							});
 							
+						}
+					
+
+
+					}else{
+						
+						let sqlArr9 =[team_id];
+						let sql9 = 'select * from  nhj_team_info where team_id = ? ';
+						let result9 = await sqlQuery.SysqlConnect(sql9,sqlArr9);
+						if(JSON.parse(result9[0]['members']).length<3){
+							userinfo['to']='zd'
+							userinfo['to_team_id']=team_id
+							res.send({ 
+								'code': 1,
+								'msg': '被分享战队还差人，判断是否加入当前战队',
+								'data':userinfo
+							});
+						
 						}else{
 							userinfo['to']='db'
 							userinfo['to_team_id']=team_id
 							res.send({ 
 								'code': 1,
-								'msg': '被分享战队不差人，判断是否仍要加入当前战队',
+								'msg': '被分享战队还差人，判断是否加入当前战队',
 								'data':userinfo
 							});
 						}
-
-
-					}else{
-						userinfo['to']='sy'
-						res.send({ 
-							'code': 1,
-							'msg': '你已经帮当前战队助过力了',
-							'data':userinfo
-						});
-
+						
 					}
 				}else{
 					//查询当前前往哪个页面
@@ -1221,7 +1234,6 @@ let updateTeamName =async function (req,res) {
 let getCommand = async function (req,res) { 
 	let {team_id,user_id} =req.body
 	// console.log(team_id,user_id)
-	
 	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index?team_id='+team_id+'&share_id='+user_id
 	
 	let data ={
