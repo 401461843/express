@@ -1041,7 +1041,6 @@ let createGoodsList = async function (req,res) {
 	let sqlArr0 =[user_id];
 	let sql0 = 'select * from  nhj_user_info where user_id = ? ';
 	let result0 = await sqlQuery.SysqlConnect(sql0,sqlArr0);
-	// console.log(result0[0])
 	if(result0[0]['captain_flag'] =='1'){
 		res.send({ 
 			'code': 1,
@@ -1050,7 +1049,7 @@ let createGoodsList = async function (req,res) {
 	}else{
 		//设置战队排行榜
 		let obj ={}
-		obj['team_name'] =result0[0]['user_name']+'的战队'
+		obj['team_name'] =result0[0]['user_name']
 		obj['user_avatar_url']=result0[0]['user_avatar_url']
 		obj['total_bill']=1
 		await redisStrSet(1, user_id, JSON.stringify(obj));
