@@ -1198,7 +1198,13 @@ let joinTeam = async function (req,res) {
 	let sqlArr1 =[team_id];
 	let sql1 = 'select * from  nhj_team_info where team_id = ? ';
 	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
-	if(result1.length>0){
+	if(result1['0']['members'].indexOf(user_id)>-1){
+		res.send({ 
+			'code': 1,
+			'msg': '您已经加入过战队了！'
+		});
+	}else{
+		
 		let obj=JSON.parse(result1[0]['members'])
 		obj.push(user_id)
 		let sqlArr2 =[JSON.stringify(obj),team_id];
@@ -1208,7 +1214,9 @@ let joinTeam = async function (req,res) {
 			'code': 1,
 			'msg': '更新加入战队成功！'
 		});
+		
 	}
+	
 	
 }
 //更新战队名
@@ -1306,7 +1314,6 @@ let task =async function (req,res) {
 		}
 	})
 	zd_info['pm']=pm
-	console.log(task_id)
 	if(task_id==3){
 
 		if(res_code=='nn2021'){
