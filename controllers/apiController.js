@@ -1094,7 +1094,10 @@ let getTeamInfo= async function (req,res) {
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
 	let team_info =[]
 	let data ={}
-	
+	let sqlArr8 =[];
+	let sql8 = 'select count(*) from  nhj_user_info';
+	let result8 = await sqlQuery.SysqlConnect(sql8,sqlArr8);
+	data['person_num']=result8[0]['count(*)']
 	if(result.length >0){
 		data['goods_list']= JSON.parse(result[0]['goods_list'])
 		util.customForeach(JSON.parse(result[0]['members']), async (val,index) => {
@@ -1134,6 +1137,9 @@ let getTeamzy =async function (req,res) {
 	let sqlArr2 =[];
 	let sql2 = 'select * from  nhj_team_info order by total_bill desc';
 	let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
+	let sqlArr8 =[];
+	let sql8 = 'select count(*) from  nhj_user_info';
+	let result8 = await sqlQuery.SysqlConnect(sql8,sqlArr8);
 	let sqlArr3 =[user_id];
 	let sql3 = 'select * from  nhj_user_info where user_id = ? ';
 	let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
@@ -1154,6 +1160,7 @@ let getTeamzy =async function (req,res) {
 		}
 	})
 	data['pm'] =pm
+	data['person_num']=result8[0]['count(*)']
 	if(result.length >0){
 		data['total_bill']=result[0]['total_bill']
 		data['team_name']=result[0]['team_name']
