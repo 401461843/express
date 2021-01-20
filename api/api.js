@@ -70,6 +70,8 @@ router.post('/getRankingList', api.getRankingList);
 router.post('/getTeamzy', api.getTeamzy);
 // 完成任务接口
 router.post('/task', api.task);
+// 专题页抽奖接口
+router.post('/ztyluckDraw', api.ztyluckDraw);
 
 
 module.exports = router; 

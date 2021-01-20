@@ -1255,7 +1255,7 @@ let updateTeamName =async function (req,res) {
 let getCommand = async function (req,res) { 
 	let {team_id,user_id} =req.body
 	// console.log(team_id,user_id) 
-	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index?team_id='+team_id+'&share_id='+user_id
+	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/loading/loading?team_id='+team_id+'&share_id='+user_id
 	
 	let data ={
 		"activity_id":"749",//活动id，由cms申请,必选
@@ -1407,7 +1407,71 @@ let task =async function (req,res) {
 }
 //专题页抽奖
 
-
+let ztyluckDraw =async function ( req,res) { 	
+	let rate ='';
+	let sum = 0;
+	let section = [0];
+	let newArr =[];
+	let prizeNumber =Math.floor(Math.random() * 200);
+	let allPrize='';
+	let count =0;
+	let prizeName ='';
+	
+	// 获取抽奖概率
+	rate =JSON.parse(await redisStrGet(5, 'gl'));
+	console.log(rate)
+	if(JSON.stringify(rate) =='{}'){
+		
+		res.send({ 
+			'code': 200,
+			'msg': '抽奖成功',
+			'prize': '没中奖',
+		});
+	}else{
+		loadsh.forEach(rate, function (val) { 
+			let temArr=[];
+			sum+=val;
+			section.push(sum);
+			temArr[0]=section[count];
+			temArr[1]=section[count+1];
+			newArr.push(temArr);
+			count++;
+		});
+		console.log(prizeNumber)
+		console.log(newArr)
+		util.customForeach(newArr, async function (val, index) { 
+			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
+				prizeName=Object.keys(rate)[index];
+				await redisStrDecr(3, prizeName);
+				res.send({ 
+					'code': 200,
+					'msg': '抽奖成功',
+					'prize': prizeName,
+				});
+				allPrize=await redisStrAll(3);
+				util.customForeach(allPrize, async (val) => {
+					if ( await redisStrGet(3, val)==0) {
+						let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
+						let fboldGlObj=JSON.stringify(oldGlObj)
+						let oldGl =oldGlObj[val];
+						let avater =oldGl/( Object.keys(oldGlObj).length-1);
+	
+						delete oldGlObj[val];
+						loadsh.forEach(oldGlObj, async function (val1, key) { 
+							oldGlObj[key] =Number(val1)+avater;
+						});	
+						await redisStrDel(3, val);
+						await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
+						await redisStrSet(5, 'gl1', fboldGlObj);
+	
+					}
+				});
+				
+			} 
+		});
+	}
+	
+};
 module.exports={
 	luckDraw,
 	submit,
@@ -1442,7 +1506,8 @@ module.exports={
 	updateTeamName,
 	getRankingList,
 	getTeamzy,
-	task
+	task,
+	ztyluckDraw
 	
 
 };
