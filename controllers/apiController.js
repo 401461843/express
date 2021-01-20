@@ -81,7 +81,7 @@ let luckDraw =async function ( req,res) {
 	
 };
 //
-let jzjluckDraw =async function ( req,res) { 
+let jzjluckDraw =async function ( req,res) { 	
 	let rate ='';
 	let sum = 0;
 	let section = [0];
@@ -113,7 +113,6 @@ let jzjluckDraw =async function ( req,res) {
 		util.customForeach(newArr, async function (val, index) { 
 			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
 				prizeName=Object.keys(rate)[index];
-				// console.log(prizeName)
 				await redisStrDecr(3, prizeName);
 				res.send({ 
 					'code': 200,
@@ -1148,7 +1147,7 @@ let getTeamzy =async function (req,res) {
 	JSON.parse(result[0]['goods_list']).forEach(function (val,index) { 
 		price+=Number(val['goodsPrice'])
 	})
-	data['total_price']=price
+	data['total_price']=price.toFixed(2)
 	data['task']= JSON.parse(result3[0]['task'])
 	data['id']=result[0]['id']
 	
@@ -1406,7 +1405,8 @@ let task =async function (req,res) {
 	}
 
 }
-//签到任务 获取天数
+//专题页抽奖
+
 
 module.exports={
 	luckDraw,
