@@ -6,7 +6,7 @@ const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
-const { use } = require('../api/api');
+// const { use } = require('../api/api');
 // const { isArguments } = require('lodash');
 // const { 1 } = require('mysql/lib/protocol/constants/types');
 
