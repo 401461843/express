@@ -72,6 +72,7 @@ router.post('/getTeamzy', api.getTeamzy);
 router.post('/task', api.task);
 // 专题页抽奖接口
 router.post('/ztyluckDraw', api.ztyluckDraw);
-
+// 专题页抽奖接口
+router.post('/getPrize', api.getPrize);
 
 module.exports = router; 

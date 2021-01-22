@@ -6,6 +6,7 @@ const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
+const { use } = require('../api/api');
 // const { isArguments } = require('lodash');
 // const { 1 } = require('mysql/lib/protocol/constants/types');
 
@@ -1416,62 +1417,99 @@ let ztyluckDraw =async function ( req,res) {
 	let allPrize='';
 	let count =0;
 	let prizeName ='';
+	let {user_id} =req.body
+	let sqlArr =[user_id];
+	let sql = 'select * from  nhj_user_info where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
 	
-	// 获取抽奖概率
-	rate =JSON.parse(await redisStrGet(5, 'gl'));
-	console.log(rate)
-	if(JSON.stringify(rate) =='{}'){
-		
+	if(result[0]['cj_flag'] =='1'){
 		res.send({ 
 			'code': 200,
-			'msg': '抽奖成功',
-			'prize': '没中奖',
+			'msg': '您已经抽过奖了！',
+			'prize': ''
 		});
 	}else{
-		loadsh.forEach(rate, function (val) { 
-			let temArr=[];
-			sum+=val;
-			section.push(sum);
-			temArr[0]=section[count];
-			temArr[1]=section[count+1];
-			newArr.push(temArr);
-			count++;
+
+		// 获取抽奖概率
+		rate =JSON.parse(await redisStrGet(5, 'gl'));
+		
+		if(JSON.stringify(rate) =='{}'){
+			
+			res.send({ 
+				'code': 200,
+				'msg': '抽奖成功',
+				'prize': '没中奖',
+			});
+		}else{
+			loadsh.forEach(rate, function (val) { 
+				let temArr=[];
+				sum+=val;
+				section.push(sum);
+				temArr[0]=section[count];
+				temArr[1]=section[count+1];
+				newArr.push(temArr);
+				count++;
+			});
+			
+				util.customForeach(newArr, async function (val, index) { 
+					if (prizeNumber>val[0] && prizeNumber<=val[1]) {
+						prizeName=Object.keys(rate)[index];
+						await redisStrDecr(3, prizeName);
+						
+						//更新用户状态
+						let sqlArr =['1',user_id];
+						let sql = 'update nhj_user_info  set cj_flag = ? where user_id= ?';
+						await sqlQuery.SysqlConnect(sql,sqlArr);
+
+						allPrize=await redisStrAll(3);
+						util.customForeach(allPrize, async (val) => {
+							if ( await redisStrGet(3, val)==0) {
+								let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
+								let fboldGlObj=JSON.stringify(oldGlObj)
+								let oldGl =oldGlObj[val];
+								let avater =oldGl/( Object.keys(oldGlObj).length-1);
+			
+								delete oldGlObj[val];
+								loadsh.forEach(oldGlObj, async function (val1, key) { 
+									oldGlObj[key] =Number(val1)+avater;
+								});	
+								await redisStrDel(3, val);
+								await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
+								await redisStrSet(5, 'gl1', fboldGlObj);
+			
+							}
+						});
+						res.send({ 
+							'code': 200,
+							'msg': '抽奖成功',
+							'prize': prizeName,
+						});
+						
+					} 
+				});
+			}
+	}
+	
+	
+};
+let getPrize=async function (req,res) { 
+	let {tell,name,user_id,prize}=req.body
+	let sqlArr =[tell,name,prize,'1',user_id];
+	let sql = 'update nhj_user_info  set tell = ? , name= ? ,prize = ? ,cj_flag = ? where user_id= ?';
+	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '奖品领取成功！'
 		});
-		console.log(prizeNumber)
-		console.log(newArr)
-		util.customForeach(newArr, async function (val, index) { 
-			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
-				prizeName=Object.keys(rate)[index];
-				await redisStrDecr(3, prizeName);
-				res.send({ 
-					'code': 200,
-					'msg': '抽奖成功',
-					'prize': prizeName,
-				});
-				allPrize=await redisStrAll(3);
-				util.customForeach(allPrize, async (val) => {
-					if ( await redisStrGet(3, val)==0) {
-						let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
-						let fboldGlObj=JSON.stringify(oldGlObj)
-						let oldGl =oldGlObj[val];
-						let avater =oldGl/( Object.keys(oldGlObj).length-1);
-	
-						delete oldGlObj[val];
-						loadsh.forEach(oldGlObj, async function (val1, key) { 
-							oldGlObj[key] =Number(val1)+avater;
-						});	
-						await redisStrDel(3, val);
-						await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
-						await redisStrSet(5, 'gl1', fboldGlObj);
-	
-					}
-				});
-				
-			} 
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '奖品领取失败！'
 		});
 	}
 	
-};
+}
 module.exports={
 	luckDraw,
 	submit,
@@ -1507,7 +1545,8 @@ module.exports={
 	getRankingList,
 	getTeamzy,
 	task,
-	ztyluckDraw
+	ztyluckDraw,
+	getPrize
 	
 
 };

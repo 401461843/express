@@ -2,19 +2,19 @@
  
 
 // module.exports ={
-// 	// encryption_tx_sign: function () { 
-// 	// 	var data = '156156165152165156156' ;
-// 	// 	var algorithm = 'AES_256_CBC' ;
-// 	// 	var key = 'f0b7fd911a1e183004af9dcb9fb95d84' ;
-// 	// 	var iv = 'd82197f631102409' ;
-// 	// 	var clearEncoding = 'utf8' ;
-// 	// 	var cipherEncoding = 'base64' ;
-// 	// 	var cipherChunks = [];
-// 	// 	var cipher = crypto.createCipheriv(algorithm, key, iv);
-
-// 	// 	cipherChunks.push(cipher.update(data, clearEncoding, cipherEncoding));
-// 	// 	cipherChunks.push(cipher.final(cipherEncoding));
-// 	// 	return cipherChunks.join( '' );
-// 	// },
+// 	encryption_tx_sign: function (data, key, iv) {
+//             if (!data) {
+//                 return "";
+//             }
+//             iv = iv || "";
+//             var clearEncoding = 'utf8';
+//             var cipherEncoding = 'base64';
+//             var cipherChunks = [];
+//             var decipher = crypto.createDecipheriv('AES-192-CBC', key, iv);
+//             decipher.setAutoPadding(true);
+//             cipherChunks.push(decipher.update(data, cipherEncoding, clearEncoding));
+//             cipherChunks.push(decipher.final(clearEncoding));
+//             return cipherChunks.join('');
+//         }
 // };
  
