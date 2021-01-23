@@ -6,9 +6,7 @@ const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
-// const { use } = require('../api/api');
-// const { isArguments } = require('lodash');
-// const { 1 } = require('mysql/lib/protocol/constants/types');
+
 
 const b64 = new BaiduB64();
 
@@ -1145,6 +1143,7 @@ let getTeamzy =async function (req,res) {
 	let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
 	let pm =''
 	let price =0
+	let captain={}
 	JSON.parse(result[0]['goods_list']).forEach(function (val,index) { 
 		price+=Number(val['goodsPrice'])
 	})
@@ -1170,16 +1169,27 @@ let getTeamzy =async function (req,res) {
 			let sql1 = 'select * from  nhj_user_info where user_id = ? ';
 			let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
 			if(result1.length>0){
-				obj['user_name'] =result1[0]['user_name']
-				obj['user_avatar_url'] =result1[0]['user_avatar_url']
-				obj['share_count']=JSON.parse(result1[0]['share_count_info']).length +result1[0]['task_total']
-				obj['captain_flag']=result1[0]['captain_flag']
-				obj['user_id']=result1[0]['user_id']
-				team_info.push(obj)
+				if(result1[0]['captain_flag']=='1'){
+					captain['user_name'] =result1[0]['user_name']
+					captain['user_avatar_url'] =result1[0]['user_avatar_url']
+					captain['share_count']=JSON.parse(result1[0]['share_count_info']).length +result1[0]['task_total']
+					captain['captain_flag']=result1[0]['captain_flag']
+					captain['user_id']=result1[0]['user_id']
+				}else{
+					obj['user_name'] =result1[0]['user_name']
+					obj['user_avatar_url'] =result1[0]['user_avatar_url']
+					obj['share_count']=JSON.parse(result1[0]['share_count_info']).length +result1[0]['task_total']
+					obj['captain_flag']=result1[0]['captain_flag']
+					obj['user_id']=result1[0]['user_id']
+					team_info.push(obj)
+				}
+				
 			}
 			if((JSON.parse(result[0]['members']).length -1) == index){
-				
-				data['team_info']=util.objSort('share_count',team_info)
+				let temp =util.objSort('share_count',team_info)
+				temp.unshift(captain)
+				data['team_info']=temp
+
 				data['goods_list']=JSON.parse(result[0]['goods_list'])
 				
 				// 
