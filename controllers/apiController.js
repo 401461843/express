@@ -1307,6 +1307,11 @@ let getRankingList   = async function (req,res) {
 //签到任务签到
 let task =async function (req,res) {
 	let {date,user_id,task_id,res_code,add_bill} =req.body
+	let date1 = new Date();
+	let year = date1.getFullYear(); //获取完整的年份(4位)
+	let month = date1.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+	let day = date1.getDate(); //获取当前日(1-31)
+	let time = year + '.' + month + '.' + day
 	let map={
 		'2021.1.23':1,
 		'2021.1.24':2,
@@ -1315,8 +1320,6 @@ let task =async function (req,res) {
 		'2021.1.27':5,
 		'2021.1.28':6,
 		'2021.1.29':7
-
-
 	}
 	let dayNum=map[date]
 	let sqlArr =[user_id];
@@ -1344,89 +1347,101 @@ let task =async function (req,res) {
 		}
 		
 	}
-	if(task_id==3){
+	if(time != date || task['task'+task_id][dayNum-1] =='1' ||  add_bill>50){
+		res.send({ 
+			'code': 1,
+			'msg': '数据异常！',
+			'data':''
+		});
+	}else{	
+		if(task_id==3){
 
-		if(res_code=='nn2021'){
-			
-			if(task['task'+task_id].indexOf('1')>-1){
+			if(res_code=='nn2021'){
 				
-				res.send({ 
-					'code': 1,
-					'msg': '您已经关注过公众号了！',
-					'data':task
-				});
+				if(task['task'+task_id].indexOf('1')>-1){
+					
+					res.send({ 
+						'code': 1,
+						'msg': '您已经关注过公众号了！',
+						'data':task
+					});
+				}else{
+					//更新个人任务信息
+					task['task'+task_id][dayNum-1]='1'
+					let task_total= Number(result[0]['task_total'])+add_bill
+					let sqlArr1 =[JSON.stringify(task),task_total,user_id];
+					let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
+					await sqlQuery.SysqlConnect(sql1,sqlArr1);
+					
+					// //更新团队牌票数
+					let sqlArr5 =[result[0]['team_id']];
+					let sql5 = 'select * from  nhj_team_info where team_id = ? ';
+					let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
+					let total_bill =result5[0]['total_bill']+add_bill
+					let sqlArr2 =[total_bill,result[0]['team_id']];
+					let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
+					await sqlQuery.SysqlConnect(sql2,sqlArr2);
+				
+					//更新redis
+					let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
+					objRes['total_bill']= total_bill
+					await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
+					zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
+					zd_info['user_id'] =result[0]['user_id']
+					zd_info['total_bill']=total_bill
+					zd_info['task'] =task
+					res.send({ 
+						'code': 1,
+						'msg': '任务完成成功',
+						'data':zd_info
+					});
+				}
+			
 			}else{
-				//更新个人任务信息
-				task['task'+task_id][dayNum-1]='1'
-				let task_total= Number(result[0]['task_total'])+add_bill
-				let sqlArr1 =[JSON.stringify(task),task_total,user_id];
-				let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
-				await sqlQuery.SysqlConnect(sql1,sqlArr1);
-				
-				// //更新团队牌票数
-				let sqlArr5 =[result[0]['team_id']];
-				let sql5 = 'select * from  nhj_team_info where team_id = ? ';
-				let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
-				let total_bill =result5[0]['total_bill']+add_bill
-				let sqlArr2 =[total_bill,result[0]['team_id']];
-				let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
-				await sqlQuery.SysqlConnect(sql2,sqlArr2);
-			
-				//更新redis
-				let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
-				objRes['total_bill']= total_bill
-				await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
-				zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
-				zd_info['user_id'] =result[0]['user_id']
-				zd_info['total_bill']=total_bill
-				zd_info['task'] =task
 				res.send({ 
 					'code': 1,
-					'msg': '任务完成成功',
+					'msg': '关注码错误了！',
 					'data':zd_info
 				});
 			}
-		
+	
 		}else{
+			//更新个人任务信息
+			task['task'+task_id][dayNum-1]='1'
+			let task_total= Number(result[0]['task_total'])+add_bill
+			let sqlArr1 =[JSON.stringify(task),task_total,user_id];
+			let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
+			await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			
+			// //更新团队牌票数
+			let sqlArr5 =[result[0]['team_id']];
+			let sql5 = 'select * from  nhj_team_info where team_id = ? ';
+			let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
+			let total_bill =result5[0]['total_bill']+add_bill
+			let sqlArr2 =[total_bill,result[0]['team_id']];
+			let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
+			await sqlQuery.SysqlConnect(sql2,sqlArr2);
+		
+			//更新redis
+			let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
+			objRes['total_bill']= total_bill
+			await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
+			zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
+			zd_info['user_id'] =result[0]['user_id']
+			zd_info['total_bill']=total_bill
+			zd_info['task'] =task
+			
 			res.send({ 
 				'code': 1,
-				'msg': '关注码错误了！',
+				'msg': '任务完成成功',
 				'data':zd_info
 			});
 		}
-
-	}else{
-		//更新个人任务信息
-		task['task'+task_id][dayNum-1]='1'
-		let task_total= Number(result[0]['task_total'])+add_bill
-		let sqlArr1 =[JSON.stringify(task),task_total,user_id];
-		let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
-		await sqlQuery.SysqlConnect(sql1,sqlArr1);
-		
-		// //更新团队牌票数
-		let sqlArr5 =[result[0]['team_id']];
-		let sql5 = 'select * from  nhj_team_info where team_id = ? ';
-		let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
-		let total_bill =result5[0]['total_bill']+add_bill
-		let sqlArr2 =[total_bill,result[0]['team_id']];
-		let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
-		await sqlQuery.SysqlConnect(sql2,sqlArr2);
-	
-		//更新redis
-		let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
-		objRes['total_bill']= total_bill
-		await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
-		zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
-		zd_info['user_id'] =result[0]['user_id']
-		zd_info['total_bill']=total_bill
-		zd_info['task'] =task
-		
-		res.send({ 
-			'code': 1,
-			'msg': '任务完成成功',
-			'data':zd_info
-		});
 	}
+
+
+
+	
 
 }
 //专题页抽奖
