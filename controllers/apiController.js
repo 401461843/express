@@ -1266,7 +1266,7 @@ let updateTeamName =async function (req,res) {
 let getCommand = async function (req,res) { 
 	let {team_id,user_id} =req.body
 	// console.log(team_id,user_id) 
-	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/loading/loading?team_id='+team_id+'&share_id='+user_id
+	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index?team_id='+team_id+'&share_id='+user_id
 	
 	let data ={
 		"activity_id":"749",//活动id，由cms申请,必选
@@ -1427,98 +1427,88 @@ let ztyluckDraw =async function ( req,res) {
 	let allPrize='';
 	let count =0;
 	let prizeName ='';
-	let {user_id} =req.body
-	let sqlArr =[user_id];
-	let sql = 'select * from  nhj_user_info where user_id = ? ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
-	
-	if(result[0]['cj_flag'] =='1'){
+	// 获取抽奖概率
+	rate =JSON.parse(await redisStrGet(5, 'gl'));
+	if(JSON.stringify(rate) =='{}'){
 		res.send({ 
 			'code': 200,
-			'msg': '您已经抽过奖了！',
-			'prize': ''
+			'msg': '抽奖成功',
+			'prize': '没中奖',
 		});
 	}else{
+		loadsh.forEach(rate, function (val) { 
+			let temArr=[];
+			sum+=val;
+			section.push(sum);
+			temArr[0]=section[count];
+			temArr[1]=section[count+1];
+			newArr.push(temArr);
+			count++;
+		});
 
-		// 获取抽奖概率
-		rate =JSON.parse(await redisStrGet(5, 'gl'));
-		
-		if(JSON.stringify(rate) =='{}'){
-			
-			res.send({ 
-				'code': 200,
-				'msg': '抽奖成功',
-				'prize': '没中奖',
-			});
-		}else{
-			loadsh.forEach(rate, function (val) { 
-				let temArr=[];
-				sum+=val;
-				section.push(sum);
-				temArr[0]=section[count];
-				temArr[1]=section[count+1];
-				newArr.push(temArr);
-				count++;
-			});
-			
-				util.customForeach(newArr, async function (val, index) { 
-					if (prizeNumber>val[0] && prizeNumber<=val[1]) {
-						prizeName=Object.keys(rate)[index];
-						await redisStrDecr(3, prizeName);
-						
-						//更新用户状态
-						let sqlArr =['1',user_id];
-						let sql = 'update nhj_user_info  set cj_flag = ? where user_id= ?';
-						await sqlQuery.SysqlConnect(sql,sqlArr);
-
-						allPrize=await redisStrAll(3);
-						util.customForeach(allPrize, async (val) => {
-							if ( await redisStrGet(3, val)==0) {
-								let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
-								let fboldGlObj=JSON.stringify(oldGlObj)
-								let oldGl =oldGlObj[val];
-								let avater =oldGl/( Object.keys(oldGlObj).length-1);
-			
-								delete oldGlObj[val];
-								loadsh.forEach(oldGlObj, async function (val1, key) { 
-									oldGlObj[key] =Number(val1)+avater;
-								});	
-								await redisStrDel(3, val);
-								await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
-								await redisStrSet(5, 'gl1', fboldGlObj);
-			
-							}
-						});
-						res.send({ 
-							'code': 200,
-							'msg': '抽奖成功',
-							'prize': prizeName,
-						});
-						
-					} 
-				});
-			}
-	}
+		util.customForeach(newArr, async function (val, index) { 
+			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
+				prizeName=Object.keys(rate)[index];
+				await redisStrDecr(3, prizeName);
+				allPrize=await redisStrAll(3);
+				util.customForeach(allPrize, async (val) => {
+					if ( await redisStrGet(3, val)==0) {
+						let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
+						let fboldGlObj=JSON.stringify(oldGlObj)
+						let oldGl =oldGlObj[val];
+						let avater =oldGl/( Object.keys(oldGlObj).length-1);
 	
+						delete oldGlObj[val];
+						loadsh.forEach(oldGlObj, async function (val1, key) { 
+							oldGlObj[key] =Number(val1)+avater;
+						});	
+						await redisStrDel(3, val);
+						await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
+						await redisStrSet(5, 'gl1', fboldGlObj);
+	
+					}
+				});
+				res.send({ 
+					'code': 200,
+					'msg': '抽奖成功',
+					'prize': prizeName,
+				});
+				
+			} 
+		});
+	}
 	
 };
 let getPrize=async function (req,res) { 
-	let {tell,name,user_id,prize}=req.body
-	let sqlArr =[tell,name,prize,'1',user_id];
-	let sql = 'update nhj_user_info  set tell = ? , name= ? ,prize = ? ,cj_flag = ? where user_id= ?';
-	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
-	if(result.affectedRows==1){
+	let {name,tell,prize} = req.body;
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	let sqlArr1 =[tell];
+	let sql1 = 'select * from  nhjcj where tell = ? ';
+	let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
+	if(result1.length>0){
 		res.send({ 
 			'code': 1,
-			'msg': '奖品领取成功！'
+			'msg': '您已经领取过奖品了,请勿重复领取！',
+			'data':''
 		});
 	}else{
-		res.send({ 
-			'code': 0,
-			'msg': '奖品领取失败！'
-		});
+		let sqlArr =[name,tell,prize,create_time];
+		let sql = 'insert into nhjcj (name,tell,prize,create_time) values(?,?,?,?)';
+		let result= await sqlQuery.SysqlConnect(sql,sqlArr)
+		if(result.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'msg': '领取成功！',
+				'data':''
+			});
+		}else{
+			res.send({ 
+				'code': 2,
+				'msg': '领取失败!',
+				'data':''
+			});
+		}
 	}
-	
 }
 module.exports={
 	luckDraw,

@@ -62,4 +62,10 @@ router.get('/home/czysf', function(req, res) {
 router.get('/home/audi1', function(req, res) {
 	res.render('audi1.html');
 });
+router.get('/home/mainHome', function(req, res) {
+	res.render('nhjzhc.html');
+});
+router.get('/home/rule', function(req, res) {
+	res.render('rule.html');
+});
 module.exports = router;
