@@ -1335,8 +1335,14 @@ let task =async function (req,res) {
 	})
 	zd_info['pm']=pm
 	if(task['task'+task_id].length==5){
-		task['task'+task_id].push('0')
-		task['task'+task_id].push('0')
+		if(task_id == 1){
+			task['task'+task_id].push('1')
+			task['task'+task_id].push('1')
+		}else{
+			task['task'+task_id].push('0')
+			task['task'+task_id].push('0')
+		}
+		
 	}
 	if(task_id==3){
 
