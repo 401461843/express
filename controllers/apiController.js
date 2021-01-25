@@ -1312,7 +1312,10 @@ let task =async function (req,res) {
 		'2021.1.24':2,
 		'2021.1.25':3,
 		'2021.1.26':4,
-		'2021.1.27':5
+		'2021.1.27':5,
+		'2021.1.28':6,
+		'2021.1.29':7
+
 
 	}
 	let dayNum=map[date]
@@ -1331,6 +1334,10 @@ let task =async function (req,res) {
 		}
 	})
 	zd_info['pm']=pm
+	if(task['task'+task_id].length==5){
+		task['task'+task_id].push('0')
+		task['task'+task_id].push('0')
+	}
 	if(task_id==3){
 
 		if(res_code=='nn2021'){
