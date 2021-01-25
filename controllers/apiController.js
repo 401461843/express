@@ -907,7 +907,7 @@ let getOpenid=async function (req,res) {
 						//更新 redis战队票数
 					
 						let objRes =JSON.parse(await redisStrGet(1,team_id))
-						objRes['total_bill']= objRes['total_bill']+1
+						objRes['total_bill']= objRes['total_bill']+30
 						await redisStrSet(1, team_id, JSON.stringify(objRes))
 						//更新数据库战队票数
 						let sqlArr7 =[objRes['total_bill'],team_id];
