@@ -1485,7 +1485,6 @@ let getPrize=async function (req,res) {
 	let sqlArr1 =[tell];
 	let sql1 = 'select * from  nhjcj where tell = ? ';
 	let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
-	console.log(name)
 	if(result1.length>0){
 		res.send({ 
 			'code': 1,
