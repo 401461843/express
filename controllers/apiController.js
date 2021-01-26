@@ -8,7 +8,7 @@ const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
 
 const b64 = new BaiduB64();
-// var fs = require('fs');//文件模块
+var fs = require('fs');//文件模块
 
 
 global.dataList =[];
