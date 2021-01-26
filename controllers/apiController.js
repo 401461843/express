@@ -809,8 +809,9 @@ let download1 = function (req,res) {
 //小程序接口
 let getOpenid=async function (req,res) {
 	let {code,team_id,share_id} =req.body
-	// team_id='aaaaa',
-	// share_id='aaaaa'
+	code =escape(code)
+	team_id =escape(team_id)
+	share_id =escape(share_id)
 	let param ={
 		code:code,
 		client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
@@ -997,6 +998,11 @@ let getOpenid=async function (req,res) {
 //updateUserinfo
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
+
+	name =escape(name)
+	avatarUrl =escape(avatarUrl)
+	user_id =escape(user_id)
+
 	let sqlArr =[name,avatarUrl,user_id];
 	let sql = 'update nhj_user_info  set user_name = ? , user_avatar_url= ? where user_id= ?';
 	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
@@ -1016,6 +1022,7 @@ let updateUserinfo = async function (req,res) {
 //getUserinfo
 let getUserinfo = async function (req,res) {
 	let {user_id} =req.body
+	user_id=escape(user_id)
 	let sqlArr =[user_id];
 	let sql = 'select * from  nhj_user_info where user_id = ? ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
@@ -1036,6 +1043,8 @@ let getUserinfo = async function (req,res) {
 //createGoodsList
 let createGoodsList = async function (req,res) {
 	let {user_id,goods_list} =req.body
+	user_id=escape(user_id)
+	goods_list=escape(goods_list)
 	let sqlArr0 =[user_id];
 	let sql0 = 'select * from  nhj_user_info where user_id = ? ';
 	let result0 = await sqlQuery.SysqlConnect(sql0,sqlArr0);
@@ -1087,6 +1096,7 @@ let createGoodsList = async function (req,res) {
 //getTeamInfo 战队信息
 let getTeamInfo= async function (req,res) {
 	let {team_id} =req.body
+	team_id=escape(team_id)
 	let sqlArr =[team_id];
 	let sql = 'select * from  nhj_team_info where team_id = ? ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
@@ -1127,8 +1137,8 @@ let getTeamInfo= async function (req,res) {
 //战队助力页内容
 let getTeamzy =async function (req,res) {
 	let {team_id,user_id} =req.body
-	// team_id='k04HERmq6Jaacd9N_X4X_4R1Kn'
-	// user_id='k04HERmq6Jaacd9N_X4X_4R1Kn'
+	team_id =escape(team_id)
+	user_id=escape(user_id)
 	let sqlArr =[team_id];
 	let sql = 'select * from  nhj_team_info where team_id = ? ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
@@ -1209,6 +1219,8 @@ let getTeamzy =async function (req,res) {
 //加入战队
 let joinTeam = async function (req,res) {
 	let {user_id,team_id}=req.body
+	user_id=escape(user_id)
+	team_id=escape(team_id)
 	//更新当前用户信息
 	let sqlArr =[1,team_id,user_id];
 	let sql = 'update nhj_user_info  set join_team_flag = ? ,team_id = ? where user_id= ?';
@@ -1267,7 +1279,8 @@ let updateTeamName =async function (req,res) {
 //小程序点击分享，生成分享口令
 let getCommand = async function (req,res) { 
 	let {team_id,user_id} =req.body
-	// console.log(team_id,user_id) 
+	team_id=escape(team_id)
+	user_id=escape(user_id)
 	let url ='dKatXb51y13Gizn8EboLkFfHaLU208Zj/pages/index/index?team_id='+team_id+'&share_id='+user_id
 	
 	let data ={
@@ -1309,6 +1322,11 @@ let getRankingList   = async function (req,res) {
 //签到任务签到
 let task =async function (req,res) {
 	let {date,user_id,task_id,res_code,add_bill} =req.body
+	date=escape(date)
+	user_id=escape(user_id)
+	task_id=escape(task_id)
+	res_code=escape(res_code)
+	add_bill=escape(add_bill)
 	let date1 = new Date();
 	let year = date1.getFullYear(); //获取完整的年份(4位)
 	let month = date1.getMonth() + 1; //获取当前月份(0-11,0代表1月)
@@ -1511,6 +1529,9 @@ let ztyluckDraw =async function ( req,res) {
 };
 let getPrize=async function (req,res) { 
 	let {name,tell,prize} = req.body;
+	name=escape(name)
+	tell=escape(tell)
+	prize=escape(prize)
 	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
 	let sqlArr1 =[tell];
 	let sql1 = 'select * from  nhjcj where tell = ? ';
