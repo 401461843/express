@@ -15,7 +15,7 @@ var util =require('./utils/util');
 
 let env =process.env.NODE_ENV; 
 var fs = require('fs');//文件模块
-var accessLogStream = fs.createWriteStream('./log1s/access.log', {flags: 'a'});
+var accessLogStream = fs.createWriteStream('./logs/access.log', {flags: 'a'});
 
 app.use(logger('combined', {stream: accessLogStream}));
 
