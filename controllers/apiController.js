@@ -833,8 +833,8 @@ let getOpenid=async function (req,res) {
 			//判断用户是否存在
 			if(result.length ==0){
 				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-				let sqlArr1 =[openid,create_time];
-				let sql1 = 'insert into nhj_user_info (user_id,create_time) values(?,?)';
+				let sqlArr1 =[openid,JSON.stringify([]),create_time];
+				let sql1 = 'insert into nhj_user_info (user_id,share_count_info,create_time) values(?,?,?)';
 				await sqlQuery.SysqlConnect(sql1,sqlArr1);
 			}
 			let sqlArr7 =[openid];
