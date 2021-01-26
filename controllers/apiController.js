@@ -8,7 +8,7 @@ const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
 
 const b64 = new BaiduB64();
-var fs = require('fs');//文件模块
+// var fs = require('fs');//文件模块
 
 
 global.dataList =[];
@@ -811,7 +811,7 @@ let getOpenid=async function (req,res) {
 
 	let {code,team_id,share_id} =req.body
 	let ip =util.getIPAdress()
-	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
+	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
 	code =escape(code)
 	team_id =escape(team_id)
 	share_id =escape(share_id)
@@ -1001,7 +1001,7 @@ let getOpenid=async function (req,res) {
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
 	let ip =util.getIPAdress()
-	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
+	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
 	name =escape(name)
 	avatarUrl =escape(avatarUrl)
 	user_id =escape(user_id)
@@ -1141,10 +1141,12 @@ let getTeamInfo= async function (req,res) {
 }
 //战队助力页内容
 let getTeamzy =async function (req,res) {
-
+	
 	let {team_id,user_id} =req.body
 	let ip =util.getIPAdress()
-	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getTeamzy',team_id:team_id,user_id:user_id,ip:ip}));
+	console.log(ip)
+	console.log(req.ip)
+	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getTeamzy',team_id:team_id,user_id:user_id,ip:ip}));
 	team_id =escape(team_id)
 	user_id=escape(user_id)
 	let sqlArr =[team_id];
@@ -1227,7 +1229,7 @@ let getTeamzy =async function (req,res) {
 //加入战队
 let joinTeam = async function (req,res) {
 	let {user_id,team_id}=req.body
-	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'joinTeam',team_id:team_id,user_id:user_id}));
+	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'joinTeam',team_id:team_id,user_id:user_id}));
 	user_id=escape(user_id)
 	team_id=escape(team_id)
 	//更新当前用户信息
