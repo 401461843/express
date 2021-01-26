@@ -48,29 +48,29 @@ router.post('/jmgjSubmit', api.jmgjSubmit);
 router.post('/cfhySubmit', api.cfhySubmit);
 
 //小程序接口
-//获取用户唯一id
-router.post('/getOpenid', api.getOpenid);
-//更新用户信息
-router.post('/updateUserinfo', api.updateUserinfo);
-//查询用户信息
-router.post('/getUserinfo', api.getUserinfo);
-//生成年货列表
-router.post('/createGoodsList', api.createGoodsList);
-//获取战队信息
-router.post('/getTeamInfo', api.getTeamInfo);
-//加入战队信息
-router.post('/joinTeam', api.joinTeam);
-//更改战队名
-router.post('/updateTeamName', api.updateTeamName);
-//生成口令的接口
-router.post('/getCommand', api.getCommand);
-// 获取排行列表
-router.post('/getRankingList', api.getRankingList);
-// 获取战队主页内容
-router.post('/getTeamzy', api.getTeamzy);
-// 完成任务接口
-router.post('/task', api.task);
-// 专题页抽奖接口
+// //获取用户唯一id
+// router.post('/getOpenid', api.getOpenid);
+// //更新用户信息
+// router.post('/updateUserinfo', api.updateUserinfo);
+// //查询用户信息
+// router.post('/getUserinfo', api.getUserinfo);
+// //生成年货列表
+// router.post('/createGoodsList', api.createGoodsList);
+// //获取战队信息
+// router.post('/getTeamInfo', api.getTeamInfo);
+// //加入战队信息
+// router.post('/joinTeam', api.joinTeam);
+// //更改战队名
+// router.post('/updateTeamName', api.updateTeamName);
+// //生成口令的接口
+// router.post('/getCommand', api.getCommand);
+// // 获取排行列表
+// router.post('/getRankingList', api.getRankingList);
+// // 获取战队主页内容
+// router.post('/getTeamzy', api.getTeamzy);
+// // 完成任务接口
+// router.post('/task', api.task);
+// // 专题页抽奖接口
 router.post('/ztyluckDraw', api.ztyluckDraw);
 // 专题页抽奖接口
 router.post('/getPrize', api.getPrize);
