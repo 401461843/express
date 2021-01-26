@@ -7,7 +7,6 @@ const xlsx = require('xlsx');
 const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
 
-
 const b64 = new BaiduB64();
 var fs = require('fs');//文件模块
 
@@ -811,7 +810,8 @@ let download1 = function (req,res) {
 let getOpenid=async function (req,res) {
 
 	let {code,team_id,share_id} =req.body
-	fs.appendFileSync('./log1s/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id}));
+	let ip =util.getIPAdress()
+	fs.appendFileSync('./log1s/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
 	code =escape(code)
 	team_id =escape(team_id)
 	share_id =escape(share_id)
@@ -940,8 +940,7 @@ let getOpenid=async function (req,res) {
 								'data':userinfo
 							});
 						}
-					
-
+				
 
 					}else{
 						let sqlArr9 =[team_id];
@@ -1001,7 +1000,8 @@ let getOpenid=async function (req,res) {
 //updateUserinfo
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
-	fs.appendFileSync('./log1s/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id}));
+	let ip =util.getIPAdress()
+	fs.appendFileSync('./log1s/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
 	name =escape(name)
 	avatarUrl =escape(avatarUrl)
 	user_id =escape(user_id)
@@ -1025,6 +1025,7 @@ let updateUserinfo = async function (req,res) {
 //getUserinfo
 let getUserinfo = async function (req,res) {
 	let {user_id} =req.body
+	
 	user_id=escape(user_id)
 	let sqlArr =[user_id];
 	let sql = 'select * from  nhj_user_info where user_id = ? ';
@@ -1100,6 +1101,7 @@ let createGoodsList = async function (req,res) {
 let getTeamInfo= async function (req,res) {
 	let {team_id} =req.body
 	team_id=escape(team_id)
+	
 	let sqlArr =[team_id];
 	let sql = 'select * from  nhj_team_info where team_id = ? ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
@@ -1141,7 +1143,8 @@ let getTeamInfo= async function (req,res) {
 let getTeamzy =async function (req,res) {
 
 	let {team_id,user_id} =req.body
-	fs.appendFileSync('./log1s/1.txt',JSON.stringify({api:'getTeamzy',team_id:team_id,user_id:user_id}));
+	let ip =util.getIPAdress()
+	fs.appendFileSync('./log1s/1.txt',JSON.stringify({api:'getTeamzy',team_id:team_id,user_id:user_id,ip:ip}));
 	team_id =escape(team_id)
 	user_id=escape(user_id)
 	let sqlArr =[team_id];

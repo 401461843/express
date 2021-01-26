@@ -1,1 +1,1 @@
-{"api":"getOpenid","code":"7bab7c3c25a948aac1c75383799b98f6NW","team_id":"","share_id":""}
+{"api":"getOpenid","code":"7bab7c3c25a948aac1c75383799b98f6NW","team_id":"","share_id":""}{"api":"getOpenid","code":"7ec0ce7477a4bea78a873b4a98b4ae86NW","team_id":"","share_id":"","ip":"172.16.233.71"}{"api":"getTeamzy","team_id":"k04HERpS7gftwqxK2-D3zZRRfn","user_id":"k04HERpS7gftwqxK2-D3zZRRfn","ip":"172.16.233.71"}{"api":"getTeamzy","team_id":"k04HERpS7gftwqxK2-D3zZRRfn","user_id":"k04HERpS7gftwqxK2-D3zZRRfn","ip":"172.16.233.71"}
