@@ -811,7 +811,7 @@ let getOpenid=async function (req,res) {
 
 	let {code,team_id,share_id} =req.body
 	let ip =util.getIPAdress()
-	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
+	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
 	code =escape(code)
 	team_id =escape(team_id)
 	share_id =escape(share_id)
@@ -1001,7 +1001,7 @@ let getOpenid=async function (req,res) {
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
 	let ip =util.getIPAdress()
-	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
+	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
 	name =escape(name)
 	avatarUrl =escape(avatarUrl)
 	user_id =escape(user_id)
@@ -1141,12 +1141,7 @@ let getTeamInfo= async function (req,res) {
 }
 //战队助力页内容
 let getTeamzy =async function (req,res) {
-	
 	let {team_id,user_id} =req.body
-	let ip =util.getIPAdress()
-	console.log(ip)
-	console.log(req.ip)
-	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getTeamzy',team_id:team_id,user_id:user_id,ip:ip}));
 	team_id =escape(team_id)
 	user_id=escape(user_id)
 	let sqlArr =[team_id];
@@ -1229,7 +1224,6 @@ let getTeamzy =async function (req,res) {
 //加入战队
 let joinTeam = async function (req,res) {
 	let {user_id,team_id}=req.body
-	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'joinTeam',team_id:team_id,user_id:user_id}));
 	user_id=escape(user_id)
 	team_id=escape(team_id)
 	//更新当前用户信息
@@ -1337,7 +1331,8 @@ let task =async function (req,res) {
 	user_id=escape(user_id)
 	task_id=escape(task_id)
 	res_code=escape(res_code)
-	add_bill=escape(add_bill)
+	add_bill=Number(escape(add_bill))
+
 	let date1 = new Date();
 	let year = date1.getFullYear(); //获取完整的年份(4位)
 	let month = date1.getMonth() + 1; //获取当前月份(0-11,0代表1月)
@@ -1399,7 +1394,7 @@ let task =async function (req,res) {
 				}else{
 					//更新个人任务信息
 					task['task'+task_id][dayNum-1]='1'
-					let task_total= Number(result[0]['task_total'])+add_bill
+					let task_total= result[0]['task_total']+add_bill
 					let sqlArr1 =[JSON.stringify(task),task_total,user_id];
 					let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
 					await sqlQuery.SysqlConnect(sql1,sqlArr1);
