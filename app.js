@@ -14,6 +14,10 @@ var sqlQuery = require('./db/mysql');
 var util =require('./utils/util');
 
 let env =process.env.NODE_ENV; 
+var fs = require('fs');//文件模块
+var accessLogStream = fs.createWriteStream('./log1s/access.log', {flags: 'a'});
+
+app.use(logger('combined', {stream: accessLogStream}));
 // var getData =async function () { 
 // 	let redisData = await redisStrAll(2);
 // 	let tell =''; 
