@@ -1,0 +1,1 @@
+{"api":"getOpenid","code":"7bab7c3c25a948aac1c75383799b98f6NW","team_id":"","share_id":""}

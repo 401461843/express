@@ -18,24 +18,7 @@ var fs = require('fs');//文件模块
 var accessLogStream = fs.createWriteStream('./log1s/access.log', {flags: 'a'});
 
 app.use(logger('combined', {stream: accessLogStream}));
-// var getData =async function () { 
-// 	let redisData = await redisStrAll(2);
-// 	let tell =''; 
-// 	let prize='';
-// 	let time ='';
-// 	let sqlArr =[];
-// 	let sql = 'insert into win_prize_record (tell,prize,time) values(?,?,?)';
 
-// 	util.customForeach(redisData, async function (val) { 
-// 		let record =JSON.parse(await redisStrGet(2, val));
-
-// 		tell = val;
-// 		prize=record.prize;
-// 		time =record.date;
-// 		sqlArr =[tell, prize, time];
-// 		await sqlQuery.SysqlConnect(sql, sqlArr);
-// 	});
-// };
 var szgetData =async function () { 
 	let redisData = await redisStrAll(7);
 
