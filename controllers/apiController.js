@@ -1127,6 +1127,8 @@ let getTeamInfo= async function (req,res) {
 //战队助力页内容
 let getTeamzy =async function (req,res) {
 	let {team_id,user_id} =req.body
+	team_id='k04HERpkR1kQRAaiBnLpvrCSTb'
+	user_id='k04HERpkR1kQRAaiBnLpvrCSTb'
 	let sqlArr =[team_id];
 	let sql = 'select * from  nhj_team_info where team_id = ? ';
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);

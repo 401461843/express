@@ -2,82 +2,122 @@
 <html lang="en">
 <script>
     var _hmt = _hmt || [];
-    (function() {
+    (function () {
         var hm = document.createElement("script");
         hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
-        var s = document.getElementsByTagName("script")[0]; 
+        var s = document.getElementsByTagName("script")[0];
         s.parentNode.insertBefore(hm, s);
     })();
 </script>
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>年货节</title>
-    <link rel="stylesheet" href="../public/css/reset.css"> 
-    <link rel="stylesheet" href="../public/css/swiper.css">  
-    
-    <style> 
-    
-        .cont{
-            
+    <link rel="stylesheet" href="../public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/swiper.css">
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        .cont {
+
             background-image: linear-gradient(#db030b, #bc1414);
             width: 7.5rem;
             padding-bottom: 1rem;
 
         }
-        .baner{
-            height: 13.79rem;
+
+        .baner {
+            height: 15.34rem;
             width: 7.5rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/baner.jpg') no-repeat;
             background-size: 100%;
         }
-        #sw2{
+
+        .video_wrap {
+            background-image: linear-gradient(to top right, #f0693c, #e84635);
+            height: 3.85rem;
+            position: relative;
+        }
+
+        .video_wrap .video_box {
+            width: 6.2rem;
+            height: 3.5rem;
+            border-radius: 0.2rem;
+            border: 1px solid #fed986;
+            overflow: hidden;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            top: -20px;
+        }
+
+        .video_wrap .video_box video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            border-radius: 0.2rem;
+            overflow: hidden;
+        }
+
+        #sw2 {
             height: .60rem !important;
             width: 5.00rem !important;
         }
+
         .zj {
             height: .60rem !important;
             width: 5.00rem !important;
         }
-        .lb{
+
+        .lb {
             width: 7.50rem;
             height: 4.80rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/lbbg.png') no-repeat;
             background-size: 100%;
-            margin-top: -1.00rem;
+            /* margin-top: -1.00rem; */
             overflow: hidden;
         }
-        .swiper1{
-            width:6.17rem !important;
+
+        .swiper1 {
+            width: 6.17rem !important;
             height: 3.32rem !important;
             margin: 0 auto;
             margin-top: .90rem !important;
 
         }
-        .swiper1 a{
+
+        .swiper1 a {
             display: block;
             height: 100%;
             width: 100%;
         }
-        .lb1{
+
+        .lb1 {
             height: 3.32rem;
             width: 6.17rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/lb2.png') no-repeat;
             background-size: 100%;
         }
-        .lb2{
+
+        .lb2 {
             height: 3.32rem;
             width: 6.17rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/lb-1.png') no-repeat;
             background-size: 100%;
         }
-        .lb3{
+
+        .lb3 {
             height: 3.32rem;
             width: 6.17rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/lb3.png') no-repeat;
             background-size: 100%;
         }
-        .bt1{
+
+        .bt1 {
             height: 1.09rem;
             width: 6.12rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/bt1.png') no-repeat;
@@ -85,7 +125,8 @@
             margin: 0 auto;
             margin-top: .30rem;
         }
-        .nnlog{
+
+        .nnlog {
             height: 2.29rem;
             width: 6.78rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/nnlog.png') no-repeat;
@@ -93,7 +134,8 @@
             margin: 0 auto;
             margin-top: .38rem;
         }
-        .mws-box{
+
+        .mws-box {
             width: 6.29rem;
             height: 3.61rem;
             margin: 0 auto;
@@ -101,82 +143,98 @@
             margin-top: .60rem;
             position: relative;
         }
-        .cp-box{
+
+        .cp-box {
             height: 3.61rem;
             overflow: hidden;
             width: 13rem;
         }
 
-        .cp{
+        .cp {
             height: 3.61rem;
             width: 2.93rem;
-            margin-right:.35rem;
+            margin-right: .35rem;
             display: inline-block;
         }
-        .cp1{
+
+        .cp1 {
 
             background: url('https://smartsh.gzbaidu.co:50/zhc/mws-1.png') no-repeat;
             background-size: 100%;
             float: left;
         }
-        .cp2{
+
+        .cp2 {
 
             background: url('https://smartsh.gzbaidu.co:50/zhc/mws-2.png') no-repeat;
             background-size: 100%;
         }
-        .cp3{
+
+        .cp3 {
 
             background: url('https://smartsh.gzbaidu.co:50/zhc/1.png') no-repeat;
             background-size: 100%;
             margin-right: 0;
         }
-        .cp4{
+
+        .cp4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/2.png') no-repeat;
             background-size: 100%;
 
         }
+
         .cp5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms.png') no-repeat;
             background-size: 100%;
             margin-right: 0;
         }
-        .cp6{
+
+        .cp6 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/tz.png') no-repeat;
             background-size: 100%;
         }
-        .cp7{
+
+        .cp7 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms.png') no-repeat;
             background-size: 100%;
         }
-        .cp8{
+
+        .cp8 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/dkn.png') no-repeat;
             background-size: 100%;
         }
-        .cp9{
+
+        .cp9 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/nb.png') no-repeat;
             background-size: 100%;
         }
-        .cp10{
+
+        .cp10 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/3.png') no-repeat;
             background-size: 100%;
         }
-        .cp11{
+
+        .cp11 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/4.png') no-repeat;
             background-size: 100%;
         }
-        .cp12{
+
+        .cp12 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/5.png') no-repeat;
             background-size: 100%;
         }
-        .cp13{
+
+        .cp13 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/6.png') no-repeat;
             background-size: 100%;
         }
-        .msw{
+
+        .msw {
             position: relative;
             width: 7.50rem;
         }
-        .xs{
+
+        .xs {
             height: .75rem;
             width: .45rem;
             position: absolute;
@@ -184,28 +242,33 @@
             background-size: 100%;
             right: .15rem;
             top: 50%;
-            transform: translateY(-50%) ;
+            transform: translateY(-50%);
             z-index: 9999;
         }
-        .ac{
-            animation:dd 1s linear alternate infinite ;
+
+        .ac {
+            animation: dd 1s linear alternate infinite;
         }
-        @keyframes dd{
-            0%{
+
+        @keyframes dd {
+            0% {
                 transform: translateY(-50%);
 
             }
-            100%{
+
+            100% {
                 transform: translateY(-50%) rotate(30deg);
                 transform-origin: 0.055rem .75rem;
             }
         }
-        .bt2{
+
+        .bt2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/bt2.png') no-repeat;
             background-size: 100%;
             margin-top: .55rem;
         }
-        .bg{
+
+        .bg {
             height: 4.71rem;
             width: 6.91rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/nxhlbg.png') no-repeat;
@@ -215,7 +278,8 @@
             position: relative;
             margin-bottom: .40rem;
         }
-        .tit{
+
+        .tit {
             position: absolute;
             left: 49%;
             transform: translateX(-50%);
@@ -227,8 +291,9 @@
             font-weight: bold;
             letter-spacing: 0.02rem;
         }
-        .ms-box{
-            height:3.20rem;
+
+        .ms-box {
+            height: 3.20rem;
             width: 6.55rem;
             position: absolute;
             /* background: red; */
@@ -239,213 +304,287 @@
 
             overflow-y: hidden;
         }
-        .ms-con{
+
+        .ms-con {
             height: 100%;
             width: 11.28rem;
         }
-        .ms-bg{
+
+        .ms-bg {
             height: 100%;
             width: 2.15rem;
             display: inline-block;
             margin-right: 0.05rem;
 
         }
-        .mstp{
+
+        .mstp {
             height: 2.67rem;
             width: 2.15rem;
 
         }
-        .an{
+
+        .an {
             height: .48rem;
             width: 1.94rem;
             margin: 0 auto;
             margin-top: .10rem;
 
         }
-        .tp1{
+
+        .tp1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms1.png') no-repeat;
             background-size: 100%;
         }
-        .an1{
+
+        .an1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/xz.png') no-repeat;
             background-size: 100%;
         }
-        .tp2{
+
+        .tp2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms2.png') no-repeat;
             background-size: 100%;
         }
-        .an2{
+
+        .an2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/gm.png') no-repeat;
             background-size: 100%;
         }
-        .tp3{
+
+        .tp3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms3.png') no-repeat;
             background-size: 100%;
         }
-        .an3{
+
+        .an3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/gm.png') no-repeat;
             background-size: 100%;
         }
-        .tp4{
+
+        .tp4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms4.png') no-repeat;
             background-size: 100%;
         }
-        .an4{
+
+        .an4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/gm.png') no-repeat;
             background-size: 100%;
         }
-        .tp5{
+
+        .tp5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms-4.png') no-repeat;
             background-size: 100%;
         }
-        .an5{
+
+        .an5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/gm.png') no-repeat;
             background-size: 100%;
         }
-        .tp6{
+
+        .tp6 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms4.png') no-repeat;
             background-size: 100%;
         }
-        .tp7{
+
+        .tp7 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms5.png') no-repeat;
             background-size: 100%;
         }
-        .tp8{
+
+        .tp8 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms6.png') no-repeat;
             background-size: 100%;
         }
-        .tp9{
+
+        .tp9 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms7.png') no-repeat;
             background-size: 100%;
         }
-        .tp10{
+
+        .tp10 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms8.png') no-repeat;
             background-size: 100%;
         }
-        .tp11{
+
+        .tp11 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/ms9.png') no-repeat;
             background-size: 100%;
         }
-        .an1{
+
+        .an1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/lq.png') no-repeat !important;
             background-size: 100% !important;
         }
-        .xxtp1{
+
+        .xxtp1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn1.png') no-repeat;
             background-size: 100%;
         }
-        .xxan1{
+
+        .xxan1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/lq.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp2{
+
+        .xxtp2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn2.png') no-repeat;
             background-size: 100%;
         }
-        .xxan2{
+
+        .xxan2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/xx.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp3{
+
+        .xxtp3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn3.png') no-repeat;
             background-size: 100%;
         }
-        .xxan3{
+
+        .xxan3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/lq.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp4{
+
+        .xxtp4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn4.png') no-repeat;
             background-size: 100%;
         }
-        .xxan4{
+
+        .xxan4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/lq.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp5{
+
+        .xxtp5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn5.png') no-repeat;
             background-size: 100%;
         }
-        .xxan5{
+
+        .xxan5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/lq.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp6{
+
+        .xxtp6 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn6.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp7{
+
+        .xxtp7 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn7.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp8{
+
+        .xxtp8 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn8.png') no-repeat;
             background-size: 100%;
         }
-        .xxtp9{
+
+        .xxtp9 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jn9.png') no-repeat;
             background-size: 100%;
         }
-        .jttp1{
+
+        .jttp1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt1.png') no-repeat;
             background-size: 100%;
         }
-        .jtan1{
+
+        .jtan1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/zx.png') no-repeat !important;
             background-size: 100% !important;
         }
-        .jttp2{
+
+        .jttp2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt2.png') no-repeat;
             background-size: 100%;
         }
-        .jttp4{
+
+        .jttp4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt4.png') no-repeat;
             background-size: 100%;
         }
-        .jttp5{
+
+        .jttp5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt5.png') no-repeat;
             background-size: 100%;
         }
-        .jttp6{
+
+        .jttp6 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt6.png') no-repeat;
             background-size: 100%;
         }
-        .jttp7{
+
+        .jttp7 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt7.png') no-repeat;
             background-size: 100%;
         }
-        .jttp8{
+
+        .jttp8 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt8.png') no-repeat;
             background-size: 100%;
         }
-        .an{
+
+        .an {
             background: url('https://smartsh.gzbaidu.co:50/zhc/gm.png') no-repeat;
             background-size: 100%;
 
         }
 
-        .jtan2{
+        .jtan2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/zx.png') no-repeat;
             background-size: 100%;
         }
-        .jttp3{
+
+        .jttp3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jt3.png') no-repeat;
             background-size: 100%;
         }
-        .jtan3{
+
+        .jtan3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/zx.png') no-repeat;
             background-size: 100%;
         }
-        .ms-con1{
+
+        .ms-con1 {
             width: 6.60rem !important;
         }
-        .bt3{
+
+
+        .code_wrap {
+            height: ;
+            position: relative;
+            padding-top: 0.7rem;
+        }
+        .code_wrap .hand {
+            width: 7rem;
+            height: 1.27rem;
+            background: url('https://smartsh.gzbaidu.co:50/zhc/hand.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            top: 0.1rem;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        .code_wrap .code {
+            width: 7.5rem;
+            height: 7.79rem;
+            background: url('https://smartsh.gzbaidu.co:50/zhc/code.png') no-repeat;
+            background-size: 100%;
+        }
+
+
+
+        .bt3 {
 
             background: url('https://smartsh.gzbaidu.co:50/zhc/bt3.png') no-repeat;
             background-size: 100%;
             margin-top: .55rem;
         }
-        .bf{
+
+        .bf {
 
             width: 6.82rem;
             height: 4.15rem;
@@ -456,7 +595,8 @@
             margin-top: .35rem;
             overflow: hidden;
         }
-        .lh{
+
+        .lh {
             height: 1.07rem;
             width: 4.18rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/zb.png') no-repeat;
@@ -465,13 +605,15 @@
             margin-top: -.15rem;
 
         }
-        .bt4{
+
+        .bt4 {
 
             background: url('https://smartsh.gzbaidu.co:50/zhc/bt5.png') no-repeat;
             background-size: 100%;
             margin-top: .55rem;
         }
-        .cj{
+
+        .cj {
             width: 7.08rem;
             height: 6.21rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/yxbg.png') no-repeat;
@@ -482,7 +624,8 @@
             box-sizing: border-box;
             position: relative;
         }
-        .jp{
+
+        .jp {
             height: 1.62rem;
             width: 1.45rem;
             float: left;
@@ -490,27 +633,32 @@
 
 
         }
-        .jp1{
+
+        .jp1 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp1.png') no-repeat;
             background-size: 100%;
             margin-top: .14rem;
         }
-        .jp2{
+
+        .jp2 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp11.png') no-repeat;
             background-size: 100%;
             margin-top: .14rem;
         }
-        .jp3{
+
+        .jp3 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp7.png') no-repeat;
             background-size: 100%;
             margin-top: .14rem;
         }
-        .jp4{
+
+        .jp4 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp4.png') no-repeat;
             background-size: 100%;
             margin-top: .14rem;
         }
-        .jp5{
+
+        .jp5 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp5.png') no-repeat;
             background-size: 100%;
             color: white;
@@ -519,49 +667,56 @@
             line-height: 2.40rem;
             letter-spacing: 0.02rem;
         }
-        .jp6{
+
+        .jp6 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp6.png') no-repeat;
             background-size: 100%;
         }
-        .jp7{
+
+        .jp7 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp8.png') no-repeat;
             background-size: 100%;
         }
 
-        .jp8{
+        .jp8 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp2.png') no-repeat;
             background-size: 100%;
         }
-        .jp9{
+
+        .jp9 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp9.png') no-repeat;
             background-size: 100%;
 
         }
-        .jp10{
+
+        .jp10 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp10.png') no-repeat;
             background-size: 100%;
 
         }
-        .jp11{
+
+        .jp11 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp1.png') no-repeat;
             background-size: 100%;
 
         }
-        .jp12{
+
+        .jp12 {
             background: url('https://smartsh.gzbaidu.co:50/zhc/jp12.png') no-repeat;
             background-size: 100%;
 
         }
 
-        .zj-box{
+        .zj-box {
             width: 6.80rem;
             height: .60rem;
-            background: rgba(0,0,0,.3);
+            background: rgba(0, 0, 0, .3);
             margin: 0 auto;
             border-radius: .30rem;
             margin-top: .15rem;
         }
-        .ts{
+
+        .ts {
             color: #ffe337;
             font-size: .26rem;
             height: 100%;
@@ -573,89 +728,107 @@
             text-indent: .15rem;
 
         }
-        .mdlb{
+
+        .mdlb {
             font-size: .26rem;
 
         }
-        .md1{
+
+        .md1 {
             display: inline-block;
             line-height: .60rem;
             text-indent: .20rem;
             color: white;
         }
-        .jpq{
+
+        .jpq {
             display: inline-block;
             line-height: .60rem;
             color: #ffe337;
         }
-        .swiper2{
+
+        .swiper2 {
             height: .60rem;
             width: 5.00rem;
             display: inline-block;
             overflow: hidden;
 
         }
-        .zjlb{
+
+        .zjlb {
             height: .60rem;
             width: 5.00rem;
 
         }
-        .zzc-box{
+
+        .zzc-box {
             position: absolute;
         }
-        .zz{
-        height: 1.62rem;
-            width: 1.45rem;;
+
+        .zz {
+            height: 1.62rem;
+            width: 1.45rem;
+            ;
             float: left;
             margin: 0.05rem;
 
 
         }
-        .zz1,.zz2,.zz3,.zz4{
+
+        .zz1,
+        .zz2,
+        .zz3,
+        .zz4 {
             margin-top: .14rem;
         }
-        .active{
+
+        .active {
             background: #ffe43771;
         }
-        .gz{
+
+        .gz {
             width: 2.25rem;
             height: .58rem;
             margin: 0 auto;
-            margin-top:.15rem;
+            margin-top: .15rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/gz.png') no-repeat;
             background-size: 100%;
 
         }
-        .zjtc{
+
+        .zjtc {
             position: fixed;
             height: 100%;
             width: 100%;
-            background: rgba(0,0,0,.5);
+            background: rgba(0, 0, 0, .5);
             z-index: 99;
             top: 0;
             display: none;
         }
-        .zjnr{
+
+        .zjnr {
             width: 7.50rem;
             height: 6.21rem;
             position: absolute;
             top: 50%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
         }
-        .ljlq{
+
+        .ljlq {
             position: absolute;
             width: 5.86rem;
             height: 6.74rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/bd.png') no-repeat;
             background-size: 100%;
             left: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             top: 35%;
 
 
         }
-        .gx{
+
+        .gx {
             position: absolute;
             left: 52%;
             transform: translateX(-50%);
@@ -665,7 +838,8 @@
             letter-spacing: 0.02rem;
             font-size: .34rem;
         }
-        .prz{
+
+        .prz {
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -674,7 +848,8 @@
             letter-spacing: 0.02rem;
             font-size: .26rem;
         }
-        .name{
+
+        .name {
             width: 3.4rem;
             height: .60rem;
             outline: none;
@@ -685,7 +860,8 @@
             transform: translateX(-50%);
 
         }
-        .tell{
+
+        .tell {
             width: 3.4rem;
             height: .60rem;
             outline: none;
@@ -696,7 +872,8 @@
             transform: translateX(-50%);
 
         }
-        .tj{
+
+        .tj {
             width: 4.40rem;
             outline: none;
             border: none;
@@ -706,20 +883,22 @@
             transform: translateX(-50%);
             height: 1.02rem;
         }
-        .tips{
+
+        .tips {
             position: absolute;
             padding: .15rem .30rem;
-            background: rgba(0,0,0,.5);
+            background: rgba(0, 0, 0, .5);
             color: white;
             position: absolute;
             left: 50%;
             top: 50%;
-            transform: translate(-50%,-50%);
+            transform: translate(-50%, -50%);
             font-size: .25rem;
             border-radius: .10rem;
             display: none;
         }
-        .close{
+
+        .close {
             position: absolute;
             font-size: .80rem;
             color: white;
@@ -728,7 +907,8 @@
             bottom: 37%;
             font-weight: bold;
         }
-        .cjan{
+
+        .cjan {
             height: .95rem;
             width: 6.82rem;
             background: url('https://smartsh.gzbaidu.co:50/zhc/ks.png') no-repeat;
@@ -736,10 +916,12 @@
             margin: 0 auto;
             margin-top: .15rem;
         }
-        .tmp{
+
+        .tmp {
             height: .30rem;
             width: 100%;
         }
+
         .logo_tip {
             width: 6.05rem;
             height: .40rem;
@@ -755,7 +937,7 @@
 
 
 
-        .team_name{
+        .team_name {
             color: #fffecc;
             width: 100%;
             text-align: center;
@@ -764,6 +946,7 @@
             line-height: .37rem;
             top: 1.00rem;
         }
+
         .team_name .left {
             width: .30rem;
             height: .50rem;
@@ -772,7 +955,8 @@
             position: absolute;
             left: .48rem;
         }
-        .erm{
+
+        .erm {
             width: 5.2rem;
             height: 4.2rem;
             margin: 0 auto;
@@ -780,317 +964,360 @@
             background-size: 100%;
             margin-top: .3rem;
         }
-     
     </style>
 </head>
+
 <body>
     <div class="cont">
         <div class="baner"></div>
-          <div class="lb">
+        <div class="video_wrap">
+            <div class="video_box">
+                <video src="https://smartsh.gzbaidu.co:50/images/video1.mp4" controls></video>
+            </div>
+        </div>
+        <div class="lb">
             <div class="swiper-container swiper1">
                 <div class="swiper-wrapper ">
-                    <div class="swiper-slide lb1" >
-                        <a onclick="_hmt.push(['_trackEvent', '轮播','click', '金伯利'])" href="https://detail.tmall.com/item.htm?spm=a1z10.3-b-s.w4011-21895570262.69.f16966fdJ3jZZZ&id=625175590497&rn=7c7891e865f1258ac6677e8dd427238b&abbucket=15&sku_properties=21735:44500;122276380:44500;161712509:4683774">
+                    <div class="swiper-slide lb1">
+                        <a onclick="_hmt.push(['_trackEvent', '轮播','click', '金伯利'])"
+                            href="https://detail.tmall.com/item.htm?spm=a1z10.3-b-s.w4011-21895570262.69.f16966fdJ3jZZZ&id=625175590497&rn=7c7891e865f1258ac6677e8dd427238b&abbucket=15&sku_properties=21735:44500;122276380:44500;161712509:4683774">
                         </a>
                     </div>
-                
-                    <div class="swiper-slide lb2" >
-                        <a onclick="_hmt.push(['_trackEvent', '轮播','click', '高顿'])" href="https://v.gaodun.com/Course/17794?pdiv=div">
+
+                    <div class="swiper-slide lb2">
+                        <a onclick="_hmt.push(['_trackEvent', '轮播','click', '高顿'])"
+                            href="https://v.gaodun.com/Course/17794?pdiv=div">
                         </a>
                     </div>
-                
-                    <div class="swiper-slide lb3" >
-                        <a onclick="_hmt.push(['_trackEvent', '轮播','click', '天猫年货节'])" href="https://equity.tmall.com/tm?agentId=928305&_bind=true&bc_fl_src=tmall_market_llb_1_1092929&llbPlatform=_pube&llbOsd=1">
+
+                    <div class="swiper-slide lb3">
+                        <a onclick="_hmt.push(['_trackEvent', '轮播','click', '天猫年货节'])"
+                            href="https://equity.tmall.com/tm?agentId=928305&_bind=true&bc_fl_src=tmall_market_llb_1_1092929&llbPlatform=_pube&llbOsd=1">
                         </a>
                     </div>
-                    
-                   
-                    
+
+
+
                 </div>
-                
+
             </div>
-           
+
         </div>
         <div class="bt1"></div>
-        <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '宝藏上海'])" href="https://mr.baidu.com/r/gpvwv5iZ2M?f=cp&u=67ca5849303cfda1">
-            <div class="nnlog" ></div>
+        <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '宝藏上海'])"
+            href="https://mr.baidu.com/r/gpvwv5iZ2M?f=cp&u=67ca5849303cfda1">
+            <div class="nnlog"></div>
         </a>
-        
+
         <div class="msw">
-         <div class="xs ac"></div>
+            <div class="xs ac"></div>
             <div class="mws-box">
-                <div class="cp-box" >
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '麦斯威尔-特浓'])" href="https://pro.m.jd.com/mall/active/43ySvKiALqZGHtsA73p5Qq7HSc1v/index.html">
-                        <div  class="cp1 cp"></div>
+                <div class="cp-box">
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '麦斯威尔-特浓'])"
+                        href="https://pro.m.jd.com/mall/active/43ySvKiALqZGHtsA73p5Qq7HSc1v/index.html">
+                        <div class="cp1 cp"></div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '麦斯威尔-原味'])" href="https://pro.m.jd.com/mall/active/2YzW7m6aqq6R8YtFy4vpRAaV8QzS/index.html">
-                        <div  class="cp2 cp"></div>
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '麦斯威尔-原味'])"
+                        href="https://pro.m.jd.com/mall/active/2YzW7m6aqq6R8YtFy4vpRAaV8QzS/index.html">
+                        <div class="cp2 cp"></div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', 'on-跑运动鞋'])" href="https://onyundong.tmall.com">
-                        <div  class="cp4 cp" ></div>
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', 'on-跑运动鞋'])"
+                        href="https://onyundong.tmall.com">
+                        <div class="cp4 cp"></div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '科罗娜啤酒'])" href="https://detail.tmall.com/item.htm?id=597464837071">
-                        <div  class="cp3 cp"></div>
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '科罗娜啤酒'])"
+                        href="https://detail.tmall.com/item.htm?id=597464837071">
+                        <div class="cp3 cp"></div>
                     </a>
                 </div>
             </div>
             <div class="mws-box">
                 <div class="cp-box">
                     <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '童装'])" href="https://moimoln.tmall.com/">
-                        <div  class="cp6 cp" ></div>
+                        <div class="cp6 cp"></div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '牛年限定毛衫'])" href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.7187687dVqOP3v&id=633019120513">
-                        <div  class="cp7 cp" ></div>
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '牛年限定毛衫'])"
+                        href="https://detail.tmall.com/item.htm?spm=a212k0.12153887.0.0.7187687dVqOP3v&id=633019120513">
+                        <div class="cp7 cp"></div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '极致年货','click', 'spe女装'])" href="https://spelledit.tmall.hk/">
-                        <div  class="cp10 cp"></div>
+                        <div class="cp10 cp"></div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '极致年货','click', 'cat女装'])" href="https://cathuwai.tmall.com/">
-                        <div  class="cp11 cp" style="margin-right:0" ></div>
+                        <div class="cp11 cp" style="margin-right:0"></div>
                     </a>
                 </div>
             </div>
-              <div class="mws-box">
+            <div class="mws-box">
                 <div class="cp-box">
                     <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '迪卡侬'])" href="https://www.decathlon.com.cn/">
-                        <div  class="cp8 cp" ></div>
+                        <div class="cp8 cp"></div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '迪卡侬'])" href="https://katespade.tmall.com/">
-                        <div  class="cp9 cp"></div>
+                        <div class="cp9 cp"></div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '巴拉巴拉童装'])" href="https://balabala.tmall.com/">
-                        <div  class="cp12 cp" ></div>
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '巴拉巴拉童装'])"
+                        href="https://balabala.tmall.com/">
+                        <div class="cp12 cp"></div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '宝藏上海定制包'])" href="https://mbd.baidu.com/ma/s/wDz5iDsi">
-                        <div  class="cp13 cp" style="margin-right:0"></div>
+                    <a onclick="_hmt.push(['_trackEvent', '极致年货','click', '宝藏上海定制包'])"
+                        href="https://mbd.baidu.com/ma/s/wDz5iDsi">
+                        <div class="cp13 cp" style="margin-right:0"></div>
                     </a>
                 </div>
             </div>
         </div>
         <div class="bt1 bt2"></div>
         <div class="bg" style="height:8.42rem">
-            <div class="tit">美食诱惑  马上尝新</div>
+            <div class="tit">美食诱惑 马上尝新</div>
             <div class="ms-box ">
                 <div class="ms-con">
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '喜雀美龄浓豆浆'])" href="https://mbd.baidu.com/ma/s/bhJHj21j">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '喜雀美龄浓豆浆'])"
+                        href="https://mbd.baidu.com/ma/s/bhJHj21j">
                         <div class="ms-bg">
                             <div class="mstp tp5"></div>
-                            <div  class="an an5"  ></div>
+                            <div class="an an5"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '科罗娜啤酒'])" href="https://detail.tmall.com/item.htm?id=597464837071">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '科罗娜啤酒'])"
+                        href="https://detail.tmall.com/item.htm?id=597464837071">
+                        <div class="ms-bg">
                             <div class="mstp tp2"></div>
-                            <div  class="an an2" ></div>
+                            <div class="an an2"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '梦陇酒庄'])" href="https://mbd.baidu.com/ma/s/jVpJzw6w">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '梦陇酒庄'])"
+                        href="https://mbd.baidu.com/ma/s/jVpJzw6w">
+                        <div class="ms-bg">
                             <div class="mstp tp3"></div>
-                            <div  class="an an3" ></div>
+                            <div class="an an3"></div>
                         </div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '悠冉咖啡'])" href="https://cloudnine.tmall.com/">
                         <div class="ms-bg">
                             <div class="mstp tp10"></div>
-                            <div  class="an an4" ></div>
+                            <div class="an an4"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '麦斯威尔-原味'])" href="https://pro.m.jd.com/mall/active/43ySvKiALqZGHtsA73p5Qq7HSc1v/index.html">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '麦斯威尔-原味'])"
+                        href="https://pro.m.jd.com/mall/active/43ySvKiALqZGHtsA73p5Qq7HSc1v/index.html">
+                        <div class="ms-bg">
                             <div class="mstp tp1"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                     
-                     
-                    
-                    
-    
+
+
+
+
+
                 </div>
-    
+
             </div>
             <div class="ms-box " style="top:4.75rem">
-                <div class="ms-con" style="width: 9rem;" >
-                  
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '来一份'])" href="https://detail.tmall.com/item.htm?id=634835830898">
-                        <div class="ms-bg"  >
+                <div class="ms-con" style="width: 9rem;">
+
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '来一份'])"
+                        href="https://detail.tmall.com/item.htm?id=634835830898">
+                        <div class="ms-bg">
                             <div class="mstp tp7"></div>
-                            <div  class="an an2" ></div>
+                            <div class="an an2"></div>
                         </div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '爱丁顿'])" href="https://macallan.tmall.com/">
-                        <div class="ms-bg"  >
+                        <div class="ms-bg">
                             <div class="mstp tp8"></div>
-                            <div  class="an an3" ></div>
+                            <div class="an an3"></div>
                         </div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '力大狮二'])" href="https://lidashi.tmall.com/">
-                        <div class="ms-bg"  >
+                        <div class="ms-bg">
                             <div class="mstp tp9"></div>
-                            <div  class="an an4" ></div>
+                            <div class="an an4"></div>
                         </div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '元祖蛋糕'])" href="https://ganso.tmall.com/">
-                        <div class="ms-bg"  >
+                        <div class="ms-bg">
                             <div class="mstp tp11"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
                 </div>
-    
+
             </div>
         </div>
         <div class="bg" style="height:8.42rem">
-            <div class="tit">技能进阶  温故知新</div>
+            <div class="tit">技能进阶 温故知新</div>
             <div class="ms-box ">
                 <div class="ms-con" style="width:11.28rem">
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '高顿-公募基金'])" href="https://v.gaodun.com/jinrongshicao/9571.html">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '高顿-公募基金'])"
+                        href="https://v.gaodun.com/jinrongshicao/9571.html">
+                        <div class="ms-bg">
                             <div class="mstp xxtp1"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '高顿-python网课'])" href="https://v.gaodun.com/Course/17794?pdiv=div">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '高顿-python网课'])"
+                        href="https://v.gaodun.com/Course/17794?pdiv=div">
+                        <div class="ms-bg">
                             <div class="mstp xxtp2"></div>
-                            <div  class="an an1"  ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', 'vip陪练'])" href="https://mobile.peilian.com/promotion_leaf?utm_source=bd%5Fm&utm_medium=GQ&utm_campaign=%E7%99%BE%E5%BA%A6CNY%2D%E6%B4%BB%E5%8A%A8%2D2021&utm_term=&utm_content=%E7%A8%8B%E5%BA%8F%E5%8C%96%2D%E5%9F%BA%E7%A1%80%E4%BA%BA%E7%BE%A4%2D%E5%A4%A7%E5%9B%BE">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', 'vip陪练'])"
+                        href="https://mobile.peilian.com/promotion_leaf?utm_source=bd%5Fm&utm_medium=GQ&utm_campaign=%E7%99%BE%E5%BA%A6CNY%2D%E6%B4%BB%E5%8A%A8%2D2021&utm_term=&utm_content=%E7%A8%8B%E5%BA%8F%E5%8C%96%2D%E5%9F%BA%E7%A1%80%E4%BA%BA%E7%BE%A4%2D%E5%A4%A7%E5%9B%BE">
+                        <div class="ms-bg">
                             <div class="mstp xxtp3"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
                     <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '来学技能'])" href="https://www.laixue.com/">
-                        <div class="ms-bg" >
+                        <div class="ms-bg">
                             <div class="mstp xxtp8"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '派学车'])" href="https://detail.tmall.com/item.htm?id=618619807380">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '派学车'])"
+                        href="https://detail.tmall.com/item.htm?id=618619807380">
+                        <div class="ms-bg">
                             <div class="mstp xxtp9"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
                 </div>
-    
+
             </div>
             <div class="ms-box " style="top:4.75rem">
                 <div class="ms-con" style="width:9rem">
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '傲梦编程'])" href="https://all-dream.com/landing/m1/?PG=3&LK=3&promotion=&utmSource=%E7%99%BE%E5%BA%A6SEM-%E4%B8%80%E7%B1%BB%E5%9F%8E%E5%B8%82%E8%A1%A8%E5%8D%95">
-                        <div class="ms-bg"  data-src="">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '傲梦编程'])"
+                        href="https://all-dream.com/landing/m1/?PG=3&LK=3&promotion=&utmSource=%E7%99%BE%E5%BA%A6SEM-%E4%B8%80%E7%B1%BB%E5%9F%8E%E5%B8%82%E8%A1%A8%E5%8D%95">
+                        <div class="ms-bg" data-src="">
                             <div class="mstp xxtp4"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '松鼠ai'])" href="https://www.songshuai.com.cn/">
-                        <div class="ms-bg"  data-src="">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '松鼠ai'])"
+                        href="https://www.songshuai.com.cn/">
+                        <div class="ms-bg" data-src="">
                             <div class="mstp xxtp5"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '叽里呱啦'])" href="https://detail.tmall.com/item.htm?id=619927634487">
-                        <div class="ms-bg"  data-src="">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '叽里呱啦'])"
+                        href="https://detail.tmall.com/item.htm?id=619927634487">
+                        <div class="ms-bg" data-src="">
                             <div class="mstp xxtp6"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '昂立新课程'])" href="https://detail.tmall.com/item.htm?id=581430091565">
-                        <div class="ms-bg"  data-src="">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '昂立新课程'])"
+                        href="https://detail.tmall.com/item.htm?id=581430091565">
+                        <div class="ms-bg" data-src="">
                             <div class="mstp xxtp7"></div>
-                            <div  class="an an1" ></div>
+                            <div class="an an1"></div>
                         </div>
                     </a>
                 </div>
-    
+
             </div>
         </div>
         <div class="bg " style="height:8.42rem">
-            <div class="tit">美丽无界  焕然一新</div>
-            <div class="ms-box " >
-               
-                <div class="ms-con  ms-con1"  style="width:9rem !important">
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '沪佳'])" href="https://aisite.wejianzhan.com/site/hjgcd.com/acb35bd3-66d5-4b39-b09e-22132d486ca5">
-                        <div class="ms-bg" >
+            <div class="tit">美丽无界 焕然一新</div>
+            <div class="ms-box ">
+
+                <div class="ms-con  ms-con1" style="width:9rem !important">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '沪佳'])"
+                        href="https://aisite.wejianzhan.com/site/hjgcd.com/acb35bd3-66d5-4b39-b09e-22132d486ca5">
+                        <div class="ms-bg">
                             <div class="mstp jttp1"></div>
-                            <div  class="an jtan1" ></div>
+                            <div class="an jtan1"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '聚通'])" href="https://aisite.wejianzhan.com/site/jt111.com/32701e21-3a7f-4033-83e0-1e4b25d287ec">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '聚通'])"
+                        href="https://aisite.wejianzhan.com/site/jt111.com/32701e21-3a7f-4033-83e0-1e4b25d287ec">
+                        <div class="ms-bg">
                             <div class="mstp jttp2"></div>
-                            <div  class="an jtan2" ></div>
+                            <div class="an jtan2"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '沪尚茗居'])" href="https://aisite.wejianzhan.com/site/mingjugroup.com/116c9797-9796-43b9-be32-5b0e9a2a7a15">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '沪尚茗居'])"
+                        href="https://aisite.wejianzhan.com/site/mingjugroup.com/116c9797-9796-43b9-be32-5b0e9a2a7a15">
+                        <div class="ms-bg">
                             <div class="mstp jttp3"></div>
-                            <div  class="an jtan3" ></div>
+                            <div class="an jtan3"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '碧尔缇希神仙水'])" href="https://s.click.taobao.com/iFh67su">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '碧尔缇希神仙水'])"
+                        href="https://s.click.taobao.com/iFh67su">
+                        <div class="ms-bg">
                             <div class="mstp jttp8"></div>
-                            <div  class="an jtan4" ></div>
+                            <div class="an jtan4"></div>
                         </div>
                     </a>
-           
+
                 </div>
-    
+
             </div>
             <div class="ms-box " style="top:4.75rem">
-                <div class="ms-con  ms-con1" style="width:11.28rem !important" >
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '野兽派'])" href="https://detail.tmall.com/item.htm?id=637059046386">
-                        <div class="ms-bg"  >
+                <div class="ms-con  ms-con1" style="width:11.28rem !important">
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '野兽派'])"
+                        href="https://detail.tmall.com/item.htm?id=637059046386">
+                        <div class="ms-bg">
                             <div class="mstp jttp4"></div>
-                            <div  class="an " ></div>
+                            <div class="an "></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '金可儿'])" href="https://detail.tmall.com/item.htm?id=27101976427">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '金可儿'])"
+                        href="https://detail.tmall.com/item.htm?id=27101976427">
+                        <div class="ms-bg">
                             <div class="mstp jttp5"></div>
-                            <div  class="an " ></div>
+                            <div class="an "></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', 'a2n奶粉'])" href="https://detail.tmall.com/item.htm?id=546032873511">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', 'a2n奶粉'])"
+                        href="https://detail.tmall.com/item.htm?id=546032873511">
+                        <div class="ms-bg">
                             <div class="mstp jttp6"></div>
                             <div class="an "></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '帅丰'])" href="https://detail.m.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-23235101343.1.10277b6dLMZjC3&id=628374113230&scene=taobao_shop&sku_properties=1627207:28341">
-                        <div class="ms-bg" >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '帅丰'])"
+                        href="https://detail.m.tmall.com/item.htm?spm=a1z10.1-b-s.w5003-23235101343.1.10277b6dLMZjC3&id=628374113230&scene=taobao_shop&sku_properties=1627207:28341">
+                        <div class="ms-bg">
                             <div class="mstp tp6"></div>
-                            <div  class="an an5" ></div>
+                            <div class="an an5"></div>
                         </div>
                     </a>
-                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '镜特梦眼镜'])" href="https://gentlemonster.tmall.com">
-                        <div class="ms-bg"  >
+                    <a onclick="_hmt.push(['_trackEvent', '暖心好礼','click', '镜特梦眼镜'])"
+                        href="https://gentlemonster.tmall.com">
+                        <div class="ms-bg">
                             <div class="mstp jttp7"></div>
-                            <div  class="an " ></div>
+                            <div class="an "></div>
                         </div>
                     </a>
                 </div>
-    
+
             </div>
         </div>
+        <div class="code_wrap">
+            <div class="hand"></div>
+            <div class="code"></div>
+        </div>
         <div class="bt1 bt3"></div>
-        <a onclick="_hmt.push(['_trackEvent', '直播','click', '直播'])" href="https://mbd.baidu.com/newspage/data/mdpage?sid=1016847&tag=33&offset=10&method=LiveList&getTPL=1&livepre=1&roomid=4146487485">
+        <a onclick="_hmt.push(['_trackEvent', '直播','click', '直播'])"
+            href="https://mbd.baidu.com/newspage/data/mdpage?sid=1016847&tag=33&offset=10&method=LiveList&getTPL=1&livepre=1&roomid=4146487485">
             <div class="bf">
                 <div class="lh"></div>
             </div>
         </a>
-       
+
         <div class="bt1 bt4"></div>
         <div class="cj">
             <div class="jp  jp1"></div>
             <div class="jp jp2"></div>
             <div class="jp jp3"></div>
             <div class="jp jp4"></div>
-            <div class="jp jp5" ></div>
+            <div class="jp jp5"></div>
             <div class="jp jp6"></div>
             <div class="jp jp7"></div>
             <div class="jp jp8"></div>
@@ -1099,11 +1326,11 @@
             <div class="jp jp11"></div>
             <div class="jp jp12"></div>
             <div class="zzc-box">
-                <div class="zz zz1 " id="0" ></div>
+                <div class="zz zz1 " id="0"></div>
                 <div class="zz zz2 " id="1"></div>
                 <div class="zz zz3 " id="2"></div>
                 <div class="zz zz4 " id="3"></div>
-                <div class="zz "  id="4"></div>
+                <div class="zz " id="4"></div>
                 <div class="zz " id="5"></div>
                 <div class="zz " id="6"></div>
                 <div class="zz " id="7"></div>
@@ -1112,15 +1339,15 @@
                 <div class="zz " id="10"></div>
             </div>
         </div>
-        <div class="cjan" > </div>
-    
+        <div class="cjan"> </div>
+
         <div class="zj-box">
             <div class="ts">中奖名单</div>
             <div class="mdlb">
                 <div class="bgw swiper2">
                     <div class="swiper-container" id="sw2">
                         <div class="swiper-wrapper">
-                            <div class="swiper-slide zj" >
+                            <div class="swiper-slide zj">
                                 <div class="md1">恭喜198****0031抽到</div>
                                 <div class="jpq">《不乱》图书</div>
                             </div>
@@ -1144,38 +1371,31 @@
                                 <div class="md1">恭喜182****9011抽到</div>
                                 <div class="jpq">星座度熊</div>
                             </div>
-                            
+
                         </div>
-                        
                     </div>
                 </div>
-                
-              
             </div>
-    
         </div>
-        <div class="gz" ></div>
-        <div class="erm">
-
-
-        </div>
+        <div class="gz"></div>
+        <!-- <div class="erm"></div> -->
         <div class="logo_tip"></div>
         <div class="tmp"></div>
-        <div class="zjtc" >
-            <div class="close" >×</div>
+        <div class="zjtc">
+            <div class="close">×</div>
             <div class="ljlq">
                 <div class="gx"> 恭喜你获得</div>
                 <div class="prz"></div>
-                <input  class="name" placeholder="姓名" value="" />
-                <input  class="tell" placeholder="电话" value="" />
-                <div class="tj"  ></div>
+                <input class="name" placeholder="姓名" value="" />
+                <input class="tell" placeholder="电话" value="" />
+                <div class="tj"></div>
             </div>
-            
+
         </div>
     </div>
 
-    
-    
+
+
 </body>
 <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
 <script src="../public/javascripts/rem.js"></script>
@@ -1183,171 +1403,171 @@
 
 <script>
     var mySwiper = new Swiper('.swiper-container', {
-        autoplay : 2000,
+        autoplay: 2000,
         loop: true,
-        speed:1000
-       
+        speed: 1000
+
     })
     var mySwiper = new Swiper('#sw2', {
-        autoplay : 2000,
+        autoplay: 2000,
         loop: true,
-        speed:1000,
-        direction : 'vertical'
+        speed: 1000,
+        direction: 'vertical'
     })
-    var map={
-            "bl": 0,
-            "up": 1,
-            "xzdx":2,
-            "xhz":3,
-            "ybsw": 4,
-            "gmjj": 5,
-            "xdyx":6,
-            "wjcz":7,
-            "bw": 8,
-            "pswk": 9,
-            "xsj": 10,
-        }
-    var map1={
-            "bl": '《不乱》图书',
-            "wjcz":'《无界成长》图书',
-            "xsj": '《小瞬间》图书',
-            "xhz":'熊孩子家庭套装',
-            "ybsw": '《引爆思维》图书',
-            "gmjj": '公募基金入门网课',
-            "bw": '百威科罗娜优惠拳',
-            "pswk": 'Python网课',
-            "xzdx": '星座度熊',
-            "xdyx":'小度智能音响Play',
-            "up":'度熊定制U盘'
-        }
-    var cjFlag=''
-    var prizeName=''
-    var prize=''
-    if(localStorage.getItem('cjFlag') ){
-        if(localStorage.getItem('cjFlag') =='0'){
-            cjFlag=false
-        }else{
-            cjFlag=true
+    var map = {
+        "bl": 0,
+        "up": 1,
+        "xzdx": 2,
+        "xhz": 3,
+        "ybsw": 4,
+        "gmjj": 5,
+        "xdyx": 6,
+        "wjcz": 7,
+        "bw": 8,
+        "pswk": 9,
+        "xsj": 10,
+    }
+    var map1 = {
+        "bl": '《不乱》图书',
+        "wjcz": '《无界成长》图书',
+        "xsj": '《小瞬间》图书',
+        "xhz": '熊孩子家庭套装',
+        "ybsw": '《引爆思维》图书',
+        "gmjj": '公募基金入门网课',
+        "bw": '百威科罗娜优惠拳',
+        "pswk": 'Python网课',
+        "xzdx": '星座度熊',
+        "xdyx": '小度智能音响Play',
+        "up": '度熊定制U盘'
+    }
+    var cjFlag = ''
+    var prizeName = ''
+    var prize = ''
+    if (localStorage.getItem('cjFlag')) {
+        if (localStorage.getItem('cjFlag') == '0') {
+            cjFlag = false
+        } else {
+            cjFlag = true
 
         }
-        
-    }else{
-        localStorage.setItem('cjFlag','1')
-        cjFlag=true
+
+    } else {
+        localStorage.setItem('cjFlag', '1')
+        cjFlag = true
     }
-    
-    $('body').on('click','.cjan',function () {
-        var timer=null
-        var count =0
-        let random=11
-        if(cjFlag){
+
+    $('body').on('click', '.cjan', function () {
+        var timer = null
+        var count = 0
+        let random = 11
+        if (cjFlag) {
             $.ajax({
                 //请求方式
-                type : "post",
+                type: "post",
                 //请求地址
-                url : "/api/ztyluckDraw",
+                url: "/api/ztyluckDraw",
                 //数据，json字符串
-                data:{},
+                data: {},
                 dataType: 'json',
                 //请求成功
-                success : function(res) {
-                    localStorage.setItem('cjFlag','0')
-                    cjFlag=false
-                    timer=setInterval(function(){
-                        
-                        random=parseInt(Math.random()*11,10)
+                success: function (res) {
+                    localStorage.setItem('cjFlag', '0')
+                    cjFlag = false
+                    timer = setInterval(function () {
+
+                        random = parseInt(Math.random() * 11, 10)
                         count++
                         $('.zz').removeClass('active')
-                        
-                        if(count >30){
+
+                        if (count > 30) {
                             clearInterval(timer);
-                                random=map[res.prize]
-                                prize=res.prize
-                                prizeName=map1[res.prize]
-                                $.each($('.zz'),function (index,val) { 
-                                    if($(val).attr('id')==random){
-                                        $(val).addClass('active')
-                                    }
-                                })
-                            
+                            random = map[res.prize]
+                            prize = res.prize
+                            prizeName = map1[res.prize]
+                            $.each($('.zz'), function (index, val) {
+                                if ($(val).attr('id') == random) {
+                                    $(val).addClass('active')
+                                }
+                            })
+
                             if (res.prize == 'bw') {
-                                window.location.href ='https://uland.taobao.com/quan/detail?sellerId=2386428115&activityId=84a0c50e82df459ca5ac6ce335222b61'
-                                
-                            }else{
+                                window.location.href =
+                                    'https://uland.taobao.com/quan/detail?sellerId=2386428115&activityId=84a0c50e82df459ca5ac6ce335222b61'
+
+                            } else {
                                 $('.prz').text(map1[res.prize])
                                 $('.zjtc').show()
                             }
-                            
-                        }else{
-                            $.each($('.zz'),function (index,val) { 
-                                if($(val).attr('id')==random){
+
+                        } else {
+                            $.each($('.zz'), function (index, val) {
+                                if ($(val).attr('id') == random) {
                                     $(val).addClass('active')
                                 }
                             })
                         }
                     }, 100);
-                    
 
-                   
+
+
                 },
                 //请求失败，包含具体的错误信息
-                error : function(e){
+                error: function (e) {
                     console.log(e.status);
                     console.log(e.responseText);
                 }
             });
-        }else{
+        } else {
             alert('您已经抽过奖了!')
         }
-        
-        
-    }).on('click','.close',function () { 
+
+
+    }).on('click', '.close', function () {
         $('.zjtc').hide()
-    }).on('click','.gz',function () {
-        window.location.href='/home/rule'
-    }).on('click','.tj',function () {
-        if($('.name').val().trim() ==''){
+    }).on('click', '.gz', function () {
+        window.location.href = '/home/rule'
+    }).on('click', '.tj', function () {
+        if ($('.name').val().trim() == '') {
             alert('请输入姓名！')
-            return 
-        }else if($('.tell').val().trim() =='' ){
+            return
+        } else if ($('.tell').val().trim() == '') {
             alert('请输入手机号！')
-            return 
-        }else if(!(/^1[3456789]\d{9}$/.test($('.tell').val().trim())) ){
+            return
+        } else if (!(/^1[3456789]\d{9}$/.test($('.tell').val().trim()))) {
             alert('请输入正确格式手机号！')
-            return 
+            return
         }
-        var param={
-            name:$('.name').val().trim(),
-            tell:$('.tell').val().trim(),
-            prize:prizeName
+        var param = {
+            name: $('.name').val().trim(),
+            tell: $('.tell').val().trim(),
+            prize: prizeName
         }
-        
+
         $.ajax({
-                //请求方式
-                type : "post",
-                //请求地址
-                url : "/api/getPrize",
-                //数据，json字符串
-                data:param,
-                dataType: 'json',
-                //请求成功
-                success : function(res) {
-                   if(res.code ==1){
-                        alert(res.msg)
-                       
-                   }else{
-                       alert(res.msg)
-                   }
-                   
-                },
-                //请求失败，包含具体的错误信息
-                error : function(e){
-                    console.log(e.status);
-                    console.log(e.responseText);
+            //请求方式
+            type: "post",
+            //请求地址
+            url: "/api/getPrize",
+            //数据，json字符串
+            data: param,
+            dataType: 'json',
+            //请求成功
+            success: function (res) {
+                if (res.code == 1) {
+                    alert(res.msg)
+
+                } else {
+                    alert(res.msg)
                 }
-            });
+
+            },
+            //请求失败，包含具体的错误信息
+            error: function (e) {
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
     })
-   
-        
 </script>
+
 </html>
