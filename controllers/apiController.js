@@ -831,7 +831,7 @@ let getOpenid=async function (req,res) {
 							"content-type": "Application/x-www-form-urlencoded",
 						},
 					},async (error, response, body)=>{
-						if(JSON.parse(body).data.level =='3' ||JSON.parse(body).data.level =='4'){
+						if(JSON.parse(body).data.level =='3' ||JSON.parse(body).data.level =='4' ||JSON.parse(body).data.level =='2' ||JSON.parse(body).data.level =='1' ){
 							if(cuid&& code){
 								let param ={
 									code:code,
