@@ -808,201 +808,270 @@ let download1 = function (req,res) {
 
 //小程序接口
 let getOpenid=async function (req,res) {
+	let {xtoken,code,team_id,share_id,cuid} =req.body
+	let accsstoken =''
+	let acurl= 'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=dKatXb51y13Gizn8EboLkFfHaLU208Zj&client_secret=2GSqlxC7P4KEdHggYoGmp6tkZDIHCn9A&scope=smartapp_snsapi_base'
+	if(xtoken){
+		request(acurl, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				accsstoken =JSON.parse(body).access_token
+				let param1={
+					'appkey':'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
+					'xtoken':xtoken,
+					'type':'marketing',
+					'clientip':req.ip.split('ffff:')[1],
+					'ts':Math.floor(Date.now()/1000),
+					'ev':'login'
+				}
+				request({
+						url:'https://openapi.baidu.com/rest/2.0/smartapp/detectrisk?access_token='+accsstoken,
+						method: 'POST',
+						form: param1,
+						headers: {
+							"content-type": "Application/x-www-form-urlencoded",
+						},
+					},async (error, response, body)=>{
+						if(JSON.parse(body).data.level =='3' ||JSON.parse(body).data.level =='4'){
+							if(cuid&& code){
+								let param ={
+									code:code,
+									client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
+									sk:'2GSqlxC7P4KEdHggYoGmp6tkZDIHCn9A'
+								}
+								request({
+										url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
+										method: 'POST',
+										form: param,
+										headers: {
+											"content-type": "Application/x-www-form-urlencoded",
+										},
+									},async (error, response, body)=>{
+										if (!error && response.statusCode == 200) {
+											let userinfo ={}
+											let openid =JSON.parse(body)['openid']
+											let sqlArr0 =[cuid];
+											let sql0 = 'select * from  nhj_user_info where cuid = ? ';
+											let result0 = await sqlQuery.SysqlConnect(sql0,sqlArr0);
+											if(result0.length>0){
+												if(result0[0]['user_id'] != openid){
+													res.send({ 
+														'code': 1,
+														'msg': '一台设备只能绑定一个账号',
+														'data':''
+													});
+													return
+												}
+											}else{
+												let sqlArr =[openid];
+												let sql = 'select * from  nhj_user_info where user_id = ? ';
+												let result = await sqlQuery.SysqlConnect(sql,sqlArr);
 
-	let {code,team_id,share_id} =req.body
-	// let ip =util.getIPAdress()
-	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
-	code =escape(code)
-	team_id =escape(team_id)
-	share_id =escape(share_id)
-	// cuid=escape(cuid)
-	let param ={
-		code:code,
-		client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
-		sk:'2GSqlxC7P4KEdHggYoGmp6tkZDIHCn9A'
+												if(result.length ==0){
+													let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+													let sqlArr1 =[openid,cuid,JSON.stringify([]),create_time];
+													let sql1 = 'insert into nhj_user_info (user_id,cuid,share_count_info,create_time) values(?,?,?,?)';
+													await sqlQuery.SysqlConnect(sql1,sqlArr1);
+												}else{
+													if(result[0]['cuid']==''){
+														let sqlArr8 =[cuid,openid];
+														let sql8 = 'update nhj_user_info  set cuid = ? where user_id= ? ';
+														await sqlQuery.SysqlConnect(sql8,sqlArr8);
+													}
+												}
+
+											}
+
+											let sqlArr7 =[openid];
+											let sql7 = 'select * from  nhj_user_info where user_id = ? ';
+											let result7 = await sqlQuery.SysqlConnect(sql7,sqlArr7);
+											userinfo =result7[0]
+
+											//判断有没有team_id
+											if(team_id ==''){
+												if(userinfo['join_team_flag'] =='0'){
+													userinfo['to']='sy'
+													userinfo['to_team_id']=''
+													
+													res.send({ 
+														'code': 1,
+														'msg': '用户未加入战队',
+														'data':userinfo
+													});
+												}else{
+													let sqlArr1 =[userinfo['team_id']];
+													let sql1 = 'select * from  nhj_team_info where team_id = ? ';
+													let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
+													if(JSON.parse(result1[0]['members']).length<3){
+														userinfo['to']='zd'
+														userinfo['to_team_id']=userinfo['team_id']
+														res.send({ 
+															'code': 1,
+															'msg': '用户已加入战队，但战队人数不够',
+															'data':userinfo
+														});
+														
+													}else{
+														userinfo['to']='db'
+														userinfo['to_team_id']=userinfo['team_id']
+														res.send({ 
+															'code': 1,
+															'msg': '用户已加入战队，人数已够上榜',
+															'data':userinfo
+														});
+													}
+													
+
+												}
+
+											}else{
+												
+												// 当前用户没有加入战队
+												if(userinfo['join_team_flag'] =='0'){
+													if(JSON.parse(userinfo['help_team_id']).indexOf(team_id)==-1){
+														
+														//更新被分享者信息
+														let help_team_id_temp =JSON.parse(userinfo['help_team_id'])
+														help_team_id_temp.push(team_id)
+														
+														let sqlArr3 =[JSON.stringify(help_team_id_temp),userinfo['user_id']];
+														let sql3 = 'update nhj_user_info  set help_team_id = ? where user_id= ? ';
+														let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
+														if(result3.affectedRows ==1){
+															userinfo['help_team_id']=JSON.stringify(help_team_id_temp)
+														}
+														//更新分享者的分享信息
+														let sqlArr10 =[share_id];
+														let sql10 = 'select * from  nhj_user_info where user_id = ? ';
+														let result10 = await sqlQuery.SysqlConnect(sql10,sqlArr10);
+														let shareinfo=JSON.parse(result10[0]['share_count_info'])
+
+														shareinfo.push(userinfo['user_id'])
+														let sqlArr4 =[JSON.stringify(shareinfo),share_id];
+														let sql4 = 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
+														await sqlQuery.SysqlConnect(sql4,sqlArr4);
+														//更新 redis战队票数
+													
+														let objRes =JSON.parse(await redisStrGet(1,team_id))
+														objRes['total_bill']= objRes['total_bill']+30
+														await redisStrSet(1, team_id, JSON.stringify(objRes))
+														//更新数据库战队票数
+														let sqlArr7 =[objRes['total_bill'],team_id];
+														let sql7 = 'update nhj_team_info  set total_bill = ?  where team_id= ?';
+														await sqlQuery.SysqlConnect(sql7,sqlArr7);
+
+														//查询当前前往哪个页面
+														let sqlArr5 =[team_id];
+														let sql5 = 'select * from  nhj_team_info where team_id = ? ';
+														let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
+														if(JSON.parse(result5[0]['members']).length<3){
+															userinfo['to']='zd'
+															userinfo['to_team_id']=team_id
+															res.send({ 
+																'code': 1,
+																'msg': '被分享战队还差人，判断是否加入当前战队',
+																'data':userinfo
+															});
+															
+														}else{
+															userinfo['to']='db'
+															userinfo['to_team_id']=team_id
+															res.send({ 
+																'code': 1,
+																'msg': '被分享已上榜，判断是否加入当前战队',
+																'data':userinfo
+															});
+														}
+												
+
+													}else{
+														let sqlArr9 =[team_id];
+														let sql9 = 'select * from  nhj_team_info where team_id = ? ';
+														let result9 = await sqlQuery.SysqlConnect(sql9,sqlArr9);
+														if(JSON.parse(result9[0]['members']).length<3){
+															userinfo['to']='zd'
+															userinfo['to_team_id']=team_id
+															res.send({ 
+																'code': 1,
+																'msg': '被分享战队还差人，判断是否加入当前战队',
+																'data':userinfo
+															});
+														
+														}else{
+															userinfo['to']='db'
+															userinfo['to_team_id']=team_id
+															res.send({ 
+																'code': 1,
+																'msg': '被分享战队已上榜，判断是否加入当前战队',
+																'data':userinfo
+															});
+														}
+														
+													}
+												}else{
+													//查询当前前往哪个页面
+												
+													let sqlArr6 =[userinfo['team_id']];
+													let sql6 = 'select * from  nhj_team_info where team_id = ? ';
+													let result6 = await sqlQuery.SysqlConnect(sql6,sqlArr6);
+													if(JSON.parse(result6[0]['members']).length<3){
+														userinfo['to']='zd'
+														userinfo['to_team_id']=userinfo['team_id']
+														res.send({ 
+															'code': 1,
+															'msg': '你的战队已经还差人，快去邀请成员吧！',
+															'data':userinfo
+														});
+														
+													}else{
+														userinfo['to']='db'
+														userinfo['to_team_id']=userinfo['team_id']
+														res.send({ 
+															'code': 1,
+															'msg': '你的战队已经还不差人，快去分享助力吧！',
+															'data':userinfo
+														});
+													}
+													
+												}
+											}
+
+
+										}
+
+									})
+					
+							}else{
+								res.send({ 
+									'code': 1,
+									'msg': '数据异常',
+									'data':''
+								});
+							}
+
+						}else{
+							res.send({ 
+								'code': 2,
+								'msg': '数据异常',
+								'data':''
+							});
+						}
+				})
+	
+			}
+		})
+	}else{
+		res.send({ 
+			'code': 1,
+			'msg': '数据异常',
+			'data':''
+		});
 	}
-	request({
-		url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
-		method: 'POST',
-		form: param,
-		headers: {
-			"content-type": "Application/x-www-form-urlencoded",
-		},
-	},async (error, response, body)=>{
-		if (!error && response.statusCode == 200) {
-			let userinfo ={}
-			let openid =JSON.parse(body)['openid']
-			let sqlArr =[openid];
-			let sql = 'select * from  nhj_user_info where user_id = ? ';
-			let result = await sqlQuery.SysqlConnect(sql,sqlArr);
-			//判断用户是否存在
-			if(result.length ==0){
-				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-				let sqlArr1 =[openid,JSON.stringify([]),create_time];
-				let sql1 = 'insert into nhj_user_info (user_id,share_count_info,create_time) values(?,?,?)';
-				await sqlQuery.SysqlConnect(sql1,sqlArr1);
-			}
-			let sqlArr7 =[openid];
-			let sql7 = 'select * from  nhj_user_info where user_id = ? ';
-			let result7 = await sqlQuery.SysqlConnect(sql7,sqlArr7);
-			userinfo =result7[0]
-			//判断有没有team_id
-			if(team_id ==''){
-				if(userinfo['join_team_flag'] =='0'){
-					userinfo['to']='sy'
-					userinfo['to_team_id']=''
-					// console.log(userinfo)
-					res.send({ 
-						'code': 1,
-						'msg': '用户未加入战队',
-						'data':userinfo
-					});
-				}else{
-					let sqlArr1 =[userinfo['team_id']];
-					let sql1 = 'select * from  nhj_team_info where team_id = ? ';
-					let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
-					if(JSON.parse(result1[0]['members']).length<3){
-						userinfo['to']='zd'
-						userinfo['to_team_id']=userinfo['team_id']
-						res.send({ 
-							'code': 1,
-							'msg': '用户已加入战队，但战队人数不够',
-							'data':userinfo
-						});
-						
-					}else{
-						userinfo['to']='db'
-						userinfo['to_team_id']=userinfo['team_id']
-						res.send({ 
-							'code': 1,
-							'msg': '用户已加入战队，人数已够上榜',
-							'data':userinfo
-						});
-					}
-					
-
-				}
-
-			}else{
-				
-				// 当前用户没有加入战队
-				if(userinfo['join_team_flag'] =='0'){
-					if(JSON.parse(userinfo['help_team_id']).indexOf(team_id)==-1){
-						
-						//更新被分享者信息
-						let help_team_id_temp =JSON.parse(userinfo['help_team_id'])
-						help_team_id_temp.push(team_id)
-						
-						let sqlArr3 =[JSON.stringify(help_team_id_temp),userinfo['user_id']];
-						let sql3 = 'update nhj_user_info  set help_team_id = ? where user_id= ? ';
-						let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
-						if(result3.affectedRows ==1){
-							userinfo['help_team_id']=JSON.stringify(help_team_id_temp)
-						}
-						//更新分享者的分享信息
-						let sqlArr10 =[share_id];
-						let sql10 = 'select * from  nhj_user_info where user_id = ? ';
-						let result10 = await sqlQuery.SysqlConnect(sql10,sqlArr10);
-						let shareinfo=JSON.parse(result10[0]['share_count_info'])
-
-						shareinfo.push(userinfo['user_id'])
-						let sqlArr4 =[JSON.stringify(shareinfo),share_id];
-						let sql4 = 'update nhj_user_info  set share_count_info = ?  where user_id= ?';
-						await sqlQuery.SysqlConnect(sql4,sqlArr4);
-						//更新 redis战队票数
-					
-						let objRes =JSON.parse(await redisStrGet(1,team_id))
-						objRes['total_bill']= objRes['total_bill']+30
-						await redisStrSet(1, team_id, JSON.stringify(objRes))
-						//更新数据库战队票数
-						let sqlArr7 =[objRes['total_bill'],team_id];
-						let sql7 = 'update nhj_team_info  set total_bill = ?  where team_id= ?';
-						await sqlQuery.SysqlConnect(sql7,sqlArr7);
-
-						//查询当前前往哪个页面
-						let sqlArr5 =[team_id];
-						let sql5 = 'select * from  nhj_team_info where team_id = ? ';
-						let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
-						if(JSON.parse(result5[0]['members']).length<3){
-							userinfo['to']='zd'
-							userinfo['to_team_id']=team_id
-							res.send({ 
-								'code': 1,
-								'msg': '被分享战队还差人，判断是否加入当前战队',
-								'data':userinfo
-							});
-							
-						}else{
-							userinfo['to']='db'
-							userinfo['to_team_id']=team_id
-							res.send({ 
-								'code': 1,
-								'msg': '被分享已上榜，判断是否加入当前战队',
-								'data':userinfo
-							});
-						}
-				
-
-					}else{
-						let sqlArr9 =[team_id];
-						let sql9 = 'select * from  nhj_team_info where team_id = ? ';
-						let result9 = await sqlQuery.SysqlConnect(sql9,sqlArr9);
-						if(JSON.parse(result9[0]['members']).length<3){
-							userinfo['to']='zd'
-							userinfo['to_team_id']=team_id
-							res.send({ 
-								'code': 1,
-								'msg': '被分享战队还差人，判断是否加入当前战队',
-								'data':userinfo
-							});
-						
-						}else{
-							userinfo['to']='db'
-							userinfo['to_team_id']=team_id
-							res.send({ 
-								'code': 1,
-								'msg': '被分享战队已上榜，判断是否加入当前战队',
-								'data':userinfo
-							});
-						}
-						
-					}
-				}else{
-					//查询当前前往哪个页面
-				
-					let sqlArr6 =[userinfo['team_id']];
-					let sql6 = 'select * from  nhj_team_info where team_id = ? ';
-					let result6 = await sqlQuery.SysqlConnect(sql6,sqlArr6);
-					if(JSON.parse(result6[0]['members']).length<3){
-						userinfo['to']='zd'
-						userinfo['to_team_id']=userinfo['team_id']
-						res.send({ 
-							'code': 1,
-							'msg': '你的战队已经还差人，快去邀请成员吧！',
-							'data':userinfo
-						});
-						
-					}else{
-						userinfo['to']='db'
-						userinfo['to_team_id']=userinfo['team_id']
-						res.send({ 
-							'code': 1,
-							'msg': '你的战队已经还不差人，快去分享助力吧！',
-							'data':userinfo
-						});
-					}
-					
-				}
-			}
-		}
-		
-	});
+	
 }
 //updateUserinfo
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
-	// let ip =util.getIPAdress()
-	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
+
 	name =escape(name)
 	avatarUrl =escape(avatarUrl)
 	user_id =escape(user_id)
@@ -1327,148 +1396,216 @@ let getRankingList   = async function (req,res) {
 } 
 //签到任务签到
 let task =async function (req,res) {
-	let {date,user_id,task_id,res_code,add_bill} =req.body
+	let {xtoken,cuid,date,user_id,task_id,res_code,add_bill} =req.body
 	date=escape(date)
 	user_id=escape(user_id)
 	task_id=escape(task_id)
 	res_code=escape(res_code)
 	add_bill=Number(escape(add_bill))
+	let accsstoken =''
+	let acurl= 'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=dKatXb51y13Gizn8EboLkFfHaLU208Zj&client_secret=2GSqlxC7P4KEdHggYoGmp6tkZDIHCn9A&scope=smartapp_snsapi_base'
+	if(xtoken){
+		request(acurl, function (error, response, body) {
+			if (!error && response.statusCode == 200) {
+				accsstoken =JSON.parse(body).access_token
+				let param1={
+					'appkey':'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
+					'xtoken':xtoken,
+					'type':'marketing',
+					'clientip':req.ip.split('ffff:')[1],
+					'ts':Math.floor(Date.now()/1000),
+					'ev':'login'
+				}
+				request({
+						url:'https://openapi.baidu.com/rest/2.0/smartapp/detectrisk?access_token='+accsstoken,
+						method: 'POST',
+						form: param1,
+						headers: {
+							"content-type": "Application/x-www-form-urlencoded",
+						},
+					},async (error, response, body)=>{
+						if(JSON.parse(body).data.level =='3' ||JSON.parse(body).data.level =='4'){;
+							if(cuid && user_id){
+								let sqlArr0 =[cuid];
+								let sql0 = 'select * from  nhj_user_info where cuid = ? ';
+								let result0 = await sqlQuery.SysqlConnect(sql0,sqlArr0);
+								if(result0.length>0){
+									if(result0[0]['user_id'] == user_id){
+										let date1 = new Date();
+										let year = date1.getFullYear(); //获取完整的年份(4位)
+										let month = date1.getMonth() + 1; //获取当前月份(0-11,0代表1月)
+										let day = date1.getDate(); //获取当前日(1-31)
+										let time = year + '.' + month + '.' + day
+										let map={
+											'2021.1.23':1,
+											'2021.1.24':2,
+											'2021.1.25':3,
+											'2021.1.26':4,
+											'2021.1.27':5,
+											'2021.1.28':6,
+											'2021.1.29':7
+										}
+										let dayNum=map[date]
+										let sqlArr =[user_id];
+										let sql = 'select * from  nhj_user_info where user_id = ? ';
+										let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+										let task =JSON.parse(result[0]['task'])
+										let zd_info ={}
+										let sqlArr7 =[];
+										let pm=''
+										let sql7 = 'select * from  nhj_team_info order by total_bill desc';
+										let result7 = await sqlQuery.SysqlConnect(sql7,sqlArr7);
+										result7.forEach(function (val,index) {
+											if(val.team_id == result[0]['team_id'] ){
+												pm = index+1
+											}
+										})
+										zd_info['pm']=pm
+										if(task['task'+task_id].length==5){
+											if(task_id == 1){
+												task['task'+task_id].push('1')
+												task['task'+task_id].push('1')
+											}else{
+												task['task'+task_id].push('0')
+												task['task'+task_id].push('0')
+											}
+											
+										}
+										if(time != date || task['task'+task_id][dayNum-1] =='1' ||  add_bill>50){
+											res.send({ 
+												'code': 1,
+												'msg': '数据异常！',
+												'data':''
+											});
+										}else{	
+											if(task_id==3){
+									
+												if(res_code=='nn2021'){
+													
+													if(task['task'+task_id].indexOf('1')>-1){
+														
+														res.send({ 
+															'code': 1,
+															'msg': '您已经关注过公众号了！',
+															'data':task
+														});
+													}else{
+														//更新个人任务信息
+														task['task'+task_id][dayNum-1]='1'
+														let task_total= result[0]['task_total']+add_bill
+														let sqlArr1 =[JSON.stringify(task),task_total,user_id];
+														let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
+														await sqlQuery.SysqlConnect(sql1,sqlArr1);
+														
+														// //更新团队牌票数
+														let sqlArr5 =[result[0]['team_id']];
+														let sql5 = 'select * from  nhj_team_info where team_id = ? ';
+														let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
+														let total_bill =result5[0]['total_bill']+add_bill
+														let sqlArr2 =[total_bill,result[0]['team_id']];
+														let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
+														await sqlQuery.SysqlConnect(sql2,sqlArr2);
+													
+														//更新redis
+														let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
+														objRes['total_bill']= total_bill
+														await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
+														zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
+														zd_info['user_id'] =result[0]['user_id']
+														zd_info['total_bill']=total_bill
+														zd_info['task'] =task
+														res.send({ 
+															'code': 1,
+															'msg': '任务完成成功',
+															'data':zd_info
+														});
+													}
+												
+												}else{
+													res.send({ 
+														'code': 1,
+														'msg': '关注码错误了！',
+														'data':zd_info
+													});
+												}
+										
+											}else{
+												//更新个人任务信息
+												task['task'+task_id][dayNum-1]='1'
+												let task_total= Number(result[0]['task_total'])+add_bill
+												let sqlArr1 =[JSON.stringify(task),task_total,user_id];
+												let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
+												await sqlQuery.SysqlConnect(sql1,sqlArr1);
+												
+												// //更新团队牌票数
+												let sqlArr5 =[result[0]['team_id']];
+												let sql5 = 'select * from  nhj_team_info where team_id = ? ';
+												let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
+												let total_bill =result5[0]['total_bill']+add_bill
+												let sqlArr2 =[total_bill,result[0]['team_id']];
+												let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
+												await sqlQuery.SysqlConnect(sql2,sqlArr2);
+											
+												//更新redis
+												let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
+												objRes['total_bill']= total_bill
+												await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
+												zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
+												zd_info['user_id'] =result[0]['user_id']
+												zd_info['total_bill']=total_bill
+												zd_info['task'] =task
+												
+												res.send({ 
+													'code': 1,
+													'msg': '任务完成成功',
+													'data':zd_info
+												});
+											}
+										}
 
-	let date1 = new Date();
-	let year = date1.getFullYear(); //获取完整的年份(4位)
-	let month = date1.getMonth() + 1; //获取当前月份(0-11,0代表1月)
-	let day = date1.getDate(); //获取当前日(1-31)
-	let time = year + '.' + month + '.' + day
-	let map={
-		'2021.1.23':1,
-		'2021.1.24':2,
-		'2021.1.25':3,
-		'2021.1.26':4,
-		'2021.1.27':5,
-		'2021.1.28':6,
-		'2021.1.29':7
-	}
-	let dayNum=map[date]
-	let sqlArr =[user_id];
-	let sql = 'select * from  nhj_user_info where user_id = ? ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
-	let task =JSON.parse(result[0]['task'])
-	let zd_info ={}
-	let sqlArr7 =[];
-	let pm=''
-	let sql7 = 'select * from  nhj_team_info order by total_bill desc';
-	let result7 = await sqlQuery.SysqlConnect(sql7,sqlArr7);
-	result7.forEach(function (val,index) {
-		if(val.team_id == result[0]['team_id'] ){
-			pm = index+1
-		}
-	})
-	zd_info['pm']=pm
-	if(task['task'+task_id].length==5){
-		if(task_id == 1){
-			task['task'+task_id].push('1')
-			task['task'+task_id].push('1')
-		}else{
-			task['task'+task_id].push('0')
-			task['task'+task_id].push('0')
-		}
-		
-	}
-	if(time != date || task['task'+task_id][dayNum-1] =='1' ||  add_bill>50){
+
+
+									}else{
+										res.send({ 
+											'code': 2,
+											'msg': '数据异常',
+											'data':''
+										});
+									}
+								}else{
+									res.send({ 
+										'code': 2,
+										'msg': '数据异常',
+										'data':''
+									});
+								}
+
+							}else{
+								res.send({ 
+									'code': 2,
+									'msg': '数据异常',
+									'data':''
+								});
+							}
+
+						}else{
+							res.send({ 
+								'code': 2,
+								'msg': '数据异常',
+								'data':''
+							});
+						}
+				})
+	
+			}
+		})
+	}else{
 		res.send({ 
 			'code': 1,
-			'msg': '数据异常！',
+			'msg': '数据异常',
 			'data':''
 		});
-	}else{	
-		if(task_id==3){
-
-			if(res_code=='nn2021'){
-				
-				if(task['task'+task_id].indexOf('1')>-1){
-					
-					res.send({ 
-						'code': 1,
-						'msg': '您已经关注过公众号了！',
-						'data':task
-					});
-				}else{
-					//更新个人任务信息
-					task['task'+task_id][dayNum-1]='1'
-					let task_total= result[0]['task_total']+add_bill
-					let sqlArr1 =[JSON.stringify(task),task_total,user_id];
-					let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
-					await sqlQuery.SysqlConnect(sql1,sqlArr1);
-					
-					// //更新团队牌票数
-					let sqlArr5 =[result[0]['team_id']];
-					let sql5 = 'select * from  nhj_team_info where team_id = ? ';
-					let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
-					let total_bill =result5[0]['total_bill']+add_bill
-					let sqlArr2 =[total_bill,result[0]['team_id']];
-					let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
-					await sqlQuery.SysqlConnect(sql2,sqlArr2);
-				
-					//更新redis
-					let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
-					objRes['total_bill']= total_bill
-					await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
-					zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
-					zd_info['user_id'] =result[0]['user_id']
-					zd_info['total_bill']=total_bill
-					zd_info['task'] =task
-					res.send({ 
-						'code': 1,
-						'msg': '任务完成成功',
-						'data':zd_info
-					});
-				}
-			
-			}else{
-				res.send({ 
-					'code': 1,
-					'msg': '关注码错误了！',
-					'data':zd_info
-				});
-			}
-	
-		}else{
-			//更新个人任务信息
-			task['task'+task_id][dayNum-1]='1'
-			let task_total= Number(result[0]['task_total'])+add_bill
-			let sqlArr1 =[JSON.stringify(task),task_total,user_id];
-			let sql1 = 'update nhj_user_info  set task = ? ,task_total = ?  where user_id= ?';
-			await sqlQuery.SysqlConnect(sql1,sqlArr1);
-			
-			// //更新团队牌票数
-			let sqlArr5 =[result[0]['team_id']];
-			let sql5 = 'select * from  nhj_team_info where team_id = ? ';
-			let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5);
-			let total_bill =result5[0]['total_bill']+add_bill
-			let sqlArr2 =[total_bill,result[0]['team_id']];
-			let sql2 = 'update nhj_team_info  set total_bill = ? where team_id= ?';
-			await sqlQuery.SysqlConnect(sql2,sqlArr2);
-		
-			//更新redis
-			let objRes =JSON.parse(await redisStrGet(1,result[0]['team_id']))
-			objRes['total_bill']= total_bill
-			await redisStrSet(1, result[0]['team_id'], JSON.stringify(objRes))
-			zd_info['person_total']=task_total+JSON.parse(result[0]['share_count_info']).length
-			zd_info['user_id'] =result[0]['user_id']
-			zd_info['total_bill']=total_bill
-			zd_info['task'] =task
-			
-			res.send({ 
-				'code': 1,
-				'msg': '任务完成成功',
-				'data':zd_info
-			});
-		}
 	}
-
-
-
-	
 
 }
 //专题页抽奖
@@ -1536,7 +1673,9 @@ let ztyluckDraw =async function ( req,res) {
 };
 let getPrize=async function (req,res) { 
 	let {name,tell,prize} = req.body;
-	
+	name=escape(name)
+	tell=escape(tell)
+	prize=escape(prize)
 	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
 	let sqlArr1 =[tell];
 	let sql1 = 'select * from  nhjcj where tell = ? ';
