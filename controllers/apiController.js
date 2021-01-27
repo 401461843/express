@@ -8,7 +8,7 @@ const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
 
 const b64 = new BaiduB64();
-var fs = require('fs');//文件模块
+// var fs = require('fs');//文件模块
 
 
 global.dataList =[];
@@ -809,12 +809,13 @@ let download1 = function (req,res) {
 //小程序接口
 let getOpenid=async function (req,res) {
 
-	let {code,team_id,share_id} =req.body
-	let ip =util.getIPAdress()
-	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
+	let {code,team_id,share_id,cuid} =req.body
+	// let ip =util.getIPAdress()
+	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
 	code =escape(code)
 	team_id =escape(team_id)
 	share_id =escape(share_id)
+	cuid=escape(cuid)
 	let param ={
 		code:code,
 		client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
@@ -837,9 +838,18 @@ let getOpenid=async function (req,res) {
 			//判断用户是否存在
 			if(result.length ==0){
 				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-				let sqlArr1 =[openid,JSON.stringify([]),create_time];
-				let sql1 = 'insert into nhj_user_info (user_id,share_count_info,create_time) values(?,?,?)';
+				let sqlArr1 =[openid,cuid,JSON.stringify([]),create_time];
+				let sql1 = 'insert into nhj_user_info (user_id,cuid,share_count_info,create_time) values(?,?,?,?)';
 				await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			}else{
+				if(result[0]['cuid']==''){
+					let sqlArr8 =[cuid,openid];
+					let sql8 = 'update nhj_user_info  set cuid = ? where user_id= ? ';
+					await sqlQuery.SysqlConnect(sql8,sqlArr8);
+				}else{
+					
+
+				}
 			}
 			let sqlArr7 =[openid];
 			let sql7 = 'select * from  nhj_user_info where user_id = ? ';
@@ -1000,8 +1010,8 @@ let getOpenid=async function (req,res) {
 //updateUserinfo
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
-	let ip =util.getIPAdress()
-	fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
+	// let ip =util.getIPAdress()
+	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'updateUserinfo',name:name,avatarUrl:avatarUrl,user_id:user_id,ip:ip}));
 	name =escape(name)
 	avatarUrl =escape(avatarUrl)
 	user_id =escape(user_id)
