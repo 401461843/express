@@ -1053,7 +1053,7 @@ let getOpenid=async function (req,res) {
 							}else{
 								res.send({ 
 									'code': 1,
-									'msg': '数据异常',
+									'msg': 'cuid，code数据异常',
 									'data':''
 								});
 							}
@@ -1061,7 +1061,7 @@ let getOpenid=async function (req,res) {
 						}else{
 							res.send({ 
 								'code': 2,
-								'msg': '数据异常',
+								'msg': '风控异常',
 								'data':''
 							});
 						}
@@ -1072,7 +1072,7 @@ let getOpenid=async function (req,res) {
 	}else{
 		res.send({ 
 			'code': 1,
-			'msg': '数据异常',
+			'msg': 'xtoken数据异常',
 			'data':''
 		});
 	}
