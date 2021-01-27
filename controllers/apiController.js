@@ -1536,9 +1536,7 @@ let ztyluckDraw =async function ( req,res) {
 };
 let getPrize=async function (req,res) { 
 	let {name,tell,prize} = req.body;
-	name=escape(name)
-	tell=escape(tell)
-	prize=escape(prize)
+	
 	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
 	let sqlArr1 =[tell];
 	let sql1 = 'select * from  nhjcj where tell = ? ';
