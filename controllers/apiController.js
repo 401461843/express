@@ -809,13 +809,13 @@ let download1 = function (req,res) {
 //小程序接口
 let getOpenid=async function (req,res) {
 
-	let {code,team_id,share_id,cuid} =req.body
+	let {code,team_id,share_id} =req.body
 	// let ip =util.getIPAdress()
 	// fs.appendFileSync('./logs/1.txt',JSON.stringify({api:'getOpenid',code:code,team_id:team_id,share_id:share_id,ip:ip}));
 	code =escape(code)
 	team_id =escape(team_id)
 	share_id =escape(share_id)
-	cuid=escape(cuid)
+	// cuid=escape(cuid)
 	let param ={
 		code:code,
 		client_id:'dKatXb51y13Gizn8EboLkFfHaLU208Zj',
@@ -838,18 +838,9 @@ let getOpenid=async function (req,res) {
 			//判断用户是否存在
 			if(result.length ==0){
 				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-				let sqlArr1 =[openid,cuid,JSON.stringify([]),create_time];
-				let sql1 = 'insert into nhj_user_info (user_id,cuid,share_count_info,create_time) values(?,?,?,?)';
+				let sqlArr1 =[openid,JSON.stringify([]),create_time];
+				let sql1 = 'insert into nhj_user_info (user_id,share_count_info,create_time) values(?,?,?)';
 				await sqlQuery.SysqlConnect(sql1,sqlArr1);
-			}else{
-				if(result[0]['cuid']==''){
-					let sqlArr8 =[cuid,openid];
-					let sql8 = 'update nhj_user_info  set cuid = ? where user_id= ? ';
-					await sqlQuery.SysqlConnect(sql8,sqlArr8);
-				}else{
-					
-
-				}
 			}
 			let sqlArr7 =[openid];
 			let sql7 = 'select * from  nhj_user_info where user_id = ? ';
