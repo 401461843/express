@@ -1069,7 +1069,7 @@ let getOpenid=async function (req,res) {
 						res.send({ 
 								'code': 2,
 								'msg': '风控异常',
-								'data':JSON.parse(body).data.level
+								'data':JSON.parse(body).data
 							});
 				})
 	
