@@ -856,7 +856,7 @@ let getOpenid=async function (req,res) {
 											if(result0[0]['user_id'] != openid){
 												res.send({ 
 													'code': 2,
-													'msg': '一台设备只能绑定一个账号',
+													'msg': '该设备已绑定其它账号！',
 													'data':''
 												});
 												return
@@ -880,7 +880,7 @@ let getOpenid=async function (req,res) {
 													if(cuid !=result[0]['cuid']){
 														res.send({ 
 															'code': 2,
-															'msg': '一台设备只能绑定一个账号',
+															'msg': '该设备已绑定其它账号',
 															'data':''
 														});
 														return
