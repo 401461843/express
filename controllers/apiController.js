@@ -876,6 +876,16 @@ let getOpenid=async function (req,res) {
 														let sqlArr8 =[cuid,openid];
 														let sql8 = 'update nhj_user_info  set cuid = ? where user_id= ? ';
 														await sqlQuery.SysqlConnect(sql8,sqlArr8);
+													}else{
+														if(cuid !=result[0]['cuid']){
+															res.send({ 
+																'code': 1,
+																'msg': '一台设备只能绑定一个账号',
+																'data':''
+															});
+															return
+														}
+														
 													}
 												}
 
