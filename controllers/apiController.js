@@ -1406,11 +1406,22 @@ let getPhb =async function (req,res) {
 		if(index == (result.length-1)){
 			let jq =util.objSort('total_bill',list)
 			let w =jq.slice(3,30)
-			res.send({ 
-				'code': 1,
-				'msg': '',
-				'data':w
+			util.customForeach(w, async (val,index) => {
+				let sqlArr =[val.team_id];
+				let sql = 'select * from  nhj_user_info where user_id = ? ';
+				let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+				if(result.length>0){
+					let sqlArr1 =[(index+3)+'',val.team_id];
+					let sql1 = 'update nhj_user_info  set pm = ?  where user_id= ?';
+					await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				}
+				res.send({ 
+					'code': 1,
+					'msg': '',
+					'data':'数据更新成功！'
+				});
 			});
+			
 		}
 	});
 
