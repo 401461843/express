@@ -1404,10 +1404,12 @@ let getPhb =async function (req,res) {
 		obj['team_id'] =val
 		list.push(obj)
 		if(index == (result.length-1)){
+			let jq =util.objSort('total_bill',list)
+			let w =jq.slice(3,31)
 			res.send({ 
 				'code': 1,
 				'msg': '',
-				'data':util.objSort('total_bill',list)
+				'data':w
 			});
 		}
 	});
