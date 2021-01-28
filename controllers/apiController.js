@@ -808,6 +808,7 @@ let download1 = function (req,res) {
 
 //小程序接口
 let getOpenid=async function (req,res) {
+	
 	let {xtoken,code,team_id,share_id,cuid} =req.body
 	let accsstoken =''
 	let acurl= 'https://openapi.baidu.com/oauth/2.0/token?grant_type=client_credentials&client_id=dKatXb51y13Gizn8EboLkFfHaLU208Zj&client_secret=2GSqlxC7P4KEdHggYoGmp6tkZDIHCn9A&scope=smartapp_snsapi_base'
@@ -890,12 +891,22 @@ let getOpenid=async function (req,res) {
 											}
 
 										}
-
 										let sqlArr7 =[openid];
 										let sql7 = 'select * from  nhj_user_info where user_id = ? ';
 										let result7 = await sqlQuery.SysqlConnect(sql7,sqlArr7);
 										userinfo =result7[0]
 
+
+										let datetime =new Date('2021/1/29 21:30:00').getTime()
+										let date1 =new Date().getTime()
+										if(date1>datetime ){
+											res.send({ 
+												'code': 3,
+												'msg': '活动已结束',
+												'data':userinfo
+											});
+											return
+										}
 										//判断有没有team_id
 										if(team_id ==''){
 											if(userinfo['join_team_flag'] =='0'){
@@ -1057,20 +1068,7 @@ let getOpenid=async function (req,res) {
 								'data':''
 							});
 						}
-						// if(JSON.parse(body).data.level =='3' ||JSON.parse(body).data.level =='4' ||JSON.parse(body).data.level =='2' ||JSON.parse(body).data.level =='1' ){
-							
-
-						// }else{
-						// 	res.send({ 
-						// 		'code': 2,
-						// 		'msg': '风控异常',
-						// 		'data':''
-						// 	});
-						// res.send({ 
-						// 		'code': 2,
-						// 		'msg': '风控异常',
-						// 		'data':JSON.parse(body).data
-						// 	});
+						
 				})
 	
 			}
@@ -1082,6 +1080,7 @@ let getOpenid=async function (req,res) {
 			'data':''
 		});
 	}
+	
 	
 }
 //updateUserinfo
@@ -1643,6 +1642,66 @@ let task =async function (req,res) {
 }
 //专题页抽奖
 
+// 直播抽奖
+let zbcj =async function (req,res) { 
+	let {cuid,user_id,user_name,tell,prize,adress,pm} =req.body;
+	if(cuid !='' && user_id !=''){
+		let sqlArr2 =[user_id];
+		let sql2 = 'select * from  zbtj where user_id = ? ';
+		let result2= await sqlQuery.SysqlConnect(sql2,sqlArr2);
+		if(result2.length >0){
+			res.send({ 
+				'code': 2,
+				'msg': '数据已经提交',
+				'data':''
+			});
+		}else{
+			let sqlArr =[cuid];
+			let sql = 'select * from  nhj_user_info where cuid = ? ';
+			let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+			if(result.length>0){
+				if(result[0]['user_id'] == user_id &&result[0]['pm'] ==pm ){
+					let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+					let sqlArr1 =[user_id,user_name,tell,prize,adress,create_time];
+					let sql1 = 'insert into zbtj (user_id,user_name,tell,prize,adress,create_time) values(?,?,?,?,?,?)';
+					let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+					if(result1.affectedRows ==1){
+						res.send({ 
+							'code': 1,
+							'msg': '提交成功',
+							'data':''
+						});
+					}
+				}else{
+					res.send({ 
+						'code': 1,
+						'msg': '数据异常',
+						'data':''
+					});
+				}
+				
+			}else{
+				res.send({ 
+					'code': 2,
+					'msg': '数据异常',
+					'data':''
+				});
+			}
+
+		}
+
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '数据异常',
+			'data':''
+		});
+	}
+
+
+
+} 
+
 let ztyluckDraw =async function ( req,res) { 	
 	let rate ='';
 	let sum = 0;
@@ -1773,7 +1832,8 @@ module.exports={
 	task,
 	ztyluckDraw,
 	getPrize,
-	getPhb
+	getPhb,
+	zbcj
 	
 
 };

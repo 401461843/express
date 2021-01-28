@@ -76,4 +76,7 @@ router.post('/ztyluckDraw', api.ztyluckDraw);
 router.post('/getPrize', api.getPrize);
 // 专题页抽奖接口
 router.post('/getPhb', api.getPhb);
+//直播提交
+router.post('/zbcj', api.zbcj);
+
 module.exports = router; 

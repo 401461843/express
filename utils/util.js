@@ -94,5 +94,16 @@ module.exports ={
 
 		return arr.sort(sort1);	  
 	},
+	getDateTime() {
+		var date=new Date();   
+		var year=date.getFullYear(); //获取当前年份   
+		var month=date.getMonth()+1; //获取当前月份   
+		var dat=date.getDate(); //获取当前日   
+		var hour=date.getHours(); //获取小时   
+		var minutes=date.getMinutes(); //获取分钟   
+		var second=date.getSeconds(); //获取秒   
+
+		return year+'-'+month+'-'+dat+' '+hour+':'+minutes+':'+second;
+	},
 };
  
