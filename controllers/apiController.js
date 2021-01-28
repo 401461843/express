@@ -1405,7 +1405,7 @@ let getPhb =async function (req,res) {
 		list.push(obj)
 		if(index == (result.length-1)){
 			let jq =util.objSort('total_bill',list)
-			let w =jq.slice(3,31)
+			let w =jq.slice(3,30)
 			res.send({ 
 				'code': 1,
 				'msg': '',
