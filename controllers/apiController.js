@@ -1411,7 +1411,7 @@ let getPhb =async function (req,res) {
 				let sql = 'select * from  nhj_user_info where user_id = ? ';
 				let result= await sqlQuery.SysqlConnect(sql,sqlArr);
 				if(result.length>0){
-					let sqlArr1 =[(index+3)+'',val.team_id];
+					let sqlArr1 =[index+3,val.team_id];
 					let sql1 = 'update nhj_user_info  set pm = ?  where user_id= ?';
 					await sqlQuery.SysqlConnect(sql1,sqlArr1);
 				}
