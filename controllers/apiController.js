@@ -1394,6 +1394,25 @@ let getRankingList   = async function (req,res) {
 	});
 	
 } 
+
+let getPhb =async function (req,res) {
+
+	let result = await redisStrAll(1)
+	let list =[]
+	util.customForeach(result, async (val,index) => {
+		let obj =JSON.parse(await redisStrGet(1, val))
+		obj['team_id'] =val
+		list.push(obj)
+		if(index == (result.length-1)){
+			res.send({ 
+				'code': 1,
+				'msg': '',
+				'data':util.objSort('total_bill',list).slice[3,31]
+			});
+		}
+	});
+
+}
 //签到任务签到
 let task =async function (req,res) {
 	let {xtoken,cuid,date,user_id,task_id,res_code,add_bill} =req.body
@@ -1736,7 +1755,8 @@ module.exports={
 	getTeamzy,
 	task,
 	ztyluckDraw,
-	getPrize
+	getPrize,
+	getPhb
 	
 
 };
