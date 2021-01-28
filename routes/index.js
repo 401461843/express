@@ -15,6 +15,10 @@ router.get('/home/audi', function(req, res) {
 router.get('/home/jmgj', function(req, res) {
 	res.render('jmgj.html');
 });
+router.get('/home/update', function(req, res) {
+	res.render('update.html');
+});
+
 
 // router.get('/lfx', function(req, res) {
 // 	res.render('lfx.html');

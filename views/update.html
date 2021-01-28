@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>更新</title>
+   
+
+    <style> 
+      
+    </style>
+</head>
+<body>
+   
+   
+    
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+
+<script>
+   
+
+    
+   $.ajax({
+            //请求方式
+            type : "post",
+            //请求地址
+            url : "https://smartsh.gzbaidu.co/api/getPhb",
+            //数据，json字符串
+            data:'',
+            dataType: 'json',
+            //请求成功
+            success : function(res) {
+                console.log(res)
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    
+       
+
+
+        
+
+    
+        
+</script>
+</html>

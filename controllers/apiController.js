@@ -1407,7 +1407,7 @@ let getPhb =async function (req,res) {
 			res.send({ 
 				'code': 1,
 				'msg': '',
-				'data':util.objSort('total_bill',list).slice[3,31]
+				'data':util.objSort('total_bill',list)
 			});
 		}
 	});
