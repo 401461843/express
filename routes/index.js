@@ -72,4 +72,8 @@ router.get('/home/mainHome', function(req, res) {
 router.get('/home/rule', function(req, res) {
 	res.render('rule.html');
 });
+//苏分 1314 
+router.get('/home/sfqrj', function(req, res) {
+	res.render('1314.html');
+});
 module.exports = router;

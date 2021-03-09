@@ -897,16 +897,16 @@ let getOpenid=async function (req,res) {
 										userinfo =result7[0]
 
 
-										let datetime =new Date('2021/1/29 21:30:00').getTime()
-										let date1 =new Date().getTime()
-										if(date1>datetime ){
-											res.send({ 
-												'code': 3,
-												'msg': '活动已结束',
-												'data':userinfo
-											});
-											return
-										}
+										// let datetime =new Date('2021/1/28 19:37:00').getTime()
+										// let date1 =new Date().getTime()
+										// if(date1>datetime ){
+										// 	res.send({ 
+										// 		'code': 3,
+										// 		'msg': '活动已结束',
+										// 		'data':userinfo
+										// 	});
+										// 	return
+										// }
 										//判断有没有team_id
 										if(team_id ==''){
 											if(userinfo['join_team_flag'] =='0'){
