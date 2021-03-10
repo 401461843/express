@@ -371,7 +371,7 @@
         
     </div>
     <div class="mask">
-        <video controls="controls" src=""  autoplay="autoplay"></video>
+        <video controls="controls" src=""  autoplay="autoplay" poster=""></video>
                
     </div>
    
@@ -395,6 +395,8 @@
         $('.mask').fadeIn()
      
         $('.mask video').attr('src','../public/video/'+$(this).attr('index')+'.mp4')
+        $('.mask video').attr('poster','../public/images/zbt.png')
+        
     }).on('click',function (e) {
        if($(e.target).hasClass('mask')){
          $('.mask').fadeOut()
