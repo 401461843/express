@@ -86,12 +86,13 @@ img {
 }
 
 .box_wrap1 {
-    margin-top: -1rem;
+    margin-top: -0.6rem;
 }
 
 .zb_wrap {
     width: 6.4rem;
     margin: 0 auto;
+    margin-top: -0.3rem;
 }
 
 .zb_wrap .zb_t {
@@ -104,7 +105,6 @@ img {
 .zb_wrap .zb_b {
     display: flex;
     justify-content: space-between;
-    margin-top: 0.24rem;
 }
 
 .zb_wrap .zb_b .list {
@@ -128,7 +128,16 @@ img {
     border-radius: 0.2rem;
     background: #fff;
 }
-
+.swiper_wrap1 .swiper-container1 .swiper-wrapper .swiper-slide .text {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    padding: 0.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    display: none;
+}
 .swiper_wrap1 .swiper-pagination {
     width: 100%;
     margin-top: 0.2rem;
@@ -210,6 +219,7 @@ img {
 .game_wrap {
     position: relative;
     padding-top: 0.4rem;
+    margin-top: 1.2rem;
 }
 
 .game_wrap .rule {
@@ -291,18 +301,21 @@ img {
 }
 
 .game_wrap .cont .gameTime {
+    top: -1.2rem;
+    border-radius: 50%;
+    height: 1.2rem;
+    width: 1.2rem;
+    background: url(../images/djsbj.png) no-repeat;
+    background-size: 100%;
+    font-size: .45rem;
     position: absolute;
     left: 50%;
     transform: translateX(-50%);
-    top: -0.4rem;
-    width: 0.5rem;
-    height: 0.5rem;
-    border-radius: 50%;
-    background: #ec4c72;
-    font-size: 0.3rem;
-    color: #fff;
+    line-height: 1.2rem;
+    color: #f55884;
     text-align: center;
-    line-height: 0.5rem;
+    font-weight: bold;
+    text-indent: .05rem;
 }
 
 .box_wrap2 {
@@ -716,8 +729,103 @@ img {
 
 .fxts img {
     width: 100%;
+    height: auto;
     position: absolute;
     bottom: 0;
+}
+
+.dzp-mask {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, .7);
+    top: 0;
+    z-index: 9999;
+    display: none;
+}
+
+.dzp-mask-content {
+    position: absolute;
+    width: 90%;
+    height: 12rem;
+    left: 50%;
+    top: 50%;
+    background: url(../images/gxn.png) no-repeat;
+    background-size: 100%;
+    transform: translate(-50%, -50%);
+}
+
+.jxm {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    top: 3.6rem;
+    font-size: .3rem;
+    width: 3.3rem;
+    text-align: center;
+}
+
+.xxk {
+    width: 4.3rem;
+    height: 2.4rem;
+    left: 50%;
+    top: 6rem;
+    transform: translateX(-50%);
+    position: absolute;
+}
+
+.xxk input {
+    display: block;
+    width: 100%;
+    height: 0.7rem;
+    border-radius: .4rem;
+    border: none;
+    outline: none;
+    margin-bottom: .2rem;
+    text-align: center;
+}
+
+.xxk div {
+    width: 100%;
+    height: 0.7rem;
+    background: #fec44c;
+    border-radius: .4rem;
+    text-align: center;
+    line-height: .7rem;
+    color: white;
+    font-size: .35rem;
+}
+
+.yx-gz span {
+    display: block;
+    color: white;
+    width: 5.5rem;
+    margin-left: -0.5rem;
+}
+
+.yx-gz-title {
+    text-align: center;
+    font-size: .3rem;
+    font-weight: bold;
+    margin-top: .2rem;
+    margin-bottom: .1rem;
+}
+
+.close1 {
+    height: .7rem;
+    width: .7rem;
+    border-radius: 50%;
+    background: red;
+    color: white;
+    position: absolute;
+    left: 93%;
+    top: 0.4rem;
+    transform: translateX(-50%);
+    font-size: .5rem;
+    font-weight: bold;
+    text-align: center;
+    line-height: .65rem;
 }
 
 .shake {

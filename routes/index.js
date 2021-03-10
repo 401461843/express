@@ -74,6 +74,10 @@ router.get('/home/rule', function(req, res) {
 });
 //苏分 1314 
 router.get('/home/sfqrj', function(req, res) {
-	res.render('1314.html');
+	res.render('1314-1.html');
+});
+//上分 1314 
+router.get('/home/314', function(req, res) {
+	res.render('314.html');
 });
 module.exports = router;
