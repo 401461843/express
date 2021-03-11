@@ -66,7 +66,8 @@
             <div class="swiper-container swiper-container1">
                 <div class="swiper-wrapper">
                     <div class="swiper-slide" style="width: 100%;">
-                        <img src="https://smartsh.gzbaidu.co:50/sf/1.jpg">
+                        <a href="https://baijiahao.baidu.com/builder/preview/s?id=1693921203901785489"><img src="https://smartsh.gzbaidu.co:50/sf/1.jpg"></a>
+                        
                         <div class="text">苏州市委网信办副主任陈震欧先生、苏州市妇女联合会副主席祁麟女士为先锋团授团旗、颁团标。</div>
                     </div>
                     <div class="swiper-slide" style="width: 100%;">
@@ -693,14 +694,14 @@
         .on('click', '.close1', function () {
             $('.dzp-mask').fadeOut()
         })
-        .on('touchstart', '.swiper_wrap1 .swiper-slide', function(){
-            console.log(this.children[1].style.display)
-            if (this.children[1].style.display == 'none' || this.children[1].style.display == ''){
-                this.children[1].style.display = 'block'
-            }else {
-                this.children[1].style.display = 'none'
-            }
-        })
+        // .on('touchstart', '.swiper_wrap1 .swiper-slide', function(){
+        //     console.log(this.children[1].style.display)
+        //     if (this.children[1].style.display == 'none' || this.children[1].style.display == ''){
+        //         this.children[1].style.display = 'block'
+        //     }else {
+        //         this.children[1].style.display = 'none'
+        //     }
+        // })
 
     function rand(min, max) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
