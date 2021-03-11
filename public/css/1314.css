@@ -100,6 +100,7 @@ img {
     border: 0.03rem solid #dc0465;
     border-radius: 0.12rem;
     overflow: hidden;
+    margin-bottom: .15rem;
 }
 
 .zb_wrap .zb_b {
