@@ -103,12 +103,23 @@
             width: 3.15rem;
             height: 2.1rem;
             margin-left: .15rem;
-            background: url('../public/images/314/zbt.png') no-repeat;
-            background-size: 100%;
+          
             display: inline-block;
         }
         .box div:nth-child(1){
-            background: url('../public/images/314/zbt.png') no-repeat;
+            background: url('https://smartsh.gzbaidu.co:50/sp/1.jpg') no-repeat;
+            background-size: 100%;
+        }
+        .box div:nth-child(2){
+            background: url('https://smartsh.gzbaidu.co:50/sp/2.jpg') no-repeat;
+            background-size: 100%;
+        }
+        .box div:nth-child(3){
+            background: url('https://smartsh.gzbaidu.co:50/sp/3.jpg') no-repeat;
+            background-size: 100%;
+        }
+        .box div:nth-child(4){
+            background: url('https://smartsh.gzbaidu.co:50/sp/4.jpg') no-repeat;
             background-size: 100%;
         }
         .ra{
@@ -399,7 +410,7 @@
         $('.mask').fadeIn()
      
         $('.mask video').attr('src','../public/video/'+$(this).attr('index')+'.mp4')
-        $('.mask video').attr('poster','../public/images/314/zbt.png')
+        $('.mask video').attr('poster','https://smartsh.gzbaidu.co:50/sp/'+$(this).attr('index')+'.jpg')
         
     }).on('click',function (e) {
        if($(e.target).hasClass('mask')){
