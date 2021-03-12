@@ -46,7 +46,6 @@
                     <div class="zb_wrap">
                         <div class="zb_t" onclick="_hmt.push(['_trackEvent', '直播现场','click', '直播大图'])">
                             <img src="https://smartsh.gzbaidu.co:50/sf/sp-z.jpg">
-                            <div class="text">苏州市委网信办副主任陈震欧先生、苏州市妇女联合会副主席祁麟女士为先锋团授团旗、颁团标。</div>
                         </div>
                         <div class="zb_b">
                             <div class="list" onclick="_hmt.push(['_trackEvent', '直播现场','click', '直播小图1'])">
@@ -66,23 +65,16 @@
         <div class="swiper_wrap1">
             <div class="swiper-container swiper-container1">
                 <div class="swiper-wrapper">
-                    <a href="https://baijiahao.baidu.com/builder/preview/s?id=1693921203901785489" onclick="_hmt.push(['_trackEvent', '轮播','click', '轮播1'])">
-                        <div class="swiper-slide" style="width: 100%;">
+                    <div class="swiper-slide" style="width: 100%;">
+                        <a href="https://baijiahao.baidu.com/builder/preview/s?id=1693921203901785489"
+                            onclick="_hmt.push(['_trackEvent', '轮播','click', '轮播1'])">
                             <img src="https://smartsh.gzbaidu.co:50/sf/1.jpg">
-                        </div>
-                    </a>
-                    <div class="swiper-slide" style="width: 100%;" onclick="_hmt.push(['_trackEvent', '轮播','click', '轮播2'])">
+                        </a>
+                    </div>
+                    <div class="swiper-slide" style="width: 100%;"
+                        onclick="_hmt.push(['_trackEvent', '轮播','click', '轮播2'])">
                         <img src="https://smartsh.gzbaidu.co:50/sf/2.jpg">
-                        <div class="text">江苏天创科技有限公司副总经理/妇联主席、新网天盾创始人赵历女士，发布公益创业项目。</div>
                     </div>
-                    <!-- <div class="swiper-slide" style="width: 100%;" onclick="_hmt.push(['_trackEvent', '轮播','click', '轮播3'])">
-                        <img src="https://smartsh.gzbaidu.co:50/sf/3.jpg">
-                        <div class="text">苏州工业园区聋人协会主席果果发布公益创业项目。</div>
-                    </div>
-                    <div class="swiper-slide" style="width: 100%;" onclick="_hmt.push(['_trackEvent', '轮播','click', '轮播4'])">
-                        <img src="https://smartsh.gzbaidu.co:50/sf/4.jpg">
-                        <div class="text">苏州市互联网协会秘书长朱建中先生、江苏天创科技有限公司副总经理赵历女士，共同启动“UP新力量×木兰姐姐”互联网公益行动。</div>
-                    </div> -->
                 </div>
             </div>
             <div class="swiper-pagination"></div>
@@ -102,8 +94,8 @@
             <div class="rule">规则攻略</div>
             <div class="cont">
                 <div class="lists" id="gameList">-->
-                    <!-- <div class="list"></div> -->
-                <!--
+        <!-- <div class="list"></div> -->
+        <!--
                 </div>
                 <div class="mask" style="display:none">
                     <div class="start"></div>
@@ -265,19 +257,7 @@
             </div>
         </div>
         -->
-        <div class="footer_wrap">
-            <!-- <div class="tit"></div>
-            <div class="lists">
-                <div class="list"></div>
-                <div class="list"></div>
-                <div class="list"></div>
-                <div class="list"></div>
-                <div class="list"></div>
-                <div class="list"></div>
-                <div class="list"></div>
-                <div class="list"></div>
-            </div> -->
-        </div>
+        <div class="footer_wrap"></div>
         <div class="gameTip_wrap">
             <div class="ss">
                 <img src="../public/images/yxgz.png">
@@ -522,7 +502,7 @@
         }
     }
     let my_love1314 = new love1314();
-    // my_love1314.swiper1()
+    my_love1314.swiper1()
     // my_love1314.swiper2()
     // my_love1314.prizeInit(16)
 
@@ -695,11 +675,11 @@
         .on('click', '.close1', function () {
             $('.dzp-mask').fadeOut()
         })
-        .on('click', '.swiper_wrap1 .swiper-slide', function(){
+        .on('click', '.swiper_wrap1 .swiper-slide', function () {
             console.log(this.children[1].style.display)
-            if (this.children[1].style.display == 'none' || this.children[1].style.display == ''){
+            if (this.children[1].style.display == 'none' || this.children[1].style.display == '') {
                 this.children[1].style.display = 'block'
-            }else {
+            } else {
                 this.children[1].style.display = 'none'
             }
         })
