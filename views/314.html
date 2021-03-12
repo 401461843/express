@@ -92,7 +92,7 @@
         }
         .box{
             height: 2.1rem;
-            width: 10.2rem;
+            width: 13.6rem;
         }
         ::-webkit-scrollbar {
             height: 0;
@@ -287,10 +287,10 @@
         <div class="gd"></div>
         <div class="gdt">
             <div class="box">
-                <div class="video" src="https://haokan.baidu.com/v?pd=bjh&vid=17666633592778709247&fr=bjhauthor&type=video"></div>
-                <div class="video" src="https://baijiahao.baidu.com/builder/preview/s?id=1693998528051220636"></div>
-                <div class="video" src="https://baijiahao.baidu.com/builder/preview/s?id=1693998781450876909"></div>
-                <div class="video" src="https://baijiahao.baidu.com/builder/preview/s?id=1693999270327914926"></div>
+                <div class="video" index="1"></div>
+                <div class="video" index="2"></div>
+                <div class="video" index="3"></div>
+                <div class="video" index="4"></div>
             </div>
 
         </div>
@@ -397,8 +397,8 @@
     }) 
     $('body').on('click','.video',function () {
         $('.mask').fadeIn()
-        console.log($(this).attr('src'))
-        $('.mask video').attr('src',$(this).attr('src'))
+     
+        $('.mask video').attr('src','../public/video/'+$(this).attr('index')+'.mp4')
         $('.mask video').attr('poster','../public/images/314/zbt.png')
         
     }).on('click',function (e) {
