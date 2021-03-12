@@ -106,7 +106,7 @@
             width: 3.15rem;
             height: 2.1rem;
             margin-left: .15rem;
-          
+           position: relative;
             display: inline-block;
         }
         .box div:nth-child(1){
@@ -277,6 +277,27 @@
             left: 50%;
             top: 50%;
             transform: translate(-50%, -52%);
+            
+        }
+        .pl{
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background: url('../public/images/314/play.png') no-repeat;
+            background-size: 100%;
+            height: .6rem;
+            width: .6rem;
+
+        }
+        .close{
+        
+            color: white;
+            left: 50%;
+            top: 71%;
+            transform: translate(-50%, -52%);
+            position: absolute;
+            font-size: .8rem;
         }
     </style>
 </head>
@@ -301,10 +322,12 @@
         <div class="gd"></div>
         <div class="gdt">
             <div class="box">
-                <div class="video" index="1"></div>
-                <div class="video" index="2"></div>
-                <div class="video" index="3"></div>
-                <div class="video" index="4"></div>
+                <div class="video" index="1">
+                    <p class="pl"></p>
+                </div>
+                <div class="video" index="2"><p class="pl"></p></div>
+                <div class="video" index="3"><p class="pl"></p></div>
+                <div class="video" index="4"><p class="pl"></p></div>
             </div>
 
         </div>
@@ -390,7 +413,7 @@
     </div>
     <div class="mask">
         <video controls="controls" src=""   poster="" id ="video"></video>
-               
+        <div class="close">×</div>
     </div>
    
   
@@ -415,13 +438,10 @@
         $('.mask video').attr('src','../public/video/'+$(this).attr('index')+'.mp4')
         $('.mask video').attr('poster','https://smartsh.gzbaidu.co:50/sp/'+$(this).attr('index')+'.jpg')
         
-    }).on('click',function (e) {
-       if($(e.target).hasClass('mask')){
-         
-         var video =document.getElementById('video')
+    }).on('click','.close',function (e) {
+        var video =document.getElementById('video')
          video.pause();
          $('.mask').fadeOut()
-       }
     })
 </script>
 
