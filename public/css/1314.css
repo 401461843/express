@@ -23,7 +23,7 @@ img {
 
 .baner {
     position: relative;
-    background: url('../images/1314/banner.jpg') no-repeat;
+    background: url('https://smartsh.gzbaidu.co:50/sf/banner.jpg') no-repeat;
     background-size: 100% auto;
     min-height: 7.27rem;
 }
@@ -96,11 +96,24 @@ img {
 }
 
 .zb_wrap .zb_t {
+    width: 6.4rem;
     height: 3.62rem;
     border: 0.03rem solid #dc0465;
     border-radius: 0.12rem;
     overflow: hidden;
-    margin-bottom: .15rem;
+    margin-bottom: 0.2rem;
+    position: relative;
+}
+.zb_wrap .zb_t .text {
+    position: absolute;
+    width: 6.4rem;
+    padding: 0.2rem;
+    background: rgba(0, 0, 0, 0.3);
+    color: #fff;
+    bottom: -0.03rem;
+    left: 50%;
+    transform: translateX(-50%);
+    /* display: none; */
 }
 
 .zb_wrap .zb_b {
@@ -507,8 +520,9 @@ img {
 }
 
 .footer_wrap {
-    background: #fff0f5 url('../images/1314/btm.jpg') no-repeat left bottom/7.5rem 4rem;
-    padding: 0.36rem 0.3rem 1.68rem 0.3rem
+    background: #fff0f5 url('https://smartsh.gzbaidu.co:50/sf/btm.jpg') no-repeat left bottom/7.5rem 4rem;
+    padding: 0.36rem 0.3rem 1.68rem 0.3rem;
+    height: 4rem;
 }
 
 .footer_wrap .tit {
