@@ -375,7 +375,7 @@
         
     </div>
     <div class="mask">
-        <video controls="controls" src=""   poster=""></video>
+        <video controls="controls" src=""   poster="" id ="video"></video>
                
     </div>
    
@@ -403,6 +403,9 @@
         
     }).on('click',function (e) {
        if($(e.target).hasClass('mask')){
+         
+         var video =document.getElementById('video')
+         video.pause();
          $('.mask').fadeOut()
        }
     })
