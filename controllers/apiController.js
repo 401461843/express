@@ -2236,8 +2236,9 @@ let getMSg =async function(req,res){
 	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
 	let result =[]
 	if(result1.length >0){
-		let obj ={}
+		
 		result1.forEach(function(val,index){
+			let obj ={}
 			obj['user_avatar_url'] =val['user_avatar_url']
 			obj['msg'] =JSON.parse(val['message'])['msg']
 			result.push(obj)
