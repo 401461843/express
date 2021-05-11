@@ -97,5 +97,7 @@ router.post('/dxsubmit', api.dxsubmit);
 router.post('/sendMsg', api.sendMsg);
 //保存手机号
 router.post('/saveTell', api.saveTell);
+//获取 留言
+router.get('/getMSg', api.getMSg);
 
 module.exports = router; 

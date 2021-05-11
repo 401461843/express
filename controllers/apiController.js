@@ -1870,7 +1870,8 @@ let userLogin =async function (req,res) {
 								'data':{
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
-									"messageFlag":result4[0]['message_flag']
+									"messageFlag":result4[0]['message_flag'],
+									"message":JSON.parse(result4[0]['message'])['msg']
 								}
 							});
 						}else if(result4[0]['user_name'] !=''  &&  result4[0]['tell'] =='' ){
@@ -1880,7 +1881,8 @@ let userLogin =async function (req,res) {
 								'data':{
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
-									"messageFlag":result4[0]['message_flag']
+									"messageFlag":result4[0]['message_flag'],
+									"message":JSON.parse(result4[0]['message'])['msg']
 								}
 							});
 						}else if(result4[0]['user_name'] ==''  &&  result4[0]['tell'] =='' ){
@@ -1890,7 +1892,8 @@ let userLogin =async function (req,res) {
 								'data':{
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
-									"messageFlag":result4[0]['message_flag']
+									"messageFlag":result4[0]['message_flag'],
+									"message":JSON.parse(result4[0]['message'])['msg']
 								}
 							});
 						}else{
@@ -1900,7 +1903,8 @@ let userLogin =async function (req,res) {
 								'data':{
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
-									"messageFlag":result4[0]['message_flag']
+									"messageFlag":result4[0]['message_flag'],
+									"message":JSON.parse(result4[0]['message'])['msg']
 								}
 							});
 						}
@@ -2225,6 +2229,34 @@ let saveTell =async function (req,res) {
 	
 	
 }
+//获取留言
+let getMSg =async function(req,res){
+	let sqlArr1 =['2'];
+	let sql1 = 'select * from  qrj_user where message_flag = ? ';
+	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
+	let result =[]
+	if(result1.length >0){
+		let obj ={}
+		result1.forEach(function(val,index){
+			obj['user_avatar_url'] =val['user_avatar_url']
+			obj['msg'] =JSON.parse(val['message'])['msg']
+			result.push(obj)
+		})
+		res.send({ 
+			'code': 1,
+			'msg': '留言查询成功！',
+			'data':result
+		});
+	}else{
+		res.send({ 
+			'code': 1,
+			'msg': '留言人数不足',
+			'data':result
+		});
+	}
+
+	
+}
 module.exports={	
 	luckDraw,
 	submit,
@@ -2273,5 +2305,6 @@ module.exports={
 	sign,
 	dxsubmit,
 	sendMsg,
-	saveTell
+	saveTell,
+	getMSg
 };
