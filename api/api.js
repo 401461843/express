@@ -78,5 +78,24 @@ router.post('/getPrize', api.getPrize);
 router.post('/getPhb', api.getPhb);
 //直播提交
 router.post('/zbcj', api.zbcj);
+//520活动
+//用户信息记录
+router.post('/userLogin', api.userLogin);
+//更新用户
+router.post('/updateUser5', api.updateUser5);
+//提交告白
+router.post('/submitMsg', api.submitMsg);
+//获取用户信息
+router.post('/getPersonInfo', api.getPersonInfo);
+//获取用户 签到状态
+router.post('/getSignStaus', api.getSignStaus);
+//用户签到
+router.post('/sign', api.sign);
+//用户信息提交
+router.post('/dxsubmit', api.dxsubmit);
+//下发短信
+router.post('/sendMsg', api.sendMsg);
+//保存手机号
+router.post('/saveTell', api.saveTell);
 
 module.exports = router; 

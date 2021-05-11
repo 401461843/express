@@ -6,7 +6,7 @@ const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
 const BaiduB64 = require('@baidu/oap-lib').BaiduB64;
-
+const {encryptionSign} =require('../utils/encryption');
 const b64 = new BaiduB64();
 // var fs = require('fs');//文件模块
 
@@ -1086,7 +1086,7 @@ let getOpenid=async function (req,res) {
 //updateUserinfo
 let updateUserinfo = async function (req,res) {
 	let {name,avatarUrl,user_id} =req.body
-	let sqlArr =[name,avatarUrl,user_id];
+	let sqlArr =[name,avᆨatarUrl,user_id];
 	let sql = 'update nhj_user_info  set user_name = ? , user_avatar_url= ? where user_id= ?';
 	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
 	if(result.affectedRows==1){
@@ -1795,6 +1795,436 @@ let getPrize=async function (req,res) {
 		}
 	}
 }
+//520 活动接口
+//用户登录接口
+
+let userLogin =async function (req,res) { 
+	let {code,share_id} =req.body
+	if(code ){
+		let param ={
+			code:code,
+			client_id:'GP9ZV4hFnB4rHG3pruGK1lusWpGPfaLs',
+			sk:'FjFBeoxI7GBgl9NFHMkqOujIV9sGHjB1'
+		}
+		request({
+				url:'https://spapi.baidu.com/oauth/jscode2sessionkey',
+				method: 'POST',
+				form: param,
+				headers: {
+					"content-type": "Application/x-www-form-urlencoded",
+				},
+			},async (error, response, body)=>{
+				// console.log(response)
+				if (!error && response.statusCode == 200) {
+					
+					let openid =JSON.parse(body)['openid']
+					let sqlArr =[openid];
+					let sql = 'select * from  qrj_user where user_id = ? ';
+					let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+					let updateFAlg =false
+					if(result.length ==0){
+						if(share_id !=''){
+							let sqlArr2 =[share_id];
+							let sql2 = 'select * from  qrj_user where user_id = ? ';
+							let result2 = await sqlQuery.SysqlConnect(sql2,sqlArr2);
+							let share_info = JSON.parse(result2[0]['share_info'])
+							share_info.push(openid)
+							let sqlArr3 =[JSON.stringify(share_info),share_id];
+							let sql3 = 'update qrj_user  set share_info = ?  where user_id= ?';
+							let result3 = await sqlQuery.SysqlConnect(sql3,sqlArr3);
+							if(result3.affectedRows ==1){
+								updateFAlg =true
+							}	
+						}else{
+							updateFAlg =true
+						}
+						let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+						let sqlArr1 =[openid,create_time];
+						let sql1 = 'insert into qrj_user (user_id,create_time) values(?,?)';
+						let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+						if(result1.affectedRows ==1 && updateFAlg){
+							res.send({ 
+								'code': 1,
+								'msg': '数据记录成功',
+								'data':{
+									"openid":openid,
+									"session_key":JSON.parse(body)['session_key'],
+									"messageFlag":'0'
+								}
+							});
+						}else{
+							res.send({ 
+								'code': 3,
+								'msg': '数据记录失败',
+								'data':''
+							});
+						}
+					}else{
+						let sqlArr4 =[openid];
+						let sql4 = 'select * from  qrj_user where user_id = ? ';
+						let result4 = await sqlQuery.SysqlConnect(sql4,sqlArr4);
+						if(result4[0]['user_name'] ==''  &&  result4[0]['tell'] !=''){
+							res.send({ 
+								'code': 4,
+								'msg': '用户头像和用户名不存在',
+								'data':{
+									"openid":openid,
+									"session_key":JSON.parse(body)['session_key'],
+									"messageFlag":result4[0]['message_flag']
+								}
+							});
+						}else if(result4[0]['user_name'] !=''  &&  result4[0]['tell'] =='' ){
+							res.send({ 
+								'code': 5,
+								'msg': '用户手机号不存在',
+								'data':{
+									"openid":openid,
+									"session_key":JSON.parse(body)['session_key'],
+									"messageFlag":result4[0]['message_flag']
+								}
+							});
+						}else if(result4[0]['user_name'] ==''  &&  result4[0]['tell'] =='' ){
+							res.send({ 
+								'code': 6,
+								'msg': '用户手机号，用户名，用户头像都不存在！',
+								'data':{
+									"openid":openid,
+									"session_key":JSON.parse(body)['session_key'],
+									"messageFlag":result4[0]['message_flag']
+								}
+							});
+						}else{
+							res.send({ 
+								'code': 7,
+								'msg': '用户信息完善！',
+								'data':{
+									"openid":openid,
+									"session_key":JSON.parse(body)['session_key'],
+									"messageFlag":result4[0]['message_flag']
+								}
+							});
+						}
+						
+					}
+				}
+
+			})
+
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '参数不全',
+			'data':''
+		});
+	}
+
+}
+//更新用户信息
+let updateUser5 = async function (req,res) {
+	let {name,avatarUrl,user_id} =req.body
+	let sqlArr =[name,avatarUrl,user_id];
+	let sql = 'update qrj_user  set user_name = ? , user_avatar_url= ? where user_id= ?';
+	let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '更新用户信息成功！'
+		});
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '更新用户信息失败！'
+		});
+	}
+	
+	
+
+}
+//提交留言接口
+let submitMsg =async function (req,res) { 
+	let {msg,tell,user_id,name} =req.body
+	let obj ={}
+	let url='https://aip.baidubce.com/rest/2.0/solution/v1/text_censor/v2/user_defined'
+	let access_token ="24.cdd4621376776827695134d8c1cbbf38.2592000.1620457856.282335-23946188"
+	let request_url =url + "?access_token=" + access_token
+	request({
+		url: request_url,
+		method: "POST",
+		headers: {'content-type': 'application/x-www-form-urlencoded'},
+		form:{'text': msg}
+	},async function(error, response, body) {
+		if (!error && response.statusCode == 200) {
+			console.log(body) // 请求成功的处理逻辑
+			if(JSON.parse(body)['conclusion'] =='不合规'){
+				res.send({ 
+					'code': 0,
+					'msg': JSON.parse(body)['data'][0]['msg']
+				});
+			}else{
+				obj['msg'] =msg
+				obj['tell']=tell
+				obj['name']=name
+				let mgs1 = tell.trim()== '' ? '2':'1'
+				let sqlArr =[JSON.stringify(obj),mgs1,user_id];
+				let sql = 'update qrj_user  set message = ? , message_flag= ? where user_id= ?';
+				let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+				if(result.affectedRows==1){
+					res.send({ 
+						'code': 1,
+						'msg': '提交告白宣言成功！'
+					});
+				}else{
+					res.send({ 
+						'code': 2,
+						'msg': '提交告白宣言失败！'
+					});
+				}
+			}	
+		}
+	});
+	
+
+}
+//获取用户个人信息
+let getPersonInfo =async function (req,res) { 
+	let {user_id}=req.body
+	let sqlArr =[user_id];
+	let sql = 'select * from  qrj_user where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.length >0){
+		res.send({ 
+			'code': 1,
+			'msg': '数据获取成功 ！',
+			'data':result[0]
+		});
+	}else{
+		res.send({ 
+			'code': 0,
+			'msg': '查询的用户不存在 ！',
+			'data':''
+		});
+	}
+}
+//获取签到状态
+let getSignStaus =async function (req,res) { 
+	let {user_id}=req.body
+	let sqlArr =[user_id];
+	let sql = 'select * from  qrj_user where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	if(result.length>0){
+		res.send({ 
+			'code': 1,
+			'msg': '获取状态成功 ！',
+			'data':{
+				'sign':JSON.parse(result[0]['sign'])
+			}
+		});
+	}
+
+}
+//签到
+let sign = async function (req,res) {
+	let {date,user_id,sign_flag}=req.body
+	let map ={
+		'2021-04-09':0,
+		'2021-04-10':1,
+		'2021-04-11':2
+	}
+	
+	let sqlArr =[user_id];
+	let sql = 'select * from  qrj_user where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let data ={}
+	let sign =false
+	let share_info_list = JSON.parse(result[0]['share_info'])
+	if(result.length>0){
+		// 正常签到
+		if(sign_flag ){
+			sign =true
+		}else{
+			//补签
+			if( share_info_list.length >0 ){
+				share_info_list.shift()
+				sign =true
+			}else{
+				res.send({ 
+					'code': 2,
+					'msg': '您没有补签卡 ！',
+					'data':''
+				});
+			}
+
+
+		}
+		if(sign){
+			let newSign =JSON.parse(result[0]['sign'])
+			let newCard =JSON.parse(result[0]['card'])
+			
+			if(newSign[map[date]]=='1'){
+				res.send({ 
+					'code': 3,
+					'msg': '当天已经签到过了 ！',
+					'data':''
+				});
+			}else{
+				newSign[map[date]]='1'
+				if(map[date] == 0){
+					let prizeNum =await redisStrGet(6, 'dx')
+					if(Number(prizeNum)>0){
+						data['type']='1'
+						data['prize']='小度熊笔记本'
+						data['name'] =''
+						data['adress']=''
+						data['date']='2021.05.08-2021.06.08'
+						prizeNum--;
+						await redisStrSet(6, 'dx',prizeNum)
+					}else{
+						data['type']='1'
+						data['prize']=''
+						data['name'] =''
+						data['adress']=''
+						data['date']=''
+					}
+
+					
+				}else if(map[date] == 1){
+					let prizeList =JSON.parse(await redisStrGet(6, 'jbl'))
+					if(prizeList.length>0){
+						let code =prizeList.shift()
+						data['type']='2'
+						data['prize']='金伯利'
+						data['date']='2021.05.08-2021.06.08'
+						data['code']=code
+						await redisStrSet(6, 'jbl',JSON.stringify(prizeList))
+					}else{
+						data['type']='2'
+						data['prize']=''
+						data['date']=''
+						data['code']=''
+					}
+					
+				}else if(map[date] == 2){
+					let prizeList =JSON.parse(await redisStrGet(6, 'zds'))
+					if(prizeList.length>0){
+						let code =prizeList.shift()
+						data['type']='2'
+						data['prize']='周大生'
+						data['date']='2021.05.08-2021.06.08'
+						data['code']=code
+						await redisStrSet(6, 'zds',JSON.stringify(prizeList))
+					}else{
+						data['type']='2'
+						data['prize']=''
+						data['date']=''
+						data['code']=''
+					}
+				}
+				newCard[map[date]]= data
+				let sqlArr1 =[JSON.stringify(newSign),JSON.stringify(newCard),JSON.stringify(share_info_list),user_id];
+				let sql1 = 'update qrj_user  set sign = ? , card = ?, share_info=?  where user_id= ?';
+				let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				if(result1.affectedRows ==1){
+					res.send({ 
+						'code': 1,
+						'msg': '签到成功 ！',
+						'data':data
+					});
+				}
+
+			}
+			
+			
+		}
+	}
+}
+//提交信息
+let dxsubmit =async function (req,res) {
+	let {name,adress,user_id}=req.body
+	
+	let sqlArr =[user_id];
+	let sql = 'select * from  qrj_user where user_id = ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let data =JSON.parse(result[0]['card'])
+	data[0]['name'] =name
+	data[0]['adress']=adress
+	let sqlArr1 =[JSON.stringify(data),user_id];
+	let sql1 = 'update qrj_user  set  card = ? where user_id= ?';
+	let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+	if(result1.affectedRows ==1){
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功 ！',
+			'data':''
+		});
+	}
+}
+//发送信息
+let sendMsg =async function (req,res) { 
+	
+	let header ={
+		"content-type": "application/json;charset=utf-8",
+		"host":"smsv3.bj.baidubce.com",
+		"x-bce-date":"2021-05-06T03:07:05Z",
+		"Authorization":"bce-auth-v1/63374f58c0e646f2b5eb127371f5fbc9/2021-05-06T03:07:53Z/3678400/host;x-bce-date/aea6ecfa56cc18f53a3feb76c4c64fb51ac38f4be771cfbcf72ebe65f251f6e6"
+	}
+	let body={
+		"mobile": "17621611037",
+		"template": "sms-tmpl-qewLpw80252",
+		"signatureId": "sms-sign-hkcTgu02982",
+		"contentVar": {
+		  "content": "小仙女,我好喜欢你啊！虽然你伤我千百遍，但是我还待你如初恋！",
+		  "name": "小跟班"
+		}
+	  }
+	request({
+		url:'http://smsv3.bj.baidubce.com/api/v3/sendSms?clientToken=e325ea68-02c1-47ad-8844-c7b93cafaeba',
+		method: 'POST',
+		body: JSON.stringify(body),
+		headers: header,
+	},async (err,result)=>{
+		console.log(result.body)
+		
+	})
+
+}
+//存储手机号
+let saveTell =async function (req,res) {
+	 
+	let {encryptedData,session_key,iv,user_id}=req.body
+	let sqlArr1 =[user_id];
+	let sql1 = 'select * from  qrj_user where user_id = ? ';
+	let result1 = await sqlQuery.SysqlConnect(sql1,sqlArr1);
+	if(result1[0]['tell'] !==''){
+		res.send({ 
+			'code': 2,
+			'msg': '手机号已存在！'
+		});
+	}else{
+		let decodeData = Buffer.from(encryptedData, 'base64')
+		let decodeIv =Buffer.from(iv, 'base64')
+		let decodeSession_key=Buffer.from(session_key, 'base64')
+		let data = encryptionSign(decodeData,decodeSession_key,decodeIv)
+		let mobile = data.slice(data.indexOf('{'),data.indexOf('}')).split(':')[1].replace(/"/g,"")
+		let sqlArr =[mobile,user_id];
+		let sql = 'update qrj_user  set tell = ? where user_id= ?';
+		let result= await sqlQuery.SysqlConnect(sql,sqlArr);
+		if(result.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'msg': '更新手机号成功！'
+			});
+		}else{
+			res.send({ 
+				'code': 0,
+				'msg': '更新手机号失败！'
+			});
+		}
+	}
+
+
+	
+	
+}
 module.exports={	
 	luckDraw,
 	submit,
@@ -1833,7 +2263,15 @@ module.exports={
 	ztyluckDraw,
 	getPrize,
 	getPhb,
-	zbcj
-	
-
+	zbcj,
+	//520接口
+	userLogin,
+	updateUser5,
+	submitMsg,
+	getPersonInfo,
+	getSignStaus,
+	sign,
+	dxsubmit,
+	sendMsg,
+	saveTell
 };
