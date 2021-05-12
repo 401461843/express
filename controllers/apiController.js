@@ -2165,30 +2165,74 @@ let dxsubmit =async function (req,res) {
 //发送信息
 let sendMsg =async function (req,res) { 
 	
-	let header ={
-		"content-type": "application/json;charset=utf-8",
-		"host":"smsv3.bj.baidubce.com",
-		"x-bce-date":"2021-05-06T03:07:05Z",
-		"Authorization":"bce-auth-v1/63374f58c0e646f2b5eb127371f5fbc9/2021-05-06T03:07:53Z/3678400/host;x-bce-date/aea6ecfa56cc18f53a3feb76c4c64fb51ac38f4be771cfbcf72ebe65f251f6e6"
+	
+	let sqlArr=['1','2']
+	let sql = 'select * from  qrj_user where message_flag=? or message_flag=?  ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let toTEll =[]
+	let toNotell=[]
+	let toMsg =[]
+	if(result.length>0){
+		result.forEach(function(val,index){
+			let obj ={}
+			if(val.message_flag=='1'){
+				obj['mobile'] =JSON.parse(val.message)['tell']
+				obj['content'] =JSON.parse(val.message)['msg']
+				toTEll.push(obj)
+			}else{
+				toNotell.push(val.tell)
+				toMsg.push(JSON.parse(val.message)['msg'])
+			}
+		})
 	}
-	let body={
-		"mobile": "17621611037",
-		"template": "sms-tmpl-qewLpw80252",
-		"signatureId": "sms-sign-hkcTgu02982",
-		"contentVar": {
-		  "content": "小仙女,我好喜欢你啊！虽然你伤我千百遍，但是我还待你如初恋！",
-		  "name": "小跟班"
-		}
-	  }
-	request({
-		url:'http://smsv3.bj.baidubce.com/api/v3/sendSms?clientToken=e325ea68-02c1-47ad-8844-c7b93cafaeba',
-		method: 'POST',
-		body: JSON.stringify(body),
-		headers: header,
-	},async (err,result)=>{
-		console.log(result.body)
-		
+
+	toNotell.forEach(function(val,index){
+		let obj ={}
+		obj['mobile'] =val
+		obj['content'] =toMsg[toMsg.length -index-1]
+		toTEll.push(obj)
 	})
+
+	for(var i = 0; i < toTEll.length; i++){
+		(function(i){
+			let header ={
+				"content-type": "application/json;charset=utf-8",
+				"host":"smsv3.bj.baidubce.com",
+				"x-bce-date":"2021-05-06T03:07:05Z",
+				"Authorization":"bce-auth-v1/63374f58c0e646f2b5eb127371f5fbc9/2021-05-06T03:07:53Z/3678400/host;x-bce-date/aea6ecfa56cc18f53a3feb76c4c64fb51ac38f4be771cfbcf72ebe65f251f6e6"
+			}
+			let body={
+				"mobile": toTEll[i].mobile,
+				"template": "sms-tmpl-qewLpw80252",
+				"signatureId": "sms-sign-hkcTgu02982",
+				"contentVar": {
+				  "content":toTEll[i].content,
+				  "name": "朋友"
+				}
+			  }
+			request({
+				url:'http://smsv3.bj.baidubce.com/api/v3/sendSms?clientToken=e325ea68-02c1-47ad-8844-c7b93cafaeba',
+				method: 'POST',
+				body: JSON.stringify(body),
+				headers: header,
+			},async (err,result)=>{
+				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+				let sqlArr1 =[JSON.stringify(toTEll[i]),create_time];
+				let sql1 = 'insert into send_msg_record (record,create_time) values(?,?)';
+				await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			})
+			
+		})(i)
+
+	}
+
+	res.send('成功！')
+	
+	
+
+
+	
+
 
 }
 //存储手机号

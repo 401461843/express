@@ -105,5 +105,6 @@ module.exports ={
 
 		return year+'-'+month+'-'+dat+' '+hour+':'+minutes+':'+second;
 	},
+	
 };
  
