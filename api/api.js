@@ -100,4 +100,7 @@ router.post('/saveTell', api.saveTell);
 //获取 留言
 router.get('/getMSg', api.getMSg);
 
+//唯一旅拍
+router.post('/wylpSubmit', api.wylpSubmit);
+
 module.exports = router; 

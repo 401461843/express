@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>唯一旅拍</title>
+    <link rel="stylesheet" href="../public/css/reset.css">
+    <link rel="stylesheet" href="../public/css/swiper.css">  
+    <style>
+        body,html{
+            height: 100%;
+            width: 100%;
+            position: relative;
+            
+        }
+        .bg{
+            width: 7.5rem;
+            height: 30.92rem;
+            background: url('../public/images/wy/bg.png') no-repeat;
+            background-size: 100%;
+        }
+        .mh{
+            width: 6.92rem;
+            height: 3.75rem;
+            background: url('../public/images/wy/mhbox.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            top: 14.96rem;
+            left: 50%;
+            transform: translateX(-50%);
+           
+        }
+        .form{
+            position: absolute;
+            top: 19.32rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: url('../public/images/wy/1_05.jpg') no-repeat;
+            background-size: 100%;
+            width: 6.92rem;
+            height: 10.4rem;
+        }
+        .gz{
+            width: 1.24rem;
+            height: 0.53rem;
+            background: url('../public/images/wy/hdgz.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            top: 1.1rem;
+            right: 0;
+        }
+        .time{
+            width: 1.77rem;
+            height: 0.69rem;
+            background: url('../public/images/wy/time.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            right: 0;
+            top: 0.34rem;
+        }
+        .yy{
+            width: 2.66rem;
+            height: 0.67rem;
+            background: url('../public/images/wy/yy.png') no-repeat;
+            background-size: 100%;
+            position: absolute;
+            left: .38rem;
+            bottom: .38rem;
+
+        }
+        .name ,.tell{
+            width: 6.45rem;
+            height: .86rem;
+            border: 1px solid white;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            bottom: 3.4rem;
+            border-radius: .43rem;
+        }
+        .tell{
+            bottom: 2.2rem;
+        }
+        .nr{
+            display: inline-block;
+            width: 1.5rem;
+            height: .86rem;
+            text-align: center;
+            line-height: .86rem;
+            color: white;
+            font-size: .3rem;
+        }
+        input{
+            border: none;
+            background: transparent;
+            outline: none;
+            color: white;
+            font-size: .3rem;
+        }
+        .tj{
+            width: 6.43rem;
+            height: 0.98rem;
+            position: absolute;
+            bottom: .55rem;
+            left: 50%;
+            transform: translateX(-50%);
+            background: url('../public/images/wy/tj.png') no-repeat;
+            background-size: 100%;
+
+        }
+        @keyframes shake{
+            0%, 65%{
+                transform:rotate(0deg);
+            }
+            70% {
+                transform:rotate(6deg);
+            }
+            75% {
+                transform:rotate(-6deg);
+            }
+            80% {
+                transform:rotate(6deg);
+            }
+            85% {
+                transform:rotate(-6deg);
+            }
+            90% {
+                transform:rotate(6deg);
+            }
+            95% {
+                transform:rotate(-6deg);
+            }
+            100% {
+                transform:rotate(0deg);
+            }
+        }
+        .dd{
+            animation: shake 3s linear 2s infinite;
+        }
+        .mask{
+            height: 30.92rem;
+            width: 100%;
+            position: absolute;
+            top: 0;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 2;
+            display: none;
+        }
+        .rule{
+            position: fixed;
+            width: 6.14rem;
+            height: 9.53rem;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%,-50%);
+            background: url('../public/images/wy/rule.png') no-repeat;
+            background-size: 100%;
+
+        }
+        .close{
+            position: absolute;
+            color: white;
+            left: 50%;
+           
+            transform: translateX(-50%);
+         
+            bottom: -.7rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="bg">
+        <div class="gz">
+
+        </div>
+        <div class="mh">
+            <div class="time dd"></div>
+            <a href="https://mr.baidu.com/r/mmtdkqNZ2U?f=cp&u=8bdbc44915e971c8"><div class="yy"></div></a>
+        </div>
+        <div class="form">
+            <div class="name">
+                <span class="nr">姓名 :</span>
+                <input type="text" class="xm">
+            </div>
+            <div class="tell">
+                <span class="nr">电话 :</span>
+                <input type="text" class="dh">
+            </div>
+            <div class="tj">
+
+            </div>
+        </div>
+       
+    </div>
+    <div class="mask">
+        <div class="rule">
+            <div class="close">×关闭</div>
+        </div>
+        
+ 
+    </div>
+  
+</body>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+
+<script >
+  $('body').on('click','.tj',function () {
+        if($('.xm').val().trim() ==''){
+            alert('请输入姓名！')
+            return 
+        }else if($('.dh').val().trim() =='' ){
+            alert('请划入手机号！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($('.dh').val().trim())) ){
+            alert('请输入正确格式手机号！')
+            return 
+        }
+        var param ={
+            name:$('.xm').val().trim(),
+            tell:$('.dh').val().trim()
+        }
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/wylpSubmit",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                       
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+    }).on('click','.gz',function () {
+        $('.mask').show()
+        $('body').css('overflow', 'hidden')
+    }).on('click','.close',function (e) {
+       
+        $('.mask').hide()
+        $('body').css('overflow', 'auto')
+       
+    })
+</script>
+
+</html>

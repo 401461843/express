@@ -80,4 +80,8 @@ router.get('/home/sfqrj', function(req, res) {
 router.get('/home/314', function(req, res) {
 	res.render('314.html');
 });
+//唯一旅拍
+router.get('/home/wylp', function(req, res) {
+	res.render('wylp.html');
+});
 module.exports = router;
