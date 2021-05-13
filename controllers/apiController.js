@@ -2211,11 +2211,10 @@ let sendMsg =async function (req,res) {
 			}
 			let body={
 				"mobile": toTEll[i].mobile,
-				"template": "sms-tmpl-qewLpw80252",
+				"template": "sms-tmpl-AMNbks70543",
 				"signatureId": "sms-sign-hkcTgu02982",
 				"contentVar": {
-				  "content":toTEll[i].content,
-				  "name": "朋友"
+				  "content":toTEll[i].content
 				}
 			  }
 			request({
