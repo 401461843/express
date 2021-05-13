@@ -1865,6 +1865,12 @@ let userLogin =async function (req,res) {
 						let sqlArr4 =[openid];
 						let sql4 = 'select * from  qrj_user where user_id = ? ';
 						let result4 = await sqlQuery.SysqlConnect(sql4,sqlArr4);
+						let msg2 =''
+						if(result4[0]['message'] === null){
+							msg2 =''
+						}else{
+							msg2= JSON.parse(result4[0]['message'])['msg']
+						}
 						if(result4[0]['user_name'] ==''  &&  result4[0]['tell'] !=''){
 							res.send({ 
 								'code': 4,
@@ -1873,7 +1879,7 @@ let userLogin =async function (req,res) {
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
 									"messageFlag":result4[0]['message_flag'],
-									"message":JSON.parse(result4[0]['message'])['msg']
+									"message":msg2
 								}
 							});
 						}else if(result4[0]['user_name'] !=''  &&  result4[0]['tell'] =='' ){
@@ -1884,7 +1890,7 @@ let userLogin =async function (req,res) {
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
 									"messageFlag":result4[0]['message_flag'],
-									"message":JSON.parse(result4[0]['message'])['msg']
+									"message":msg2
 								}
 							});
 						}else if(result4[0]['user_name'] ==''  &&  result4[0]['tell'] =='' ){
@@ -1895,7 +1901,7 @@ let userLogin =async function (req,res) {
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
 									"messageFlag":result4[0]['message_flag'],
-									"message":JSON.parse(result4[0]['message'])['msg']
+									"message":msg2
 								}
 							});
 						}else{
@@ -1906,7 +1912,7 @@ let userLogin =async function (req,res) {
 									"openid":openid,
 									"session_key":JSON.parse(body)['session_key'],
 									"messageFlag":result4[0]['message_flag'],
-									"message":JSON.parse(result4[0]['message'])['msg']
+									"message":msg2
 								}
 							});
 						}
@@ -1965,11 +1971,6 @@ let submitMsg =async function (req,res) {
 				res.send({ 
 					'code': 0,
 					'msg': JSON.parse(body)['data'][0]['msg']
-				});
-			}else if(msg.length >250){
-				res.send({ 
-					'code': 4,
-					'msg': '留言长度大于140个字'
 				});
 			}else{
 				obj['msg'] =msg
