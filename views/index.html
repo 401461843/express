@@ -16,36 +16,33 @@
 
 </head>
 <body>
-
+ <button>发送</button>
 </body>
 <script src="../public/javascripts/jquery-3.3.1.min.js"></script>
 
 <script> 
  
-    var param ={
-        user_id:'MCt1srWopMairAZKTogETHUWqn',
-        user_name:'王大毛',
-        goods_list:JSON.stringify([{"goodSName":"小米手机","goodsPrice":999,"goodsImgSrc":""},{"goodSName":"华为手机","goodsPrice":999,"goodsImgSrc":""},{"goodSName":"苹果手机","goodsPrice":9229,"goodsImgSrc":""}])
-    }
-    $.ajax({
-        //请求方式
-        type : "post",
-        //请求地址
-        url : "/api/sendMsg",
-        //数据，json字符串
-        dataType: 'json',
-        data:param,
-        //请求成功
-        success : function(res) {
-           console.log(res)
-            
-        },
-        //请求失败，包含具体的错误信息
-        error : function(e){
-            console.log(e.status);
-            console.log(e.responseText);
-        }
-    });
+   $('body').on('click','button',function () {
+        $.ajax({
+            //请求方式
+            type : "post",
+            //请求地址
+            url : "/api/sendMsg",
+            //数据，json字符串
+            dataType: 'json',
+            data:param,
+            //请求成功
+            success : function(res) {
+            console.log(res)
+                
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+    })
    
 </script>
 </html>
