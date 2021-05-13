@@ -1966,6 +1966,11 @@ let submitMsg =async function (req,res) {
 					'code': 0,
 					'msg': JSON.parse(body)['data'][0]['msg']
 				});
+			}else if(msg.length >250){
+				res.send({ 
+					'code': 4,
+					'msg': '留言长度大于140个字'
+				});
 			}else{
 				obj['msg'] =msg
 				obj['tell']=tell
