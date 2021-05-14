@@ -2037,7 +2037,6 @@ let getSignStaus =async function (req,res) {
 //签到
 let sign = async function (req,res) {
 	let {date,user_id,sign_flag}=req.body
-	console.log(date)
 	let map ={
 		'2021-05-12':0,
 		'2021-05-13':1,
@@ -2080,61 +2079,9 @@ let sign = async function (req,res) {
 					'data':''
 				});
 			}else{
-				newSign[map[date]]='1'
-				if(map[date] == 0){
-					let prizeNum =await redisStrGet(6, 'dx')
-					if(Number(prizeNum)>0){
-						data['type']='1'
-						data['prize']='小度熊笔记本'
-						data['name'] =''
-						data['adress']=''
-						data['date']='2021.05.08-2021.06.08'
-						prizeNum--;
-						await redisStrSet(6, 'dx',prizeNum)
-					}else{
-						data['type']='1'
-						data['prize']=''
-						data['name'] =''
-						data['adress']=''
-						data['date']=''
-					}
-
-					
-				}else if(map[date] == 1){
-					let prizeList =JSON.parse(await redisStrGet(6, 'jbl'))
-					if(prizeList.length>0){
-						let code =prizeList.shift()
-						data['type']='2'
-						data['prize']='金伯利'
-						data['date']='2021.05.08-2021.06.08'
-						data['code']=code
-						await redisStrSet(6, 'jbl',JSON.stringify(prizeList))
-					}else{
-						data['type']='2'
-						data['prize']=''
-						data['date']=''
-						data['code']=''
-					}
-					
-				}else if(map[date] == 2){
-					let prizeList =JSON.parse(await redisStrGet(6, 'zds'))
-					if(prizeList.length>0){
-						let code =prizeList.shift()
-						data['type']='2'
-						data['prize']='周大生'
-						data['date']='2021.05.08-2021.06.08'
-						data['code']=code
-						await redisStrSet(6, 'zds',JSON.stringify(prizeList))
-					}else{
-						data['type']='2'
-						data['prize']=''
-						data['date']=''
-						data['code']=''
-					}
-				}
-				newCard[map[date]]= data
-				let sqlArr1 =[JSON.stringify(newSign),JSON.stringify(newCard),JSON.stringify(share_info_list),user_id];
-				let sql1 = 'update qrj_user  set sign = ? , card = ?, share_info=?  where user_id= ?';
+				newSign[map[date]]='1'	
+				let sqlArr1 =[JSON.stringify(newSign),JSON.stringify(share_info_list),user_id];
+				let sql1 = 'update qrj_user  set sign = ? , share_info=?  where user_id= ?';
 				let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
 				if(result1.affectedRows ==1){
 					res.send({ 
