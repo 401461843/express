@@ -2152,21 +2152,22 @@ let sign = async function (req,res) {
 }
 //提交信息
 let dxsubmit =async function (req,res) {
-	let {name,adress,user_id}=req.body
+	let {name,tell} = req.body;
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
 	
-	let sqlArr =[user_id];
-	let sql = 'select * from  qrj_user where user_id = ? ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
-	let data =JSON.parse(result[0]['card'])
-	data[0]['name'] =name
-	data[0]['adress']=adress
-	let sqlArr1 =[JSON.stringify(data),user_id];
-	let sql1 = 'update qrj_user  set  card = ? where user_id= ?';
-	let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
-	if(result1.affectedRows ==1){
+	let sqlArr =[name,tell,create_time];
+	let sql = 'insert into wylp_form_xcx (name,tell,create_time) values(?,?,?)';;
+	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
+	if(result1.affectedRows==1){
 		res.send({ 
 			'code': 1,
-			'msg': '提交成功 ！',
+			'msg': '提交成功！',
+			'data':''
+		});
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '提交失败!',
 			'data':''
 		});
 	}
