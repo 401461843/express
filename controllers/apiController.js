@@ -2070,7 +2070,6 @@ let sign = async function (req,res) {
 		}
 		if(sign){
 			let newSign =JSON.parse(result[0]['sign'])
-			let newCard =JSON.parse(result[0]['card'])
 			
 			if(newSign[map[date]]=='1'){
 				res.send({ 
