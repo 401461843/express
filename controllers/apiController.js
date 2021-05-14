@@ -2039,9 +2039,9 @@ let sign = async function (req,res) {
 	let {date,user_id,sign_flag}=req.body
 	console.log(date)
 	let map ={
-		'2021-05-17':0,
-		'2021-05-18':1,
-		'2021-05-19':2
+		'2021-05-12':0,
+		'2021-05-13':1,
+		'2021-05-14':2
 	}
 	
 	let sqlArr =[user_id];
