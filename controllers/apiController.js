@@ -2213,7 +2213,7 @@ let sendMsg =async function (req,res) {
 		obj['content'] =toMsg[toMsg.length -index-1]
 		toTEll.push(obj)
 	})
-
+	
 	for(var i = 0; i < toTEll.length; i++){
 		(function(i){
 			let header ={
@@ -2227,7 +2227,7 @@ let sendMsg =async function (req,res) {
 				"template": "sms-tmpl-AMNbks70543",
 				"signatureId": "sms-sign-hkcTgu02982",
 				"contentVar": {
-				  "content":toTEll[i].content
+				  "content":toTEll[i].content+ '5月19日来直播间抢告白礼 http://t.hk.uy/cXG'
 				}
 			  }
 			request({
