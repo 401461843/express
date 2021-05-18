@@ -2293,6 +2293,31 @@ let wylpSubmit = async function (req,res) {
 		});
 	}
 }
+//抽奖
+let zbcj1 =async function (req,res) {
+	let sqlArr=['1','2']
+	let sql = 'select * from  qrj_user where message_flag=? or message_flag=?  ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
+	let data =[]
+	if(result.length>0){
+
+		result.forEach(function (val,index) {
+			let obj ={}
+			obj['tx'] =val.user_avatar_url
+			obj['nc']=val.user_name
+			obj['dh']=val.tell
+			data.push(obj)
+			if(index ==result.length-1){
+				res.send({
+					'code': 1,
+					'msg': '获取数据成功！',
+					'data':data
+				});
+			}
+		})
+		
+	}
+}
 module.exports={	
 	luckDraw,
 	submit,
@@ -2343,5 +2368,6 @@ module.exports={
 	sendMsg,
 	saveTell,
 	getMSg,
-	wylpSubmit
+	wylpSubmit,
+	zbcj1
 };

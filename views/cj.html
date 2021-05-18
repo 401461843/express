@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>抽奖</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+    <style> 
+        .bg{
+            width: 7.5rem;
+            height: 16.32rem;
+            background: url('../public/images/wy/bj.png') no-repeat;
+            background-size: 100%;
+            position: relative;
+        }
+        .box{
+            position: absolute;
+            left: 50%;
+            top: 6.8rem;
+            transform: translateX(-50%);
+            width: 6.25rem;
+            height: 6rem;
+            /* background: red; */
+
+        }
+        .bxo-i{
+            height: .95rem;
+            width: 6.25rem;
+            border-bottom: 2px solid #2953ce;
+        }
+        span{
+            display: inline-block;
+            width: 35.5%;
+            text-align: center;
+            height: 100%;
+            color: #2953ce;
+            font-size: .3rem;
+            line-height: 4;
+        }
+        span:nth-child(1){
+            width: 24%;
+        }
+        .bxo-i div{
+            float: left;
+        }
+        .tx{
+            width:0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+            border: 1px solid red;
+            margin-top: .15rem;
+            margin-left: 0.43rem;
+        }
+        img{
+            width:0.6rem;
+            height: 0.6rem;
+            border-radius: 50%;
+        }
+        .nc{
+            width: 2.1rem;
+            height: 100%;
+            text-align: center;
+            line-height: .95rem;
+            margin-left: .6rem;
+            font-size: .28rem;
+            color: #2953ce;
+           
+            word-break: break-all;
+            /*属性规定自动换行的处理方法。normal(使用浏览器默认的换行规则。),break-all(允许在单词内换行。),keep-all(只能在半角空格或连字符处换行。)*/
+            text-overflow: ellipsis;
+            overflow: hidden;
+            display: -webkit-box;
+            /** 对象作为伸缩盒子模型显示 **/
+            -webkit-box-orient: vertical;
+            /** 设置或检索伸缩盒对象的子元素的排列方式 **/
+            -webkit-line-clamp: 1;
+
+        }
+        .dh{
+            width: 1.8rem;
+            height: 100%;
+            text-align: center;
+            line-height: .95rem;
+            margin-left: .6rem;
+            font-size: .28rem;
+            color: #2953ce;
+           
+        }
+        .btn{
+            position: absolute;
+            bottom: 1.15rem;
+            width: 5.15rem;
+            height: 1.09rem;
+            background: url('../public/images/wy/btn.png') no-repeat;
+            background-size: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+    </style>
+</head>
+<body>
+  <div class="bg">
+        <div class="box"> 
+            <div class="bxo-i">
+                <span>头像</span>
+                <span>昵称</span>
+                <span>电话</span>
+            </div>
+            <div class="bxo-i item">
+                <div class="tx"><img src="../public/images/wy/tx1.png" alt=""></div>
+                <div class="nc">XXXXXXXXXX....</div>
+                <div class="dh">XXXXXXXXXX</div>
+            </div>
+            <div class="bxo-i item">
+                <div class="tx"><img src="../public/images/wy/tx1.png" alt=""></div>
+                <div class="nc">XXXXXXXXXX....</div>
+                <div class="dh">XXXXXXXXXX</div>
+            </div>
+            <div class="bxo-i item">
+                <div class="tx"><img src="../public/images/wy/tx1.png" alt=""></div>
+                <div class="nc">XXXXXXXXXX....</div>
+                <div class="dh">XXXXXXXXXX</div>
+            </div>
+            <div class="bxo-i item">
+                <div class="tx"><img src="../public/images/wy/tx1.png" alt=""></div>
+                <div class="nc">XXXXXXXXXX....</div>
+                <div class="dh">XXXXXXXXXX</div>
+            </div>
+            <div class="bxo-i item">
+                <div class="tx"><img src="../public/images/wy/tx1.png" alt=""></div>
+                <div class="nc">XXXXXXXXXX....</div>
+                <div class="dh">XXXXXXXXXX</div>
+            </div>
+            
+           
+          
+           
+
+        </div>
+        <div class="btn">
+
+        </div>
+  </div>
+
+    
+    
+</body>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+
+
+<script>
+    
+    $.ajax({
+        //请求方式
+        type : "get",
+        //请求地址
+        url : "/api/zbcj1",
+        //数据，json字符串
+        dataType: 'json',
+        //请求成功
+        success : function(res) {
+            console.log(res)
+            localStorage.setItem('list',JSON.stringify(res.data))
+            
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+    let timer= null
+    let count =0
+    let temp =[]
+    $('body').on('click','.btn',function () {
+        if(count>1){
+            return 
+        }else{
+            var list =JSON.parse(localStorage.getItem('list'))
+            var array=[]
+            if(timer){
+                clearInterval(timer)
+                var arr =[]
+                list.forEach(function (val,index) { 
+                    if(temp.indexOf(index)<0){
+                        arr.push(list[index])
+                    }
+                })
+                localStorage.setItem('list',JSON.stringify(arr))
+                timer=null
+                count++
+                return
+            }
+           
+            timer =setInterval(function () { 
+                array= new Array(list.length)
+                    .fill(0)
+                    .map((v,i)=>i+1)
+                    .sort(()=>0.5 - Math.random())
+                    .filter((v,i)=>i<5);
+                temp=array
+                $.each($('.item'),function (index,val) {
+                    $(val).find('img').attr('src',list[array[index]]['tx'])
+                    $(val).find('.nc').text(list[array[index]]['nc'])
+                    $(val).find('.dh').text(list[array[index]]['dh'])
+                })
+            },100)
+        }
+       
+        
+       
+        
+    })       
+</script>
+</html>

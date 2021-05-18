@@ -102,5 +102,8 @@ router.get('/getMSg', api.getMSg);
 
 //唯一旅拍
 router.post('/wylpSubmit', api.wylpSubmit);
+//直播抽奖
+router.get('/zbcj1', api.zbcj1);
+
 
 module.exports = router; 
