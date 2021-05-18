@@ -173,8 +173,15 @@
         dataType: 'json',
         //请求成功
         success : function(res) {
-            console.log(res)
-            localStorage.setItem('list',JSON.stringify(res.data))
+            let list =[]
+            res.data.forEach(function (val,index) { 
+                let obj ={}
+                obj.tx=val.tx
+                obj.nc=val.nc
+                obj.dh =val.dh.slice(0,3)+'****'+val.dh.slice(7,11)
+                list.push(obj)
+            })
+            localStorage.setItem('list',JSON.stringify(list))
             
         },
         //请求失败，包含具体的错误信息
@@ -193,6 +200,7 @@
         }else{
             $('.btn').text('确 认')
             var list =JSON.parse(localStorage.getItem('list'))
+
             var array=[]
             if(timer){
                 clearInterval(timer)
