@@ -104,6 +104,10 @@
             background-size: 100%;
             left: 50%;
             transform: translateX(-50%);
+            color: white;
+            line-height: 1.09rem;
+            text-align: center;
+            font-size: .35rem;
         }
     </style>
 </head>
@@ -147,7 +151,7 @@
 
         </div>
         <div class="btn">
-
+            抽 奖
         </div>
   </div>
 
@@ -183,13 +187,16 @@
     let count =0
     let temp =[]
     $('body').on('click','.btn',function () {
+        
         if(count>1){
             return 
         }else{
+            $('.btn').text('确 认')
             var list =JSON.parse(localStorage.getItem('list'))
             var array=[]
             if(timer){
                 clearInterval(timer)
+                $('.btn').text('抽 奖')
                 var arr =[]
                 list.forEach(function (val,index) { 
                     if(temp.indexOf(index)<0){
@@ -214,7 +221,7 @@
                     $(val).find('.nc').text(list[array[index]]['nc'])
                     $(val).find('.dh').text(list[array[index]]['dh'])
                 })
-            },100)
+            },50)
         }
        
         
