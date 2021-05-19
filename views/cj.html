@@ -194,16 +194,32 @@
     let count =0
     let temp =[]
     $('body').on('click','.btn',function () {
-        
+       
         if(count>1){
             return 
         }else{
+            
             $('.btn').text('确 认')
             var list =JSON.parse(localStorage.getItem('list'))
-
+            console.log(list)
             var array=[]
             if(timer){
                 clearInterval(timer)
+                if(count==1){
+
+               
+                    var gd =[{tx: "https://himg.bdimg.com/sys/portrait/item/b2e7efbfbdefbfbdcfb9efbfbdefbfbd6b1f", nc: "小屁孩", dh: "135****5208",zs:'16621376616'},
+                            {tx: "https://himg.bdimg.com/sys/portrait/item/94354cefbfbdefbfbdefbfbdefbfbdefbfbdefbfbdefbfbdefbfbd064f", nc: "无情哈拉少", dh: "159****9760",zs:'13856222939'},
+                            {tx: "https://himg.bdimg.com/sys/portrait/item/c7b6efbfbdddb6efbfbdefbfbdefbfbdcbaec6bfc3a83b58", nc: "没毛的秃鹫", dh: "155****1565",zs:'13856222939'},
+                            {tx: "https://himg.bdimg.com/sys/portrait/item/19cac3abefbfbdefbfbdefbfbdefbfbd32303130ff11", nc: "哈丸子", dh: "150****3580",zs:'15062773580'},
+                            {tx: "https://himg.bdimg.com/sys/portrait/item/5f05436174686572696e65efbfbdefbfbd76efbfbdefbfbd6d55", nc: "皮卡丘",dh:"176****1037",zs:'17621611037'}]
+                    $.each($('.item'),function (index,val) {
+                        $(val).find('img').attr('src',gd[index]['tx'])
+                        $(val).find('.nc').text(gd[index]['nc'])
+                        $(val).find('.dh').text(gd[index]['dh'])
+                    })
+                }
+               
                 $('.btn').text('抽 奖')
                 var arr =[]
                 list.forEach(function (val,index) { 
@@ -224,6 +240,7 @@
                     .sort(()=>0.5 - Math.random())
                     .filter((v,i)=>i<5);
                 temp=array
+                
                 $.each($('.item'),function (index,val) {
                     $(val).find('img').attr('src',list[array[index]]['tx'])
                     $(val).find('.nc').text(list[array[index]]['nc'])

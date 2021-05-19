@@ -2135,6 +2135,8 @@ let sendMsg =async function (req,res) {
 	
 	let sqlArr=['1','2']
 	let sql = 'select * from  qrj_user where message_flag=? or message_flag=?  ';
+	// let sqlArr =['1','2','2021-05-16 00:00:00','2021-05-18 00:00:00']
+	// let sql ='select * from  qrj_user where (message_flag=? or message_flag=?) and (create_time between ? and ?);'
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
 	let toTEll =[]
 	let toNotell=[]
@@ -2300,7 +2302,6 @@ let zbcj1 =async function (req,res) {
 	let result = await sqlQuery.SysqlConnect(sql,sqlArr);
 	let data =[]
 	if(result.length>0){
-
 		result.forEach(function (val,index) {
 			let obj ={}
 			obj['tx'] =val.user_avatar_url
