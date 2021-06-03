@@ -88,5 +88,9 @@ router.get('/home/wylp', function(req, res) {
 router.get('/home/cj', function(req, res) {
 	res.render('cj.html');
 });
+//抽奖
+router.get('/home/bzsh', function(req, res) {
+	res.render('bzsh.html');
+});
 
 module.exports = router;

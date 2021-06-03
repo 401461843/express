@@ -2145,6 +2145,7 @@ let sendMsg =async function (req,res) {
 		result.forEach(function(val,index){
 			let obj ={}
 			if(val.message_flag=='1'){
+				console.log(1111)
 				obj['mobile'] =JSON.parse(val.message)['tell']
 				obj['content'] =JSON.parse(val.message)['msg']
 				toTEll.push(obj)
@@ -2184,10 +2185,14 @@ let sendMsg =async function (req,res) {
 				body: JSON.stringify(body),
 				headers: header,
 			},async (err,result)=>{
-				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-				let sqlArr1 =[JSON.stringify(toTEll[i]),create_time];
-				let sql1 = 'insert into send_msg_record (record,create_time) values(?,?)';
-				await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				console.log(result.statusCode)
+				if(result.statusCode ==200){
+					let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+					let sqlArr1 =[JSON.stringify(toTEll[i]),create_time];
+					let sql1 = 'insert into send_msg_record (record,create_time) values(?,?)';
+					await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				}
+				
 			})
 			
 		})(i)
