@@ -92,5 +92,10 @@ router.get('/home/cj', function(req, res) {
 router.get('/home/bzsh', function(req, res) {
 	res.render('bzsh.html');
 });
+//hfj
+//抽奖
+router.get('/home/hfj', function(req, res) {
+	res.render('hfj.html');
+});
 
 module.exports = router;
