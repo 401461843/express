@@ -2324,6 +2324,206 @@ let zbcj1 =async function (req,res) {
 		
 	}
 }
+//
+let getBrandCode =async function (req,res) { 
+	let map={
+		"1": "A",
+		"2": "B",
+		"3": "C",
+		"4": "D",
+		"5": "E",
+		"6": "F",
+		"7": "G",
+		"8": "H",
+		"9": "J",
+		"10": "K"
+	}
+	let {index}=req.body
+	let sqlArr=[map[index]]
+	let sql = 'select * from  brand_code where brand= ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	let code =''
+	if(result.length>0){
+		let codeList =JSON.parse(result[0]['code_list'])
+		code =codeList.splice(0,1)[0]
+		let sqlArr1 =[JSON.stringify(codeList),map[index]];
+		let sql1 = 'update brand_code  set code_list = ?  where brand= ?';
+		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+		if(result1.affectedRows==1){
+			res.send({ 
+				'code': 1,
+				'data':{'code':code},
+				'msg': '获取券码成功'
+			});
+		}else{
+			res.send({ 
+				'code': 0,
+				'data':{'code':code},
+				'msg': '获取券码失败'
+			});
+		}
+	}
+ }
+let tjbd =async function (req,res) { 
+	let map ={
+		"A": "1",
+		"B": "2",
+		"C": "3",
+		"D": "4",
+		"E": "5",
+		"F": "6",
+		"G": "7",
+		"H": "8",
+		"J": "9",
+		"K": "10"
+	}
+	let map1={
+		"1": "A",
+		"2": "B",
+		"3": "C",
+		"4": "D",
+		"5": "E",
+		"6": "F",
+		"7": "G",
+		"8": "H",
+		"9": "J",
+		"10": "K"
+	}
+	let {index,name,tell} =req.body
+	let sqlArr=[tell]
+	let sql = 'select * from  user_sub_info where tell= ? ';
+	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
+	let code =''
+	if(result.length ==0){
+	
+		let sqlArr4=[map1[index]]
+		let sql4 = 'select * from  brand_code where brand= ? ';
+		let result4 = await sqlQuery.SysqlConnect(sql4,sqlArr4)
+		if(result4.length>0){
+			let codeList =JSON.parse(result4[0]['code_list'])
+			code =codeList.splice(0,1)[0]
+			let sqlArr1 =[JSON.stringify(codeList),map1[index]];
+			let sql1 = 'update brand_code  set code_list = ?  where brand= ?';
+			let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+			if(result1.affectedRows==1){
+				let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+				let brand_code ={
+					"A": "",
+					"B": "",
+					"C": "",
+					"D": "",
+					"E": "",
+					"F": "",
+					"G": "",
+					"H": "",
+					"J": "",
+					"K": ""
+				}
+				brand_code[code.split('-')[0]] =code
+				let sqlArr2 =[name,tell,JSON.stringify(brand_code),map[code.split('-')[0]],create_time];
+				let sql2 = 'insert into user_sub_info (name,tell,brand_code,count,create_time) values(?,?,?,?,?)';;
+				let result2= await sqlQuery.SysqlConnect(sql2,sqlArr2)
+				if(result2.affectedRows ==1){
+					res.send({
+						'code': 1,
+						'data':{
+							'code':code,
+							'count':map[code.split('-')[0]]
+						},
+						'msg': '提交成功'
+					});
+				}else{
+					res.send({
+						'code': 2,
+						'data':{'code':''},
+						'msg': '提交失败'
+					});
+				}
+
+
+			}else{
+				res.send({
+					'code':3,
+					'msg':'获取券码失败'
+				});
+			}
+		}
+		
+	}else{
+		if(Number(index)<= Number(result[0]['count'])){
+			res.send({
+				'code': 4,
+				'data':{'count':result[0]['count']},
+				'msg': '当前手机号已经领取过该品牌的券码！'
+			});
+		}else{
+			
+			let sqlArr5=[map1[index]]
+			let sql5 = 'select * from  brand_code where brand= ? ';
+			let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5)
+			if(result5.length>0){
+				let codeList =JSON.parse(result5[0]['code_list'])
+				code =codeList.splice(0,1)[0]
+				let sqlArr1 =[JSON.stringify(codeList),map1[index]];
+				let sql1 = 'update brand_code  set code_list = ?  where brand= ?';
+				let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1);
+				
+				if(result1.affectedRows==1){
+					let brand_code = JSON.parse(result[0]['brand_code'])
+					brand_code[code.split('-')[0]] =code
+					let sqlArr2 =[JSON.stringify(brand_code),map[code.split('-')[0]],result[0]['id']];
+	
+					let sql2 = 'update user_sub_info set brand_code =? ,count = ? where id = ? ';
+					let result2= await sqlQuery.SysqlConnect(sql2,sqlArr2)
+					if(result2.affectedRows ==1){
+						res.send({
+							'code': 1,
+							'data':{
+								'code':code,
+								'count':map[code.split('-')[0]]
+							},
+							'msg': '提交成功'
+						});
+					}else{
+						res.send({
+							'code': 2,
+							'data':{'code':''},
+							'msg': '提交失败'
+						});
+					}
+				}
+			}	
+		}
+		
+	}
+	
+
+	
+	
+}
+let hfjgz =async function (req,res) { 
+	let {name,tell} = req.body;
+	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
+	
+	let sqlArr =[name,tell,create_time];
+	let sql = 'insert into hfj_gz (name,tell,create_time) values(?,?,?)';;
+	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
+	if(result1.affectedRows==1){
+		res.send({ 
+			'code': 1,
+			'msg': '提交成功！',
+			'data':''
+			
+			 
+		});
+	}else{
+		res.send({ 
+			'code': 2,
+			'msg': '提交失败!',
+			'data':''
+		});
+	}
+ }
 module.exports={	
 	luckDraw,
 	submit,
@@ -2375,5 +2575,8 @@ module.exports={
 	saveTell,
 	getMSg,
 	wylpSubmit,
-	zbcj1
+	zbcj1,
+	getBrandCode,
+	tjbd,
+	hfjgz
 };

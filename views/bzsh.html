@@ -1,12 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <title>宝藏上海</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+ 
+    
+    
 </head>
 <body>
-    宝藏上海
+   
+    
 </body>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+
+
+<script>
+
+    // $.ajax({
+    //         //请求方式
+    //         type : "post",
+    //         //请求地址
+    //         url : "/api/getBrandCode",
+    //         //数据，json字符串
+    //         data:{
+    //             'index':'2'
+    //         },
+    //         dataType: 'json',
+    //         //请求成功
+    //         success : function(res) {
+    //             if(res.code ==1){
+    //                 // alert(res.msg) 
+                    
+    //             }else{
+    //                 // alert(res.msg)
+    //             }
+                
+    //         },
+    //         //请求失败，包含具体的错误信息
+    //         error : function(e){
+    //             console.log(e.status);
+    //             console.log(e.responseText);
+    //         }
+    //     });
+    $.ajax({
+            //请求方式
+            type : "post",
+            //请求地址
+            url : "/api/tjbd",
+            //数据，json字符串
+            data:{
+                'index':'5',
+                'name':'小明',
+                'tell':'17621611037'
+
+            },
+            dataType: 'json',
+            //请求成功
+            success : function(res) {
+                if(res.code ==1){
+                    // alert(res.msg) 
+                    
+                }else{
+                    // alert(res.msg)
+                }
+                
+            },
+            //请求失败，包含具体的错误信息
+            error : function(e){
+                console.log(e.status);
+                console.log(e.responseText);
+            }
+        });
+</script>
 </html>

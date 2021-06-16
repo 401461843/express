@@ -104,6 +104,11 @@ router.get('/getMSg', api.getMSg);
 router.post('/wylpSubmit', api.wylpSubmit);
 //直播抽奖
 router.get('/zbcj1', api.zbcj1);
-
+//获取券码
+router.post('/getBrandCode', api.getBrandCode);
+//提交表单
+router.post('/tjbd', api.tjbd);
+//提交表单
+router.post('/hfjgz', api.hfjgz);
 
 module.exports = router; 

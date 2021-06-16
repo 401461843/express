@@ -86,3 +86,7 @@ a:hover {
 a:active {
     text-decoration: none;
 }
+@font-face {
+    font-family: mFont;
+    src: url('../font/方正清刻本悦宋简体.TTF');
+}

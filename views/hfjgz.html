@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<script>
+    var _hmt = _hmt || [];
+    (function() {
+        var hm = document.createElement("script");
+        hm.src = "https://hm.baidu.com/hm.js?ffbbabff928b8ef748056bddc55a79aa";
+        var s = document.getElementsByTagName("script")[0]; 
+        s.parentNode.insertBefore(hm, s);
+    })();
+</script>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>好房节</title>
+    <link rel="stylesheet" href="../public/css/reset.css"> 
+    <style> 
+        .wrap{
+            height: 41.56rem;
+            width: 7.5rem;
+            background: url('../public/images/gz/bg.png') no-repeat;
+            background-size: 100%;
+            position: relative;
+            overflow: hidden;
+            
+        }
+        .localtion{
+            width: 2.53rem;
+            height: .52rem;
+            background: url('../public/images/gz/gz.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .65rem;
+        }
+        .content{
+            width: 7.14rem;
+            height: 34.5rem;
+            position: absolute;
+            top: 7.62rem;
+            left: 50%;
+            transform: translateX(-50%);
+            /* background: rebeccapurple; */
+            overflow: hidden;
+        }
+        .tit1{
+            width: 5.14rem;
+            height: 1.88rem;
+            background: url('../public/images/gz/yykf.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .6rem;
+        }
+       
+        .inp input{
+            width: 5.35rem;
+            height: 0.70rem;
+            background: white;
+            outline: none;
+            border: none;
+            border-radius: .2rem;
+            margin: 0 auto;
+            display: block;
+            margin-top: .3rem;
+            text-align: center;
+            font-size: .3rem;
+        }
+        .inp1  input{
+            width: 5.35rem;
+            height: 0.70rem;
+            background: white;
+            outline: none;
+            border: none;
+            border-radius: .2rem;
+            margin: 0 auto;
+            display: block;
+            margin-top: .3rem;
+            text-align: center;
+            font-size: .3rem;
+        }
+        .btn{
+            width: 5.41rem;
+            height: .8rem;
+            background: url('../public/images/gz/yyan.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .24rem;
+        }
+        .btn1{
+            width: 5.41rem;
+            height: .8rem;
+            background: url('../public/images/gz/zxbt.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .24rem;
+        }
+
+        .tit2{
+            width: 5.21rem;
+            height: 0.68rem;
+            background: url('../public/images/gz/tit.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: 1.25rem;
+        }
+        .tab{
+            width: 6.68rem;
+            height: .65rem;
+            margin: 0 auto;
+            margin-top: 0.5rem;
+        }
+        .tab-item{
+            width: 1.66rem;
+            height: .65rem;
+            background: url('../public/images/gz/tab.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            float: left;
+            line-height: .65rem;
+            text-align: center;
+            color: white;
+            font-size: .28rem;
+        }
+        .tab-active{
+            width: 1.66rem;
+            height: .65rem;
+            background: url('../public/images/gz/tab-active.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            float: left;
+            line-height: .65rem;
+            text-align: center;
+            color: white;
+            font-size: .28rem;
+        }
+        .tab-con-item{
+            width: 6.67rem;
+            height: 17.60rem;
+            /* background: red; */
+            margin: 0 auto;
+            margin-top: .5rem;
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            overflow-y: auto;
+
+        }
+        .item{
+            width: 3.28rem;
+            height: 3.43rem;
+        
+        }
+        .m1-1{
+            background: url('../public/images/gz/rx/1.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-2{
+            background: url('../public/images/gz/rx/2.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-3{
+            background: url('../public/images/gz/rx/3.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m1-4{
+            background: url('../public/images/gz/rx/4.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-5{
+            background: url('../public/images/gz/rx/5.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-6{
+            background: url('../public/images/gz/rx/6.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-7{
+            background: url('../public/images/gz/rx/7.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-8{
+            background: url('../public/images/gz/rx/8.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m1-9{
+            background: url('../public/images/gz/rx/9.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m1-10{
+            background: url('../public/images/gz/rx/10.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-1{
+            background: url('../public/images/gz/rq/1.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-2{
+            background: url('../public/images/gz/rq/2.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-3{
+            background: url('../public/images/gz/rq/3.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m2-4{
+            background: url('../public/images/gz/rq/4.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-5{
+            background: url('../public/images/gz/rq/5.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-6{
+            background: url('../public/images/gz/rq/6.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-7{
+            background: url('../public/images/gz/rq/7.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-8{
+            background: url('../public/images/gz/rq/8.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m2-9{
+            background: url('../public/images/gz/rq/9.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m2-10{
+            background: url('../public/images/gz/rq/10.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-1{
+            background: url('../public/images/gz/pz/1.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-2{
+            background: url('../public/images/gz/pz/2.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-3{
+            background: url('../public/images/gz/pz/3.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m3-4{
+            background: url('../public/images/gz/pz/4.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-5{
+            background: url('../public/images/gz/pz/5.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-6{
+            background: url('../public/images/gz/pz/6.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-7{
+            background: url('../public/images/gz/pz/7.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-8{
+            background: url('../public/images/gz/pz/8.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m3-9{
+            background: url('../public/images/gz/pz/9.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-10{
+            background: url('../public/images/gz/pz/10.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-1{
+            background: url('../public/images/gz/zb/1.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-2{
+            background: url('../public/images/gz/zb/2.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-3{
+            background: url('../public/images/gz/zb/3.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m4-4{
+            background: url('../public/images/gz/zb/4.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-5{
+            background: url('../public/images/gz/zb/5.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-6{
+            background: url('../public/images/gz/zb/6.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-7{
+            background: url('../public/images/gz/zb/7.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m4-8{
+            background: url('../public/images/gz/zb/8.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+
+        .m4-9{
+            background: url('../public/images/gz/zb/9.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        .m3-10{
+            background: url('../public/images/gz/zb/10.png') no-repeat;
+            background-size: 100%;
+            margin-top: .05rem;   
+        }
+        
+        .tit3{
+            width: 5.12rem;
+            height: .56rem;
+            background: url('../public/images/gz/zxgd.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: 1.3rem;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="localtion"></div>
+        <div class="content">
+           <div class="sec1">
+                <div class="tit1"></div>
+                <div class="inp">
+                    <input type="text" class="name" style="margin-top: .4rem;" placeholder="请输入您的姓名">
+                    <input type="text" class="tell" placeholder="请输入您的电话">
+                </div>
+                <div class="btn">
+
+                </div>
+           </div>
+           <div class="sec2">
+               <div class="tit2"></div>
+               <div class="tab">
+                    <div class="tab-item tab-active" index='0'>热销楼盘</div>
+                    <div class="tab-item" index='1'>人气楼盘</div>
+                    <div class="tab-item" index='2'>品质人居</div>
+                    <div class="tab-item" index='3'>周边好盘</div>
+               </div>
+               <div class="tab-con">
+                    <div class="tab-con-item" index='0'>
+                        <div class="item m1-1"></div>
+                        <div class="item m1-2"></div>
+                        <div class="item m1-3"></div>
+                        <div class="item m1-4"></div>
+                        <div class="item m1-5"></div>
+                        <div class="item m1-6"></div>
+                        <div class="item m1-7"></div>
+                        <div class="item m1-8"></div>
+                        <div class="item m1-9"></div>
+                        <div class="item m1-10"></div>
+                    </div>
+                    <div class="tab-con-item" index='1' style="display: none;">
+                        <div class="item m2-1"></div>
+                        <div class="item m2-2"></div>
+                        <div class="item m2-3"></div>
+                        <div class="item m2-4"></div>
+                        <div class="item m2-5"></div>
+                        <div class="item m2-6"></div>
+                        <div class="item m2-7"></div>
+                        <div class="item m2-8"></div>
+                        <div class="item m2-9"></div>
+                        <div class="item m2-10"></div>
+                    </div>
+                    <div class="tab-con-item" index='2' style="display: none;" >
+                        <div class="item m3-1"></div>
+                        <div class="item m3-2"></div>
+                        <div class="item m3-3"></div>
+                        <div class="item m3-4"></div>
+                        <div class="item m3-5"></div>
+                        <div class="item m3-6"></div>
+                        <div class="item m3-7"></div>
+                        <div class="item m3-8"></div>
+                        <div class="item m3-9"></div>
+                        <div class="item m3-10"></div>
+                    </div>
+                    <div class="tab-con-item" index='3' style="display: none;">
+                        <div class="item m4-1"></div>
+                        <div class="item m4-2"></div>
+                        <div class="item m4-3"></div>
+                        <div class="item m4-4"></div>
+                        <div class="item m4-5"></div>
+                        <div class="item m4-6"></div>
+                        <div class="item m4-7"></div>
+                        <div class="item m4-8"></div>
+                        <div class="item m4-9"></div>
+                        <div class="item m4-10"></div>
+                    </div>
+               </div>
+           </div>
+           <div class="sec3">
+                <div class="tit3"></div>
+                <div class="inp1">
+                    <input type="text" class="name" style="margin-top: .6rem;" placeholder="请输入您的姓名">
+                    <input type="text" class="tell" placeholder="请输入您的电话">
+                </div>
+                <div class="btn1">
+
+                </div>
+           </div>
+        </div>
+       
+    </div>
+</body>
+<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
+<script src="../public/javascripts/rem.js"></script>
+<script>
+
+
+    $('body').on('click','.tab-item',function () { 
+        console.log($(this))
+        $(this).siblings().removeClass('tab-active')
+        $(this).addClass('tab-active')
+        $('.tab-con-item').hide()
+        $($('.tab-con-item')[ Number($(this).attr('index'))]).show()
+
+    }).on('click','.btn',function () { 
+        if($('.inp .name').val().trim() ==''){
+            alert('请输入姓名！')
+            return 
+        }else if($('.inp .tell').val().trim() =='' ){
+            alert('请划入手机号！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($('.inp .tell').val().trim())) ){
+            alert('请输入正确格式手机号！')
+            return 
+        }
+        var param ={
+            name:$('.inp .name').val().trim(),
+            tell:$('.inp .tell').val().trim()
+        }
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/hfjgz",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                       
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+     }).on('click','.btn1',function () { 
+        if($('.inp1 .name').val().trim() ==''){
+            alert('请输入姓名！')
+            return 
+        }else if($('.inp1 .tell').val().trim() =='' ){
+            alert('请划入手机号！')
+            return 
+        }else if(!(/^1[3456789]\d{9}$/.test($('.inp1 .tell').val().trim())) ){
+            alert('请输入正确格式手机号！')
+            return 
+        }
+        var param ={
+            name:$('.inp1 .name').val().trim(),
+            tell:$('.inp1 .tell').val().trim()
+        }
+        $.ajax({
+                //请求方式
+                type : "post",
+                //请求地址
+                url : "/api/hfjgz",
+                //数据，json字符串
+                data:param,
+                dataType: 'json',
+                //请求成功
+                success : function(res) {
+                   if(res.code ==1){
+                        alert(res.msg)
+                       
+                   }else{
+                       alert(res.msg)
+                   }
+                   
+                },
+                //请求失败，包含具体的错误信息
+                error : function(e){
+                    console.log(e.status);
+                    console.log(e.responseText);
+                }
+            });
+     })
+
+</script>
+
+
+</html>
