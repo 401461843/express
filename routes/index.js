@@ -101,6 +101,9 @@ router.get('/home/hfj', function(req, res) {
 router.get('/home/hfjgz', function(req, res) {
 	res.render('hfjgz.html');
 });
+router.get('/home/hfjsz', function(req, res) {
+	res.render('hfjsz.html');
+});
 
 
 module.exports = router;
