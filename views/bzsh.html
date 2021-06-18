@@ -95,7 +95,7 @@
   <script>
     // localStorage.index = 1;
     // localStorage.tell = 1;
-    let api = 'http://172.16.225.130:3000';
+    let api = '';
     let index = 1;
     let tell;
     let codeArr = [{
@@ -171,6 +171,11 @@
     }
     // 获取宝藏
     function getBZ(style) {
+        if(style=="none"){
+            $('.wrap_wrap').removeClass('noScroll')
+        }else {
+            $('.wrap_wrap').addClass('noScroll')
+        }
       if (style == 'none') {
         var dom = document.querySelector('.form_wrap');
         dom.style.display = style;
