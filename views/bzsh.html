@@ -80,7 +80,7 @@
         </div>
         <label id="phone" style="display: none;">手机号:</label>
         <div class="btns_wrap">
-          <button class="btn1 btn" id="giveUp">放弃领取</button>
+          <button class="btn1 btn" id="giveUp" onclick="giveUp()">放弃领取</button>
           <button class="submit btn" id="submit" onclick="tjbd()">立即领取</button>
         </div>
         <div class="form_tip">请谨慎填写，点击提交后无法再次修改</div>
@@ -168,6 +168,11 @@
     function showRule(style) {
       var dom = document.querySelector('.rule_wrap');
       dom.style.display = style;
+    }
+    // 放弃领取
+    function giveUp(){
+        document.querySelector('.form_wrap').style.display= "none";
+        localStorage.setItem('index', index - 0 + 1);
     }
     // 获取宝藏
     function getBZ(style) {
