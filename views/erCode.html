@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宝藏上海</title>
+  <link rel="stylesheet" href="../public/css/bzsh/common.css">
+  <link rel="stylesheet" href="../public/css/bzsh/code.css">
+  <script>
+    (function (a) {
+      var b = document.documentElement.clientWidth;
+      if (b > a)
+        b = a;
+      document.documentElement.style.fontSize = b / a * 100 + 'px';
+    })(750);
+  </script>
+</head>
+<body>
+  <div class="wrap_wrap" id="erCode">
+    <div class="logo"></div>
+    <div class="code_tit" id="codeName">恭喜您获得A品牌宝券！</div>
+    <div class="code_code" id="codeCode">请截图保存二维码哦~</div>
+    <div class="er_code">
+      <div class="code_box"></div>
+    </div>
+    <div class="rule_wrap">
+      <div class="rule_tit">
+        <div class="line"></div>
+        <div class="tit">使用规则</div>
+        <div class="line"></div>
+      </div>
+      <div class="rule_cont">
+      </div>
+    </div>
+    <div class="btns_wrap">
+      <div class="btn1 btn">返回直播</div>
+      <div class="btn2 btn" onclick="backIndex()">再抽一次</div>
+    </div>
+    <div class="tip">活动最终解释权归百度上海分公司所有</div>
+  </div>
+  <script src="../public/javascripts/bzsh/index.js"></script>
+  <script>
+    let index = localStorage.index;
+    let code = localStorage.code;
+    console.log(index,code)
+
+    document.getElementById('codeName').innerHTML = "恭喜您获得"+codeArr[index-2].name+"奖品";
+    document.querySelector('.rule_cont').innerHTML = codeArr[index-2].rule;
+
+    function backIndex(){
+      if(index>10){
+        window.location.href = '/home/over';
+      }else{
+        window.location.href = '/home/bzsh'
+      }
+    }
+  </script>
+</body>
+</html>

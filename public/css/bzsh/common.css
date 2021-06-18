@@ -1,0 +1,119 @@
+body,html {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  font-size: .18rem;
+  background: #fff;
+}
+
+/* 禁用iPhone中Safari的字号自动调 */
+html {
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+    /* 解决IOS默认滑动很卡的情况 */
+    -webkit-overflow-scrolling : touch;
+}
+
+/* 初始化 */
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    margin: 0;
+    padding: 0;
+    box-sizing:border-box;
+    -moz-box-sizing:border-box;  /*Firefox */
+    -webkit-box-sizing:border-box; /* Safari */
+}
+
+/* 禁止缩放表单 */
+input[type="submit"], input[type="reset"], input[type="button"], input {
+    resize: none;
+    border: none;
+}
+
+body, div, ul, li, ol, h1, h2, h3, h4, h5, h6, input, textarea, select, p, dl, dt, dd, a, img, button, form, table, th, tr, td, tbody, article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+ul,li{
+    list-style-type: none;
+}
+@font-face {
+  font-family: mFont;
+  src: url('../../font/方正清刻本悦宋简体.TTF');
+}
+
+img {
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  vertical-align: top;
+  pointer-events: none;
+}
+
+span { display:inline-block; }
+
+a { 
+  text-decoration: none;
+  display: block;
+}
+
+
+.messageBox {  
+  position: fixed;
+  z-index: 999999;
+  width: 60%;
+  top: 20%;
+  left: 20%;
+  text-align: center;
+  min-width: 150px;
+  display: inline-block;
+  font-size: 0.3rem;
+  font-weight: bold;
+  color: #fff;
+  background: rgba(0, 0, 0, 0.7);
+  border-radius: 6px;
+  padding: 12px 8px;
+}
+
+
+.top_wrap {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  left: 0;
+  top: 0;
+  z-index: 999999;
+}
+.top_wrap .top {
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%,-50%);
+  position: absolute;
+}
+.top_wrap .top .close {
+  position: absolute;
+  color: #fff;
+  font-size: 0.24rem;
+  bottom: -0.8rem;
+  display: flex;
+  align-items: center;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.top_wrap .top .close .x {
+  width: 0.3rem;
+  height: 0.3rem;
+  background: url('../../images/bzsh/x.png') no-repeat;
+  background-size: 100%;
+  margin-right: 0.1rem;
+}
+
+
+.noScroll{
+  width: 100% !important;
+  height: 100% !important;
+  position: fixed !important;
+}

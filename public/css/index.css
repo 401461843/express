@@ -291,7 +291,8 @@ body{
     float: right;
     height: .9rem;
     width: 2.65rem;
-    background: url('../images/right-nav.png') no-repeat;
+    background: url('../   /right-nav.png') no-repeat;
+    
     background-size: 100%;
     
     line-height: .9rem;

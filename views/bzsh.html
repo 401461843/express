@@ -11,77 +11,261 @@
 </script>
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,minimum-scale=1,maximum-scale=1,initial-scale=1">
     <title>宝藏上海</title>
-    <link rel="stylesheet" href="../public/css/reset.css"> 
- 
-    
-    
-</head>
-<body>
-   
-    
-</body>
-<script src="../public/javascripts/jquery-3.3.1.min.js"></script>
-<script src="../public/javascripts/rem.js"></script>
-
-
-<script>
-
-    // $.ajax({
-    //         //请求方式
-    //         type : "post",
-    //         //请求地址
-    //         url : "/api/getBrandCode",
-    //         //数据，json字符串
-    //         data:{
-    //             'index':'2'
-    //         },
-    //         dataType: 'json',
-    //         //请求成功
-    //         success : function(res) {
-    //             if(res.code ==1){
-    //                 // alert(res.msg) 
-                    
-    //             }else{
-    //                 // alert(res.msg)
-    //             }
-                
-    //         },
-    //         //请求失败，包含具体的错误信息
-    //         error : function(e){
-    //             console.log(e.status);
-    //             console.log(e.responseText);
-    //         }
-    //     });
-    $.ajax({
-            //请求方式
-            type : "post",
-            //请求地址
-            url : "/api/tjbd",
-            //数据，json字符串
-            data:{
-                'index':'5',
-                'name':'小明',
-                'tell':'17621611037'
-
-            },
-            dataType: 'json',
-            //请求成功
-            success : function(res) {
-                if(res.code ==1){
-                    // alert(res.msg) 
-                    
-                }else{
-                    // alert(res.msg)
-                }
-                
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.log(e.status);
-                console.log(e.responseText);
+    <link rel="stylesheet" href="../public/css/bzsh/common.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+    <link rel="stylesheet" href="../public/css/bzsh/index.css">
+    <script>
+      (function (a) {
+        var b = document.documentElement.clientWidth;
+        if (b > a)
+          b = a;
+        document.documentElement.style.fontSize = b / a * 100 + 'px';
+      })(750);
+    </script>
+  </head>
+  
+  <body>
+    <div class="wrap_wrap">
+      <div class="logo"></div>
+      <div class="big_title"></div>
+      <div class="rule" onclick="showRule('block')"></div>
+      <div class="box" onclick="getBZ('block')"></div>
+      <div class="box_title"></div>
+      <div class="swiper-container">
+        <img src="../public/images/bzsh/pic1.png" alt="">
+      </div>
+      <div class="logos">
+        <a class="logo1" href="http://t.hk.uy/wG3"></a>
+        <a class="logo2" href="weixin://dl/business/?t=aSGh6tvjsEh"></a>
+        <a class="logo3" href="http://www.osim.com/"></a>
+        <a class="logo4" href="https://www.dfth.com/index-m.html"></a>
+      </div>
+      <div class="logos2">
+        <a class="logo5" href="http://m.kx.cn/pinggupage?utm_source=%E7%99%BE%E5%BA%A6%E5%AE%9D%E8%97%8F%E4%B8%8A%E6%B5%B7&utm_medium=&utm_campaign=&utm_term=&utm_content="></a>
+        <a class="logo6" href="https://ahava.tmall.com/shop/view_shop.htm?spm=a230r.1.14.30.79de6b52HAoN2e&user_number_id=3321469925"></a>
+        <a class="logo7" href="https://www.idaipai.com/"></a>
+      </div>
+      <div class="tip">活动最终解释权归百度上海分公司所有</div>
+    </div>
+  
+    <div class="rule_wrap top_wrap">
+      <div class="top">
+        <div class="close" onclick="showRule('none')"><i class="x"></i>关闭</div>
+        <div class="b_rule"></div>
+        <div class="rule_box">
+          <!-- <div class="rule_tit">
+            <div class="line"></div>
+            <div class="tit">沪尚茗居</div>
+            <div class="line"></div>
+          </div>
+          <div class="rule_cont"></div> -->
+        </div>
+      </div>
+    </div>
+    <div class="form_wrap top_wrap">
+      <div class="top">
+        <div class="close" onclick="getBZ('none')"><i class="x"></i>关闭</div>
+        <div class="title" id="codeName">恭喜获得A品牌宝卷</div>
+        <div class="form_code" id="codeValue">A品牌200元优惠券</div>
+        <div class="label_wrap">
+          <label class="input_box">
+            <input id="name" type="text" placeholder="填写姓名">
+          </label>
+          <label class="input_box">
+            <input id="tel" type="tel" placeholder="填写手机号">
+          </label>
+        </div>
+        <label id="phone" style="display: none;">手机号:</label>
+        <div class="btns_wrap">
+          <button class="btn1 btn" id="giveUp">放弃领取</button>
+          <button class="submit btn" id="submit" onclick="tjbd()">立即领取</button>
+        </div>
+        <div class="form_tip">请谨慎填写，点击提交后无法再次修改</div>
+      </div>
+    </div>
+  </body>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="../public/javascripts/bzsh/reg.js"></script>
+  <script src="../public/javascripts/bzsh/toast.js"></script>
+  <script src="../public/javascripts/bzsh/ajax.js"></script>
+  <script>
+    // localStorage.index = 1;
+    // localStorage.tell = 1;
+    let api = 'http://172.16.225.130:3000';
+    let index = 1;
+    let tell;
+    let codeArr = [{
+        name: "沪尚茗居",
+        value: "41000元装修大礼包",
+        rule: '66整装节价值41000元装修礼包。</br>免资深设计师户型规划费，免装修全程施工管理费，免开荒保洁费让您直接拎包即入住（设计费价值20000元、管理费价值20000元、保洁费价值1000元）</br>1、活动仅限沪尚茗居签约整装业主参加；</br>2、需至沪尚茗居线下实景体验中心门店使用，无需提前预约；</br>3、活动使用期限：2021年6月23日-2021年12月31日；</br>4、此次活动产品不折现，不退换。</br>'
+      },
+      {
+        name: "光明驾校",
+        value: "200元学车抵用券",
+        rule: '此券仅供小汽车C1/C2及摩托车E/F培训课程报名时使用，不找零，不兑现，不可用于测评及模拟，单次课程报名尽可使用1张抵用券。</br>适用期限：6.23~8.31。适用门店：光明所属5个门店皆可。</br>本券最终解释权归上海光明驾培集团所有</br>'
+      },
+      {
+        name: "悸动烧仙草",
+        value: "宝藏仙草捞75折",
+        rule: "仅支持微信扫码打开</br>有效期购买后7天有效（周末、法定节假日通用）</br>使用时间:00:00-23:59,营业时间内核销</br>使用规则:店内无包间，堂食外带均可，可以打包，打包费详情请咨询商家，无需预约，消费高峰期可能需要等位，</br>限制性条款/特殊情况：本页面选取的参照价格为所有参加活动的高价位门店价格，每家门店的实际价格以门店公示为准。 如部分菜品因时令或其他不可抗因素导致无法提供，商家会用等价菜品替换，具体事宜请与商家协商</br>使用优惠券购买团单，有效期以优惠券规则为准，发票问题请询问商家. 团购用户不可同时享受商家其他优惠 酒水饮料等问题，请致电商家咨询，以商家反馈为准</br>如部分菜品因时令或其他不可抗因素导致无法提供，商家会用等价菜品替换，具体事宜请与商家协商 使用优惠券购买团单，有效期以优惠券规则为准，发票问题请询问商家</br>"
+      },
+      {
+        name: "钻石小鸟",
+        value: "钻石大师定制抵扣券500元",
+        rule: "有效期起止时间，2021-6-23至 2021-8-23</br>活动细则：凭券码至钻石小鸟线下门店兑换</br>兑换规则：1、本券适用于以下门店</br>钻石小鸟上海旗舰店</br>钻石小鸟上海嘉定新城万达店</br>钻石小鸟上海金山万达店</br>钻石小鸟南京金鹰店</br>钻石小鸟杭州店</br>钻石小鸟上海青浦万达茂店</br>钻石小鸟上海松江万达店</br>钻石小鸟嵩明百联万达店</br>2、同一用户仅限使用一张优惠券；</br>3、本券不退换、不兑现、不找零，抵扣部分不开具发票；</br>4、此优惠不与其他优惠同享；</br>5. 本券仅适用于银锆钻戒定制。</br>"
+      },
+      {
+        name: "OSIM按摩椅",
+        value: "养生体验套餐",
+        rule: "凭该宝物券至OSIM上海门店兑换领取，礼品数量有限，请提前咨询021-51962828（周一至周五9:00-18:00)。</br>礼品兑换时间（2021.06.24-2021.06.30）</br>养生体验套餐（20分钟按摩+3D立体眼罩）,礼品数量养生体验套餐共250套（每套配送一副3D立体眼罩，共250副）。</br>"
+      },
+      {
+        name: "东方童画",
+        value: "东方童画礼券",
+        rule: "该宝物券仅限初次到店3-12岁小朋友，至东方童画线下门店兑换。</br>各门店礼品数量有限，领取前请提前3天电话预约，电话：400-895-6006</br>礼品兑换时间：2021.6.20-2021.8.31</br>"
+      },
+      {
+        name: "车开新",
+        value: "免费车辆体检报告+车载香薰",
+        rule: "凭该宝物券至车开新线下门店兑换礼品，各门店礼品数量有限，先到先得。</br>领取前请提前电话预约（电话：4001036699）。</br>礼品兑换时间：2021.6.24-2021.7.30 9:00-18:00</br>"
+      },
+      {
+        name: "AHAVA",
+        value: "AHAVA水黄金系列四件套",
+        rule: "凭该宝物券至AHAVA线下上海门店兑换AHAVA水黄金系列四件套礼品，</br>各门店礼品数量有限，领取前请提前电话预约（上海新世界021-53862188，上海正大02153098781，上海BFC SPA 021-63307572，上海复地活力城 021-58942810），</br>礼品兑换时间：2021.06.24-2021.06.30</br>礼品以实物为准</br>"
+      },
+      {
+        name: "爱代拍",
+        value: "线上无门槛优惠券300元",
+        rule: " 凭该宝物券至爱代拍平台微信公众号兑换礼品，</br>平台礼品数量有限，领取去请先提前咨询公众号客服人员（工作日上班时间可直接咨询），</br>礼品兑换时间（2021.06.24-2021.07.24）</br>（其中300优惠券仅限线上无门槛下单优惠）</br>"
+      },
+      {
+        name: "爱代拍",
+        value: "爱代拍logo雨伞/台式风扇",
+        rule: " 凭该宝物券至爱代拍平台微信公众号兑换礼品，</br>平台礼品数量有限，领取去请先提前咨询公众号客服人员（工作日上班时间可直接咨询），</br>礼品兑换时间（2021.06.24-2021.07.24）</br>（其中300优惠券仅限线上无门槛下单优惠）</br>"
+      },
+    ];
+  
+    init();
+  
+    function init() {
+      let str = ''
+      for (let i = 0; i < codeArr.length - 1; i++) {
+        str += '<div class="rule_tit">' +
+          '<div class="line"></div>' +
+          '<div class="tit">' + codeArr[i].name + '</div>' +
+          '<div class="line"></div>' +
+          '</div>' +
+          '<div class="rule_cont">' + codeArr[i].rule + '</div>'
+      }
+      document.querySelector('.rule_box').innerHTML = str;
+    }
+    // 规则
+    function showRule(style) {
+      var dom = document.querySelector('.rule_wrap');
+      dom.style.display = style;
+    }
+    // 获取宝藏
+    function getBZ(style) {
+      if (style == 'none') {
+        var dom = document.querySelector('.form_wrap');
+        dom.style.display = style;
+        return;
+      }
+  
+      index = localStorage.index || 1;
+      tell = localStorage.tell;
+      if (tell && /^1\d{10}$/.test(tell)) {
+        document.getElementById('tel').value = tell;
+        document.getElementById('tel').disabled = true;
+        document.querySelector('.label_wrap').style.display = 'none';
+        document.querySelector('#phone').innerHTML = "当前手机号: " + tell
+        document.querySelector('#phone').style.display = "block";
+      }
+  
+      console.log(index, tell);
+  
+      if (index - 0 > 10) {
+        window.location.href = '/home/over'
+      } else {
+        var codeName = document.querySelector('#codeName');
+        codeName.innerHTML = "恭喜获得" + codeArr[index - 1].name + "奖品";
+  
+        var codeValue = document.querySelector('#codeValue');
+        codeValue.innerHTML = codeArr[index - 1].value;
+  
+        var dom = document.querySelector('.form_wrap');
+        dom.style.display = 'block';
+      }
+    }
+    // 提交表单
+    function tjbd() {
+      var name = document.getElementById('name').value;
+      var tellNow = document.getElementById('tel').value;
+      console.log(name, tellNow)
+      if (phoneReg(tellNow)) {
+        if (tell && /^1\d{10}$/.test(tell) && tell !== tellNow) {
+          document.getElementById('tel').value = tell;
+          document.getElementById('tel').disabled = true;
+          message('手机号不能修改!')
+          return;
+        } else {
+          tell = tellNow;
+        }
+        $.ajax({
+          type: "post",
+          url: api + '/api/tjbd',
+          data: {
+            index: index,
+            name: name,
+            tell: tell,
+          },
+          dataType: "json",
+          success: function (res) {
+            console.log(res);
+            if (res.code == 1) {
+              var giveUp = document.getElementById('giveUp');
+              giveUp.disabled = true;
+              var submit = document.getElementById('submit');
+              submit.disabled = true;
+  
+              localStorage.setItem('index', res.data.count - 0 + 1);
+              localStorage.setItem('tell', tell);
+              localStorage.setItem('code', res.data.code);
+              message(res.msg);
+              if (res.data.count == 3) {
+                setTimeout(() => {
+                  window.location.href = "/home/erCode";
+                }, 2000)
+              } else {
+                setTimeout(() => {
+                  window.location.href = "/home/code";
+                }, 2000)
+              }
+              return;
             }
-        });
-</script>
-</html>
+            if (res.code == 4) {
+              localStorage.setItem('index', res.data.count - 0 + 1);
+              localStorage.setItem('tell', tell);
+              message(res.msg);
+  
+              if (res.data.count == 10) {
+                window.location.href = '/home/over'
+              }
+              return;
+            }
+            message(res.msg);
+          },
+          fail: (err) => {
+            message('领取失败');
+          }
+        })
+      }
+    }
+  </script>
+  
+  </html>   
