@@ -112,6 +112,24 @@ a {
 }
 
 
+
+.logo .logo_btn1 {
+  position: absolute;
+  width: 1.85rem;
+  height: 0.55rem;
+  bottom: -0.1rem;
+  left: -0.1rem;
+}
+.logo .logo_btn2 {
+  position: absolute;
+  width: 2.3rem;
+  height: 0.55rem;
+  bottom: -0.1rem;
+  right: -0.1rem;
+}
+
+
+
 .noScroll{
   width: 100% !important;
   height: 100% !important;

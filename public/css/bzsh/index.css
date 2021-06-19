@@ -1,6 +1,6 @@
 .wrap_wrap{
   width: 100%;
-  height: 19.9rem;
+  height: 22.32rem;
   background: url('../../images/bzsh/index.png') no-repeat;
   background-size: 100%;
   position: relative;
@@ -16,6 +16,7 @@
   transform: translateX(-50%);
   top: 1.18rem;
 }
+
 .big_title {
   width: 5.73rem;
   height: 1.96rem;
@@ -86,6 +87,14 @@
   background: #fff;
   border-radius: 0.1rem;
 }
+.xcl_tit {
+  width: 4.12rem;
+  height: 0.76rem;
+  background: url('../../images/bzsh/xcl_tit.png') no-repeat;
+  background-size: 100%;
+  margin:0 auto;
+  margin-top: 0.85rem;
+}
 .logos {
   display: flex;
   justify-content: space-between;
@@ -146,13 +155,14 @@
 }
 .tip {
   color: #90b3ea;
-  font-size: 0.2rem;
+  font-size: 0.18rem;
   letter-spacing: 2px;
   position: absolute;
   left: 0;
-  bottom: 0.75rem;
+  bottom: 1.1rem;
   width: 100%;
   text-align: center;
+  line-height: 0.4rem;
 }
 
 

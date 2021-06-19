@@ -19,8 +19,8 @@
 <body>
   <div class="wrap_wrap" id="erCode">
     <div class="logo"></div>
-    <div class="code_tit" id="codeName">恭喜您获得A品牌宝券！</div>
-    <div class="code_code" id="codeCode">请截图保存二维码哦~</div>
+    <div class="code_tit" id="codeName">宝藏仙草捞75折</br>原价21，团购价15.6</div>
+    <div class="m_tip">仅支持微信扫码打开</div>
     <div class="er_code">
       <div class="code_box"></div>
     </div>
@@ -33,11 +33,11 @@
       <div class="rule_cont">
       </div>
     </div>
-    <div class="btns_wrap">
+    <!-- <div class="btns_wrap">
       <div class="btn1 btn">返回直播</div>
       <div class="btn2 btn" onclick="backIndex()">再抽一次</div>
-    </div>
-    <div class="tip">活动最终解释权归百度上海分公司所有</div>
+    </div> -->
+    <div class="tip">活动最终解释权归百度上海分公司所有</br>本活动涉及品牌及产品质量等相关问题与百度无关</div>
   </div>
   <script src="../public/javascripts/bzsh/index.js"></script>
   <script>
@@ -45,8 +45,8 @@
     let code = localStorage.code;
     console.log(index,code)
 
-    document.getElementById('codeName').innerHTML = "恭喜您获得"+codeArr[index-2].name+"奖品";
-    document.querySelector('.rule_cont').innerHTML = codeArr[index-2].rule;
+    document.getElementById('codeName').innerHTML = "宝藏仙草捞75折</br>原价21，团购价15.6";
+    document.querySelector('.rule_cont').innerHTML = codeArr[2].rule;
 
     function backIndex(){
       if(index>10){

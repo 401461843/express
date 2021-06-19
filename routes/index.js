@@ -113,6 +113,9 @@ router.get('/home/erCode', function(req, res) {
 router.get('/home/over', function(req, res) {
 	res.render('over.html');
 });
+router.get('/home/ggy', function(req, res) {
+	res.render('ggy.html');
+});
 
 
 module.exports = router;
