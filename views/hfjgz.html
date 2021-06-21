@@ -449,8 +449,9 @@
                         <a href="https://qianhu.wejianzhan.com/site/qianhu.wejianzhan.com/9c5e8232-36ab-4a1b-874a-1bc6e1c89e0b"><div class="item m3-6"></div></a>
                         <a href="https://qianhu.wejianzhan.com/site/qianhu.wejianzhan.com/b191a8a4-9d67-41cc-a5a6-e3dd5935a1d7"><div class="item m3-7"></div></a>
                         <a href="https://aisite.wejianzhan.com/site/wjzfclnv/b6e148db-4c48-4912-a1b1-b3d8926a4a17"><div class="item m3-8"></div></a>
-                        <div class="item m3-9"></div>
-                        <a href="https://aisite.wejianzhan.com/site/wjzszobw/f087d0de-9379-42b4-8501-bb4257f54145"><div class="item m3-10"></div></a>
+                        <a href="https://aisite.wejianzhan.com/site/wjzszobw/f087d0de-9379-42b4-8501-bb4257f54145"><div class="item m3-9"></div></a>
+
+                        <div class="item m3-10"></div>
                     </div>
                     <div class="tab-con-item" index='3' style="display: none;">
                         
@@ -573,7 +574,12 @@
                 }
             });
     }).on('click','.item',function () {
-        window.location.href ='/home/ggy?'+'c='+$(this).attr('class').split(' ')[1]
+        if($(this).attr('class').split(' ')[1]=='m3-10'){
+            window.location.href ='/home/ggy?'+'c='+'m2-8'
+        }else{
+            window.location.href ='/home/ggy?'+'c='+$(this).attr('class').split(' ')[1]
+        }
+       
 
          console.log($(this).attr('class'))
     })
