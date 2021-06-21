@@ -123,6 +123,11 @@
   }
   // 规则
   function showRule(style) {
+    if (style == "none") {
+      $('.wrap_wrap').removeClass('noScroll')
+    } else {
+      $('.wrap_wrap').addClass('noScroll')
+    }
     var dom = document.querySelector('.rule_wrap');
     dom.style.display = style;
   }
@@ -130,6 +135,7 @@
   function giveUp() {
     document.querySelector('.form_wrap').style.display = "none";
     localStorage.setItem('index', index - 0 + 1);
+    $('.wrap_wrap').removeClass('noScroll');
   }
   // 获取宝藏
   function getBZ(style) {
