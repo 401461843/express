@@ -572,9 +572,11 @@
                     console.log(e.responseText);
                 }
             });
-     }).on('click','.item',function () {
-         console.log($(this))
-       })
+    }).on('click','.item',function () {
+        window.location.href ='/home/ggy?'+'c='+$(this).attr('class').split(' ')[1]
+
+         console.log($(this).attr('class'))
+    })
 
 </script>
 

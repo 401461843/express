@@ -15,12 +15,14 @@
     <title>楼盘信息</title>
     <link rel="stylesheet" href="../public/css/reset.css"> 
     <style> 
-        
+        img{
+            width: 7.5rem;
+        }
     </style>
 </head>
 <body>
     
-
+    <img src="" alt="">
 
     
     
@@ -30,9 +32,10 @@
 
 
 <script>
-  var query = window.location.search.substring(1);
-  console.log(query)
     
+  var query = window.location.search.substring(1).split('=')[1];
+
+    $('img').attr('src','../public/images/gz/ggy/'+query+'.jpg')
    
         
 </script>
