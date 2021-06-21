@@ -155,7 +155,7 @@
   background: url('../../images/bzsh/er_code.png') no-repeat;
   background-size: 100%;
   margin: 0 auto;
-  margin-bottom: 1rem;
+  margin-bottom: 0.11rem;
   padding: 0.2rem;
 }
 #erCode .er_code .code_box {
@@ -167,6 +167,12 @@
   background-image: url('../../images/bzsh/erw_code.jpg');
   background-repeat: no-repeat;
   background-size: 100%;
+}
+#erCode .m_tip2 {
+  text-align: center;
+  font-size: 0.24rem;
+  color: #fff;
+  margin-bottom: 0.8rem;
 }
 #erCode .tip {
   bottom: 0.9rem;

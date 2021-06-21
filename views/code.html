@@ -7,6 +7,21 @@
   <title>宝藏上海</title>
   <link rel="stylesheet" href="../public/css/bzsh/common.css">
   <link rel="stylesheet" href="../public/css/bzsh/code.css">
+  <style>
+    .logo {
+      margin-bottom: 0.4rem;
+    }
+    .code_tit {
+      margin-bottom: 0.1rem;
+    }
+    .code_detail {
+      font-size: 0.3rem;
+      text-align: center;
+      color: #1f8be6;
+      font-family: 'mFont';
+      margin-bottom: 0.3rem;
+    }
+  </style>
   <script>
     (function (a) {
       var b = document.documentElement.clientWidth;
@@ -20,6 +35,7 @@
   <div class="wrap_wrap">
     <div class="logo"></div>
     <div class="code_tit" id="codeName">恭喜您获得A品牌宝券！</div>
+    <div class="code_detail"></div>
     <div class="code_code" id="codeCode">核销码：GTX53602XDC</div>
     <div class="m_tip">请截图保存宝券哦~</div>
     <div class="rule_wrap">
@@ -29,11 +45,7 @@
         <div class="line"></div>
       </div>
       <div class="rule_cont">
-        A品牌宝物券使用规则，A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则
-        A品牌宝物券使用规则A品牌宝物券使用规则A品A品牌宝物券使用规则，
-        A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品
-        A品牌宝物券使用规则，A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品
-        A品牌宝物券使用规则，A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品牌宝物券使用规则A品
+
       </div>
     </div>
     <div class="btns_wrap">
@@ -49,6 +61,7 @@
     console.log(index,code)
 
     document.getElementById('codeName').innerHTML = "恭喜您获得"+codeArr[index-2].name+"奖品";
+    document.querySelector('.code_detail').innerHTML = codeArr[index-2].value;
     document.querySelector('.rule_cont').innerHTML = codeArr[index-2].rule;
     document.getElementById("codeCode").innerHTML = "核销码："+code;
 
