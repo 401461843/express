@@ -24,7 +24,7 @@
     <div class="er_code">
       <div class="code_box"></div>
     </div>
-    <div class="rule_wrap">
+    <div class="rule_wrap" style="height:3rem">
       <div class="rule_tit">
         <div class="line"></div>
         <div class="tit">使用规则</div>
@@ -33,10 +33,10 @@
       <div class="rule_cont">
       </div>
     </div>
-    <!-- <div class="btns_wrap">
-      <div class="btn1 btn">返回直播</div>
-      <div class="btn2 btn" onclick="backIndex()">再抽一次</div>
-    </div> -->
+    <div class="btns_wrap">
+      <a class="btn1 btn" href="https://mbd.baidu.com/newspage/data/mdpage?sid=1016847&tag=33&offset=10&method=LiveList&getTPL=1&livepre=1&roomid=4507135726">返回直播</a>
+      <a class="btn2 btn" onclick="backIndex()">回到抽奖页</a>
+    </div>
     <div class="tip">活动最终解释权归百度上海分公司所有</br>本活动涉及品牌及产品质量等相关问题与百度无关</div>
   </div>
   <script src="../public/javascripts/bzsh/index.js"></script>
@@ -49,11 +49,11 @@
     document.querySelector('.rule_cont').innerHTML = codeArr[2].rule;
 
     function backIndex(){
-      if(index>10){
-        window.location.href = '/home/over';
-      }else{
+      // if(index>10){
+      //   window.location.href = '/home/over';
+      // }else{
         window.location.href = '/home/bzsh'
-      }
+      // }
     }
   </script>
 </body>
