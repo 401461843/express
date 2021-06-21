@@ -169,10 +169,17 @@
   background-size: 100%;
 }
 #erCode .m_tip2 {
-  text-align: center;
+  width: 4.95rem;
+  height: 0.43rem;
+  background: url('../../images/bzsh/m_tip.png') no-repeat;
+  background-size: 100%;
+  margin: 0 auto;
+  margin-bottom: 0.6rem;
+  color: #49a8da;
   font-size: 0.24rem;
-  color: #fff;
-  margin-bottom: 0.8rem;
+  text-align: center;
+  line-height: 0.45rem;
+  letter-spacing: 2px;
 }
 #erCode .tip {
   bottom: 0.9rem;
