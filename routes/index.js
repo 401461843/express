@@ -116,6 +116,9 @@ router.get('/home/over', function(req, res) {
 router.get('/home/ggy', function(req, res) {
 	res.render('ggy.html');
 });
+router.get('/home/result', function(req, res) {
+	res.render('result.html');
+});
 
 
 module.exports = router;
