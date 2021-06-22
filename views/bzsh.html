@@ -39,7 +39,10 @@
     <div class="box" onclick="getBZ('block')"></div>
     <div class="box_title"></div>
     <div class="swiper-container">
-      <img src="../public/images/bzsh/pic1.png" alt="">
+      <video src="https://smartsh.gzbaidu.co:50/mp4/bzsh.mp4" controls id="video"></video>
+      <div class="video_box">
+        <div class="start"></div>
+      </div>
     </div>
     <a class="xcl_tit" href="/home/erCode"></a>
     <div class="logos">
@@ -108,7 +111,11 @@
   let tell;
 
   init();
-
+  $('.start').on('click',function(){
+    console.log(1)
+    $('.video_box').hide();
+    $('#video')[0].play();
+  })
   function init() {
     let str = ''
     for (let i = 0; i < codeArr.length - 1; i++) {
@@ -155,7 +162,7 @@
     tell = localStorage.tell;
 
 
-    
+
 
     console.log(index, tell);
 
@@ -179,14 +186,14 @@
   // 提交表单
   function tjbd() {
     var name = ''
-    if(!tell || !/^1\d{10}$/.test(tell)){
+    if (!tell || !/^1\d{10}$/.test(tell)) {
       name = document.getElementById('name').value;
       tell = document.getElementById('tel').value;
     }
-    if(index == 3){
-      index =4;
+    if (index == 3) {
+      index = 4;
     }
-    
+
     console.log(name, tell)
     $.ajax({
       type: "post",
@@ -230,7 +237,7 @@
         message('领取失败');
       }
     })
-    }
+  }
 </script>
 
 </html>
