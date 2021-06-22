@@ -2594,6 +2594,24 @@ let hfjgz =async function (req,res) {
 		});
 	}
  }
+let queryQm =async function (req,res) {
+	let sqlArr5=[]
+	let sql5 = 'select * from  brand_code  ';
+	let result5 = await sqlQuery.SysqlConnect(sql5,sqlArr5)
+	let data =[]
+	
+	result5.forEach(function (val,index) { 
+		let obj ={}
+		obj['brand'] =val['brand']
+		obj['count']= JSON.parse(val['code_list']).length
+		data.push(obj)
+	 })
+	 res.send({
+		 'data':data,
+		 'code':1,
+		 'msg':'查询成功'
+	 });
+} 
 module.exports={	
 	luckDraw,
 	submit,
@@ -2648,5 +2666,6 @@ module.exports={
 	zbcj1,
 	getBrandCode,
 	tjbd,
-	hfjgz
+	hfjgz,
+	queryQm
 };

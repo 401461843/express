@@ -22,28 +22,27 @@
 
 <script> 
  
-   $('body').on('click','button',function () {
-        $.ajax({
-            //请求方式
-            type : "post",
-            //请求地址
-            url : "/api/sendMsg",
-            //数据，json字符串
-            dataType: 'json',
-            data:'',
-            //请求成功
-            success : function(res) {
-            console.log(res)
-                
-            },
-            //请求失败，包含具体的错误信息
-            error : function(e){
-                console.log(e.status);
-                console.log(e.responseText);
-            }
-        });
-    })
-    
+ 
+    $.ajax({
+        //请求方式
+        type : "post",
+        //请求地址
+        url : "/api/queryQm",
+        //数据，json字符串
+        dataType: 'json',
+        data:'',
+        //请求成功
+        success : function(res) {
+        console.log(res)
+            
+        },
+        //请求失败，包含具体的错误信息
+        error : function(e){
+            console.log(e.status);
+            console.log(e.responseText);
+        }
+    });
+  
 
    
 </script>

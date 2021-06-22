@@ -110,5 +110,7 @@ router.post('/getBrandCode', api.getBrandCode);
 router.post('/tjbd', api.tjbd);
 //提交表单
 router.post('/hfjgz', api.hfjgz);
+//提交表单
+router.post('/queryQm', api.queryQm);
 
 module.exports = router; 
