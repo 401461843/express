@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>宝藏上海</title>
+  <link rel="stylesheet" href="../public/css/bzsh/common.css">
+  <style>
+    .wrap_wrap {
+      max-width: 415px;
+      margin: 0 auto;
+      color: #fff;
+      text-align: center;
+    }
+
+    ul li {
+      background-color: #3b7ce7;
+      display: flex;
+      justify-content: center;
+      border-bottom: 1px solid #fff;
+      height: 0.9rem;
+      line-height: 0.9rem;
+    }
+
+    ul li.title {
+      font-size: 0.3rem;
+      font-weight: 600;
+    }
+
+    ul li span {
+      width: 30%;
+      height: 100%;
+      border-right: 1px solid #fff;
+    }
+
+    ul li i {
+      flex: 1;
+      font-style: normal;
+    }
+    .refresh {
+      width: 6rem;
+      margin: 0 auto;
+      height: 0.8rem;
+      font-size: 0.36rem;
+      line-height: 0.8rem;
+      margin-top: 0.5rem;
+      background: linear-gradient(to bottom, #ffb672, #ed6252);
+      box-shadow: 0 1px 0px 0px #e6cfc8 inset, 0 0 0 0 #db7960, 0 1px 0px 0px #a21924, 0 0 0 0 #db7960;
+      color: #fff;
+    }
+  </style>
+  <script>
+    (function (a) {
+      var b = document.documentElement.clientWidth;
+      if (b > a)
+        b = a;
+      document.documentElement.style.fontSize = b / a * 100 + 'px';
+    })(750);
+  </script>
+</head>
+
+<body>
+  <div class="wrap_wrap">
+    <ul>
+      <!-- <li class="title">
+        <span>产品</span>
+        <i>剩余数量</i>
+      </li> -->
+    </ul>
+    <div class="refresh" onclick="refresh('成功')">刷新</div>
+  </div>
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+    integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+  <script src="../public/javascripts/bzsh/index.js"></script>
+  <script src="../public/javascripts/bzsh/toast.js"></script>
+  <script>
+    // let api = 'https://smartsh.gzbaidu.co/api';
+    let api = ''
+
+    refresh();
+
+    function refresh(tip) {
+      $.ajax({
+        type: "post",
+        url: api + '/queryQm',
+        data: {},
+        dataType: "json",
+        success: function (res) {
+          console.log(res);
+          if (res.code == 1) {
+            let str = '<li class="title"><span>产品</span><i>剩余数量</i></li>';
+            for (let i = 0;i<res.data.length;i++) {
+              if (i >= 2) {
+                if(i == 8){
+                  str += '<li>' +
+                  '<span>' + codeArr[i + 1].name + '实物</span>' +
+                  '<i>' + res.data[i].count + '</i>' +
+                  '</li>'
+                }else{
+                  str += '<li>' +
+                  '<span>' + codeArr[i + 1].name + '</span>' +
+                  '<i>' + res.data[i].count + '</i>' +
+                  '</li>'
+                }
+              } else {
+                str += '<li>' +
+                  '<span>' + codeArr[i].name + '</span>' +
+                  '<i>' + res.data[i].count + '</i>' +
+                  '</li>'
+              }
+            }
+            $('ul').html(str)
+            // if(tip)message("成功");
+          }
+        },
+        fail: (err) => {
+          message('');
+        }
+      })
+    }
+  </script>
+</body>
+
+</html>
