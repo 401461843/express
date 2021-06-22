@@ -114,7 +114,8 @@
   $('.start').on('click',function(){
     console.log(1)
     $('.video_box').hide();
-    $('#video')[0].play();
+    var video = document.getElementById('video');
+    video.play();
   })
   function init() {
     let str = ''
