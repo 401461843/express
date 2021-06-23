@@ -91,7 +91,7 @@
       <label id="phone" style="display: none;">手机号:</label>
       <div class="btns_wrap">
         <button class="btn1 btn" id="giveUp" onclick="giveUp()">放弃领取</button>
-        <button class="submit btn" id="submit" onclick="tjbd()">立即领取</button>
+        <button class="submit btn" id="submit" onclick="ljlq()">立即领取</button>
       </div>
       <div class="form_tip">请谨慎填写，点击提交后无法再次修改</div>
     </div>
@@ -108,15 +108,16 @@
   // localStorage.tell = 1;
   let api = '';
   let index = 1;
-  let tell;
+  let tell = '';
+  let name = '';
 
   init();
-  $('.start').on('click',function(){
+  $('.start').on('click', function () {
     console.log(1)
     $('.video_box').hide();
-    var video = document.getElementById('video');
-    video.play();
+    $('#video')[0].play();
   })
+
   function init() {
     let str = ''
     for (let i = 0; i < codeArr.length - 1; i++) {
@@ -159,19 +160,20 @@
       return;
     }
 
-    index = localStorage.index || 1;
+    index = localStorage.index - 0 || 1;
     tell = localStorage.tell;
+    name = localStorage.name;
 
 
 
 
-    console.log(index, tell);
+    console.log(index, tell, name);
 
     if (index - 0 > 10) {
       window.location.href = '/home/over'
       return;
     }
-    if (tell && /^1\d{10}$/.test(tell)) {
+    if (name && /^[\u4E00-\u9FA5A-Za-z]+$/.test(name) && tell && /^1\d{10}$/.test(tell)) {
       tjbd();
       return;
     }
@@ -183,18 +185,21 @@
 
     var dom = document.querySelector('.form_wrap');
     dom.style.display = 'block';
+
+    if(name && /^[\u4E00-\u9FA5A-Za-z]+$/.test(name)){
+      document.getElementById('name').value = name;
+      document.getElementById('name').disabled = true;
+    }
+    if(tell && /^1\d{10}$/.test(tell)){
+      document.getElementById('tel').value = tell;
+      document.getElementById('tel').disabled = true;
+    }
   }
   // 提交表单
   function tjbd() {
-    var name = ''
-    if (!tell || !/^1\d{10}$/.test(tell)) {
-      name = document.getElementById('name').value;
-      tell = document.getElementById('tel').value;
-    }
     if (index == 3) {
       index = 4;
     }
-
     console.log(name, tell)
     $.ajax({
       type: "post",
@@ -215,6 +220,7 @@
 
           localStorage.setItem('index', res.data.count - 0 + 1);
           localStorage.setItem('tell', tell);
+          localStorage.setItem('name', name);
           localStorage.setItem('code', res.data.code);
           message(res.msg);
           setTimeout(() => {
@@ -238,6 +244,20 @@
         message('领取失败');
       }
     })
+  }
+  // 立即领取
+  function ljlq() {
+    if(!(name && /^[\u4E00-\u9FA5A-Za-z]+$/.test(name))){
+      name = document.getElementById('name').value;
+    }
+
+    if(!(tell && /^1\d{10}$/.test(tell))){
+      tell = document.getElementById('tel').value;
+    }
+
+    if (nameReg(name) && phoneReg(tell)) {
+      tjbd()
+    }
   }
 </script>
 

@@ -15,10 +15,34 @@
       document.documentElement.style.fontSize = b / a * 100 + 'px';
     })(750);
   </script>
+  <style>
+    .er_logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.8rem;
+    }
+    .er_logo .bz_logo{
+      width: 2.95rem;
+      height: 0.72rem;
+      background: url('../public/images/bzsh/bz_logo.png') no-repeat;
+      background-size: 100%;
+      margin-right: 0.2rem;
+    }
+    .er_logo .jd_logo {
+      width: 2.88rem;
+      height: 0.83rem;
+      background: url('../public/images/bzsh/jd_logo.png') no-repeat;
+      background-size: 100%;
+    }
+  </style>
 </head>
 <body>
   <div class="wrap_wrap" id="erCode">
-    <div class="logo"></div>
+    <div class="er_logo">
+      <div class="bz_logo"></div>
+      <div class="jd_logo"></div>
+    </div>
     <div class="code_tit" id="codeName">宝藏仙草捞75折</br>原价21，团购价15.6</div>
     <div class="m_tip">仅支持微信扫码打开</div>
     <div class="er_code">
