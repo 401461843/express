@@ -223,10 +223,10 @@
           localStorage.setItem('tell', tell);
           localStorage.setItem('name', name);
           localStorage.setItem('code', res.data.code);
-          message(res.msg);
-          setTimeout(() => {
+          // message(res.msg);
+          // setTimeout(() => {
             window.location.href = "/home/code";
-          }, 100)
+          // }, 100)
           return;
         }
         if (res.code == 4) {
