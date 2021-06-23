@@ -16,18 +16,25 @@
     <link rel="stylesheet" href="../public/css/reset.css"> 
     <style> 
         .wrap{
-            height: 33.51rem;
+            height: 37.79rem;
             width: 7.5rem;
-            background: url('../public/images/sz/szbg.png') no-repeat;
+            background: url('../public/images/sz/bg.png') no-repeat;
             background-size: 100%;
             position: relative;
             overflow: hidden;
             
         }
-       
+        .localtion{
+            width: 2.53rem;
+            height: .52rem;
+            background: url('../public/images/sz/location.png') no-repeat;
+            background-size: 100%;
+            margin: 0 auto;
+            margin-top: .65rem;
+        }
         .content{
             width: 7.14rem;
-            height: 28.88rem;
+            height: 29.13rem;
             position: absolute;
             top: 7.62rem;
             left: 50%;
@@ -38,7 +45,7 @@
         .t1{
             width: 6.32rem;
             height: .52rem;
-            background: url('../public/images/hfj/1-t.png') no-repeat;
+            background: url('../public/images/sz/1-t.png') no-repeat;
             background-size: 100%;
             margin: 0 auto;
             margin-top: .5rem;
@@ -46,7 +53,7 @@
         .t2{
             width: 6.32rem;
             height: .52rem;
-            background: url('../public/images/hfj/2-t.png') no-repeat;
+            background: url('../public/images/sz/2-t.png') no-repeat;
             background-size: 100%;
             margin: 0 auto;
             margin-top: .5rem;
@@ -54,7 +61,7 @@
         .t3{
             width: 6.32rem;
             height: .52rem;
-            background: url('../public/images/hfj/3-t.png') no-repeat;
+            background: url('../public/images/sz/3-t.png') no-repeat;
             background-size: 100%;
             margin: 0 auto;
             margin-top: .5rem;
@@ -66,73 +73,82 @@
             background-size: 100%;
             margin: 0 auto;
             margin-top: .5rem;
+            border-radius: .15rem;
         }
         .m2{
             width: 6.64rem;
-            height: 10.43rem;
+            height: 16.12rem;
             /* background: red; */
             margin: 0 auto;
             margin-top: .5rem;
             display: flex;
             justify-content: space-between;
             flex-wrap: wrap;
-            overflow-y: auto;
 
         }
         .item{
             width: 3.28rem;
-            height: 3.43rem;
+            height: 3.96rem;
+            border-radius: .15rem;
         
         }
        
         .m2-1{
-            background: url('../public/images/sz/2-1.png') no-repeat;
+            background: url('../public/images/sz/1.png') no-repeat;
             background-size: 100%;
-            width: 6.61rem;
-            height: 3.43rem;
             
         }
         .m2-2{
-            background: url('../public/images/hfj/2.png') no-repeat;
+            background: url('../public/images/sz/2.png') no-repeat;
             background-size: 100%;
            
         }
         .m2-3{
-            background: url('../public/images/sz/2-2.png') no-repeat;
+            background: url('../public/images/sz/3.png') no-repeat;
             background-size: 100%;
-            margin-top: .05rem;
+            margin-top:.1rem;
         }
 
         .m2-4{
-            background: url('../public/images/sz/2-3.png') no-repeat;
+            background: url('../public/images/sz/4.png') no-repeat;
             background-size: 100%;
-            margin-top: .05rem;
+            margin-top:.1rem;
         }
         .m2-5{
-            background: url('../public/images/sz/2-4.png') no-repeat;
+            background: url('../public/images/sz/5.png') no-repeat;
             background-size: 100%;
-            margin-top: .05rem;
+            margin-top:.1rem;
         }
 
         .m2-6{
-            background: url('../public/images/sz/2-5.png') no-repeat;
+            background: url('../public/images/sz/6.png') no-repeat;
             background-size: 100%;
-            margin-top: .05rem;
+            margin-top:.1rem;
         }
         .m2-7{
-            background: url('../public/images/sz/2-6.png') no-repeat;
+            background: url('../public/images/sz/7.png') no-repeat;
             background-size: 100%;
-            margin-top: .05rem;
+            margin-top:.1rem;
         }
         .m2-8{
-            background: url('../public/images/hfj/8.png') no-repeat;
+            background: url('../public/images/sz/8.png') no-repeat;
             background-size: 100%;
-            margin-top: .05rem;
+            margin-top:.1rem;
+        }
+        .m2-9{
+            background: url('../public/images/sz/9.png') no-repeat;
+            background-size: 100%;
+            margin-top:.1rem;
+        }
+        .m2-10{
+            background: url('../public/images/sz/10.png') no-repeat;
+            background-size: 100%;
+            margin-top:.1rem;
         }
         .m3{
             width: 6.76rem;
             height: 4.41rem;
-            background: url('../public/images/hfj/3-m.png') no-repeat;
+            background: url('../public/images/s z/3-m.png') no-repeat;
             background-size: 100%;
             margin: 0 auto;
             margin-top: .5rem;
@@ -147,25 +163,38 @@
             text-align: center;
             font-size: .15rem;
         }
+        .m2-0{
+            width: 6.62rem;
+            height: 3.77rem;
+            background: url('../public/images/sz/1-1.png') no-repeat;
+            background-size: 100%;
+            margin-bottom: .1rem;
+        }
+
     </style>
 </head>
 <body>
     <div class="wrap">
-        <div class="localtion"></div>
+        <!-- <div class="localtion"></div> -->
         <div class="content">
            <div class="t1"></div>
-            <a onclick="_hmt.push(['_trackEvent', 'kv','click', '象屿都城怡园'])" href=""><div class="m1"></div></a>
+            <a onclick="_hmt.push(['_trackEvent', 'kv','click', '苏州展馆'])" href="https://aisite.wejianzhan.com/site/wjzei35v/a874766a-91e8-4e30-9cd0-2fde07c8a4db"><div class="m1"></div></a>
            <div class="t2"></div>
            <div class="m2">
-                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '大名城映湖'])" href=""><div class="item m2-1"></div></a>
-               
-                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '中南朱里雅集'])" href=""><div class="item m2-3"></div></a>
-                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '长泰海滨城'])" href=""><div class="item m2-4"></div></a>
-                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '佳兆业城市广场'])" href=""><div class="item m2-5"></div></a>
-                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '禹州天镜雍锦府'])" href=""><div class="item m2-6"></div></a>
+
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '碧桂园大境悦府'])" href="https://aisite.wejianzhan.com/site/wjzei35v/b18d036b-e61b-453f-a924-e01e7b3b8157"><div class="item m2-1"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '天空之城2077'])" href="https://aisite.wejianzhan.com/site/wjzei35v/e0c83552-708a-40e8-9027-f549257a9ed2"><div class="item m2-2"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '保利栖月雅园'])" href="https://aisite.wejianzhan.com/site/wjzei35v/8845399b-c718-4a84-9f0b-6d9fbd9c69fc"><div class="item m2-3"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '中建河风印月'])" href="https://aisite.wejianzhan.com/site/wjzei35v/f549fa7c-83cc-4e5c-a5a3-f18c481de417"><div class="item m2-4"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '大象山舍'])" href="https://aisite.wejianzhan.com/site/wjzei35v/87d10468-92db-468a-ae7d-5d7fb5a072e1"><div class="item m2-5"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '万科锦上和风华苑'])" href="https://aisite.wejianzhan.com/site/wjzei35v/74c338e2-05eb-4c57-9d4c-75fd5c77fe4e"><div class="item m2-6"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '华发未来城'])" href="https://aisite.wejianzhan.com/site/wjzei35v/880f2e6c-4d09-4688-ae11-c85e5f721295"><div class="item m2-7"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '金地依云兰庭'])" href="https://aisite.wejianzhan.com/site/wjzei35v/9eaa99f5-89c4-42cc-b0fd-ecd388596583"><div class="item m2-8"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '宽泰铂园'])" href="https://aisite.wejianzhan.com/site/wjzei35v/f014dd19-7b1c-499f-b78e-e39c6cc51019"><div class="item m2-9"></div></a>
+                <a onclick="_hmt.push(['_trackEvent', '楼盘','click', '龙湖熙上'])" href="https://aisite.wejianzhan.com/site/wjzei35v/fe7d21f3-95ca-4e01-b92f-8c7c40808de2"><div class="item m2-10"></div></a>
             </div>
-           <div class="t3"></div>
-           <div class="m3"></div>
+           <!-- <div class="t3"></div> -->
+           <!-- <div class="m3"></div> -->
            
         </div>
         <!-- <div class="bq">
