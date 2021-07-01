@@ -1,7 +1,7 @@
 
 const loadsh = require('lodash');
 const util =require('../utils/util');
-const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll, redisStrIncr}=require('../db/redis');
+const {redisStrSet, redisStrGet, redisStrDel, redisStrDecr, redisStrAll}=require('../db/redis');
 const sqlQuery = require('../db/mysql');
 const xlsx = require('xlsx');
 const request =require('request');
@@ -79,475 +79,7 @@ let luckDraw =async function ( req,res) {
 	}
 	
 };
-//
-let jzjluckDraw =async function ( req,res) { 	
-	let rate ='';
-	let sum = 0;
-	let section = [0];
-	let newArr =[];
-	let prizeNumber =Math.floor(Math.random() * 200);
-	let allPrize='';
-	let count =0;
-	let prizeName ='';
-	
-	// 获取抽奖概率
-	rate =JSON.parse(await redisStrGet(5, 'gl'));
-	if(JSON.stringify(rate) =='{}'){
-		
-		res.send({ 
-			'code': 200,
-			'msg': '抽奖成功',
-			'prize': '没中奖',
-		});
-	}else{
-		loadsh.forEach(rate, function (val) { 
-			let temArr=[];
-			sum+=val;
-			section.push(sum);
-			temArr[0]=section[count];
-			temArr[1]=section[count+1];
-			newArr.push(temArr);
-			count++;
-		});
-		util.customForeach(newArr, async function (val, index) { 
-			if (prizeNumber>val[0] && prizeNumber<=val[1]) {
-				prizeName=Object.keys(rate)[index];
-				await redisStrDecr(3, prizeName);
-				res.send({ 
-					'code': 200,
-					'msg': '抽奖成功',
-					'prize': prizeName,
-				});
-				allPrize=await redisStrAll(3);
-				util.customForeach(allPrize, async (val) => {
-					if ( await redisStrGet(3, val)==0) {
-						let oldGlObj =JSON.parse(await redisStrGet(5, 'gl'));
-						let fboldGlObj=JSON.stringify(oldGlObj)
-						let oldGl =oldGlObj[val];
-						let avater =oldGl/( Object.keys(oldGlObj).length-1);
-	
-						delete oldGlObj[val];
-						loadsh.forEach(oldGlObj, async function (val1, key) { 
-							oldGlObj[key] =Number(val1)+avater;
-						});	
-						await redisStrDel(3, val);
-						await redisStrSet(5, 'gl', JSON.stringify(oldGlObj));
-						await redisStrSet(5, 'gl1', fboldGlObj);
-	
-					}
-				});
-				
-			} 
-		});
-	}
-	
-};
-let submit =async function (req, res) {
-	let {tell, prize} = req.body;
-	let date= new Date().toLocaleString();
-	let data ={
-		prize: prize,
-		date: date,
-	};
-	let result=await redisStrSet(2, tell, JSON.stringify(data));
-	
-	if (result == 'OK') {
-		res.send({ 
-			'code': 200,
-			'msg': '领奖成功',
-		});
-	} else {
-		res.send({ 
-			'code': 400,
-			'msg': '领取失败',
-		});
-	}
 
-};
-
-let audiSubmit = async function (req,res) {
-	let {model, name,tell} = req.body;
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	
-	let sqlArr =[model,name,tell,create_time];
-	let sql = 'insert into audi_form (model,name,tell,create_time) values(?,?,?,?)';;
-	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
-	if(result1.affectedRows==1){
-		res.send({ 
-			'code': 1,
-			'msg': '提交成功！',
-			'data':''
-			
-			 
-		});
-	}else{
-		res.send({ 
-			'code': 2,
-			'msg': '提交失败!',
-			'data':''
-		});
-	}
-}
-let audi1Submit = async function (req,res) {
-	let {model,date, name,tell} = req.body;
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	
-	let sqlArr =[model,date,name,tell,create_time];
-	let sql = 'insert into audi_form1 (model,date,name,tell,create_time) values(?,?,?,?,?)';;
-	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
-	if(result1.affectedRows==1){
-		res.send({ 
-			'code': 1,
-			'msg': '提交成功！',
-			'data':''
-			
-			 
-		});
-	}else{
-		res.send({ 
-			'code': 2,
-			'msg': '提交失败!',
-			'data':''
-		});
-	}
-}
-let jmgjSubmit = async function (req,res) {
-	let {name,tell} = req.body;
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	
-	let sqlArr =[name,tell,create_time];
-	let sql = 'insert into jmgj_form (name,tell,create_time) values(?,?,?)';;
-	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
-	if(result1.affectedRows==1){
-		res.send({ 
-			'code': 1,
-			'msg': '提交成功！',
-			'data':''
-			
-			 
-		});
-	}else{
-		res.send({ 
-			'code': 2,
-			'msg': '提交失败!',
-			'data':''
-		});
-	}
-}
-let cfhySubmit = async function (req,res) {
-	let {name,tell} = req.body;
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	
-	let sqlArr =[name,tell,create_time];
-	let sql = 'insert into cfhy_form (name,tell,create_time) values(?,?,?)';;
-	let result1= await sqlQuery.SysqlConnect(sql,sqlArr)
-	if(result1.affectedRows==1){
-		res.send({ 
-			'code': 1,
-			'msg': '提交成功！',
-			'data':''
-		});
-	}else{
-		res.send({ 
-			'code': 2,
-			'msg': '提交失败!',
-			'data':''
-		});
-	}
-}
-let giveUp =async function (req,res) {
-	let {prize} =req.body
-	let checkFlag =await redisStrGet(0,prize)
-	if(!checkFlag){
-		let fbgl =await redisStrGet(1,'gl1')
-		let result =await redisStrSet(0,prize,'1')
-		let result1 =await redisStrSet(1,'gl',fbgl)
-		if (result == 'OK' && result1 == 'OK') {
-			
-			res.send({ 
-				'code': 200,
-				'msg': '放弃成功',
-			});
-		} else {
-			res.send({ 
-				'code': 400,
-				'msg': '放弃失败',
-			});
-		}
-	}else{
-		let result = await redisStrIncr(0,prize)
-		if(result){
-			res.send({ 
-				'code': 200,
-				'msg': '放弃成功',
-			});
-		}else{
-			res.send({ 
-				'code': 200,
-				'msg': '放弃失败',
-			});
-		}
-	}
-
-
-}
-let test =async function (req,res) {
-	// console.log(req)
-	res.send({ 
-		'code': 200,
-		'msg': '成功',
-	});
-}
-//老凤祥提交
-let lfxSubmit = async function (req,res) {
-	let {name,tell,sign,jx } =req.body
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	let data ={
-		name:name,
-		tell:tell,
-		sign:sign,
-		jx:jx,
-		create_time: create_time 
-	};
-	let sqlArr =[data.tell,data.jx];
-	let sql = 'select * from  lfx_info where tell = ? and jx = ? ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
-	let msg=''
-	let count=''
-	if(jx=='kzj'){
-		msg ='恭喜你,老凤祥定制口罩夹领取成功,请及时兑换!'
-	}else if(jx == 'ssh'){
-		msg ='恭喜你,老凤祥精美首饰盒领取成功,请及时兑换!'
-	}else{
-		msg ='恭喜你,老凤祥精美餐具领取成功,请及时兑换!'
-	}
-	if(sign=='fx'){
-		count = await redisStrGet(2, 'cj')
-		if(count >0){
-			await redisStrDecr(2,'cj')
-		}else{
-			count =0
-			msg="您的手速慢了!"
-		}
-	}
-	if(result.length ==0){
-		let sqlArr1 =[data.name,data.tell,data.jx,data.sign,data.create_time];
-		let sql1 = 'insert into lfx_info (name,tell,jx,sign,create_time) values(?,?,?,?,?)';
-		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
-		if(result1.affectedRows==1){
-			res.send({ 
-				'code': 1,
-				'msg': msg,
-				'data':'',
-				'count':count
-				 
-			});
-		}else{
-			res.send({ 
-				'code': 1,
-				'msg': '服务器出错!',
-				'data':''
-			});
-		}
-	}else{
-		res.send({ 
-			'code': 1,
-			'msg': '您已经领过此类奖品,请勿重复领取!',
-			'data':'',
-			'count':count
-		});
-	}
-}
-//老凤祥分享
-let lfxFx= async function (req,res) { 
-	let count = await redisStrGet(2, 'cj')
-	if(count){
-		res.send({ 
-			'code': 1,
-			'msg': '剩余餐具数!',
-			'count':count
-		});
-	}
-}
-//智能研讨会
-let submityYth =async function (req,res) {
-	let {name,tell,dz,jx } =req.body
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	let map={
-		'kz':'米思米海绵口罩',
-		'gz':'度熊星座公仔',
-		'yx':'小度智能音响大金刚',
-		'bjb':'MT定制笔记本',
-		'hbd':'MT环保袋'
-	}
-	let data ={
-		name:name,
-		tell:tell,
-		dz:dz,
-		jx:jx,
-		create_time: create_time 
-	};
-	let sqlArr =[data.tell];
-	let sql = 'select * from  znyth_info where tell = ? ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
-	
-	if(result.length ==0){
-		let sqlArr1 =[data.name,data.tell,data.dz,data.jx,data.create_time];
-		let sql1 = 'insert into znyth_info (name,tell,dz,jx,create_time) values(?,?,?,?,?)';
-		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
-		if(result1.affectedRows==1){
-			res.send({ 
-				'code': 1,
-				'msg': '领取成功',
-				'data':''
-			});
-		}else{
-			res.send({ 
-				'code': 1,
-				'msg': '服务器出错!',
-				'data':''
-			});
-		}
-	}else{
-		// console.log(result[0]['jx'])
-		res.send({ 
-			'code': 1,
-			'msg': '您已经领过'+map[result[0]['jx']]+'奖品了!',
-			'data':''
-
-		});
-	}
-}
-//家装
-let submityJzj =async function (req,res) {
-	let {name,tell,dz,jx } =req.body
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	let data ={
-		name:name,
-		tell:tell,
-		dz:dz,
-		jx:jx,
-		create_time: create_time 
-	};
-	let sqlArr =[data.tell];
-	let sql = 'select * from  jzj_info where tell = ? ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
-	
-	if(result.length ==0){
-		let sqlArr1 =[data.name,data.tell,data.dz,data.jx,data.create_time];
-		let sql1 = 'insert into jzj_info (name,tell,dz,jx,create_time) values(?,?,?,?,?)';
-		let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
-		if(result1.affectedRows==1){
-			res.send({ 
-				'code': 1,
-				'msg': '领取成功',
-				'data':''
-			});
-		}else{
-			res.send({ 
-				'code': 1,
-				'msg': '服务器出错!',
-				'data':''
-			});
-		}
-	}else{
-		// console.log(result[0]['jx'])
-		res.send({ 
-			'code': 1,
-			'msg': '您已经领过'+result[0]['jx']+'奖品了!',
-			'data':''
-
-		});
-	}
-}
-let lfxFxsubmit= async function (req,res) { 
-	let {name,tell,sign } =req.body
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	let data ={
-		name:name,
-		tell:tell,
-		sign:sign,
-		jx:'cj',
-		create_time: create_time 
-	};
-	let sqlArr =[data.tell,data.jx];
-	let sql = 'select * from  lfx_info where tell = ? and jx = ? ';
-	
-	let msg=''
-	let count=await redisStrGet(2, 'cj')
-	
-	if(count >0){
-		let result = await sqlQuery.SysqlConnect(sql,sqlArr)
-		if(result.length ==0){
-			let sqlArr1 =[data.name,data.tell,data.jx,data.sign,data.create_time];
-			let sql1 = 'insert into lfx_info (name,tell,jx,sign,create_time) values(?,?,?,?,?)';
-			let result1= await sqlQuery.SysqlConnect(sql1,sqlArr1)
-			if(result1.affectedRows==1){
-				await redisStrDecr(2,'cj')
-				res.send({ 
-					'code': 1,
-					'msg': '恭喜你,老凤祥精美餐具领取成功,请及时兑换!',
-					'data':'',
-					'count':count-1
-					 
-				});
-			}else{
-				res.send({ 
-					'code': 1,
-					'msg': '服务器出错!',
-					'data':''
-				});
-			}
-		}else{
-			res.send({ 
-				'code': 1,
-				'msg': '您已经领过此类奖品,请勿重复领取!',
-				'data':'',
-				'count':count
-			});
-		}
-
-	}else{
-		res.send({ 
-			'code': 1,
-			'msg': '您手速慢了,请参与其他活动吧!',
-			'data':''
-		});
-	}
-	
-	
-	
-	 
-}
-//苏州表单提交
-let szSubmit = async function (req,res) {
-	let {company,name,tell } =req.body
-
-	let create_time= new Date(+new Date() + 8 * 3600 * 1000).toISOString().slice(0, 19).replace('T', ' ');
-	let sjc = new Date().getTime()
-	let data ={
-		company: company,
-		name:name,
-		tell:tell,
-		create_time: create_time
-	};
-	let result=await redisStrSet(7, tell+'-'+sjc, JSON.stringify(data),86400);
-	
-	if (result == 'OK') {
-		res.send({ 
-			'code': 1,
-			'msg': '提交成功',
-			'data':''
-		});
-	} else {
-		res.send({ 
-			'code': 0,
-			'msg': '提交失败',
-			'data':''
-		});
-	}
-  
-}
 
 
 //小程序接口
@@ -675,45 +207,38 @@ let hqjsLuckDraw =async function ( req,res) {
 	}
 }
 
-//数据查询工具
-let query = async function (req,res) {
-	let sqlArr =[];
-	let sql = 'select * from  audi_form1 ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
-	let obj ={}
-	let tableList =[]
-	if(result.length>0){
-		result.forEach(function (val) {
-			obj ={}
-			obj['model']=val.model
-			obj['name']=val.name
-			obj['tell']=val.tell
-			obj['date']=val.date
-			tableList.push(obj)
-		})
-		dataList=tableList
-		res.send({ 
-			'code': 1,
-			'msg': '成功',
-			'tab_list':tableList
-		});
-	}
-  }
 
-let download = function (req,res) {
+
+let download =async function (req,res) {
+	let map ={
+		"HSMJ": "1",
+		"GMJX": "2",
+		"ZSXN": "4",
+		"OSIM": "5",
+		"DFTH": "6",
+		"CKX": "7",
+		"AHAVA": "8",
+		"ADPQ": "9",
+		"ADPS": "10"
+	}
 	let arrayWorkSheet = '';
 	let workBook='';
+	let z ='ADPS'
 	let arrayData = [
-		['序号', '车型','姓名','电话','预约时间']
+		['序号','姓名', '电话','券码']
 	  ];
-	dataList.forEach((item,index)=>{
+	let sqlArr2 =[];
+	let sql2 = 'select * from  user_sub_info ';
+	let result2= await sqlQuery.SysqlConnect(sql2,sqlArr2);
+	result2.forEach((val,index)=>{
 		var temp = [];
 		temp.push((index+1));
-		temp.push(item.model);
-		temp.push(item.name);
-		temp.push(item.tell);
-		temp.push(item.date);
-		arrayData.push(temp)
+		temp.push(val.name);
+		temp.push(val.tell);
+		temp.push(JSON.parse(val.brand_code)[z]);
+		if(JSON.parse(val.brand_code)[z] !=''){
+			arrayData.push(temp)
+		}
 	})
 	arrayWorkSheet = xlsx.utils.aoa_to_sheet(arrayData);
 	workBook = {
@@ -722,76 +247,10 @@ let download = function (req,res) {
 		  'arrayWorkSheet': arrayWorkSheet
 		}
 	  };
-	//删除文件
-	util.deleteFile('./excel/表单信息.xlsx') 
+	
 	// 将workBook写入文件
 	try{
-		xlsx.writeFile(workBook, "./excel/表单信息.xlsx");
-		res.send({ 
-			'code': 1,
-			'msg': 'excel生成成功'
-		});
-	} catch(err){
-		res.send(
-			{ 
-				'code': 1,
-				'msg': 'excel生成失败'
-			}
-		);
-	}
-	
-	
-}
-//数据查询工具
-let query1= async function (req,res) {
-	let sqlArr =[];
-	let sql = 'select * from  jmgj_form ';
-	let result = await sqlQuery.SysqlConnect(sql,sqlArr)
-	let obj ={}
-	let tableList =[]
-	if(result.length>0){
-		result.forEach(function (val) {
-			obj ={}
-			obj['name']=val.name
-			obj['tell']=val.tell
-			obj['create_time']=util.mysqlDatetime(val.create_time) 
-			tableList.push(obj)
-		})
-		dataList1=tableList
-		res.send({ 
-			'code': 1,
-			'msg': '成功',
-			'tab_list':tableList
-		});
-	}
-  }
-
-let download1 = function (req,res) {
-	let arrayWorkSheet = '';
-	let workBook='';
-	let arrayData = [
-		['序号','姓名','电话','预约时间']
-	  ];
-	dataList1.forEach((item,index)=>{
-		var temp = [];
-		temp.push((index+1));
-		temp.push(item.name);
-		temp.push(item.tell);
-		temp.push(item.create_time);
-		arrayData.push(temp)
-	})
-	arrayWorkSheet = xlsx.utils.aoa_to_sheet(arrayData);
-	workBook = {
-		SheetNames: ['arrayWorkSheet'],
-		Sheets: {
-		  'arrayWorkSheet': arrayWorkSheet
-		}
-	  };
-	//删除文件
-	util.deleteFile('./excel/表单信息1.xlsx') 
-	// 将workBook写入文件
-	try{
-		xlsx.writeFile(workBook, "./excel/表单信息1.xlsx");
+		xlsx.writeFile(workBook, "./excel/爱代拍实物表单信息.xlsx");
 		res.send({ 
 			'code': 1,
 			'msg': 'excel生成成功'
@@ -2614,27 +2073,10 @@ let queryQm =async function (req,res) {
 } 
 module.exports={	
 	luckDraw,
-	submit,
-	giveUp,
-	test,
 	getUserInfo,
-	szSubmit,
-	lfxSubmit,
-	lfxFx,
-	lfxFxsubmit,
-	jzjluckDraw,
-	query,
 	download,
 	getAccessToken,
 	hqjsLuckDraw,
-	submityYth,
-	submityJzj,
-	audiSubmit,
-	audi1Submit,
-	jmgjSubmit,
-	cfhySubmit,
-	query1,
-	download1,
 	// 小程序接口
 	getOpenid,
 	updateUserinfo,
